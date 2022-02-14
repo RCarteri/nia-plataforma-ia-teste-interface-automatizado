@@ -1,0 +1,15 @@
+.idea
+*.iml
+target
+*.jar
+*.aar
+*.zip
+node_modules
+/www
+
+#MInhas configurações:
+.classpath
+.project
+.settings/
+/evidencia/
+/logs

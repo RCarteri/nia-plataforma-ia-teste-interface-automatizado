@@ -8,6 +8,7 @@ import ath_allure_arq3.main.AllureARQ3;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
+import utils.Utils;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty",

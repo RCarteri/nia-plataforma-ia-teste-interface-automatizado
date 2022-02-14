@@ -7,9 +7,10 @@ target
 node_modules
 /www
 
-#MInhas configurações:
+#Minhas configurações:
 .classpath
 .project
 .settings/
 /evidencia/
 /logs
+/target

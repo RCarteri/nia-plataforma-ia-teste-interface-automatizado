@@ -1,6 +1,6 @@
-# Consulta informações conta estatico testes E2E
+# Projeto de automação da interface da Plataforma de IA
 
-## Projeto de automação E2E, utilizando o FTABB para a [Plataforma BB](https://plataforma.hm.bb.com.br/gaw/v3/)
+## Projeto de automação utilizando o FTABB para a [Plataforma BB](https://plataforma.hm.bb.com.br/gaw/v3/)
 
 ### Links úteis:
  - [Documentação FTABB](https://ftabb.intranet.bb.com.br/#/)
@@ -9,7 +9,7 @@
 
 ___
 ___
-## Rodando o teste [localmente](https://fontes.intranet.bb.com.br/sol/sol-consulta-informacoes-conta-estatico-testesautomatizados/-/tree/master#rodar-este-teste-localmente) e/ou via [qTeste](https://fontes.intranet.bb.com.br/sol/sol-consulta-informacoes-conta-estatico-testesautomatizados/-/tree/master#rodar-este-teste-via-qteste):
+## Rodando o teste [localmente](https://fontes.intranet.bb.com.br/nia/nia-plataforma-ia-teste-interface-automatizado/nia-plataforma-ia-teste-interface-automatizado):
 
 ### Rodar este teste localmente:
 1.  ### Configuração de ambiente:

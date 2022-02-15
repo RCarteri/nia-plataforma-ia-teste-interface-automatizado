@@ -1,6 +1,5 @@
 package stepsDefinitions;
 
-import ath_allure_arq3.main.AllureARQ3;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import cucumber.api.java.After;
@@ -8,10 +7,11 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import pagesObjects.PlataformaIncial;
 import utils.Razoes;
 import utils.Utils;
+
 import java.util.Dictionary;
+
 import static org.junit.Assert.*;
 
 public class Hooks {
@@ -66,16 +66,8 @@ public class Hooks {
         }
     }
 
-    @Então("^realizar o log out na Plataforma e fechá-la$")
-    public void realizarOLogOutNaPlataformaEFecháLa() {
-        try {
-            final PlataformaIncial pInicial = new PlataformaIncial();
-            if (utils.elementoExisteEstaVisivel(pInicial.elemFecharModal))
-                pInicial.elemFecharModal.clicar();
-            utils.fecharSitema(pInicial.btnPerfil);
-        } catch (ElementoNaoLocalizadoException e) {
-            respostaErroElementoNaoLocalizado(e);
-        }
+    public void fecharPlataforma() {
+        Plataforma.fecharPlataforma();
     }
 
     @After
@@ -96,7 +88,10 @@ public class Hooks {
     @Quando("^acessar a pagina \"([^\"]*)\"$")
     public void acessarApagina(String nomePagina) {
         try {
-            Plataforma.selecionarAreaDeTrabalho(nomePagina);
+            String tituloPagina = Plataforma.recuperarTituloPagina();
+            if (!(tituloPagina.intern().equals("Plataforma BB | Analytics e Inteligência Artificial"))) {
+                Plataforma.selecionarAreaDeTrabalho(nomePagina);
+            }
         } catch (ElementoNaoLocalizadoException e) {
             respostaErroElementoNaoLocalizado(e);
         }

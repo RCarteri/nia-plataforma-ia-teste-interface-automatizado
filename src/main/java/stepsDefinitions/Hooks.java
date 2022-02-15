@@ -7,7 +7,6 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import pagesObjects.PlataformaIncial;
 import utils.Razoes;
 import utils.Utils;
 
@@ -67,16 +66,8 @@ public class Hooks {
         }
     }
 
-    @Então("^realizar o log out na Plataforma e fechá-la$")
-    public void realizarOLogOutNaPlataformaEFechaLa() {
-        try {
-            final PlataformaIncial pInicial = new PlataformaIncial();
-            if (utils.elementoExisteEstaVisivel(pInicial.elemFecharModal))
-                pInicial.elemFecharModal.clicar();
-            utils.fecharSitema(pInicial.btnPerfil);
-        } catch (ElementoNaoLocalizadoException e) {
-            respostaErroElementoNaoLocalizado(e);
-        }
+    public void fecharPlataforma() {
+        Plataforma.fecharPlataforma();
     }
 
     @After

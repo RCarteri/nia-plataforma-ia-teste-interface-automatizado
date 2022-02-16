@@ -28,9 +28,24 @@
 			<name>bb-maven-repo</name>
 			<url>https://atf.intranet.bb.com.br:443/artifactory/bb-maven-repo</url>
 		</repository>
+		<repository>
+			<id>maven_central</id>
+			<name>Maven Central</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-cucumber2-jvm</artifactId>
+			<version>2.17.2</version>
+		</dependency>
 		<dependency>
 			<groupId>br.com.bb.ath</groupId>
 			<artifactId>ath-ftabb2-gaw-web</artifactId>
@@ -48,21 +63,6 @@
 			<groupId>br.com.bb.ath</groupId>
 			<artifactId>ath-ftabb2-autoatendimento-web</artifactId>
 			<version>2021.8.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.qameta.allure</groupId>
-			<artifactId>allure-cucumber2-jvm</artifactId>
-			<version>2.13.6</version>
-		</dependency>
-		<dependency>
-			<groupId>ath-allure-arq3</groupId>
-			<artifactId>ath-allure-arq3</artifactId>
-			<version>1.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ant</groupId>

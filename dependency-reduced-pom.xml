@@ -4,7 +4,7 @@
   <groupId>br.com.bb.nia</groupId>
   <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
   <name>nia-plataforma-ia-teste-interface-automatizado</name>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
@@ -109,6 +109,11 @@
       <id>central</id>
       <name>bb-maven-repo</name>
       <url>https://atf.intranet.bb.com.br:443/artifactory/bb-maven-repo</url>
+    </repository>
+    <repository>
+      <id>maven_central</id>
+      <name>Maven Central</name>
+      <url>https://repo.maven.apache.org/maven2/</url>
     </repository>
   </repositories>
   <dependencies>

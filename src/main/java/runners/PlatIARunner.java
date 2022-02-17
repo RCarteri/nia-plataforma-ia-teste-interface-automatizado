@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import stepsDefinitions.Hooks;
+import utils.APIRest;
 import utils.Utils;
 
 @RunWith(Cucumber.class)
@@ -31,5 +32,6 @@ public class PlatIARunner {
 	public static void finish() {
 		new Hooks().fecharPlataforma();
 		new AllureARQ3().enviarRelatorio("servidor.allure.docker.ulr1");
+		new APIRest().atualizarAllureArq3();
 	}
 }

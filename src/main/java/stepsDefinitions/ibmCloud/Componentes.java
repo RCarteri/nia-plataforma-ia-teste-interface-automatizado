@@ -15,40 +15,40 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Componentes {
-    private IBMCloud ibmCloud = new IBMCloud();
-    private ModalComponente modalComponente = new ModalComponente();
-    private Utils utils = new Utils();
+    private final IBMCloud ibmCloud = new IBMCloud();
+    private final ModalComponente modalComponente = new ModalComponente();
+    private final Utils utils = new Utils();
 
     @Quando("^acessar a pagina do provedor IBM Cloud$")
     public void queEstejaNaPaginaDoProvedorIBMCloud() throws ElementoNaoLocalizadoException {
-        Provedor provedor = new Provedor();
-        provedor.acessarIBMCLoud();
+        new Provedor().acessarIBMCLoud();
     }
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
-        IBMCloud ibmCloud3 = new IBMCloud();
-        ibmCloud3.acessarComponente(componente);
+        new IBMCloud().acessarComponente(componente);
     }
 
     @Então("^deve apresentar o título \"([^\"]*)\"$")
     public void deveApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
+        utils.capturaTela();
         assertEquals(titulo, ibmCloud.getTituloComponente());
     }
 
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
-    public void deveráApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
+    public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
+        utils.capturaTela();
         assertEquals(titulo, modalComponente.getTituloModal());
     }
 
     @E("^deverá mostrar a lista do \"([^\"]*)\"$")
-    public void deveráMostrarAListaDe(String option){
+    public void deveraMostrarAListaDe(String option){
+        utils.capturaTela();
         assertTrue(modalComponente.getCountLinhas() > 2);
     }
 
-    @Quando("^exibir \"([^\"]*)\"$$")
-    public void exibirSkills(String option) throws InterruptedException {
-        IBMCloud ibmCloud2 = new IBMCloud(); // sem criar uma nova instância ele não retorna a lista de botoes
+    @Quando("^exibir \"([^\"]*)\"$")
+    public void exibirSkills(String option){
         int localizacao = 0;
         switch (option) {
             case "skill":
@@ -61,13 +61,14 @@ public class Componentes {
                 localizacao = 1;
                 break;
         }
-        ibmCloud2.clicarBotaoLista(localizacao);
+        new IBMCloud().clicarBotaoLista(localizacao); // sem criar uma nova instância ele não retorna a lista de botoes
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")
-    public void deveráApresentarAsInformaçõesSobreO() {
+    public void deveraApresentarAsInformaçõesSobreO() {
         ModalComponente modalComponente = new ModalComponente();
         List<String> listaInfoNomeID = modalComponente.getListaInfoNomeID();
+        utils.capturaTela();
         assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
     }
 }

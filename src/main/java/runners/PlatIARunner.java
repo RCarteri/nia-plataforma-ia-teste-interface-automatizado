@@ -1,9 +1,11 @@
 package runners;
 
+import ath_allure_arq3.main.AllureARQ3;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import stepsDefinitions.Hooks;
 import utils.Utils;
@@ -19,10 +21,15 @@ import utils.Utils;
 		dryRun = false
 )
 public class PlatIARunner {
+	@BeforeClass
+	public static void init(){
+		AllureARQ3.ConfigInicialAllureARQ3();
+		new Utils().deletarAllureResults();
+	}
 
 	@AfterClass
 	public static void finish() {
-		Hooks hooks = new Hooks();
-		hooks.fecharPlataforma();
+		new Hooks().fecharPlataforma();
+		new AllureARQ3().enviarRelatorio("servidor.allure.docker.ulr1");
 	}
 }

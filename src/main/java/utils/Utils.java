@@ -10,6 +10,12 @@ import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.UUID;
@@ -31,16 +37,15 @@ public class Utils extends FTABBUtils {
 		System.out.println("    INFO - Tela capturada.\n");
 	}
 
-	public void fecharSitema(Elemento btnPerfil) {
+	public void deletarAllureResults(){
+		Path dirPath = Paths.get("./target/allure-results");
 		try {
-			if (elementoExisteEstaVisivel(btnPerfil)) {
-				btnPerfil.clicar();
-				Plataforma.encerrarSessao();
-				esperar(Razoes.ENC_SEC.getDelay(), Razoes.ENC_SEC.getRazao());
-				Plataforma.fecharPlataforma();
-			}
-		} catch (ElementoNaoLocalizadoException enl) {
-			logError(enl);
+			Files.walk(dirPath)
+					.map(Path::toFile)
+					.sorted(Comparator.comparing(File::isDirectory))
+					.forEach(File::delete);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

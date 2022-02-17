@@ -110,18 +110,27 @@ Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o 
 		- Clique em *'Apply and Close'*.
 
 2. ### Executando o teste:
-	1. #### Clone:
-		 - Clone o projeto através do [fontes BB](https://fontes.intranet.bb.com.br/nia/nia-plataforma-ia-teste-interface-automatizado/nia-plataforma-ia-teste-interface-automatizado);
-	2. #### Abrindo o projeto MAVEN no IntelliJ:
-		 - Com a IDE aberta, acesse o menu **File => Import => Maven => Existing Maven Project =>** localize a pasta onde foi feito o **clone** do passo anterior;
-		  - Marque o arquvio */pom.xml* dentro da janela de Projetos;
-		  - Clique em **Finish**; e
-		  - Aguarde o download das dependendicas do **MAVEN**.
-	3. #### Convertendo o projeto para um projeto Cucumber:
-		- Com a IDE aberta, clique com o botão direito do mouse sobre a pasta do projeto e clique no menu **Configure => Convert to a Cucmber Project**
-	4. #### RUN:
-		- Na estrutura do projeto, navegue até a pasta **src/main/java/runners/**; e
-		- Execute a classe **"...Runner.java"** referente ao cenário de testes que deseja.
-		### ou
-		- Na estrutura do projeto, navegue até a pasta **src/main/resources/features/**; e
-		- Execute a classe **"*.feature"** referente ao cenário de testes que deseja.
+    1. #### Clone:
+         - Clone o projeto através do [fontes BB](https://fontes.intranet.bb.com.br/nia/nia-plataforma-ia-teste-interface-automatizado/nia-plataforma-ia-teste-interface-automatizado);
+    2. #### Abrindo o projeto MAVEN no IntelliJ:
+         - Com a IDE aberta, acesse o menu **File => Import => Maven => Existing Maven Project =>** localize a pasta onde foi feito o **clone** do passo anterior;
+          - Marque o arquvio */pom.xml* dentro da janela de Projetos;
+          - Clique em **Finish**; e
+          - Aguarde o download das dependendicas do **MAVEN**.
+    3. #### Convertendo o projeto para um projeto Cucumber:
+        - Com a IDE aberta, clique com o botão direito do mouse sobre a pasta do projeto e clique no menu **Configure => Convert to a Cucmber Project**
+    4. #### RUN:
+        - Na estrutura do projeto, navegue até a pasta **src/main/java/runners/**; e
+        - Execute a classe **"...Runner.java"** referente ao cenário de testes que deseja.
+        ### ou
+        - Na estrutura do projeto, navegue até a pasta **src/main/resources/features/**; e
+        - Execute a classe **"*.feature"** referente ao cenário de testes que deseja.
+
+3. ### Relatórios Allure na ARQ3
+    Este projeto está integrado com a ferramenta Allure implementada na infraestrutura de nuvem da Arq3. Ele é responsável por gerar relatórios dinamicamente a cada teste que for realizado pela classe "**Runner.java**".
+
+    Após rodar o teste pela **Runner.java** é só acessar o link do [Allure][allure] para ver os resultados do teste.
+    ![relatorio][relatorio]
+
+[allure]: http://plataforma-ia-teste-interface-automatizado-allure-arq3.nia.desenv.bb.com.br/allure-docker-service/projects/default/reports/latest/index.html?redirect=false#
+[relatorio]: relatorio_allure.png

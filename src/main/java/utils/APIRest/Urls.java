@@ -1,7 +1,9 @@
 package utils.APIRest;
 
 public enum Urls {
-    ATUALIZAR_ALLURE("/generate-report");
+    GERAR_RELATORIO("/generate-report"),
+    LIMPAR_HISTORICO("/clean-history"),
+    LIMPAR_RESULTADOS("/clean-results");
 
     private final String url;
 

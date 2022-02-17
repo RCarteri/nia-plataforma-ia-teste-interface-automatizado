@@ -49,7 +49,7 @@ public class IBMCloud extends Pagina {
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         ativarDropDown();
-        List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".ng-tns-c45-5 li span"));
+        List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".ng-tns-c47-5 li span"));
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
                 webElement.click();

@@ -1,4 +1,4 @@
-package utils;
+package utils.APIRest;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class APIRest {
     public void atualizarAllureArq3(){
         try{
-            String url = "http://plataforma-ia-teste-interface-automatizado-allure-arq3.nia.desenv.bb.com.br/allure-docker-service/generate-report";
+            String url = Urls.ATUALIZAR_ALLURE.getUrl();
             HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");

@@ -7,6 +7,7 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import pagesObjects.PlataformaIncial;
 import utils.Razoes;
 import utils.Utils;
 
@@ -15,7 +16,7 @@ import java.util.Dictionary;
 import static org.junit.Assert.*;
 
 public class Hooks {
-    private Utils utils;
+    private final Utils utils;
 
     public Hooks() {
         utils = new Utils();
@@ -66,8 +67,15 @@ public class Hooks {
         }
     }
 
-    public void fecharPlataforma() {
-        Plataforma.fecharPlataforma();
+    public void realizarOLogOutNaPlataformaEFechaLa() {
+        try {
+            final PlataformaIncial pInicial = new PlataformaIncial();
+            if (utils.elementoExisteEstaVisivel(pInicial.elemFecharModal))
+                pInicial.elemFecharModal.clicar();
+            utils.fecharSitema(pInicial.btnPerfil);
+        } catch (ElementoNaoLocalizadoException e) {
+            respostaErroElementoNaoLocalizado(e);
+        }
     }
 
     @After

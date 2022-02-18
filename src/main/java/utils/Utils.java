@@ -96,6 +96,19 @@ public class Utils extends FTABBUtils {
         }
     }
 
+    public void fecharSitema(Elemento btnPerfil) {
+        try {
+            if (elementoExisteEstaVisivel(btnPerfil)) {
+                btnPerfil.clicar();
+                Plataforma.encerrarSessao();
+                esperar(Razoes.ENC_SEC.getDelay(), Razoes.ENC_SEC.getRazao());
+                Plataforma.fecharPlataforma();
+            }
+        } catch (ElementoNaoLocalizadoException enl) {
+            logError(enl);
+        }
+    }
+
     public static void rolarPaginaAteElemento(WebElement elemento) {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }

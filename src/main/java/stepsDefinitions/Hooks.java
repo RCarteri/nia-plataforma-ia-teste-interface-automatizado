@@ -7,35 +7,39 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import pagesObjects.PlataformaIncial;
 import utils.Razoes;
+import utils.SysProps;
 import utils.Utils;
 
 import java.util.Dictionary;
 
 import static org.junit.Assert.*;
+import static utils.Utils.getDriver;
 
 public class Hooks {
     private final Utils utils;
+    private final short MAX_BOUND;
+    private short count;
 
     public Hooks() {
         utils = new Utils();
+        MAX_BOUND = 10;
+        count = 0;
     }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
-        try {
-            final boolean estaLogado = Plataforma.estaLogado();
-            if (estaLogado) {
-                assertTrue(estaLogado);
-                System.out.println("\n    INFO - A Plataforma está aberta.\n");
-            } else {
-                Plataforma.abrirPlataforma();
-                utils.esperar(Razoes.CARR_PLAT.getDelay(), Razoes.CARR_PLAT.getRazao());
-                Plataforma.getVersaoContextoAtual();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            respostaErroElementoNaoLocalizado(e);
+        System.setProperty(SysProps.IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
+        final boolean isLogged = Boolean.valueOf(System.getProperty(SysProps.IS_LOGGED.toString()));
+        if (isLogged) {
+            assertTrue(isLogged);
+            System.out.println("\n    INFO - A Plataforma esta aberta.\n");
+        } else {
+            Plataforma.abrirPlataforma();
         }
     }
 
@@ -43,27 +47,46 @@ public class Hooks {
     public void realizeOLoginNoSistema() {
         try {
             final Dictionary<String, String> datapool = utils.getDatapool();
-            final boolean estaLogado = Plataforma.estaLogado();
-            if (estaLogado) {
-                assertTrue(estaLogado);
-                System.out.println("\n    INFO - Usuário " + datapool.get("chave") + " está logado.\n");
+            boolean isLogged = Boolean.parseBoolean(System.getProperty(SysProps.IS_LOGGED.toString()));
+            if (isLogged) {
+                assertTrue(isLogged);
+                System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
             } else {
-                Plataforma.fazerLogin(datapool.get("chave"), datapool.get("senha"));
+                WebElement elem = getDriver().findElement(By.xpath("//input[@id='idToken1']"));
+                elem.sendKeys(datapool.get("chave"));
+
+                elem = getDriver().findElement(By.xpath("//input[@id='idToken2']"));
+                elem.sendKeys(datapool.get("senha"));
+
+                elem = getDriver().findElement(By.xpath("//input[@id='loginButton_0']"));
+                elem.click();
                 int count = 0;
-                while (!Plataforma.estaLogado()) {
-                    System.out.print("\n    INFO - ");
-                    utils.esperar(Razoes.LOGIN.getDelay(), Razoes.LOGIN.getRazao());
-                    if (++count == 3) {
-                        System.err.println("\n    ERRO - Não foi possivel carregar a Plataforma.");
+                while (!isLogged) {
+                    if (++count == MAX_BOUND) {
                         Plataforma.fecharPlataforma();
-                        fail("\n    Não foi possível logar na Plataforma.");
+                        fail("Não foi possível carregar a Plataforma após o login.");
                         System.exit(0);
                     }
+                    System.setProperty(SysProps.IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
+                    isLogged = Boolean.parseBoolean(System.getProperty(SysProps.IS_LOGGED.toString()));
                 }
                 System.out.println("\n    INFO - Login realizado com a chave: " + datapool.get("chave") + "\n");
             }
-        } catch (ElementoNaoLocalizadoException e) {
-            respostaErroElementoNaoLocalizado(e);
+        } catch (NoSuchElementException nsee) {
+            String noSuchElement = nsee.getMessage().split(" ")[4];
+            noSuchElement = noSuchElement.substring(0, noSuchElement.length() - 4);
+
+            System.err.println("\n    ERRO - Um elemento não foi localizado.");
+            System.err.println("    ERRO - Não foi possível localizar o elemento \"" + noSuchElement + "\"");
+
+            utils.esperar(Razoes.LOGIN.getDelay(), Razoes.LOGIN.getRazao());
+
+            if (++count <= MAX_BOUND)
+                realizeOLoginNoSistema();
+            else {
+                Plataforma.fecharPlataforma();
+                fail("Não foi possível logar na Plataforma.");
+            }
         }
     }
 

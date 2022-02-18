@@ -101,8 +101,10 @@ public class Utils extends FTABBUtils {
             if (elementoExisteEstaVisivel(btnPerfil)) {
                 btnPerfil.clicar();
                 Plataforma.encerrarSessao();
+                System.out.println("Sessão encerrada");
                 esperar(Razoes.ENC_SEC.getDelay(), Razoes.ENC_SEC.getRazao());
                 Plataforma.fecharPlataforma();
+                System.out.println("Plataforma fechada");
             }
         } catch (ElementoNaoLocalizadoException enl) {
             logError(enl);

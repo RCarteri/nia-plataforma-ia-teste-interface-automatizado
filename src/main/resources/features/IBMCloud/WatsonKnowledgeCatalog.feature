@@ -8,7 +8,7 @@ Funcionalidade: Watson Knowledge Catalog
         E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a pagina do provedor IBM Cloud
         E selecionar o componente "Watson Knowledge Catalog"
-        Então deve apresentar o título "Lista de Catálogos"
+        Então deverá apresentar o título "Lista de Catálogos" na página
         
     Cenario: Exibir Membros
         Quando exibir "membro"

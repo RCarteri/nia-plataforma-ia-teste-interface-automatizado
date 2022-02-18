@@ -8,7 +8,7 @@ Funcionalidade: Modelos
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
 		E acessar a pagina do provedor IBM Cloud
 		E selecionar o componente "Modelos"
-		Então deve apresentar o título "Lista de Modelos"
+		Então deverá apresentar o título "Lista de Modelos" na página
 
 	Cenario: Exibir Modelos
 		Quando exibir "modelo"

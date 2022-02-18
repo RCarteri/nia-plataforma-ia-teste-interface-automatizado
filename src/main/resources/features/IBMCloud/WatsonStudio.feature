@@ -8,4 +8,4 @@ Funcionalidade: Watson Studio
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
 		E acessar a pagina do provedor IBM Cloud
 		E selecionar o componente "Watson Studio"
-		Então deve apresentar o título "Lista de Projetos"
+		Então deverá apresentar o título "Lista de Projetos" na página

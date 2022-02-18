@@ -8,7 +8,7 @@ Funcionalidade: Cloud Object Storage
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
 		E acessar a pagina do provedor IBM Cloud
 		E selecionar o componente "Cloud Object Storage"
-		Então deve apresentar o título "Lista de Object Storages"
+		Então deverá apresentar o título "Lista de Object Storages" na página
 
 	Cenario: Exibir Storage
 		Quando exibir "storage"

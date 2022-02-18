@@ -29,8 +29,8 @@ public class Componentes {
         new IBMCloud().acessarComponente(componente);
     }
 
-    @Então("^deve apresentar o título \"([^\"]*)\"$")
-    public void deveApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
+    @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
+    public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
         utils.capturaTela();
         assertEquals(titulo, ibmCloud.getTituloComponente());
     }
@@ -42,7 +42,7 @@ public class Componentes {
     }
 
     @E("^deverá mostrar a lista do \"([^\"]*)\"$")
-    public void deveraMostrarAListaDe(String option){
+    public void deveraMostrarAListagem(String option){
         utils.capturaTela();
         assertTrue(modalComponente.getCountLinhas() > 2);
     }
@@ -65,9 +65,8 @@ public class Componentes {
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")
-    public void deveraApresentarAsInformaçõesSobreO() {
-        ModalComponente modalComponente = new ModalComponente();
-        List<String> listaInfoNomeID = modalComponente.getListaInfoNomeID();
+    public void deveraApresentarAsInformacoesIDeNome() {
+        List<String> listaInfoNomeID = new ModalComponente().getListaInfoNomeID();
         utils.capturaTela();
         assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
     }

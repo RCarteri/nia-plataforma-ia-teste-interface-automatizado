@@ -8,7 +8,7 @@ Funcionalidade: Watson Assistant
         E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a pagina do provedor IBM Cloud
         E selecionar o componente "Watson Assistant"
-        Então deve apresentar o título "Lista de Instâncias"
+        Então deverá apresentar o título "Lista de Instâncias" na página
 
     Cenario: Exibir Skills
         Quando exibir "skill"

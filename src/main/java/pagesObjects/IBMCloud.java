@@ -7,6 +7,7 @@ import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.Utils;
 
 import java.util.List;
 
@@ -23,28 +24,11 @@ public class IBMCloud extends Pagina {
     @MapearElementoWeb(xPath = "//*[@id='p-panel-0-content']/div/p-dropdown/div/span")
     private Elemento dropDownComponente;
 
-    @MapearElementoWeb(xPath = "//span[contains(text(), 'Watson Studio')]")
-    private ElementoTexto spanWatsonStudio;
-
-    @MapearElementoWeb(xPath = "//span[contains(text(), 'Watson Assistant')]")
-    private ElementoTexto spanWatsonAssistant;
-
-    @MapearElementoWeb(xPath = "//span[contains(text(), 'Watson Knowledge Catalog')]")
-    private ElementoTexto spanWatsonKnowledgeCatalog;
-
-    @MapearElementoWeb(xPath = "//span[contains(text(), 'Cloud Object Storage')]")
-    private ElementoTexto spanCloudObjectStorage;
-
-    @MapearElementoWeb(xPath = "//span[contains(text(), 'Modelos')]")
-    private ElementoTexto spanModelos;
-
-    @MapearElementoWeb(xPath = "//span[contains(text(), 'Grupos de Acesso')]")
-    private ElementoTexto spanGruposDeAcesso;
-
     public void clicarBotaoLista(int localizacao) {
         localizacao--;
         rolarPaginaAteElemento(listBtnExibir.get(localizacao));
         listBtnExibir.get(localizacao).click();
+        new Utils().capturaTela();
     }
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {

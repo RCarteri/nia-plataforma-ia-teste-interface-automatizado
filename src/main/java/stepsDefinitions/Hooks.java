@@ -68,14 +68,7 @@ public class Hooks {
     }
 
     public void realizarOLogOutNaPlataformaEFechaLa() {
-        try {
-            final PlataformaIncial pInicial = new PlataformaIncial();
-            if (utils.elementoExisteEstaVisivel(pInicial.elemFecharModal))
-                pInicial.elemFecharModal.clicar();
-            utils.fecharSitema(pInicial.btnPerfil);
-        } catch (ElementoNaoLocalizadoException e) {
-            respostaErroElementoNaoLocalizado(e);
-        }
+        utils.fecharSitema(new PlataformaIncial().btnPerfil);
     }
 
     @After
@@ -108,6 +101,7 @@ public class Hooks {
     @Então("^verficar se a pagina \"([^\"]*)\" foi carregada com sucesso$")
     public void verficar_se_a_pagina_foi_carregada_com_sucesso(String titulo) {
         assertTrue(utils.oTituloEigual(titulo));
+        System.out.println("Página carregada com sucesso");
         utils.capturaTela();
     }
 

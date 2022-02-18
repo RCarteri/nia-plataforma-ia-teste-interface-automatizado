@@ -7,8 +7,6 @@ import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import utils.Razoes;
-import utils.Utils;
 
 import java.util.List;
 
@@ -51,11 +49,9 @@ public class IBMCloud extends Pagina {
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         ativarDropDown();
-        Utils utils = new Utils();
         List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".ng-tns-c47-5 li span"));
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
-                utils.esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
                 webElement.click();
                 break;
             }

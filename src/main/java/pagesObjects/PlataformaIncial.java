@@ -7,6 +7,6 @@ import br.com.bb.ath.ftabb.gaw.AreaComumPlataforma;
 
 @AreaComumPlataforma
 public class PlataformaIncial extends Pagina {
-	@MapearElementoWeb(xPath = "//*[@id=\"perfil\"]/a/div/figure")
+	@MapearElementoWeb(css = "figure .mi--person")
 	public Elemento btnPerfil;
 }

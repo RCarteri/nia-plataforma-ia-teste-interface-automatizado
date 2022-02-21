@@ -71,7 +71,6 @@ public class Utils extends FTABBUtils {
 
     public boolean oTituloEigual(String titulo) {
         try {
-            esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
             final String paginaTitulo = Plataforma.recuperarTituloPagina().toLowerCase();
             if (paginaTitulo.intern().equals(titulo.toLowerCase().intern()))
                 return true;

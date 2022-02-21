@@ -18,10 +18,10 @@ public class IBMCloud extends Pagina {
 
     private final List<WebElement> listBtnExibir = getDriver().findElements(By.cssSelector(".p-button-secondary"));
 
-    @MapearElementoWeb(css = "#p-panel-1-titlebar")
+    @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
 
-    @MapearElementoWeb(xPath = "//*[@id='p-panel-0-content']/div/p-dropdown/div/span")
+    @MapearElementoWeb(css = ".ng-tns-c47-5 .p-dropdown-label")
     private Elemento dropDownComponente;
 
     public void clicarBotaoLista(int localizacao) {

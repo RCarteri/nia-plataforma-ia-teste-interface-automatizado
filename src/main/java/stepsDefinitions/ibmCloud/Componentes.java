@@ -31,7 +31,6 @@ public class Componentes {
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
-        utils.capturaTela();
         assertEquals(titulo, ibmCloud.getTituloComponente());
     }
 

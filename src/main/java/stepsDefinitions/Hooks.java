@@ -12,13 +12,13 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pagesObjects.PlataformaIncial;
 import utils.Razoes;
-import utils.SysProps;
 import utils.Utils;
 
 import java.util.Dictionary;
 
 import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.*;
+import static utils.SysProps.IS_LOGGED;
 import static utils.Utils.getDriver;
 
 public class Hooks {
@@ -28,14 +28,14 @@ public class Hooks {
 
     public Hooks() {
         utils = new Utils();
-        MAX_BOUND = 10;
+        MAX_BOUND = 5;
         count = 0;
     }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
-        System.setProperty(SysProps.IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
-        final boolean isLogged = parseBoolean(System.getProperty(SysProps.IS_LOGGED.toString()));
+        System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
+        final boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
         if (isLogged) {
             assertTrue(isLogged);
             System.out.println("\n    INFO - A Plataforma esta aberta.\n");
@@ -48,18 +48,19 @@ public class Hooks {
     public void realizeOLoginNoSistema() {
         try {
             final Dictionary<String, String> datapool = utils.getDatapool();
-            boolean isLogged = parseBoolean(System.getProperty(SysProps.IS_LOGGED.toString()));
+            boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
             if (isLogged) {
                 assertTrue(isLogged);
                 System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
             } else {
-                WebElement elem = getDriver().findElement(By.xpath("//input[@id='idToken1']"));
+                new Utils().esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
+                WebElement elem = getDriver().findElement(By.id("idToken1"));
                 elem.sendKeys(datapool.get("chave"));
 
-                elem = getDriver().findElement(By.xpath("//input[@id='idToken2']"));
+                elem = getDriver().findElement(By.id("idToken2"));
                 elem.sendKeys(datapool.get("senha"));
 
-                elem = getDriver().findElement(By.xpath("//input[@id='loginButton_0']"));
+                elem = getDriver().findElement(By.id("loginButton_0"));
                 elem.click();
                 int count = 0;
                 while (!isLogged) {
@@ -68,8 +69,8 @@ public class Hooks {
                         fail("Não foi possível carregar a Plataforma após o login.");
                         System.exit(0);
                     }
-                    System.setProperty(SysProps.IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
-                    isLogged = parseBoolean(System.getProperty(SysProps.IS_LOGGED.toString()));
+                    System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
+                    isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
                 }
                 System.out.println("\n    INFO - Login realizado com a chave: " + datapool.get("chave") + "\n");
             }
@@ -80,7 +81,7 @@ public class Hooks {
             System.err.println("\n    ERRO - Um elemento não foi localizado.");
             System.err.println("    ERRO - Não foi possível localizar o elemento \"" + noSuchElement + "\"");
 
-            utils.esperar(Razoes.LOGIN.getDelay(), Razoes.LOGIN.getRazao());
+            //utils.esperar(Razoes.LOGIN.getDelay(), Razoes.LOGIN.getRazao());
 
             if (++count <= MAX_BOUND)
                 realizeOLoginNoSistema();

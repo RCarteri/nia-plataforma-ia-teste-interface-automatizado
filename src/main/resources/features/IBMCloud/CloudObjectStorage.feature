@@ -1,5 +1,6 @@
 #language: pt
 #encoding: utf-8
+	@CloudObjectStorage
 Funcionalidade: Cloud Object Storage
 	Contexto: Acessar Cloud Object Storage
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -10,7 +11,8 @@ Funcionalidade: Cloud Object Storage
 		E selecionar o componente "Cloud Object Storage"
 		Então deverá apresentar o título "Lista de Object Storages" na página
 
-	Cenario: Exibir Storage
+	@ExibirComponente
+	Cenario: CT002 - Exibir Storage
 		Quando exibir "storage"
 		Então deverá apresentar o titulo "Buckets do storage" no modal
 		E deverá apresentar as informações sobre ID e nome

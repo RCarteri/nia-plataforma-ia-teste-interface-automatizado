@@ -12,13 +12,18 @@ public class ConfRunner {
     public static void init(){
         new Utils().deletarAllureResults();
         AllureARQ3.ConfigInicialAllureARQ3();
-        apiRest.atualizarAllureArq3(Urls.LIMPAR_RESULTADOS.getUrl());
-        apiRest.atualizarAllureArq3(Urls.LIMPAR_HISTORICO.getUrl());
+        // Descomentar para limpar o histórico de relatóios no Allure caso esteja travando muito
+        //limparRelatoriosAllure();
     }
 
     public static void finish() {
         new Hooks().realizarOLogOutNaPlataformaEFechaLa();
         new AllureARQ3().enviarRelatorio("servidor.allure.docker.ulr1");
         apiRest.atualizarAllureArq3(Urls.GERAR_RELATORIO.getUrl());
+    }
+
+    private static void limparRelatoriosAllure(){
+        apiRest.atualizarAllureArq3(Urls.LIMPAR_RESULTADOS.getUrl());
+        apiRest.atualizarAllureArq3(Urls.LIMPAR_HISTORICO.getUrl());
     }
 }

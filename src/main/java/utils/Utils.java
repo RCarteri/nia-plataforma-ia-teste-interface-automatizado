@@ -71,7 +71,6 @@ public class Utils extends FTABBUtils {
 
     public boolean oTituloEigual(String titulo) {
         try {
-            esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
             final String paginaTitulo = Plataforma.recuperarTituloPagina().toLowerCase();
             if (paginaTitulo.intern().equals(titulo.toLowerCase().intern()))
                 return true;
@@ -93,6 +92,21 @@ public class Utils extends FTABBUtils {
         } catch (DataPoolException dpe) {
             logError(dpe);
             return null;
+        }
+    }
+
+    public void fecharSitema(Elemento btnPerfil) {
+        try {
+            if (elementoExisteEstaVisivel(btnPerfil)) {
+                btnPerfil.clicar();
+                Plataforma.encerrarSessao();
+                System.out.println("Sessão encerrada");
+                esperar(Razoes.ENC_SEC.getDelay(), Razoes.ENC_SEC.getRazao());
+                Plataforma.fecharPlataforma();
+                System.out.println("Plataforma fechada");
+            }
+        } catch (ElementoNaoLocalizadoException enl) {
+            logError(enl);
         }
     }
 

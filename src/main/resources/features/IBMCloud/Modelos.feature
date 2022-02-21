@@ -1,5 +1,6 @@
 #language: pt
 #encoding: utf-8
+	@Modelos
 Funcionalidade: Modelos
 	Contexto: Acessar Modelos
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -8,9 +9,10 @@ Funcionalidade: Modelos
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
 		E acessar a pagina do provedor IBM Cloud
 		E selecionar o componente "Modelos"
-		Então deve apresentar o título "Lista de Modelos"
+		Então deverá apresentar o título "Lista de Modelos" na página
 
-	Cenario: Exibir Modelos
+	@ExibirComponente
+	Cenario: CT004 - Exibir Modelos
 		Quando exibir "modelo"
 		Então deverá apresentar o titulo "Detalhes do Modelo" no modal
 		E deverá apresentar as informações sobre ID e nome

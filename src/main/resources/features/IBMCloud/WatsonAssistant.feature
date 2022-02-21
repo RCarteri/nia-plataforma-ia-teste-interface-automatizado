@@ -1,5 +1,6 @@
 #language: pt
 #encoding: utf-8
+    @WatsonAssistant
 Funcionalidade: Watson Assistant
     Contexto: Acessar Watson Assistant
         Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -8,9 +9,10 @@ Funcionalidade: Watson Assistant
         E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a pagina do provedor IBM Cloud
         E selecionar o componente "Watson Assistant"
-        Então deve apresentar o título "Lista de Instâncias"
+        Então deverá apresentar o título "Lista de Instâncias" na página
 
-    Cenario: Exibir Skills
+    @ExibirComponente
+    Cenario: CT005 - Exibir Skills
         Quando exibir "skill"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome

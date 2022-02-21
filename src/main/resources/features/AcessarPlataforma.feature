@@ -3,7 +3,7 @@
 Funcionalidade: Acessar plataforma IA
 
     @AcessarPlataforma
-    Cenario: Acessar plataforma IA
+    Cenario: CT001 - Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a pagina "Analytics | IA (hm)"

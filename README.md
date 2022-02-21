@@ -96,8 +96,13 @@ Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o 
 
 #### IntelliJ:
 - Possuir a IDE IntelliJ IDEA instalada na sua máquina, links de download: [Link](https://www.jetbrains.com/pt-br/idea/download/#section=windows);
-	- Instalar o plugin Cucumber na sua IDE IntelliJ
-		- Com a IDE aberta, acesse o menu: **Help => Find Action => Plugins => Marketplace =>** Busque por *Cucumber* => Instale o plugin "*Cucumber for Java*"
+    - Instalar o plugin Cucumber na sua IDE IntelliJ
+        - Com a IDE aberta, acesse o menu: **Help => Find Action => Plugins => Marketplace =>** Busque por *Cucumber* => Instale o plugin "*Cucumber for Java*"
+    - Editar template das Runners do JUnit:
+        - Pressionar Alt + Shift + F10 e pressionar 0
+        - Escolher a opção **Edit configurations templates...**
+        - Em JUnit na parte de macros digitar: -ea -Dhttp.proxyHost=170.66.49.180 -Dhttp.proxyPort=3128
+        - Então clicar em **OK**
 
 #### settings.xml:
 - Para trabalhar com [Artfactory](http://atf.intranet.bb.com.br/), que é um repositório onde o Banco do Brasil mantém as libs do **Maven**, é necessário alterar o arquivo *settings.xml* do Maven, conforme os passos abaixo:
@@ -107,7 +112,7 @@ Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o 
 		- Clique no botão **Generate Settings**; e
 		- Faça o downlod do *Snippet* e salve como *settings.xml* no diretório **.\conf** onde o Maven foi instalado.
 	- Com a **IDE IntelliJ** aberta, acesse o menu **Help => Find Action** pesquise por "maven" **=> Maven Settings** e no campo **Maven Home Path** selecione a pasta do Maven que você baixou: `C:\Users\<seu usuario>\ftabb\apache-maven-3.8.4`
-		- Clique em *'Apply and Close'*.
+        - Clique em *'Apply and Close'*.
 
 2. ### Executando o teste:
     1. #### Clone:
@@ -126,10 +131,23 @@ Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o 
         - Na estrutura do projeto, navegue até a pasta **src/main/resources/features/**; e
         - Execute a classe **"*.feature"** referente ao cenário de testes que deseja.
 
-3. ### Relatórios Allure na ARQ3
+3. ### Rodar este teste via [qTeste](https://qteste.intranet.bb.com.br):
+
+- Acessar os [Testes Selenium](https://qteste.intranet.bb.com.br/selenium/testes);
+- Clique em **Selecione Componente da Aplicação**;
+- Clique em **Outros Componentes**;
+- Digite **nia-plat-ia-teste-interface** no campo de pesquisa e clique em **SELECIONAR**;
+- Clique em **Selecione o Projeto de Teste** e **nia-plat-ia-teste-interface** ;
+- Selecione a versão mais recente do Script de Teste;
+- Selecione a versão do browser que preferir;
+- Na aba **Runners**, escolha o cenário de Teste que deseja executar;
+- Clique em **EXECUTAR**;
+- Aguarde o resultado.
+
+4. ### Relatórios Allure na ARQ3
     Este projeto está integrado com a ferramenta Allure implementada na infraestrutura de nuvem da Arq3. Ele é responsável por gerar relatórios dinamicamente a cada teste que for realizado pela classe "**Runner.java**".
 
-    Após rodar o teste pela **Runner.java** é só acessar o link do [Allure][allure] para ver os resultados do teste.
+    Após rodar o teste pela **Runner.java** escolhida ou qTeste é só acessar o link do [Allure][allure] para ver os resultados do teste.
     ![relatorio][relatorio]
 
 [allure]: http://plataforma-ia-teste-interface-automatizado-allure-arq3.nia.desenv.bb.com.br/allure-docker-service/projects/default/reports/latest/index.html?redirect=false#

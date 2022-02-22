@@ -87,4 +87,14 @@ public class Componentes {
         assertTrue(ibmCloud.resultadosContemString(palavraPesquisada));
     }
 
+    @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
+    public void deveraApresentarAMensagem(String mensagem){
+        assertEquals(mensagem, ibmCloud.getTxtNenhumResultado());
+        utils.capturaTela();
+    }
+
+    @E("^quantidade de resultados devem ser (\\d+)$")
+    public void osResultadosDevemSer(int quantResultados) {
+        assertEquals(quantResultados, ibmCloud.getQuantResultados());
+    }
 }

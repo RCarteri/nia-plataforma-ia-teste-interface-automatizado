@@ -32,6 +32,9 @@ public class IBMCloud extends Pagina {
     @MapearElementoWeb(css = "div .p-paginator-current")
     private ElementoTexto txtPaginacao;
 
+    @MapearElementoWeb(css = "tr[class='ng-star-inserted'] td")
+    private ElementoTexto txtNenhumResultado;
+
     Utils utils = new Utils();
 
     public void clicarBotaoLista(int localizacao) {
@@ -88,5 +91,14 @@ public class IBMCloud extends Pagina {
 
     private void ativarDropDown() throws ElementoNaoLocalizadoException {
         dropDownComponente.clicar();
+    }
+
+    public String getTxtNenhumResultado(){
+        try {
+            return txtNenhumResultado.recuperarTexto();
+        } catch (ElementoNaoLocalizadoException e) {
+            utils.logError(e);
+        }
+        return null;
     }
 }

@@ -17,3 +17,9 @@ Funcionalidade: Watson Assistant
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista do "skills"
+
+    @FiltrarDados
+    Cenario: CT008 - Filtrar instâncias
+        Quando pesquisar "Watson"
+        Então deverá apresentar um total de resultados diferente do anterior
+        E os resultados apresentados devem conter a palavra pesquisada

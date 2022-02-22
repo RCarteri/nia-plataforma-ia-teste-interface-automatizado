@@ -18,6 +18,8 @@ public class Componentes {
     private final IBMCloud ibmCloud = new IBMCloud();
     private final ModalComponente modalComponente = new ModalComponente();
     private final Utils utils = new Utils();
+    private int quantResultadosAntes;
+    private String palavraPesquisada;
 
     @Quando("^acessar a pagina do provedor IBM Cloud$")
     public void queEstejaNaPaginaDoProvedorIBMCloud() throws ElementoNaoLocalizadoException {
@@ -66,4 +68,23 @@ public class Componentes {
         List<String> listaInfoNomeID = new ModalComponente().getListaInfoNomeID();
         assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
     }
+
+    @Quando("^pesquisar \"([^\"]*)\"$")
+    public void pesquisar(String palavraPesquisada){
+        this.quantResultadosAntes = ibmCloud.getQuantResultados();
+        this.palavraPesquisada = palavraPesquisada;
+        ibmCloud.filtrarResultados(palavraPesquisada);
+    }
+
+    @Então("^deverá apresentar um total de resultados diferente do anterior$")
+    public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
+        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados());
+        utils.capturaTela();
+    }
+
+    @E("^os resultados apresentados devem conter a palavra pesquisada$")
+    public void osResultadosApresentadosDevemConterAPalavraPesquisada() {
+        assertTrue(ibmCloud.resultadosContemString(palavraPesquisada));
+    }
+
 }

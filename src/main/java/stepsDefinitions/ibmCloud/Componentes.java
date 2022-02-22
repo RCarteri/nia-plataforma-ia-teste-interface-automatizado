@@ -97,4 +97,19 @@ public class Componentes {
     public void osResultadosDevemSer(int quantResultados) {
         assertEquals(quantResultados, ibmCloud.getQuantResultados());
     }
+
+    @E("^limpar pesquisa$")
+    public void limparPesquisa() {
+        ibmCloud.limparPesquisa();
+    }
+
+    @Então("^o input deve estar vazio$")
+    public void oInputDeveEstarVazio() {
+        assertEquals(ibmCloud.getTxtInputFiltro(), "");
+    }
+
+    @E("^o total de resultados deverá mostrar a quantidade anterior$")
+    public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
+        assertEquals(this.quantResultadosAntes, ibmCloud.getQuantResultados());
+    }
 }

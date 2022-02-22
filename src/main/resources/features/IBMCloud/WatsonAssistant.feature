@@ -25,7 +25,14 @@ Funcionalidade: Watson Assistant
         E os resultados apresentados devem conter a palavra pesquisada
 
     @FiltrarDados
-    Cenario: CT009 - Filtras instâncias sem resultado
+    Cenario: CT009 - Filtrar instâncias sem resultado
         Quando pesquisar "#invalido"
         Então deverá apresentar a mensagem "Não há nenhuma instância com este nome."
         E quantidade de resultados devem ser 0
+
+    @FiltrarDados
+    Cenario: CT010 - Limpar filtro
+        Quando pesquisar "Watson"
+        E limpar pesquisa
+        Então o input deve estar vazio
+        E o total de resultados deverá mostrar a quantidade anterior

@@ -3,6 +3,7 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
 import br.com.bb.ath.ftabb.elementos.Elemento;
+import br.com.bb.ath.ftabb.elementos.ElementoBotao;
 import br.com.bb.ath.ftabb.elementos.ElementoInput;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
@@ -26,14 +27,17 @@ public class IBMCloud extends Pagina {
     @MapearElementoWeb(css = ".ng-tns-c47-5 .p-dropdown-label")
     private Elemento dropDownComponente;
 
-    @MapearElementoWeb(css = "th .p-inputtext")
+    @MapearElementoWeb(css = "nia-platia-table th span .p-inputtext")
     private ElementoInput inputFiltro;
 
-    @MapearElementoWeb(css = "div .p-paginator-current")
+    @MapearElementoWeb(css = "nia-platia-table div .p-paginator-current")
     private ElementoTexto txtPaginacao;
 
-    @MapearElementoWeb(css = "tr[class='ng-star-inserted'] td")
+    @MapearElementoWeb(css = "nia-platia-table tr[class='ng-star-inserted'] td")
     private ElementoTexto txtNenhumResultado;
+
+    @MapearElementoWeb(css = "nia-platia-table .deleteicon span")
+    private ElementoBotao btnLimparFiltro;
 
     Utils utils = new Utils();
 
@@ -60,6 +64,15 @@ public class IBMCloud extends Pagina {
             inputFiltro.escrever(palavra);
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
+        }
+    }
+
+    public String getTxtInputFiltro(){
+        try {
+            return inputFiltro.recuperarTexto();
+        } catch (ElementoNaoLocalizadoException e) {
+            utils.logError(e);
+            return null;
         }
     }
 
@@ -98,7 +111,15 @@ public class IBMCloud extends Pagina {
             return txtNenhumResultado.recuperarTexto();
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
+            return null;
         }
-        return null;
+    }
+
+    public void limparPesquisa(){
+        try {
+            btnLimparFiltro.clicar();
+        } catch (ElementoNaoLocalizadoException e) {
+            utils.logError(e);
+        }
     }
 }

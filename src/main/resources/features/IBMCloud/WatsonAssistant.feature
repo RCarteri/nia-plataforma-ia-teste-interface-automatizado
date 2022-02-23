@@ -28,7 +28,7 @@ Funcionalidade: Watson Assistant
     Cenario: CT004 - Filtrar componente sem resultado
         Quando pesquisar "#invalido" no "componente"
         Então deverá apresentar a mensagem "Não há nenhuma instância com este nome."
-        E quantidade de resultados devem ser 0
+        E a quantidade de resultados deve ser 0
 
     @PesquisaComponente
     Cenario: CT005 - Limpar pesquisa de componente

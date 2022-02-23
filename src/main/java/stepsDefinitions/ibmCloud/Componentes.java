@@ -20,6 +20,7 @@ public class Componentes {
     private final Utils utils = new Utils();
     private int quantResultadosAntes;
     private String palavraPesquisada;
+    private String local;
 
     @Quando("^acessar a pagina do provedor IBM Cloud$")
     public void queEstejaNaPaginaDoProvedorIBMCloud() throws ElementoNaoLocalizadoException {
@@ -69,25 +70,27 @@ public class Componentes {
         assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
     }
 
-    @Quando("^pesquisar \"([^\"]*)\"$")
-    public void pesquisar(String palavraPesquisada){
-        if (ibmCloud.getQuantResultados() == 1)
+    @Quando("^pesquisar \"([^\"]*)\" no \"([^\"]*)\"$")
+    public void pesquisar(String palavraPesquisada, String local) {
+        this.local = local;
+        int quantResultados = ibmCloud.getQuantResultados(local);
+        if (quantResultados == 1)
             this.quantResultadosAntes = 2;
         else
-            this.quantResultadosAntes = ibmCloud.getQuantResultados();
+            this.quantResultadosAntes = quantResultados;
         this.palavraPesquisada = palavraPesquisada;
-        ibmCloud.filtrarResultados(palavraPesquisada);
+        ibmCloud.pesquisar(palavraPesquisada, local);
     }
-
+    
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         utils.capturaTela();
-        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados());
+        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados(this.local));
     }
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")
     public void osResultadosApresentadosDevemConterAPalavraPesquisada() {
-        assertTrue(ibmCloud.resultadosContemString(palavraPesquisada));
+        assertTrue(ibmCloud.resultadosContemString(palavraPesquisada, this.local));
     }
 
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
@@ -96,9 +99,9 @@ public class Componentes {
         assertEquals(mensagem, ibmCloud.getTxtNenhumResultado());
     }
 
-    @E("^quantidade de resultados devem ser (\\d+)$")
+    @E("^a quantidade de resultados deve ser (\\d+)$")
     public void osResultadosDevemSer(int quantResultados) {
-        assertEquals(quantResultados, ibmCloud.getQuantResultados());
+        assertEquals(quantResultados, ibmCloud.getQuantResultados(this.local));
     }
 
     @E("^limpar pesquisa$")

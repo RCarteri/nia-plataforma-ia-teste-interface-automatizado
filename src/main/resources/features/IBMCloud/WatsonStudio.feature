@@ -11,8 +11,8 @@ Funcionalidade: Watson Studio
 		E selecionar o componente "Watson Studio"
 		Então deverá apresentar o título "Lista de Projetos" na página
 
-	@FiltrarResultadosComponente
+	@PesquisaComponente
 	Cenario: CT004 - Filtrar componente sem resultado
-		Quando pesquisar "#invalido"
-		Então deverá apresentar a mensagem "Nenhum projeto encontrado."
+		Quando pesquisar "#invalido" no "componente"
+		Então deverá apresentar a mensagem "Não há nenhum projeto com este nome."
 		E quantidade de resultados devem ser 0

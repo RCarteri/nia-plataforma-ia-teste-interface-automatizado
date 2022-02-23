@@ -18,21 +18,21 @@ Funcionalidade: Watson Knowledge Catalog
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista do "membro"
 
-    @FiltrarResultadosComponente
+    @PesquisaComponente
     Cenario: CT003 - Pesquisar componente
-        Quando pesquisar "Catalog"
+        Quando pesquisar "Catalog" no "componente"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
 
-    @FiltrarResultadosComponente
+    @PesquisaComponente
     Cenario: CT004 - Filtrar componente sem resultado
-        Quando pesquisar "#invalido"
+        Quando pesquisar "#invalido" no "componente"
         Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
         E quantidade de resultados devem ser 0
 
-    @FiltrarResultadosComponente
+    @PesquisaComponente
     Cenario: CT005 - Limpar pesquisa de componente
-        Quando pesquisar "Catalog"
+        Quando pesquisar "Catalog" no "componente"
         E limpar pesquisa
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior

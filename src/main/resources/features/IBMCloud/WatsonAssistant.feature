@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-    @WatsonAssistant
+@WatsonAssistant
 Funcionalidade: Watson Assistant
     Contexto: Acessar Watson Assistant
         Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -18,19 +18,19 @@ Funcionalidade: Watson Assistant
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista do "skills"
 
-    @FiltrarDados
+    @FiltrarResultadosComponente
     Cenario: CT008 - Filtrar instâncias
         Quando pesquisar "Watson"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
 
-    @FiltrarDados
+    @FiltrarResultadosComponente
     Cenario: CT009 - Filtrar instâncias sem resultado
         Quando pesquisar "#invalido"
         Então deverá apresentar a mensagem "Não há nenhuma instância com este nome."
         E quantidade de resultados devem ser 0
 
-    @FiltrarDados
+    @FiltrarResultadosComponente
     Cenario: CT010 - Limpar filtro
         Quando pesquisar "Watson"
         E limpar pesquisa

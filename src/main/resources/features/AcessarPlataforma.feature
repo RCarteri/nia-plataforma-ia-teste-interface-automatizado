@@ -1,7 +1,6 @@
 #language: pt
 #encoding: utf-8
 Funcionalidade: Acessar plataforma IA
-
     @AcessarPlataforma
     Cenario: CT001 - Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma

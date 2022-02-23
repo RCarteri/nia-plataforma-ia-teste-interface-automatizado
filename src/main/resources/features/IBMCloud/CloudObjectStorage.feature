@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-	@CloudObjectStorage
+@CloudObjectStorage
 Funcionalidade: Cloud Object Storage
 	Contexto: Acessar Cloud Object Storage
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -18,3 +18,21 @@ Funcionalidade: Cloud Object Storage
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista do "bucket"
 
+	@FiltrarResultadosComponente
+	Cenario: CT011 - Filtrar instâncias
+		Quando pesquisar "Minhas Financas"
+		Então deverá apresentar um total de resultados diferente do anterior
+		E os resultados apresentados devem conter a palavra pesquisada
+
+	@FiltrarResultadosComponente
+	Cenario: CT012 - Filtrar instâncias sem resultado
+		Quando pesquisar "#invalido"
+		Então deverá apresentar a mensagem "Não há nenhum storage com este nome."
+		E quantidade de resultados devem ser 0
+
+	@FiltrarResultadosComponente
+	Cenario: CT013 - Limpar filtro
+		Quando pesquisar "Minhas Financas"
+		E limpar pesquisa
+		Então o input deve estar vazio
+		E o total de resultados deverá mostrar a quantidade anterior

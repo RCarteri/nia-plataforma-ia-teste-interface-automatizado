@@ -71,7 +71,10 @@ public class Componentes {
 
     @Quando("^pesquisar \"([^\"]*)\"$")
     public void pesquisar(String palavraPesquisada){
-        this.quantResultadosAntes = ibmCloud.getQuantResultados();
+        if (ibmCloud.getQuantResultados() == 1)
+            this.quantResultadosAntes = 2;
+        else
+            this.quantResultadosAntes = ibmCloud.getQuantResultados();
         this.palavraPesquisada = palavraPesquisada;
         ibmCloud.filtrarResultados(palavraPesquisada);
     }

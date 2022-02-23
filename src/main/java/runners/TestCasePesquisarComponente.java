@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 		tags = { "@FiltrarResultadosComponente" },
 		monochrome = true
 )
-public class TestCaseFiltrarResultadosComponente {
+public class TestCasePesquisarComponente {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

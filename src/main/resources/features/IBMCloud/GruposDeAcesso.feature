@@ -25,7 +25,7 @@ Funcionalidade: Grupos de Acesso
 		E os resultados apresentados devem conter a palavra pesquisada
 
 	@PesquisaComponente
-	Cenario: CT004 - Filtrar componente sem resultado
+	Cenario: CT004 - Pesquisar componente sem resultado
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
 		E a quantidade de resultados deve ser 0
@@ -38,8 +38,23 @@ Funcionalidade: Grupos de Acesso
 		E o total de resultados deverá mostrar a quantidade anterior
 
 	@PesquisarModalComponente
-	Cenario: CT006 - Pesquisar na modal do componente
+	Cenario: CT006 - Pesquisar no modal
 		Quando exibir "grupo"
 		E pesquisar "Adriano" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
+
+	@PesquisarModalComponente
+	Cenario: CT007 - Pesquisar no modal sem resultado
+		Quando exibir "grupo"
+		E pesquisar "#invalido" no "modal"
+		Então deverá apresentar a mensagem "Nenhum membro encontrado."
+		E a quantidade de resultados deve ser 0
+
+	@PesquisaComponente
+	Cenario: CT008 - Limpar pesquisa de componente no modal
+		Quando exibir "grupo"
+		E pesquisar "Grupo" no "modal"
+		E limpar pesquisa
+		Então o input deve estar vazio
+		E o total de resultados deverá mostrar a quantidade anterior

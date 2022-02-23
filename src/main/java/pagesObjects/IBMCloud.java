@@ -43,6 +43,9 @@ public class IBMCloud extends Pagina {
     @MapearElementoWeb(css = "nia-platia-table tr[class='ng-star-inserted'] td")
     private ElementoTexto txtNenhumResultado;
 
+    @MapearElementoWeb(css = "nia-membros-table tr[class='ng-star-inserted'] td")
+    private ElementoTexto txtNenhumResultadoModal;
+
     @MapearElementoWeb(css = "nia-platia-table .deleteicon span")
     private ElementoBotao btnLimparFiltro;
 
@@ -84,13 +87,18 @@ public class IBMCloud extends Pagina {
         }
     }
 
-    public String getTxtInputFiltro(){
+    public String getTxtInputFiltro(String local){
         try {
-            return inputFiltro.recuperarTexto();
+            switch (local){
+                case "componente":
+                    return inputFiltro.recuperarTexto();
+                case "modal":
+                    return inputFiltroModal.recuperarTexto();
+            }
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
-            return null;
         }
+        return null;
     }
 
     public int getQuantResultados(String local) {
@@ -144,18 +152,30 @@ public class IBMCloud extends Pagina {
         dropDownComponente.clicar();
     }
 
-    public String getTxtNenhumResultado(){
+    public String getTxtNenhumResultado(String local){
         try {
-            return txtNenhumResultado.recuperarTexto();
+            switch (local){
+                case "componente":
+                    return txtNenhumResultado.recuperarTexto();
+                case "modal":
+                    return txtNenhumResultadoModal.recuperarTexto();
+            }
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
-            return null;
         }
+        return null;
     }
 
-    public void limparPesquisa(){
+    public void limparPesquisa(String local){
         try {
-            btnLimparFiltro.clicar();
+            switch (local){
+                case "componente":
+                    btnLimparFiltro.clicar();
+                    break;
+                case "modal":
+                    btnLimparFiltroModal.clicar();
+                    break;
+            }
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
         }

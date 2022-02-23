@@ -96,7 +96,7 @@ public class Componentes {
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
     public void deveraApresentarAMensagem(String mensagem){
         utils.capturaTela();
-        assertEquals(mensagem, ibmCloud.getTxtNenhumResultado());
+        assertEquals(mensagem, ibmCloud.getTxtNenhumResultado(this.local));
     }
 
     @E("^a quantidade de resultados deve ser (\\d+)$")
@@ -106,17 +106,17 @@ public class Componentes {
 
     @E("^limpar pesquisa$")
     public void limparPesquisa() {
-        ibmCloud.limparPesquisa();
+        ibmCloud.limparPesquisa(this.local);
     }
 
     @Então("^o input deve estar vazio$")
     public void oInputDeveEstarVazio() {
         utils.capturaTela();
-        assertEquals(ibmCloud.getTxtInputFiltro(), "");
+        assertEquals(ibmCloud.getTxtInputFiltro(this.local), "");
     }
 
     @E("^o total de resultados deverá mostrar a quantidade anterior$")
     public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
-        assertEquals(this.quantResultadosAntes, ibmCloud.getQuantResultados());
+        assertEquals(this.quantResultadosAntes, ibmCloud.getQuantResultados(this.local));
     }
 }

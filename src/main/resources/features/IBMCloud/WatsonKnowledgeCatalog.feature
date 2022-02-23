@@ -25,7 +25,7 @@ Funcionalidade: Watson Knowledge Catalog
         E os resultados apresentados devem conter a palavra pesquisada
 
     @PesquisaComponente
-    Cenario: CT004 - Filtrar componente sem resultado
+    Cenario: CT004 - Pesquisar componente sem resultado
         Quando pesquisar "#invalido" no "componente"
         Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
         E a quantidade de resultados deve ser 0

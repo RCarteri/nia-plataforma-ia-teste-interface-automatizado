@@ -125,9 +125,9 @@ public class Hooks {
 
     @Então("^verficar se a pagina \"([^\"]*)\" foi carregada com sucesso$")
     public void verficar_se_a_pagina_foi_carregada_com_sucesso(String titulo) {
+        utils.capturaTela();
         assertTrue(utils.oTituloEigual(titulo));
         System.out.println("Página carregada com sucesso");
-        utils.capturaTela();
     }
 
     @E("^acessar a tela \"([^\"]*)\" e \"([^\"]*)\"$")

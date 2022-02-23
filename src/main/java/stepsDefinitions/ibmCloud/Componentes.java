@@ -81,8 +81,8 @@ public class Componentes {
 
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
-        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados());
         utils.capturaTela();
+        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados());
     }
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")
@@ -92,8 +92,8 @@ public class Componentes {
 
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
     public void deveraApresentarAMensagem(String mensagem){
-        assertEquals(mensagem, ibmCloud.getTxtNenhumResultado());
         utils.capturaTela();
+        assertEquals(mensagem, ibmCloud.getTxtNenhumResultado());
     }
 
     @E("^quantidade de resultados devem ser (\\d+)$")
@@ -108,8 +108,8 @@ public class Componentes {
 
     @Então("^o input deve estar vazio$")
     public void oInputDeveEstarVazio() {
-        assertEquals(ibmCloud.getTxtInputFiltro(), "");
         utils.capturaTela();
+        assertEquals(ibmCloud.getTxtInputFiltro(), "");
     }
 
     @E("^o total de resultados deverá mostrar a quantidade anterior$")

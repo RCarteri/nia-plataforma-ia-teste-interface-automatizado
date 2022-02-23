@@ -13,10 +13,10 @@ import org.junit.runner.RunWith;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@AcessarPlataforma" },
+		tags = { "@ExibirComponente" },
 		monochrome = true
 )
-public class TestCaseAcessarPlataforma {
+public class TestCaseExibirComponente {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

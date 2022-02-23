@@ -114,8 +114,8 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    private void logError(Exception enl) {
-        System.err.println("\nAlugum erro ocorreu!");
+    public void logError(Exception enl) {
+        System.err.println("\nAlgum erro ocorreu!");
         System.err.println("Mensagem: " + enl.getMessage() + "\n");
         enl.printStackTrace();
     }

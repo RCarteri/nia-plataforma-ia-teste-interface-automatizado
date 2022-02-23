@@ -18,6 +18,8 @@ public class Componentes {
     private final IBMCloud ibmCloud = new IBMCloud();
     private final ModalComponente modalComponente = new ModalComponente();
     private final Utils utils = new Utils();
+    private int quantResultadosAntes;
+    private String palavraPesquisada;
 
     @Quando("^acessar a pagina do provedor IBM Cloud$")
     public void queEstejaNaPaginaDoProvedorIBMCloud() throws ElementoNaoLocalizadoException {
@@ -65,5 +67,53 @@ public class Componentes {
     public void deveraApresentarAsInformacoesIDeNome() {
         List<String> listaInfoNomeID = new ModalComponente().getListaInfoNomeID();
         assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
+    }
+
+    @Quando("^pesquisar \"([^\"]*)\"$")
+    public void pesquisar(String palavraPesquisada){
+        if (ibmCloud.getQuantResultados() == 1)
+            this.quantResultadosAntes = 2;
+        else
+            this.quantResultadosAntes = ibmCloud.getQuantResultados();
+        this.palavraPesquisada = palavraPesquisada;
+        ibmCloud.filtrarResultados(palavraPesquisada);
+    }
+
+    @Então("^deverá apresentar um total de resultados diferente do anterior$")
+    public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
+        utils.capturaTela();
+        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados());
+    }
+
+    @E("^os resultados apresentados devem conter a palavra pesquisada$")
+    public void osResultadosApresentadosDevemConterAPalavraPesquisada() {
+        assertTrue(ibmCloud.resultadosContemString(palavraPesquisada));
+    }
+
+    @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
+    public void deveraApresentarAMensagem(String mensagem){
+        utils.capturaTela();
+        assertEquals(mensagem, ibmCloud.getTxtNenhumResultado());
+    }
+
+    @E("^quantidade de resultados devem ser (\\d+)$")
+    public void osResultadosDevemSer(int quantResultados) {
+        assertEquals(quantResultados, ibmCloud.getQuantResultados());
+    }
+
+    @E("^limpar pesquisa$")
+    public void limparPesquisa() {
+        ibmCloud.limparPesquisa();
+    }
+
+    @Então("^o input deve estar vazio$")
+    public void oInputDeveEstarVazio() {
+        utils.capturaTela();
+        assertEquals(ibmCloud.getTxtInputFiltro(), "");
+    }
+
+    @E("^o total de resultados deverá mostrar a quantidade anterior$")
+    public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
+        assertEquals(this.quantResultadosAntes, ibmCloud.getQuantResultados());
     }
 }

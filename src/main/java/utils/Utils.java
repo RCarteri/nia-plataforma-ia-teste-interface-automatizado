@@ -115,7 +115,7 @@ public class Utils extends FTABBUtils {
     }
 
     public void logError(Exception enl) {
-        System.err.println("\nAlugum erro ocorreu!");
+        System.err.println("\nAlgum erro ocorreu!");
         System.err.println("Mensagem: " + enl.getMessage() + "\n");
         enl.printStackTrace();
     }

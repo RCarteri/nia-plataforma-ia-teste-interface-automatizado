@@ -2,7 +2,7 @@
 #encoding: utf-8
 @CloudObjectStorage
 Funcionalidade: Cloud Object Storage
-	Contexto: Acessar Cloud Object Storage
+	Contexto: Acessar componente
 		Dado que a Plataforma esteja fechada, abra a Plataforma
 		E se não estiver logado, realiza o login no Sistema
 		Quando acessar a pagina "Analytics | IA (hm)"
@@ -12,26 +12,26 @@ Funcionalidade: Cloud Object Storage
 		Então deverá apresentar o título "Lista de Object Storages" na página
 
 	@ExibirComponente
-	Cenario: CT002 - Exibir Storage
+	Cenario: CT002 - Exibir componente
 		Quando exibir "storage"
 		Então deverá apresentar o titulo "Buckets do storage" no modal
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista do "bucket"
 
 	@FiltrarResultadosComponente
-	Cenario: CT011 - Filtrar instâncias
+	Cenario: CT003 - Pesquisar componente
 		Quando pesquisar "Minhas Financas"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
 
 	@FiltrarResultadosComponente
-	Cenario: CT012 - Filtrar instâncias sem resultado
+	Cenario: CT004 - Filtrar componente sem resultado
 		Quando pesquisar "#invalido"
 		Então deverá apresentar a mensagem "Não há nenhum storage com este nome."
 		E quantidade de resultados devem ser 0
 
 	@FiltrarResultadosComponente
-	Cenario: CT013 - Limpar filtro
+	Cenario: CT005 - Limpar pesquisa de componente
 		Quando pesquisar "Minhas Financas"
 		E limpar pesquisa
 		Então o input deve estar vazio

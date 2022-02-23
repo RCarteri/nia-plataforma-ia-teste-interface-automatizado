@@ -109,6 +109,7 @@ public class Componentes {
     @Então("^o input deve estar vazio$")
     public void oInputDeveEstarVazio() {
         assertEquals(ibmCloud.getTxtInputFiltro(), "");
+        utils.capturaTela();
     }
 
     @E("^o total de resultados deverá mostrar a quantidade anterior$")

@@ -13,7 +13,7 @@ import java.util.List;
 
 import static utils.Utils.getDriver;
 
-public class ModalComponente extends Pagina {
+public class ModalComponentePage extends Pagina {
 
     private final List<WebElement> listInfoNomeID = getDriver().findElements(By.cssSelector(".ng-trigger h4"));
     private final List<WebElement> listCabecalhoNomeID = getDriver().findElements(By.cssSelector("div[class*='p-ai-center ng-tns-c47'] span"));

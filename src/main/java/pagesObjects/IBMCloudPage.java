@@ -16,9 +16,9 @@ import java.util.List;
 import static utils.Utils.getDriver;
 import static utils.Utils.rolarPaginaAteElemento;
 
-public class IBMCloud extends Pagina {
+public class IBMCloudPage extends Pagina {
 
-    private final List<WebElement> listBtnExibir = getDriver().findElements(By.cssSelector(".p-button-secondary"));
+    private final List<WebElement> listBtnExibir = getDriver().findElements(By.cssSelector("td button.ng-star-inserted.p-button-secondary"));
 
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
@@ -50,8 +50,6 @@ public class IBMCloud extends Pagina {
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroModal;
 
-    Utils utils = new Utils();
-
     public void clicarBotaoLista(int localizacao) {
         localizacao--;
         rolarPaginaAteElemento(listBtnExibir.get(localizacao));
@@ -81,7 +79,7 @@ public class IBMCloud extends Pagina {
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+            Utils.logError(e);
         }
     }
 
@@ -94,7 +92,7 @@ public class IBMCloud extends Pagina {
                     return inputFiltroModal.recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+            Utils.logError(e);
         }
         return null;
     }
@@ -114,7 +112,7 @@ public class IBMCloud extends Pagina {
             assert frase != null;
             quantResultados = frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
         } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+            Utils.logError(e);
         }
         assert quantResultados != null;
         return Integer.parseInt(quantResultados);
@@ -159,7 +157,7 @@ public class IBMCloud extends Pagina {
                     return txtNenhumResultadoModal.recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+            Utils.logError(e);
         }
         return null;
     }
@@ -175,7 +173,7 @@ public class IBMCloud extends Pagina {
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+            Utils.logError(e);
         }
     }
 }

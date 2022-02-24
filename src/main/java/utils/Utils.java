@@ -63,8 +63,8 @@ public class Utils extends FTABBUtils {
             }
             throw new ElementoNaoLocalizadoException(
                     "Não foi possível localizar o elemento \"" + elem.getNome() + "\".");
-        } catch (ElementoNaoLocalizadoException enl) {
-            logError(enl);
+        } catch (ElementoNaoLocalizadoException e) {
+            logError(e);
         }
         return false;
     }
@@ -77,8 +77,8 @@ public class Utils extends FTABBUtils {
             else
                 throw new ElementoNaoLocalizadoException("\n\nO título buscado é: " + titulo.toLowerCase()
                         + "\nO título recuperado é: " + paginaTitulo + "\n");
-        } catch (ElementoNaoLocalizadoException enl) {
-            logError(enl);
+        } catch (ElementoNaoLocalizadoException e) {
+            logError(e);
         }
         return false;
     }
@@ -89,8 +89,8 @@ public class Utils extends FTABBUtils {
             result.put("chave", $("login_plataforma.chaveF.chave"));
             result.put("senha", $("login_plataforma.chaveF.senha"));
             return result;
-        } catch (DataPoolException dpe) {
-            logError(dpe);
+        } catch (DataPoolException e) {
+            logError(e);
             return null;
         }
     }
@@ -105,8 +105,8 @@ public class Utils extends FTABBUtils {
                 Plataforma.fecharPlataforma();
                 System.out.println("Plataforma fechada");
             }
-        } catch (ElementoNaoLocalizadoException enl) {
-            logError(enl);
+        } catch (ElementoNaoLocalizadoException e) {
+            logError(e);
         }
     }
 
@@ -114,10 +114,10 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public void logError(Exception enl) {
+    public static void logError(Exception e) {
         System.err.println("\nAlgum erro ocorreu!");
-        System.err.println("Mensagem: " + enl.getMessage() + "\n");
-        enl.printStackTrace();
+        System.err.println("Mensagem: " + e.getMessage() + "\n");
+        e.printStackTrace();
     }
 
     private void allureCapturarTela() {

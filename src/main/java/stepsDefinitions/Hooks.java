@@ -10,7 +10,7 @@ import cucumber.api.java.pt.Quando;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import pagesObjects.PlataformaIncial;
+import pagesObjects.PlataformaIncialPage;
 import utils.Razoes;
 import utils.Utils;
 
@@ -93,7 +93,7 @@ public class Hooks {
     }
 
     public void realizarOLogOutNaPlataformaEFechaLa() {
-        utils.fecharSitema(new PlataformaIncial().btnPerfil);
+        utils.fecharSitema(new PlataformaIncialPage().btnPerfil);
     }
 
     @After

@@ -3,8 +3,6 @@ package runners;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -17,13 +15,13 @@ import org.junit.runner.RunWith;
 		monochrome = true
 )
 public class TestCaseAll {
-	@BeforeClass
-	public static void init(){
-		ConfRunner.init();
-	}
-
-	@AfterClass
-	public static void finish(){
-		ConfRunner.finish();
-	}
+//	@BeforeClass
+//	public static void init(){
+//		ConfRunner.init();
+//	}
+//
+//	@AfterClass
+//	public static void finish(){
+//		ConfRunner.finish();
+//	}
 }

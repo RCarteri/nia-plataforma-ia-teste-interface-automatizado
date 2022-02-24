@@ -16,26 +16,19 @@ Funcionalidade: Grupos de Acesso
 		Quando exibir "grupo"
 		Então deverá apresentar o titulo "GRUPOS DE ACESSO" no modal
 		E deverá apresentar as informações sobre ID e nome
-		E deverá mostrar a lista do "grupo"
+		E deverá mostrar a lista de "grupo"
 
 	@PesquisaComponente
 	Cenario: CT003 - Pesquisar componente
 		Quando pesquisar "Grupo" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
-
-	@PesquisaComponente
-	Cenario: CT004 - Pesquisar componente sem resultado
+		Quando limpar pesquisa
+		Então o input deve estar vazio
+		E o total de resultados deverá mostrar a quantidade anterior
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
 		E a quantidade de resultados deve ser 0
-
-	@PesquisaComponente
-	Cenario: CT005 - Limpar pesquisa de componente
-		Quando pesquisar "Grupo" no "componente"
-		E limpar pesquisa
-		Então o input deve estar vazio
-		E o total de resultados deverá mostrar a quantidade anterior
 
 	@PesquisarModalComponente
 	Cenario: CT006 - Pesquisar no modal

@@ -12,7 +12,7 @@ Funcionalidade: Watson Studio
 		Então deverá apresentar o título "Lista de Projetos" na página
 
 	@PesquisaComponente
-	Cenario: CT004 - Pesquisar componente sem resultado
+	Cenario: CT003 - Pesquisar componente sem resultado
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum projeto com este nome."
 		E a quantidade de resultados deve ser 0

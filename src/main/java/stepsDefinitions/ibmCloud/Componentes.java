@@ -42,7 +42,7 @@ public class Componentes {
         assertEquals(titulo, modalComponente.getTituloModal());
     }
 
-    @E("^deverá mostrar a lista do \"([^\"]*)\"$")
+    @E("^deverá mostrar a lista de \"([^\"]*)\"$")
     public void deveraMostrarAListagem(String option){
         assertTrue(modalComponente.getCountLinhas() > 2);
     }
@@ -73,6 +73,7 @@ public class Componentes {
     @Quando("^pesquisar \"([^\"]*)\" no \"([^\"]*)\"$")
     public void pesquisar(String palavraPesquisada, String local) {
         this.local = local;
+        ibmCloud.limparPesquisa(this.local);
         int quantResultados = ibmCloud.getQuantResultados(local);
         if (quantResultados == 1)
             this.quantResultadosAntes = 2;

@@ -33,7 +33,7 @@ Funcionalidade: Grupos de Acesso
 	@PesquisarModalComponente
 	Cenario: CT004 - Pesquisar no modal
 		Quando exibir "grupo"
-		E pesquisar "Adriano" no "modal"
+		E pesquisar "50" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
 		Quando limpar pesquisa
@@ -43,10 +43,3 @@ Funcionalidade: Grupos de Acesso
 		Então deverá apresentar a mensagem "Nenhum membro encontrado."
 		E a quantidade de resultados deve ser 0
 
-	@PesquisaComponente
-	Cenario: CT008 - Limpar pesquisa de componente no modal
-		Quando exibir "grupo"
-		E pesquisar "Grupo" no "modal"
-		E limpar pesquisa
-		Então o input deve estar vazio
-		E o total de resultados deverá mostrar a quantidade anterior

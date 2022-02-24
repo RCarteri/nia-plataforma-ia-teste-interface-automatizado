@@ -74,19 +74,16 @@ public class Componentes {
     public void pesquisar(String palavraPesquisada, String local) {
         this.local = local;
         ibmCloud.limparPesquisa(this.local);
-        int quantResultados = ibmCloud.getQuantResultados(local);
-        if (quantResultados == 1)
-            this.quantResultadosAntes = 2;
-        else
-            this.quantResultadosAntes = quantResultados;
+        this.quantResultadosAntes = ibmCloud.getQuantResultados(local);
         this.palavraPesquisada = palavraPesquisada;
         ibmCloud.pesquisar(palavraPesquisada, local);
     }
-    
+
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         utils.capturaTela();
-        assertTrue(this.quantResultadosAntes > ibmCloud.getQuantResultados(this.local));
+        if (this.quantResultadosAntes != 1)
+            assertTrue(this.quantResultadosAntes != ibmCloud.getQuantResultados(this.local));
     }
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")

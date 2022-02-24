@@ -23,25 +23,25 @@ public class IBMCloud extends Pagina {
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
 
-    @MapearElementoWeb(css = ".ng-tns-c45-5 .p-dropdown-label")
+    @MapearElementoWeb(css = ".p-dropdown-trigger span")
     private Elemento dropDownComponente;
 
-    @MapearElementoWeb(css = "nia-platia-table th span .p-inputtext")
+    @MapearElementoWeb(css = "nia-platia-table th input.p-inputtext")
     private ElementoInput inputFiltro;
 
-    @MapearElementoWeb(css = "nia-membros-table thead span .p-inputtext")
+    @MapearElementoWeb(css = "nia-membros-table thead .p-inputtext")
     private ElementoInput inputFiltroModal;
 
-    @MapearElementoWeb(css = "nia-platia-table div .p-paginator-current")
+    @MapearElementoWeb(css = "nia-platia-table .p-paginator-current")
     private ElementoTexto txtPaginacao;
 
-    @MapearElementoWeb(css = "nia-membros-table div .p-paginator-current")
+    @MapearElementoWeb(css = "nia-membros-table .p-paginator-current")
     private ElementoTexto txtPaginacaoModal;
 
-    @MapearElementoWeb(css = "nia-platia-table tr[class='ng-star-inserted'] td")
+    @MapearElementoWeb(css = "nia-platia-table td")
     private ElementoTexto txtNenhumResultado;
 
-    @MapearElementoWeb(css = "nia-membros-table tr[class='ng-star-inserted'] td")
+    @MapearElementoWeb(css = "nia-membros-table td")
     private ElementoTexto txtNenhumResultadoModal;
 
     @MapearElementoWeb(css = "nia-platia-table .deleteicon span")
@@ -61,7 +61,7 @@ public class IBMCloud extends Pagina {
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         ativarDropDown();
-        List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".ng-tns-c45-5 li span"));
+        List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".p-dropdown-items-wrapper span"));
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
                 webElement.click();

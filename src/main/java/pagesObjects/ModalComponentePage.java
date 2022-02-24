@@ -13,15 +13,15 @@ import java.util.List;
 
 import static utils.Utils.getDriver;
 
-public class ModalComponente extends Pagina {
+public class ModalComponentePage extends Pagina {
 
-    private final List<WebElement> listInfoNomeID = getDriver().findElements(By.cssSelector("div[class*='ng-tns-c47'] h4"));
-    private final List<WebElement> listCabecalhoNomeID = getDriver().findElements(By.cssSelector("div[class*='p-ai-center ng-tns-c47'] div span"));
+    private final List<WebElement> listInfoNomeID = getDriver().findElements(By.cssSelector(".ng-trigger h4"));
+    private final List<WebElement> listCabecalhoNomeID = getDriver().findElements(By.cssSelector("div[class*='p-ai-center ng-tns-c47'] span"));
 
     @MapearElementoWeb(css="div .p-dialog-header")
     private static ElementoTexto spanTituloModal;
 
-    @MapearElementoWeb(css="div[class*='ng-tns-c4'] tbody tr")
+    @MapearElementoWeb(css=".p-dialog-content td")
     private Elemento listaElementosModal;
 
     public int getCountLinhas(){

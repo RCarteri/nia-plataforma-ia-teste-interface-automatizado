@@ -126,7 +126,7 @@ public class IBMCloudPage extends Pagina {
                 listTxt = getDriver().findElements(By.cssSelector("nia-platia-table td:first-child"));
                 break;
             case "modal":
-                listTxt = getDriver().findElements(By.cssSelector("nia-membros-table td:first-child"));
+                listTxt = getDriver().findElements(By.cssSelector("nia-membros-table td:nth-child(2)"));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + local);

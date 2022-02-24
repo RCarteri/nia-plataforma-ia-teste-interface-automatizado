@@ -33,7 +33,7 @@ Funcionalidade: Grupos de Acesso
 	@PesquisarModalComponente
 	Cenario: CT004 - Pesquisar no modal
 		Quando exibir "grupo"
-		E pesquisar "50" no "modal"
+		E pesquisar "Rafael" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
 		Quando limpar pesquisa

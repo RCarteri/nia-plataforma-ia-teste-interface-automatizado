@@ -33,7 +33,7 @@ Funcionalidade: Watson Knowledge Catalog
     @PesquisarModalComponente
     Cenario: CT004 - Pesquisar no modal
         Quando exibir "membro"
-        E pesquisar "50" no "modal"
+        E pesquisar "Bruno" no "modal"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
         Quando limpar pesquisa

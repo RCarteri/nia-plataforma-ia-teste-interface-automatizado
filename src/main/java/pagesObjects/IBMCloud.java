@@ -19,8 +19,6 @@ import static utils.Utils.rolarPaginaAteElemento;
 public class IBMCloud extends Pagina {
 
     private final List<WebElement> listBtnExibir = getDriver().findElements(By.cssSelector(".p-button-secondary"));
-    private final List<WebElement> listTxtLinha = getDriver().findElements(By.cssSelector("nia-platia-table tr td:first-child"));
-    private final List<WebElement> listTxtLinhaModal = getDriver().findElements(By.cssSelector("nia-membros-table tr td:first-child"));
 
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
@@ -127,16 +125,16 @@ public class IBMCloud extends Pagina {
         List<WebElement> listTxt;
         switch (local){
             case "componente":
-                listTxt = listTxtLinha;
+                listTxt = getDriver().findElements(By.cssSelector("nia-platia-table td:first-child"));
                 break;
             case "modal":
-                listTxt = listTxtLinhaModal;
+                listTxt = getDriver().findElements(By.cssSelector("nia-membros-table td:first-child"));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + local);
         }
         for (int i = 0; i < listTxt.size(); i++) {
-            if (!(listTxt.get(i).getText().contains(palavraPesquisada))){
+            if (!(listTxt.get(i).getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))){
                 resultadosOk = false;
                 break;
             }

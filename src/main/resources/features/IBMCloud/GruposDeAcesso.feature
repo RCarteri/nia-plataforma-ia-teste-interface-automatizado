@@ -30,7 +30,7 @@ Funcionalidade: Grupos de Acesso
 		Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
 		E a quantidade de resultados deve ser 0
 
-	@PesquisarModalComponente
+	@PesquisaModalComponente
 	Cenario: CT004 - Pesquisar no modal
 		Quando exibir "grupo"
 		E pesquisar "Rafael" no "modal"

@@ -11,6 +11,14 @@ Funcionalidade: Watson Studio
 		E selecionar o componente "Watson Studio"
 		Então deverá apresentar o título "Lista de Projetos" na página
 
+	@ExibirComponente
+	Cenario: CT002 - Exibir componente
+		Quando exibir "projeto"
+		E escolher "Membros"
+		Então deverá apresentar o titulo "Membros do projeto" no modal
+		E deverá apresentar as informações sobre ID e nome
+		E deverá mostrar a lista de "membro"
+
 	@PesquisaComponente
 	Cenario: CT003 - Pesquisar componente
 		Quando pesquisar "Teste" no "componente"
@@ -23,7 +31,7 @@ Funcionalidade: Watson Studio
 		Então deverá apresentar a mensagem "Não há nenhum projeto com este nome."
 		E a quantidade de resultados deve ser 0
 
-	@PesquisarModalComponente
+	@PesquisaModalComponente
 	Cenario: CT004 - Pesquisar no modal
 		Quando exibir "projeto"
 		E escolher "Membros"

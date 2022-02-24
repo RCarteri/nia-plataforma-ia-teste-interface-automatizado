@@ -44,7 +44,7 @@ public class Componentes {
 
     @E("^deverá mostrar a lista de \"([^\"]*)\"$")
     public void deveraMostrarAListagem(String option){
-        assertTrue(modalComponentePage.getCountLinhas() > 2);
+        assertTrue(modalComponentePage.getCountLinhas() > 1);
     }
 
     @Quando("^exibir \"([^\"]*)\"$")

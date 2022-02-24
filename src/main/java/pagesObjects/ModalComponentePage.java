@@ -21,7 +21,7 @@ public class ModalComponentePage extends Pagina {
     @MapearElementoWeb(css="div .p-dialog-header")
     private static ElementoTexto spanTituloModal;
 
-    @MapearElementoWeb(css="div[class*='ng-tns-c4'] tbody tr")
+    @MapearElementoWeb(css=".p-dialog-content td")
     private Elemento listaElementosModal;
 
     public int getCountLinhas(){

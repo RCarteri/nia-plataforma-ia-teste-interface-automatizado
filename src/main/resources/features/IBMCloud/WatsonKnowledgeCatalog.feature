@@ -29,3 +29,16 @@ Funcionalidade: Watson Knowledge Catalog
         Quando pesquisar "#invalido" no "componente"
         Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
         E a quantidade de resultados deve ser 0
+
+    @PesquisarModalComponente
+    Cenario: CT004 - Pesquisar no modal
+        Quando exibir "membro"
+        E pesquisar "50" no "modal"
+        Então deverá apresentar um total de resultados diferente do anterior
+        E os resultados apresentados devem conter a palavra pesquisada
+        Quando limpar pesquisa
+        Então o input deve estar vazio
+        E o total de resultados deverá mostrar a quantidade anterior
+        Quando pesquisar "#invalido" no "modal"
+        Então deverá apresentar a mensagem "Nenhum membro encontrado."
+        E a quantidade de resultados deve ser 0

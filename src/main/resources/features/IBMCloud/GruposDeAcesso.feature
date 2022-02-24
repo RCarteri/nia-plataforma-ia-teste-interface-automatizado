@@ -31,16 +31,15 @@ Funcionalidade: Grupos de Acesso
 		E a quantidade de resultados deve ser 0
 
 	@PesquisarModalComponente
-	Cenario: CT006 - Pesquisar no modal
+	Cenario: CT004 - Pesquisar no modal
 		Quando exibir "grupo"
 		E pesquisar "Adriano" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
-
-	@PesquisarModalComponente
-	Cenario: CT007 - Pesquisar no modal sem resultado
-		Quando exibir "grupo"
-		E pesquisar "#invalido" no "modal"
+		Quando limpar pesquisa
+		Então o input deve estar vazio
+		E o total de resultados deverá mostrar a quantidade anterior
+		Quando pesquisar "#invalido" no "modal"
 		Então deverá apresentar a mensagem "Nenhum membro encontrado."
 		E a quantidade de resultados deve ser 0
 

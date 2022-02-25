@@ -51,8 +51,7 @@ public class IBMCloudPage extends Pagina {
     private ElementoBotao btnLimparFiltroModal;
 
     public void clicarBotaoLista(int localizacao) {
-        localizacao--;
-        rolarPaginaAteElemento(listBtnExibir.get(localizacao));
+        rolarPaginaAteElemento(listBtnExibir.get(localizacao--));
         listBtnExibir.get(localizacao).click();
         new Utils().capturaTela();
     }

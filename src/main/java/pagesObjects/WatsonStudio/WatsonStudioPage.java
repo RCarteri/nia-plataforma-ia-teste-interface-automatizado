@@ -12,13 +12,13 @@ public class WatsonStudioPage extends Pagina {
     private ElementoBotao btnOpcoes;
 
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(3)")
-    private Elemento spanMembros;
+    private Elemento spanMembro;
 
 
     public void clicarBotaoOpcao(String opcao) {
         try {
             if ("Membros".equals(opcao)) {
-                spanMembros.clicar();
+                spanMembro.clicar();
             }
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);

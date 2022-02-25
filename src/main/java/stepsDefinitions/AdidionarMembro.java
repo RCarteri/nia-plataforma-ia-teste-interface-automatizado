@@ -12,11 +12,11 @@ public class AdidionarMembro {
     ModalAdicionarMembroPage adicionarMembroPage = new ModalAdicionarMembroPage();
     Utils utils = new Utils();
 
-    @E("^adicionar membro com a chave '(.*)'$")
-    public void adicionarMembroComAChave(String chave) {
+    @E("^adicionar membro com os dados (.*) '(.*)'$")
+    public void adicionarMembroComAChave(String funcao, String chave) {
         adicionarMembroPage.acessarAdicionarMembro();
         assertFalse("O botão confirmar está ativo", adicionarMembroPage.isBtnConfirmarAtivo());
-        adicionarMembroPage.adicionarMembro(chave);
+        adicionarMembroPage.adicionarMembro(funcao, chave);
     }
 
     @Então("^deverá apresentar a mensagem '(.*)' de erro$")

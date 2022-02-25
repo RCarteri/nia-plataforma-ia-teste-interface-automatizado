@@ -2,14 +2,19 @@ package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
+import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.elementos.ElementoBotao;
 import br.com.bb.ath.ftabb.elementos.ElementoInput;
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.Utils;
 
-public class ModalAdicionarMembroPage extends Pagina {
+import java.util.List;
 
+import static utils.Utils.getDriver;
+
+public class ModalAdicionarMembroPage extends Pagina {
     @MapearElementoWeb(css = ".p-button-secondary.p-ml-auto")
     private ElementoBotao btnAdicionarMembro;
 
@@ -19,19 +24,39 @@ public class ModalAdicionarMembroPage extends Pagina {
     @MapearElementoWeb(css = ".p-component.ng-invalid")
     private ElementoInput inputAdicionarMembro;
 
-    @MapearElementoWeb(css = "small.p-invalid")
-    private ElementoTexto smallMensagem;
+    @MapearElementoWeb(css = ".p-m-3 .pi-chevron-down")
+    private Elemento dropDownFuncao;
 
-    public void adicionarMembro(String chave) {
+    @MapearElementoWeb(css = "p-dropdownitem .ng-star-inserted")
+    private Elemento spanFuncao;
+
+    public void adicionarMembro(String funcao, String chave) {
         try {
             inputAdicionarMembro.escrever(chave);
-            if (isBtnConfirmarAtivo()) btnConfirmar.clicar();
+            inputAdicionarMembro.clicar();
+            if (dropDownFuncao.elementoExiste()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
     }
 
-    public void acessarAdicionarMembro(){
+    private void selecionarFuncao(String funcao) throws ElementoNaoLocalizadoException {
+        dropDownFuncao.clicar();
+        final List<WebElement> listSpanFuncao = getDriver().findElements(By.cssSelector("p-dropdownitem .ng-star-inserted"));
+        if (funcao.equals("")) {
+            dropDownFuncao.clicar();
+            inputAdicionarMembro.clicar();
+            return;
+        }
+        for (WebElement wE : listSpanFuncao) {
+            if (wE.getText().equals(funcao)) {
+                wE.click();
+                break;
+            }
+        }
+    }
+
+    public void acessarAdicionarMembro() {
         try {
             btnAdicionarMembro.clicar();
         } catch (ElementoNaoLocalizadoException e) {
@@ -48,12 +73,12 @@ public class ModalAdicionarMembroPage extends Pagina {
         return true;
     }
 
-    public String getMensagem(){
-        try {
-            return smallMensagem.recuperarTexto().replaceAll("\\n", "");
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+    public String getMensagem() {
+        final List<WebElement> listSmallMensagem = getDriver().findElements(By.cssSelector("small.p-invalid"));
+        StringBuilder mensagem = new StringBuilder();
+        for (WebElement webElement : listSmallMensagem) {
+            mensagem.append(webElement.getText().replaceAll("\\n", ""));
         }
-        return null;
+        return mensagem.toString();
     }
 }

@@ -47,7 +47,7 @@ Funcionalidade: Grupos de Acesso
 	@AdicionarMembroException
 	Esquema do Cenario: CT005 - Adicionar membro exceção
 		Quando exibir "grupo"
-		E adicionar membro com a chave '<chave>'
+		E adicionar membro com os dados  '<chave>'
 		Então deverá apresentar a mensagem '<mensagem>' de erro
 		Exemplos:
 			| chave    | mensagem                                                                                                                                  |

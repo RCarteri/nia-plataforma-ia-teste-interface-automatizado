@@ -2,6 +2,7 @@
 #encoding: utf-8
 @WatsonStudio
 Funcionalidade: Watson Studio
+
 	Contexto: Acessar componente
 		Dado que a Plataforma esteja fechada, abra a Plataforma
 		E se não estiver logado, realiza o login no Sistema
@@ -44,3 +45,15 @@ Funcionalidade: Watson Studio
 		Quando pesquisar "#invalido" no "modal"
 		Então deverá apresentar a mensagem "Nenhum membro encontrado."
 		E a quantidade de resultados deve ser 0
+
+	@AdicionarMembroException
+	Esquema do Cenario: CT005 - Adicionar membro exceção
+		Quando exibir "projeto"
+		E escolher "Membros"
+		E adicionar membro com os dados <função> '<chave>'
+		Então deverá apresentar a mensagem '<mensagem>' de erro
+		Exemplos:
+			| chave    | função        | mensagem                                                                                                                                 |
+			|          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                                                      |
+			| F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
+			| 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |

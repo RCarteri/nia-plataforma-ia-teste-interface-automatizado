@@ -51,14 +51,13 @@ public class IBMCloudPage extends Pagina {
     private ElementoBotao btnLimparFiltroModal;
 
     public void clicarBotaoLista(int localizacao) {
-        localizacao--;
         rolarPaginaAteElemento(listBtnExibir.get(localizacao));
         listBtnExibir.get(localizacao).click();
         new Utils().capturaTela();
     }
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
-        ativarDropDown();
+        dropDownComponente.clicar();
         List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".p-dropdown-items-wrapper span"));
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
@@ -142,10 +141,6 @@ public class IBMCloudPage extends Pagina {
 
     public String getTituloComponente() throws ElementoNaoLocalizadoException {
         return this.divTituloComponente.recuperarTexto();
-    }
-
-    private void ativarDropDown() throws ElementoNaoLocalizadoException {
-        dropDownComponente.clicar();
     }
 
     public String getTxtNenhumResultado(String local){

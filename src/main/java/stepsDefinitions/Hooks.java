@@ -74,13 +74,13 @@ public class Hooks {
                 }
                 System.out.println("\n    INFO - Login realizado com a chave: " + datapool.get("chave") + "\n");
             }
-        } catch (NoSuchElementException nsee) {
-            String noSuchElement = nsee.getMessage().split(" ")[4];
+        } catch (NoSuchElementException e) {
+            String noSuchElement = e.getMessage().split(" ")[4];
             noSuchElement = noSuchElement.substring(0, noSuchElement.length() - 4);
 
             System.err.println("\n    ERRO - Um elemento não foi localizado.");
             System.err.println("    ERRO - Não foi possível localizar o elemento \"" + noSuchElement + "\"");
-
+            getDriver().navigate().refresh();
             //utils.esperar(Razoes.LOGIN.getDelay(), Razoes.LOGIN.getRazao());
 
             if (++count <= MAX_BOUND)

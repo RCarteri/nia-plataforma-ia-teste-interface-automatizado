@@ -13,7 +13,7 @@ Funcionalidade: Watson Assistant
 
     @ExibirComponente
     Cenario: CT002 - Exibir componente
-        Quando exibir "skill"
+        Quando exibir "instância"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista de "skill"

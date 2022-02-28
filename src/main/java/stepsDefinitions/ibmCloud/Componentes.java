@@ -34,11 +34,13 @@ public class Componentes {
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
-        assertEquals(titulo, ibmCloudPage.getTituloComponente());
+       utils.capturaTela();
+       assertEquals(titulo, ibmCloudPage.getTituloComponente());
     }
 
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
     public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
+        utils.capturaTela();
         assertEquals(titulo, modalComponentePage.getTituloModal());
     }
 
@@ -51,18 +53,18 @@ public class Componentes {
     public void exibirSkills(String option){
         int localizacao = 0;
         switch (option) {
-            case "skill":
+            case "instância":
                 localizacao = 4; // Está sendo sitado 4 pois os anteriores estão retornando erro ao abrir
                 break;
-            case "membro":
+            case "projeto":
+            case "grupo":
+            case "catálogo":
             case "storage":
             case "modelo":
-            case "grupo":
-            case "projeto":
                 localizacao = 1;
                 break;
         }
-        new IBMCloudPage().clicarBotaoLista(localizacao); // sem criar uma nova instância ele não retorna a lista de botoes
+        new IBMCloudPage().clicarBotaoLista(--localizacao); // sem criar uma nova instância ele não retorna a lista de botoes
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")

@@ -13,7 +13,7 @@ Funcionalidade: Watson Knowledge Catalog
 
     @ExibirComponente
     Cenario: CT002 - Exibir componente
-        Quando exibir "membro"
+        Quando exibir "catálogo"
         Então deverá apresentar o titulo "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista de "membro"
@@ -32,7 +32,7 @@ Funcionalidade: Watson Knowledge Catalog
 
     @PesquisaModalComponente
     Cenario: CT004 - Pesquisar no modal
-        Quando exibir "membro"
+        Quando exibir "catálogo"
         E pesquisar "Bruno" no "modal"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
@@ -42,3 +42,14 @@ Funcionalidade: Watson Knowledge Catalog
         Quando pesquisar "#invalido" no "modal"
         Então deverá apresentar a mensagem "Nenhum membro encontrado."
         E a quantidade de resultados deve ser 0
+
+    @AdicionarMembroException
+    Esquema do Cenario: CT005 - Adicionar membro exceção
+        Quando exibir "catálogo"
+        E adicionar membro com os dados <função> '<chave>'
+        Então deverá apresentar a mensagem '<mensagem>' de erro
+        Exemplos:
+            | chave    | função        | mensagem                                                                                                                                 |
+            |          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                                                      |
+            | F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
+            | 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |

@@ -8,7 +8,7 @@ import utils.Utils;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class AdidionarMembro {
+public class AdicionarMembro {
     ModalAdicionarMembroPage adicionarMembroPage = new ModalAdicionarMembroPage();
     Utils utils = new Utils();
 

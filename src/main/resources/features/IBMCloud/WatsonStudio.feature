@@ -54,6 +54,11 @@ Funcionalidade: Watson Studio
 		Então deverá apresentar a mensagem '<mensagem>' de erro
 		Exemplos:
 			| chave    | função        | mensagem                                                                                                                                 |
-			|          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                                                      |
+			|          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
 			| F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
 			| 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
+
+	@FiltroSigla
+	Cenario: CT006 - Filtrar projetos por sigla
+		Quando selecionar a sigla "NIA"
+		Então deverá mostrar a lista de projetos com essa sigla

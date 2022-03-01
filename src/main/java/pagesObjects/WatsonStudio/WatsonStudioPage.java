@@ -23,6 +23,8 @@ public class WatsonStudioPage extends Pagina {
     @MapearElementoWeb(css = ".p-dropdown-clearable .pi-chevron-down")
     private Elemento dropDownSigla;
 
+    @MapearElementoWeb(css = ".pi-refresh")
+    private ElementoBotao btnAtualizar;
 
     public void selecionarSigla(String sigla) throws ElementoNaoLocalizadoException {
         dropDownSigla.clicar();
@@ -40,6 +42,14 @@ public class WatsonStudioPage extends Pagina {
             if ("Membros".equals(opcao)) {
                 spanMembro.clicar();
             }
+        } catch (ElementoNaoLocalizadoException e) {
+            Utils.logError(e);
+        }
+    }
+
+    public void atualizarProjetos() {
+        try {
+            btnAtualizar.clicar();
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }

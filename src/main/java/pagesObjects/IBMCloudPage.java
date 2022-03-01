@@ -50,6 +50,18 @@ public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroModal;
 
+    @MapearElementoWeb(css = "div .p-toast-detail")
+    private Elemento alertMensagem;
+
+    public String getAlertMensagem(){
+        try {
+            return alertMensagem.recuperarTexto();
+        } catch (ElementoNaoLocalizadoException e) {
+            Utils.logError(e);
+        }
+        return null;
+    }
+
     public void clicarBotaoLista(int localizacao) {
         rolarPaginaAteElemento(listBtnExibir.get(localizacao));
         listBtnExibir.get(localizacao).click();

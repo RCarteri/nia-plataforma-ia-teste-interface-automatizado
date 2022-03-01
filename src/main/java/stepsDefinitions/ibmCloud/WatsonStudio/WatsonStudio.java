@@ -30,4 +30,9 @@ public class WatsonStudio {
         utils.capturaTela();
         Assert.assertTrue(new IBMCloudPage().resultadosContemString(this.sigla, "sigla"));
     }
+
+    @Quando("^atualizar a listagem de projetos$")
+    public void atualizarAListagemDeProjetos() {
+        wSP.atualizarProjetos();
+    }
 }

@@ -62,3 +62,8 @@ Funcionalidade: Watson Studio
 	Cenario: CT006 - Filtrar projetos por sigla
 		Quando selecionar a sigla "NIA"
 		Então deverá mostrar a lista de projetos com essa sigla
+
+	@AtualizarProjetos
+	Cenario: CT007 - Atualizar listagem de projetos
+		Quando atualizar a listagem de projetos
+		Então deverá apresentar a mensagem "Carregamento dos projetos em andamento!" na tela

@@ -120,4 +120,10 @@ public class Componentes {
     public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
         assertEquals(this.quantResultadosAntes, ibmCloudPage.getQuantResultados(this.local));
     }
+
+    @Então("^deverá apresentar a mensagem \"([^\"]*)\" na tela$")
+    public void deveraApresentarAMensagemNaTela(String mensagem) {
+        assertEquals(mensagem, ibmCloudPage.getAlertMensagem());
+        utils.capturaTela();
+    }
 }

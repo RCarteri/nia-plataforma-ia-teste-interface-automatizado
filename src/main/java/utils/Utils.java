@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.UUID;
+import java.util.*;
 
 public class Utils extends FTABBUtils {
     public static WebDriver getDriver() {
@@ -127,4 +124,9 @@ public class Utils extends FTABBUtils {
         final String uuid = UUID.randomUUID().toString().substring(0, 8);
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
+
+    public static List<WebElement> getElement(String seletor){
+        return getDriver().findElements(By.cssSelector(seletor));
+    }
+
 }

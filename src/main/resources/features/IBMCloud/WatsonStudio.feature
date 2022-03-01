@@ -66,4 +66,11 @@ Funcionalidade: Watson Studio
 	@AtualizarProjetos
 	Cenario: CT007 - Atualizar listagem de projetos
 		Quando atualizar a listagem de projetos
-		Então deverá apresentar a mensagem "Carregamento dos projetos em andamento!" na tela
+		Então deverá apresentar a mensagem de alerta "Carregamento dos projetos em andamento!"
+
+	@Notebook
+	Cenario: CT008 - Validar mensagem inexistência de notebooks no projeto
+		Quando exibir "projeto"
+		E escolher "Notebooks"
+		Mas não existir notebook
+		Então deverá apresentar a mensagem de alerta "Não há nenhum notebook disponível para o projeto atualmente."

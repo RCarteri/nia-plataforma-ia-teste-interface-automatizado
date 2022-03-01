@@ -50,7 +50,7 @@ public class Componentes {
     }
 
     @Quando("^exibir \"([^\"]*)\"$")
-    public void exibirSkills(String option){
+    public void exibir(String option){
         int localizacao = 0;
         switch (option) {
             case "instância":
@@ -121,9 +121,9 @@ public class Componentes {
         assertEquals(this.quantResultadosAntes, ibmCloudPage.getQuantResultados(this.local));
     }
 
-    @Então("^deverá apresentar a mensagem \"([^\"]*)\" na tela$")
+    @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemNaTela(String mensagem) {
-        assertEquals(mensagem, ibmCloudPage.getAlertMensagem());
         utils.capturaTela();
+        assertEquals(mensagem, ibmCloudPage.getAlertMensagem());
     }
 }

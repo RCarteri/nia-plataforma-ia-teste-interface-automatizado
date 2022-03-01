@@ -7,13 +7,12 @@ import br.com.bb.ath.ftabb.elementos.ElementoBotao;
 import br.com.bb.ath.ftabb.elementos.ElementoInput;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.Utils;
 
 import java.util.List;
 
-import static utils.Utils.getDriver;
+import static utils.Utils.getElement;
 import static utils.Utils.rolarPaginaAteElemento;
 
 public class IBMCloudPage extends Pagina {
@@ -51,7 +50,7 @@ public class IBMCloudPage extends Pagina {
     private ElementoBotao btnLimparFiltroModal;
 
     @MapearElementoWeb(css = "div .p-toast-detail")
-    private Elemento alertMensagem;
+    public Elemento alertMensagem;
 
     public String getAlertMensagem(){
         try {
@@ -65,7 +64,6 @@ public class IBMCloudPage extends Pagina {
     public void clicarBotaoLista(int localizacao) {
         rolarPaginaAteElemento(listBtnExibir.get(localizacao));
         listBtnExibir.get(localizacao).click();
-        new Utils().capturaTela();
     }
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
@@ -185,9 +183,5 @@ public class IBMCloudPage extends Pagina {
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
-    }
-
-    private List<WebElement> getElement(String seletor){
-        return getDriver().findElements(By.cssSelector(seletor));
     }
 }

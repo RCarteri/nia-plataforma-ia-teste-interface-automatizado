@@ -18,7 +18,7 @@ import static utils.Utils.rolarPaginaAteElemento;
 
 public class IBMCloudPage extends Pagina {
 
-    private final List<WebElement> listBtnExibir = getDriver().findElements(By.cssSelector("td button.ng-star-inserted.p-button-secondary"));
+    private final List<WebElement> listBtnExibir = getElement("td button.ng-star-inserted.p-button-secondary");
 
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
@@ -58,7 +58,7 @@ public class IBMCloudPage extends Pagina {
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         dropDownComponente.clicar();
-        List<WebElement> listComponente = getDriver().findElements(By.cssSelector(".p-dropdown-items-wrapper span"));
+        List<WebElement> listComponente = getElement(".p-dropdown-items-wrapper span");
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
                 webElement.click();
@@ -67,9 +67,9 @@ public class IBMCloudPage extends Pagina {
         }
     }
 
-    public void pesquisar(String palavra, String local){
+    public void pesquisar(String palavra, String local) {
         try {
-            switch (local){
+            switch (local) {
                 case "componente":
                     inputFiltro.escrever(palavra);
                     break;
@@ -82,9 +82,9 @@ public class IBMCloudPage extends Pagina {
         }
     }
 
-    public String getTxtInputFiltro(String local){
+    public String getTxtInputFiltro(String local) {
         try {
-            switch (local){
+            switch (local) {
                 case "componente":
                     return inputFiltro.recuperarTexto();
                 case "modal":
@@ -100,14 +100,14 @@ public class IBMCloudPage extends Pagina {
         String quantResultados = null;
         String frase = null;
         try {
-        switch (local){
-            case "componente":
-                frase = txtPaginacao.recuperarTexto();
-                break;
-            case "modal":
-                frase = txtPaginacaoModal.recuperarTexto();
-                break;
-        }
+            switch (local) {
+                case "componente":
+                    frase = txtPaginacao.recuperarTexto();
+                    break;
+                case "modal":
+                    frase = txtPaginacaoModal.recuperarTexto();
+                    break;
+            }
             assert frase != null;
             quantResultados = frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
         } catch (ElementoNaoLocalizadoException e) {
@@ -117,21 +117,24 @@ public class IBMCloudPage extends Pagina {
         return Integer.parseInt(quantResultados);
     }
 
-    public boolean resultadosContemString(String palavraPesquisada, String local){
+    public boolean resultadosContemString(String palavraPesquisada, String local) {
         boolean resultadosOk = true;
         List<WebElement> listTxt;
-        switch (local){
+        switch (local) {
             case "componente":
-                listTxt = getDriver().findElements(By.cssSelector("nia-platia-table td:first-child"));
+                listTxt = getElement("nia-platia-table td:first-child");
                 break;
             case "modal":
-                listTxt = getDriver().findElements(By.cssSelector("nia-membros-table td:nth-child(2)"));
+                listTxt = getElement("nia-membros-table td:nth-child(2)");
+                break;
+            case "sigla":
+                listTxt = getElement(".p-datatable-tbody td:nth-child(2)");
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + local);
         }
-        for (int i = 0; i < listTxt.size(); i++) {
-            if (!(listTxt.get(i).getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))){
+        for (WebElement webElement : listTxt) {
+            if (!(webElement.getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))) {
                 resultadosOk = false;
                 break;
             }
@@ -143,9 +146,9 @@ public class IBMCloudPage extends Pagina {
         return this.divTituloComponente.recuperarTexto();
     }
 
-    public String getTxtNenhumResultado(String local){
+    public String getTxtNenhumResultado(String local) {
         try {
-            switch (local){
+            switch (local) {
                 case "componente":
                     return txtNenhumResultado.recuperarTexto();
                 case "modal":
@@ -157,9 +160,9 @@ public class IBMCloudPage extends Pagina {
         return null;
     }
 
-    public void limparPesquisa(String local){
+    public void limparPesquisa(String local) {
         try {
-            switch (local){
+            switch (local) {
                 case "componente":
                     btnLimparFiltro.clicar();
                     break;
@@ -170,5 +173,9 @@ public class IBMCloudPage extends Pagina {
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
+    }
+
+    private List<WebElement> getElement(String seletor){
+        return getDriver().findElements(By.cssSelector(seletor));
     }
 }

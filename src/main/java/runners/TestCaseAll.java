@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "" },
+		tags = { "@FiltroSigla" },
 		monochrome = true
 )
 public class TestCaseAll {

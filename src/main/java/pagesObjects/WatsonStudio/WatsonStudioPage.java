@@ -44,16 +44,4 @@ public class WatsonStudioPage extends Pagina {
             Utils.logError(e);
         }
     }
-
-    public boolean resultadosContemSigla(String sigla) {
-        boolean resultadosOk = true;
-        List<WebElement> listTxt = getDriver().findElements(By.cssSelector(".p-datatable-tbody td:nth-child(2)"));
-        for (WebElement webElement : listTxt) {
-            if (!(webElement.getText().contains(sigla))) {
-                resultadosOk = false;
-                break;
-            }
-        }
-        return resultadosOk;
-    }
 }

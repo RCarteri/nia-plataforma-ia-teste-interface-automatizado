@@ -16,7 +16,7 @@ Funcionalidade: Watson Assistant
         Quando exibir "instância"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
-        E deverá mostrar a lista de "skill"
+        E deverá mostrar a lista com elementos
 
     @PesquisaComponente
     Cenario:CT003 - Pesquisar componente

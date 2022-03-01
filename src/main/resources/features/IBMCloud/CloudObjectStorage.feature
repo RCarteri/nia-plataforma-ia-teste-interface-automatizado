@@ -16,7 +16,7 @@ Funcionalidade: Cloud Object Storage
 		Quando exibir "storage"
 		Então deverá apresentar o titulo "Buckets do storage" no modal
 		E deverá apresentar as informações sobre ID e nome
-		E deverá mostrar a lista de "bucket"
+		E deverá mostrar a lista com elementos
 
 	@PesquisaComponente
 	Cenario: CT003 - Pesquisar componente

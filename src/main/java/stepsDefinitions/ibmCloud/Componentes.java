@@ -44,11 +44,6 @@ public class Componentes {
         assertEquals(titulo, modalComponentePage.getTituloModal());
     }
 
-    @E("^deverá mostrar a lista de \"([^\"]*)\"$")
-    public void deveraMostrarAListagem(String option){
-        assertTrue(modalComponentePage.getCountLinhas() > 1);
-    }
-
     @Quando("^exibir \"([^\"]*)\"$")
     public void exibir(String option){
         int localizacao = 0;
@@ -125,5 +120,10 @@ public class Componentes {
     public void deveraApresentarAMensagemNaTela(String mensagem) {
         utils.capturaTela();
         assertEquals(mensagem, ibmCloudPage.getAlertMensagem());
+    }
+
+    @E("^deverá mostrar a lista com elementos$")
+    public void deveraMostrarAListaComElementos() {
+        assertTrue(modalComponentePage.getCountLinhas() > 1);
     }
 }

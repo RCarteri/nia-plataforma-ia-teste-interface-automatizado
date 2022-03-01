@@ -17,7 +17,7 @@ Funcionalidade: Grupos de Acesso
 		Quando exibir "grupo"
 		Então deverá apresentar o titulo "GRUPOS DE ACESSO" no modal
 		E deverá apresentar as informações sobre ID e nome
-		E deverá mostrar a lista de "grupo"
+		E deverá mostrar a lista com elementos
 
 	@PesquisaComponente
 	Cenario: CT003 - Pesquisar componente

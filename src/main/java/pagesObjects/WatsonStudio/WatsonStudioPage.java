@@ -14,6 +14,7 @@ import utils.Utils;
 
 import java.util.List;
 
+import static utils.Razoes.CARR_ELEM;
 import static utils.Utils.getDriver;
 
 public class WatsonStudioPage extends Pagina {
@@ -65,18 +66,21 @@ public class WatsonStudioPage extends Pagina {
     }
 
     public boolean existeNotebook(boolean esperado) {
-        ModalComponentePage mCP = new ModalComponentePage();
-        PaginacaoSection pS = new PaginacaoSection();
         try {
+            PaginacaoSection pS = new PaginacaoSection();
             for (WebElement nPagina : pS.listBtnNPaginacao) {
                 IBMCloudPage iCP = new IBMCloudPage();
                 for (WebElement nItem : iCP.listBtnExibir) {
-                    avancarItem(nItem);
-                    if (!esperado && iCP.alertMensagem.elementoExiste()) {
+                    avancarItem(nItem, iCP.listBtnExibir);
+                    new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+                    if (!esperado && iCP.getAlert().isDisplayed()) {
+                        System.out.println("Encontrado projeto sem notebook.");
                         return false;
-                    } else if (!esperado && !iCP.alertMensagem.elementoExiste()) {
-                        mCP.btnFechar.clicar();
-                    } else if (esperado && mCP.getCountLinhas() >= 1) {
+                    } else if (!esperado && !iCP.getAlert().isDisplayed()) {
+                        System.out.println("Fechando modal");
+                        new ModalComponentePage().btnFechar.clicar();
+                    } else if (esperado && new ModalComponentePage().getCountLinhas() >= 1) {
+                        System.out.println("Projeto com notebook encontrado.");
                         return true;
                     }
                 }
@@ -89,11 +93,13 @@ public class WatsonStudioPage extends Pagina {
     }
 
     private void avancarPagina(WebElement nPagina) {
+        System.out.println("Avancando para a página " + nPagina.getText());
         Utils.rolarPaginaAteElemento(nPagina);
         nPagina.click();
     }
 
-    private void avancarItem(WebElement nItem) {
+    private void avancarItem(WebElement nItem, List<WebElement> listBtnExibir) {
+        System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
         Utils.rolarPaginaAteElemento(nItem);
         nItem.click();
         clicarBotaoOpcao("Notebooks");

@@ -12,11 +12,10 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Utils.getElement;
-import static utils.Utils.rolarPaginaAteElemento;
+import static utils.Utils.*;
 
 public class IBMCloudPage extends Pagina {
-    public final List<WebElement> listBtnExibir = getElement("td button.ng-star-inserted.p-button-secondary");
+    public final List<WebElement> listBtnExibir = getElements("td button.ng-star-inserted.p-button-secondary");
 
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
@@ -45,13 +44,12 @@ public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(css = "div .p-toast-detail")
     public Elemento alertMensagem;
 
+    public WebElement getAlert(){
+        return getElement("div .p-toast-detail");
+    }
+
     public String getAlertMensagem(){
-        try {
-            return alertMensagem.recuperarTexto();
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
-        }
-        return null;
+        return getAlert().getText();
     }
 
     public void clicarBotaoLista(int localizacao) {
@@ -61,7 +59,7 @@ public class IBMCloudPage extends Pagina {
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         dropDownComponente.clicar();
-        List<WebElement> listComponente = getElement(".p-dropdown-items-wrapper span");
+        List<WebElement> listComponente = getElements(".p-dropdown-items-wrapper span");
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
                 webElement.click();
@@ -104,13 +102,13 @@ public class IBMCloudPage extends Pagina {
         List<WebElement> listTxt;
         switch (local) {
             case "componente":
-                listTxt = getElement("nia-platia-table td:first-child");
+                listTxt = getElements("nia-platia-table td:first-child");
                 break;
             case "modal":
-                listTxt = getElement("nia-membros-table td:nth-child(2)");
+                listTxt = getElements("nia-membros-table td:nth-child(2)");
                 break;
             case "sigla":
-                listTxt = getElement(".p-datatable-tbody td:nth-child(2)");
+                listTxt = getElements(".p-datatable-tbody td:nth-child(2)");
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + local);

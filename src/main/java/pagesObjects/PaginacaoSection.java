@@ -9,10 +9,10 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Utils.getElement;
+import static utils.Utils.getElements;
 
 public class PaginacaoSection extends Pagina {
-    public final List<WebElement> listBtnNPaginacao = getElement("button.p-paginator-page:nth-child(n+2):nth-child(-n+5)");
+    public final List<WebElement> listBtnNPaginacao = getElements("button.p-paginator-page:nth-child(n+2):nth-child(-n+5)");
 
     @MapearElementoWeb(css = "nia-platia-table .p-paginator-current")
     private ElementoTexto txtPaginacao;

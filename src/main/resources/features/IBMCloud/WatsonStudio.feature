@@ -70,9 +70,7 @@ Funcionalidade: Watson Studio
 
 	@Notebook
 	Cenario: CT008 - Validar mensagem inexistência de notebooks no projeto
-		Quando exibir "projeto"
-		E escolher "Notebooks"
-		Mas não existir notebook
+		Quando não existir notebook
 		Então deverá apresentar a mensagem de alerta "Não há nenhum notebook disponível para o projeto atualmente."
 
 	@Notebook

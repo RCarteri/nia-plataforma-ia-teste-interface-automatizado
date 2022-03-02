@@ -121,11 +121,11 @@ public class Componentes {
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemNaTela(String mensagem) {
         utils.capturaTela();
-        assertEquals(mensagem, ibmCloudPage.getAlertMensagem());
+        assertEquals(mensagem, new IBMCloudPage().getAlertMensagem());
     }
 
     @E("^deverá mostrar a lista com elementos$")
     public void deveraMostrarAListaComElementos() {
-        assertTrue(modalComponentePage.getCountLinhas() > 1);
+        assertTrue(new ModalComponentePage().getCountLinhas() > 1);
     }
 }

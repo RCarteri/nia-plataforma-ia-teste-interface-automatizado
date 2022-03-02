@@ -1,7 +1,6 @@
 package stepsDefinitions.ibmCloud.WatsonStudio;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Mas;
 import cucumber.api.java.pt.Quando;
@@ -9,6 +8,7 @@ import pagesObjects.IBMCloudPage;
 import pagesObjects.WatsonStudio.WatsonStudioPage;
 import utils.Utils;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WatsonStudio {
@@ -16,7 +16,7 @@ public class WatsonStudio {
     WatsonStudioPage wSP = new WatsonStudioPage();
     Utils utils = new Utils();
 
-    @E("^escolher \"([^\"]*)\"$")
+    @Quando("^escolher \"([^\"]*)\"$")
     public void escolher(String opcao){
         wSP.clicarBotaoOpcao(opcao);
     }
@@ -40,7 +40,13 @@ public class WatsonStudio {
 
     @Mas("^não existir notebook$")
     public void naoExistirNotebook() {
-        assertTrue("Todos os projetos possuem notebooks.\nNão foi possível realizar este teste.",
-                wSP.existeNotebook());
+        assertFalse("Todos os projetos possuem notebooks.\nNão foi possível realizar este teste.",
+                wSP.existeNotebook(false));
+    }
+
+    @Quando("^existir notebook$")
+    public void existirNotebook() {
+        assertTrue("Nenhum projeto possui notebook.\nNão foi possível realizar este teste.",
+                wSP.existeNotebook(true));
     }
 }

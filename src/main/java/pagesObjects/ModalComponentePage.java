@@ -11,24 +11,25 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.Utils.getElement;
+import static utils.Utils.getElements;
 
 public class ModalComponentePage extends Pagina {
 
-    private final List<WebElement> listInfoNomeID = getElement(".ng-trigger h4");
-    private final List<WebElement> listCabecalhoNomeID = getElement("div[class*='p-ai-center ng-tns-c47'] span");
+    private final List<WebElement> listInfoNomeID = getElements(".ng-trigger h4");
+    private final List<WebElement> listaElementosModal = getElements(".p-dialog-content td");
+    private final List<WebElement> listCabecalhoNomeID = getElements("div[class*='p-ai-center ng-tns-c47'] span");
 
     @MapearElementoWeb(css=".p-dialog-title")
-    private static ElementoTexto spanTituloModal;
+    private ElementoTexto spanTituloModal;
 
     @MapearElementoWeb(css=".p-dialog-content td")
-    private Elemento listaElementosModal;
+    public Elemento listElementosModal;
 
     @MapearElementoWeb(css=".pi-times")
     public ElementoBotao btnFechar;
 
     public int getCountLinhas(){
-        return listaElementosModal.quantosExistem();
+        return listaElementosModal.size();
     }
 
     public List<String> getListaInfoNomeID(){

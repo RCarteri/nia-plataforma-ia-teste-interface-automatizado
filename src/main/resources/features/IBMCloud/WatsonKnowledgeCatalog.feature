@@ -16,7 +16,7 @@ Funcionalidade: Watson Knowledge Catalog
         Quando exibir "catálogo"
         Então deverá apresentar o titulo "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
-        E deverá mostrar a lista de "membro"
+        E deverá mostrar a lista com elementos
 
     @PesquisaComponente
     Cenario: CT003 - Pesquisar componente

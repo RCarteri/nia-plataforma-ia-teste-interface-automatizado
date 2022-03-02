@@ -6,6 +6,7 @@ import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.IBMCloudPage;
 import pagesObjects.ModalComponentePage;
+import pagesObjects.PaginacaoSection;
 import pagesObjects.ProvedorPage;
 import utils.Utils;
 
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Componentes {
     private final IBMCloudPage ibmCloudPage = new IBMCloudPage();
+    private final PaginacaoSection pS = new PaginacaoSection();
     private final ModalComponentePage modalComponentePage = new ModalComponentePage();
     private final Utils utils = new Utils();
     private int quantResultadosAntes;
@@ -42,11 +44,6 @@ public class Componentes {
     public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
         utils.capturaTela();
         assertEquals(titulo, modalComponentePage.getTituloModal());
-    }
-
-    @E("^deverá mostrar a lista de \"([^\"]*)\"$")
-    public void deveraMostrarAListagem(String option){
-        assertTrue(modalComponentePage.getCountLinhas() > 1);
     }
 
     @Quando("^exibir \"([^\"]*)\"$")
@@ -77,7 +74,7 @@ public class Componentes {
     public void pesquisar(String palavraPesquisada, String local) {
         this.local = local;
         ibmCloudPage.limparPesquisa(this.local);
-        this.quantResultadosAntes = ibmCloudPage.getQuantResultados(local);
+        this.quantResultadosAntes = pS.getQuantResultados(local);
         this.palavraPesquisada = palavraPesquisada;
         ibmCloudPage.pesquisar(palavraPesquisada, local);
     }
@@ -86,7 +83,7 @@ public class Componentes {
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         utils.capturaTela();
         if (this.quantResultadosAntes != 1)
-            assertTrue(this.quantResultadosAntes != ibmCloudPage.getQuantResultados(this.local));
+            assertTrue(this.quantResultadosAntes != pS.getQuantResultados(this.local));
     }
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")
@@ -102,7 +99,7 @@ public class Componentes {
 
     @E("^a quantidade de resultados deve ser (\\d+)$")
     public void osResultadosDevemSer(int quantResultados) {
-        assertEquals(quantResultados, ibmCloudPage.getQuantResultados(this.local));
+        assertEquals(quantResultados, pS.getQuantResultados(this.local));
     }
 
     @E("^limpar pesquisa$")
@@ -118,12 +115,17 @@ public class Componentes {
 
     @E("^o total de resultados deverá mostrar a quantidade anterior$")
     public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
-        assertEquals(this.quantResultadosAntes, ibmCloudPage.getQuantResultados(this.local));
+        assertEquals(this.quantResultadosAntes, pS.getQuantResultados(this.local));
     }
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemNaTela(String mensagem) {
+        assertEquals(mensagem, new IBMCloudPage().getAlertMensagem());
         utils.capturaTela();
-        assertEquals(mensagem, ibmCloudPage.getAlertMensagem());
+    }
+
+    @E("^deverá mostrar a lista com elementos$")
+    public void deveraMostrarAListaComElementos() {
+        assertTrue(new ModalComponentePage().getCountLinhas() > 1);
     }
 }

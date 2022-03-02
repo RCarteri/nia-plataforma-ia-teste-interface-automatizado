@@ -9,12 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pagesObjects.IBMCloudPage;
 import pagesObjects.ModalComponentePage;
+import pagesObjects.PaginacaoSection;
 import utils.Utils;
 
 import java.util.List;
 
+import static utils.Razoes.CARR_ELEM;
 import static utils.Utils.getDriver;
-import static utils.Utils.getElement;
 
 public class WatsonStudioPage extends Pagina {
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(3)")
@@ -29,8 +30,6 @@ public class WatsonStudioPage extends Pagina {
     @MapearElementoWeb(css = ".pi-refresh")
     private ElementoBotao btnAtualizar;
 
-    private List<WebElement> listbtnOpcoes = null;
-    private List<WebElement> listbtnPaginacao = null;
 
     public void selecionarSigla(String sigla) throws ElementoNaoLocalizadoException {
         dropDownSigla.clicar();
@@ -44,8 +43,6 @@ public class WatsonStudioPage extends Pagina {
     }
 
     public void clicarBotaoOpcao(String opcao) {
-        this.listbtnOpcoes = getElement(".pi-ellipsis-v");
-        this.listbtnPaginacao = getElement("button.p-paginator-page");
         try {
             switch (opcao) {
                 case "Notebooks":
@@ -68,29 +65,43 @@ public class WatsonStudioPage extends Pagina {
         }
     }
 
-    public boolean existeNotebook() {
-        ModalComponentePage mCP = new ModalComponentePage();
-        for (WebElement paginacao : listbtnPaginacao) {
-            for (WebElement opcao : listbtnOpcoes) {
-                if (new IBMCloudPage().alertMensagem.elementoExiste()) {
-                    return true;
-                }
-                System.out.println("\n    INFO - Testando próximo item da listagem");
-                try {
-                    if (mCP.btnFechar.elementoExiste()) {
-                        mCP.btnFechar.clicar();
+    public boolean existeNotebook(boolean esperado) {
+        try {
+            PaginacaoSection pS = new PaginacaoSection();
+            for (WebElement nPagina : pS.listBtnNPaginacao) {
+                IBMCloudPage iCP = new IBMCloudPage();
+                for (WebElement nItem : iCP.listBtnExibir) {
+                    avancarItem(nItem, iCP.listBtnExibir);
+                    if (!esperado && iCP.getAlert().isDisplayed()) {
+                        System.out.println("Encontrado projeto sem notebook.");
+                        return false;
+                    } else if (!esperado && !iCP.getAlert().isDisplayed()) {
+                        System.out.println("Fechando modal");
+                        new ModalComponentePage().btnFechar.clicar();
+                    } else if (esperado && new ModalComponentePage().getCountLinhas() >= 1) {
+                        System.out.println("Projeto com notebook encontrado.");
+                        return true;
                     }
-                    opcao.click();
-                } catch (ElementoNaoLocalizadoException e) {
-                    Utils.logError(e);
                 }
-                clicarBotaoOpcao("Notebooks");
+                avancarPagina(nPagina);
             }
-            int index = listbtnPaginacao.indexOf(paginacao);
-            listbtnPaginacao.get(index + 1).click();
-            System.out.println("\n    INFO - Avançando paginação");
-            this.listbtnOpcoes = getElement(".pi-ellipsis-v");
+        } catch (ElementoNaoLocalizadoException e) {
+            Utils.logError(e);
         }
         return false;
+    }
+
+    private void avancarPagina(WebElement nPagina) {
+        System.out.println("Avancando para a página " + nPagina.getText());
+        Utils.rolarPaginaAteElemento(nPagina);
+        nPagina.click();
+    }
+
+    private void avancarItem(WebElement nItem, List<WebElement> listBtnExibir) {
+        System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
+        Utils.rolarPaginaAteElemento(nItem);
+        nItem.click();
+        clicarBotaoOpcao("Notebooks");
+        new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
     }
 }

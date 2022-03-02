@@ -31,7 +31,7 @@ public class Utils extends FTABBUtils {
         //esperar(Razoes.CAP_TELA.getDelay(), Razoes.CAP_TELA.getRazao());
         capturarTela();
         allureCapturarTela();
-        System.out.println("    INFO - Tela capturada.\n");
+        System.out.println("        INFO - Tela capturada.");
     }
 
     public void deletarAllureResults() {
@@ -125,8 +125,12 @@ public class Utils extends FTABBUtils {
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
-    public static List<WebElement> getElement(String seletor){
+    public static List<WebElement> getElements(String seletor){
         return getDriver().findElements(By.cssSelector(seletor));
+    }
+
+    public static WebElement getElement(String seletor){
+        return getDriver().findElement(By.cssSelector(seletor));
     }
 
 }

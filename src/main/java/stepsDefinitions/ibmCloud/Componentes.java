@@ -120,8 +120,8 @@ public class Componentes {
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemNaTela(String mensagem) {
-        utils.capturaTela();
         assertEquals(mensagem, new IBMCloudPage().getAlertMensagem());
+        utils.capturaTela();
     }
 
     @E("^deverá mostrar a lista com elementos$")

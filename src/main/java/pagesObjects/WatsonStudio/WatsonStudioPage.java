@@ -72,7 +72,6 @@ public class WatsonStudioPage extends Pagina {
                 IBMCloudPage iCP = new IBMCloudPage();
                 for (WebElement nItem : iCP.listBtnExibir) {
                     avancarItem(nItem, iCP.listBtnExibir);
-                    new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
                     if (!esperado && iCP.getAlert().isDisplayed()) {
                         System.out.println("Encontrado projeto sem notebook.");
                         return false;
@@ -103,5 +102,6 @@ public class WatsonStudioPage extends Pagina {
         Utils.rolarPaginaAteElemento(nItem);
         nItem.click();
         clicarBotaoOpcao("Notebooks");
+        new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
     }
 }

@@ -31,7 +31,7 @@ public class Utils extends FTABBUtils {
         //esperar(Razoes.CAP_TELA.getDelay(), Razoes.CAP_TELA.getRazao());
         capturarTela();
         allureCapturarTela();
-        System.out.println("    INFO - Tela capturada.\n");
+        System.out.println("        INFO - Tela capturada.");
     }
 
     public void deletarAllureResults() {

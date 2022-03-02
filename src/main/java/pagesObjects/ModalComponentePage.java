@@ -19,10 +19,10 @@ public class ModalComponentePage extends Pagina {
     private final List<WebElement> listCabecalhoNomeID = getElement("div[class*='p-ai-center ng-tns-c47'] span");
 
     @MapearElementoWeb(css=".p-dialog-title")
-    private static ElementoTexto spanTituloModal;
+    private ElementoTexto spanTituloModal;
 
     @MapearElementoWeb(css=".p-dialog-content td")
-    private Elemento listaElementosModal;
+    public Elemento listaElementosModal;
 
     @MapearElementoWeb(css=".pi-times")
     public ElementoBotao btnFechar;

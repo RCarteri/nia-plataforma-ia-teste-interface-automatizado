@@ -77,9 +77,7 @@ Funcionalidade: Watson Studio
 
 	@Notebook
 	Cenario: CT009 - Exibir notebook
-		Quando exibir "projeto"
-		E escolher "Notebooks"
-		E existir notebook
+		Quando existir notebook
 		Então deverá apresentar o titulo "Notebooks" no modal
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista com elementos

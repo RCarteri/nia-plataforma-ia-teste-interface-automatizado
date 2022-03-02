@@ -16,8 +16,7 @@ import static utils.Utils.getElement;
 import static utils.Utils.rolarPaginaAteElemento;
 
 public class IBMCloudPage extends Pagina {
-
-    private final List<WebElement> listBtnExibir = getElement("td button.ng-star-inserted.p-button-secondary");
+    public final List<WebElement> listBtnExibir = getElement("td button.ng-star-inserted.p-button-secondary");
 
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
@@ -30,12 +29,6 @@ public class IBMCloudPage extends Pagina {
 
     @MapearElementoWeb(css = "nia-membros-table thead .p-inputtext")
     private ElementoInput inputFiltroModal;
-
-    @MapearElementoWeb(css = "nia-platia-table .p-paginator-current")
-    private ElementoTexto txtPaginacao;
-
-    @MapearElementoWeb(css = "nia-membros-table .p-paginator-current")
-    private ElementoTexto txtPaginacaoModal;
 
     @MapearElementoWeb(css = "nia-platia-table td")
     private ElementoTexto txtNenhumResultado;
@@ -104,27 +97,6 @@ public class IBMCloudPage extends Pagina {
             Utils.logError(e);
         }
         return null;
-    }
-
-    public int getQuantResultados(String local) {
-        String quantResultados = null;
-        String frase = null;
-        try {
-            switch (local) {
-                case "componente":
-                    frase = txtPaginacao.recuperarTexto();
-                    break;
-                case "modal":
-                    frase = txtPaginacaoModal.recuperarTexto();
-                    break;
-            }
-            assert frase != null;
-            quantResultados = frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
-        }
-        assert quantResultados != null;
-        return Integer.parseInt(quantResultados);
     }
 
     public boolean resultadosContemString(String palavraPesquisada, String local) {

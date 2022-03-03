@@ -11,7 +11,7 @@ Funcionalidade: Watson Assistant
         E selecionar o componente "Watson Assistant"
         Então deverá apresentar o título "Lista de Instâncias" na página
 
-    @ExibirComponente
+    @ExibirComponente @Smoke
     Cenario: CT002 - Exibir componente
         Quando exibir "instância"
         Então deverá apresentar o titulo "Skills" no modal

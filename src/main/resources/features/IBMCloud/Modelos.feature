@@ -11,7 +11,7 @@ Funcionalidade: Modelos
 		E selecionar o componente "Modelos"
 		Então deverá apresentar o título "Lista de Modelos" na página
 
-	@ExibirComponente
+	@ExibirComponente @Smoke
 	Cenario: CT002 - Exibir componente
 		Quando exibir "modelo"
 		Então deverá apresentar o titulo "Detalhes do Modelo" no modal

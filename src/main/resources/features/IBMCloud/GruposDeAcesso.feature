@@ -12,7 +12,7 @@ Funcionalidade: Grupos de Acesso
 		E selecionar o componente "Grupos de Acesso"
 		Então deverá apresentar o título "Lista de Grupos de acesso" na página
 
-	@ExibirComponente
+	@ExibirComponente @Smoke
 	Cenario: CT002 - Exibir componente
 		Quando exibir "grupo"
 		Então deverá apresentar o titulo "GRUPOS DE ACESSO" no modal

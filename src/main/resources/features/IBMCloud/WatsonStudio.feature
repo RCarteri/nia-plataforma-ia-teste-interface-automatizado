@@ -12,7 +12,7 @@ Funcionalidade: Watson Studio
 		E selecionar o componente "Watson Studio"
 		Então deverá apresentar o título "Lista de Projetos" na página
 
-	@ExibirComponente
+	@ExibirComponente @Smoke
 	Cenario: CT002 - Exibir componente
 		Quando exibir "projeto"
 		E escolher "Membros"

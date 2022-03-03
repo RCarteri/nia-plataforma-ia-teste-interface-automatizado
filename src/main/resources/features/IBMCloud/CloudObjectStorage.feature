@@ -11,7 +11,7 @@ Funcionalidade: Cloud Object Storage
 		E selecionar o componente "Cloud Object Storage"
 		Então deverá apresentar o título "Lista de Object Storages" na página
 
-	@ExibirComponente
+	@ExibirComponente @Smoke
 	Cenario: CT002 - Exibir componente
 		Quando exibir "storage"
 		Então deverá apresentar o titulo "Buckets do storage" no modal

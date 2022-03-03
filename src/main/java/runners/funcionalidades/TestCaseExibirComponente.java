@@ -1,4 +1,4 @@
-package runners;
+package runners.funcionalidades;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -6,6 +6,7 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import runners.ConfRunner;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -13,10 +14,10 @@ import org.junit.runner.RunWith;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@PesquisaComponente" },
+		tags = { "@ExibirComponente" },
 		monochrome = true
 )
-public class TestCasePesquisaComponente {
+public class TestCaseExibirComponente {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

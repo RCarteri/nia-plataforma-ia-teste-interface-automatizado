@@ -11,7 +11,7 @@ Funcionalidade: Watson Knowledge Catalog
         E selecionar o componente "Watson Knowledge Catalog"
         Então deverá apresentar o título "Lista de Catálogos" na página
 
-    @ExibirComponente
+    @ExibirComponente @Smoke
     Cenario: CT002 - Exibir componente
         Quando exibir "catálogo"
         Então deverá apresentar o titulo "Membros do catálogo" no modal

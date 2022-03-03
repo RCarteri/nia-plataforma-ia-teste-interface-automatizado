@@ -89,7 +89,7 @@ Task: 399973
 ## [1.1.0] - 15-02-2022
 Task: 397818, 395858
 ### Adicionado
-- Funcionalidade: Acessar e exibir modal do componente
+- Cenário: CT002 - Exibir componente
 - Funcionalidade: Fechar plataforma
 ### Mudado
 - Validação se já está na página da plataforma quando for testar outro cenário
@@ -97,4 +97,4 @@ Task: 397818, 395858
 ## [1.0.0] - 14-02-2022
 Task: 397239
 ### Adicionado
-- Funcionalidade: Acessar plataforma IA
+- Cenário: CT001 - Acessar plataforma IA

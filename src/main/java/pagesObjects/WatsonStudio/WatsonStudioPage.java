@@ -15,6 +15,7 @@ import utils.Utils;
 import java.util.List;
 
 import static utils.Razoes.CARR_ELEM;
+import static utils.Razoes.CARR_ELEM_RAPIDO;
 import static utils.Utils.getDriver;
 
 public class WatsonStudioPage extends Pagina {
@@ -59,7 +60,7 @@ public class WatsonStudioPage extends Pagina {
     public void atualizarProjetos() {
         try {
             btnAtualizar.clicar();
-            new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+            new Utils().esperar(CARR_ELEM_RAPIDO.getDelay(), CARR_ELEM_RAPIDO.getRazao());
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }

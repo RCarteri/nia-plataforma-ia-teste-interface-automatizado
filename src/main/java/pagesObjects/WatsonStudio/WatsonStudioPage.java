@@ -30,7 +30,6 @@ public class WatsonStudioPage extends Pagina {
     @MapearElementoWeb(css = ".pi-refresh")
     private ElementoBotao btnAtualizar;
 
-
     public void selecionarSigla(String sigla) throws ElementoNaoLocalizadoException {
         dropDownSigla.clicar();
         List<WebElement> listSigla = getDriver().findElements(By.cssSelector("p-dropdownitem span"));

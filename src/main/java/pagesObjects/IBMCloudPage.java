@@ -12,7 +12,6 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Razoes.CARR_ELEM_RAPIDO;
 import static utils.Utils.*;
 
 public class IBMCloudPage extends Pagina {
@@ -50,7 +49,6 @@ public class IBMCloudPage extends Pagina {
     }
 
     public String getAlertMensagem(){
-        new Utils().esperar(CARR_ELEM_RAPIDO.getDelay(), CARR_ELEM_RAPIDO.getRazao());
         return getAlert().getText();
     }
 

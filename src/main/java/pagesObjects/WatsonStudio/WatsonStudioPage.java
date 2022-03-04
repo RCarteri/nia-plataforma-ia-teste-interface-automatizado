@@ -60,6 +60,7 @@ public class WatsonStudioPage extends Pagina {
     public void atualizarProjetos() {
         try {
             btnAtualizar.clicar();
+            new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }

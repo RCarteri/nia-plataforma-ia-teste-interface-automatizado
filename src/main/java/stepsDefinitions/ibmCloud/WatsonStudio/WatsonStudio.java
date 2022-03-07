@@ -2,7 +2,6 @@ package stepsDefinitions.ibmCloud.WatsonStudio;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.Então;
-import cucumber.api.java.pt.Mas;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.IBMCloudPage;
 import pagesObjects.WatsonStudio.WatsonStudioPage;
@@ -38,7 +37,7 @@ public class WatsonStudio {
         wSP.atualizarProjetos();
     }
 
-    @Mas("^não existir notebook$")
+    @Quando("^não existir notebook$")
     public void naoExistirNotebook() {
         assertFalse("Todos os projetos possuem notebooks.\nNão foi possível realizar este teste.",
                 wSP.existeNotebook(false));

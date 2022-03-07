@@ -15,7 +15,7 @@ Funcionalidade: Grupos de Acesso
 	@ExibirComponente @Smoke
 	Cenario: CT002 - Exibir componente
 		Quando exibir "grupo"
-		Então deverá apresentar o titulo "GRUPOS DE ACESSO" no modal
+		Então deverá apresentar o titulo "Grupos de acesso" no modal
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista com elementos
 

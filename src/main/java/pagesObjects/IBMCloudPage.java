@@ -12,7 +12,6 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Razoes.CARR_ELEM_RAPIDO;
 import static utils.Utils.*;
 
 public class IBMCloudPage extends Pagina {
@@ -46,11 +45,10 @@ public class IBMCloudPage extends Pagina {
     public Elemento alertMensagem;
 
     public WebElement getAlert(){
-        return getElement("div .p-toast-detail");
+        return waitElemento("div .p-toast-detail");
     }
 
     public String getAlertMensagem(){
-        new Utils().esperar(CARR_ELEM_RAPIDO.getDelay(), CARR_ELEM_RAPIDO.getRazao());
         return getAlert().getText();
     }
 

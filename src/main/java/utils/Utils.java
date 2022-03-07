@@ -2,12 +2,15 @@ package utils;
 
 import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.elementos.Elemento;
+import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -16,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+
+import static utils.Razoes.CARR_ELEM;
 
 public class Utils extends FTABBUtils {
     public static WebDriver getDriver() {
@@ -27,8 +32,19 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
+    public static long tempoQTeste(long tempo){
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            return tempo /= 2L;
+        }
+        return tempo;
+    }
+
+    public static WebElement waitElemento(String seletor) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), CARR_ELEM.getDelay());
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
+    }
+
     public void capturaTela() {
-        esperar(Razoes.CAP_TELA.getDelay(), Razoes.CAP_TELA.getRazao());
         capturarTela();
         allureCapturarTela();
         System.out.println("        INFO - Tela capturada.");
@@ -46,8 +62,8 @@ public class Utils extends FTABBUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else
-			System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
+        } else
+            System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
     }
 
     public boolean elementoExisteEstaVisivel(Elemento elem) {
@@ -125,11 +141,11 @@ public class Utils extends FTABBUtils {
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
-    public static List<WebElement> getElements(String seletor){
+    public static List<WebElement> getElements(String seletor) {
         return getDriver().findElements(By.cssSelector(seletor));
     }
 
-    public static WebElement getElement(String seletor){
+    public static WebElement getElement(String seletor) {
         return getDriver().findElement(By.cssSelector(seletor));
     }
 

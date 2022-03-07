@@ -2,6 +2,7 @@ package utils;
 
 import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.elementos.Elemento;
+import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
@@ -24,6 +25,9 @@ public class Utils extends FTABBUtils {
 
     public void esperar(long segundos, String razao) {
         System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            segundos /= 2L;
+        }
         sleep(segundos);
     }
 

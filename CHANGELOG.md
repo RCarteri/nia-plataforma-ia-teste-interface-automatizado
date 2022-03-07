@@ -5,6 +5,17 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.9.10] - 07-03-2022
+Task: 416902
+### Adicionado
+- Versão 3.9.10 no qTeste
+- Método waitElemento: Esperar até o elemento aparecer
+- Método tempoQteste: Manter o tempo de wait mesmo executando no qTeste
+### Mudado
+
+### Resolvido
+- Corrigir step: Então deverá apresentar o titulo "Grupos de acesso" no modal
+
 ## [3.8.0] - 03-03-2022
 Task: 415993
 ### Adicionado

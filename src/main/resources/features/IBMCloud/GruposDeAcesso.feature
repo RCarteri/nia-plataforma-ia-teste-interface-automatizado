@@ -10,9 +10,12 @@ Funcionalidade: Grupos de Acesso
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
 		E acessar a pagina do provedor IBM Cloud
 		E selecionar o componente "Grupos de Acesso"
+
+	@Smoke
+	Cenario: CT002 - Validar componente
 		Então deverá apresentar o título "Lista de Grupos de acesso" na página
 
-	@ExibirComponente @Smoke
+	@ExibirComponente
 	Cenario: CT002 - Exibir componente
 		Quando exibir "grupo"
 		Então deverá apresentar o titulo "Grupos de acesso" no modal
@@ -20,7 +23,7 @@ Funcionalidade: Grupos de Acesso
 		E deverá mostrar a lista com elementos
 
 	@PesquisaComponente
-	Cenario: CT003 - Pesquisar componente
+	Cenario: CT004 - Pesquisar componente
 		Quando pesquisar "Grupo" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
@@ -32,7 +35,7 @@ Funcionalidade: Grupos de Acesso
 		E a quantidade de resultados deve ser 0
 
 	@PesquisaModalComponente
-	Cenario: CT004 - Pesquisar no modal
+	Cenario: CT005 - Pesquisar no modal
 		Quando exibir "grupo"
 		E pesquisar "Rafael" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
@@ -45,7 +48,7 @@ Funcionalidade: Grupos de Acesso
 		E a quantidade de resultados deve ser 0
 
 	@AdicionarMembroException
-	Esquema do Cenario: CT005 - Adicionar membro exceção
+	Esquema do Cenario: CT006 - Adicionar membro exceção
 		Quando exibir "grupo"
 		E adicionar membro com os dados  '<chave>'
 		Então deverá apresentar a mensagem '<mensagem>' de erro

@@ -92,7 +92,7 @@ public class WatsonStudioPage extends Pagina {
     }
 
     private void avancarPagina(WebElement nPagina) {
-        System.out.println("Avancando para a página " + nPagina.getText());
+        System.out.println("Avançando para a página " + nPagina.getText());
         Utils.rolarPaginaAteElemento(nPagina);
         nPagina.click();
     }

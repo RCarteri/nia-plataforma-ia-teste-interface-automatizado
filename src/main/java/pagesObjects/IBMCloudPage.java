@@ -41,14 +41,12 @@ public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroModal;
 
-    @MapearElementoWeb(css = "div .p-toast-detail")
-    public Elemento alertMensagem;
-
     public WebElement getAlert(){
         return waitElemento("div .p-toast-detail");
     }
 
     public String getAlertMensagem(){
+        new Utils().capturaTela();
         return getAlert().getText();
     }
 

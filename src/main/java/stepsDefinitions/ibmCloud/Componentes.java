@@ -12,8 +12,7 @@ import utils.Utils;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class Componentes {
     private final IBMCloudPage ibmCloudPage = new IBMCloudPage();
@@ -32,6 +31,7 @@ public class Componentes {
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
         ibmCloudPage.acessarComponente(componente);
+        assertNotNull(ibmCloudPage.getTituloComponente());
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
@@ -121,7 +121,6 @@ public class Componentes {
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemNaTela(String mensagem) {
         assertEquals(mensagem, new IBMCloudPage().getAlertMensagem());
-        utils.capturaTela();
     }
 
     @E("^deverá mostrar a lista com elementos$")

@@ -9,16 +9,19 @@ Funcionalidade: Modelos
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
 		E acessar a pagina do provedor IBM Cloud
 		E selecionar o componente "Modelos"
+
+	@Smoke
+	Cenario: CT002 - Validar componente
 		Então deverá apresentar o título "Lista de Modelos" na página
 
-	@ExibirComponente @Smoke
-	Cenario: CT002 - Exibir componente
+	@ExibirComponente
+	Cenario: CT003 - Exibir componente
 		Quando exibir "modelo"
 		Então deverá apresentar o titulo "Detalhes do Modelo" no modal
 		E deverá apresentar as informações sobre ID e nome
 
 	@PesquisaComponente
-	Cenario: CT003 - Pesquisar componente
+	Cenario: CT004 - Pesquisar componente
 		Quando pesquisar "Zoltar" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada

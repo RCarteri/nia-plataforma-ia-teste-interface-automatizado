@@ -17,6 +17,7 @@ import java.util.List;
 import static utils.Razoes.CARR_ELEM;
 import static utils.Razoes.CARR_ELEM_RAPIDO;
 import static utils.Utils.getDriver;
+import static utils.Utils.tempoQTeste;
 
 public class WatsonStudioPage extends Pagina {
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(3)")
@@ -60,7 +61,7 @@ public class WatsonStudioPage extends Pagina {
     public void atualizarProjetos() {
         try {
             btnAtualizar.clicar();
-            new Utils().esperar(CARR_ELEM_RAPIDO.getDelay(), CARR_ELEM_RAPIDO.getRazao());
+            new Utils().esperar(tempoQTeste(CARR_ELEM_RAPIDO.getDelay()), CARR_ELEM_RAPIDO.getRazao());
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
@@ -103,6 +104,6 @@ public class WatsonStudioPage extends Pagina {
         Utils.rolarPaginaAteElemento(nItem);
         nItem.click();
         clicarBotaoOpcao("Notebooks");
-        new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+        new Utils().esperar(tempoQTeste(CARR_ELEM.getDelay()), CARR_ELEM.getRazao());
     }
 }

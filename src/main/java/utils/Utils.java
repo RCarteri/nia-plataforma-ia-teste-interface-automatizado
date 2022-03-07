@@ -25,10 +25,14 @@ public class Utils extends FTABBUtils {
 
     public void esperar(long segundos, String razao) {
         System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            segundos /= 2L;
-        }
         sleep(segundos);
+    }
+
+    public static long tempoQTeste(long segundos) {
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            return segundos /= 2L;
+        }
+        return segundos;
     }
 
     public void capturaTela() {
@@ -49,8 +53,8 @@ public class Utils extends FTABBUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else
-			System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
+        } else
+            System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
     }
 
     public boolean elementoExisteEstaVisivel(Elemento elem) {
@@ -128,11 +132,11 @@ public class Utils extends FTABBUtils {
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
-    public static List<WebElement> getElements(String seletor){
+    public static List<WebElement> getElements(String seletor) {
         return getDriver().findElements(By.cssSelector(seletor));
     }
 
-    public static WebElement getElement(String seletor){
+    public static WebElement getElement(String seletor) {
         return getDriver().findElement(By.cssSelector(seletor));
     }
 

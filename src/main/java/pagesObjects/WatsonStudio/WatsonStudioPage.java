@@ -16,6 +16,7 @@ import java.util.List;
 
 import static utils.Razoes.CARR_ELEM;
 import static utils.Utils.getDriver;
+import static utils.Utils.tempoQTeste;
 
 public class WatsonStudioPage extends Pagina {
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(3)")
@@ -74,7 +75,7 @@ public class WatsonStudioPage extends Pagina {
                     if (!esperado && iCP.getAlert().isDisplayed()) {
                         System.out.println("Encontrado projeto sem notebook.");
                         return false;
-                    } else if (!esperado && !iCP.getAlert().isDisplayed()) {
+                    } else if (!esperado && new ModalComponentePage().btnFechar.elementoExiste()) {
                         System.out.println("Fechando modal");
                         new ModalComponentePage().btnFechar.clicar();
                     } else if (esperado && new ModalComponentePage().getCountLinhas() >= 1) {
@@ -101,6 +102,6 @@ public class WatsonStudioPage extends Pagina {
         Utils.rolarPaginaAteElemento(nItem);
         nItem.click();
         clicarBotaoOpcao("Notebooks");
-        new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+        new Utils().esperar(tempoQTeste(CARR_ELEM.getDelay()), CARR_ELEM.getRazao());
     }
 }

@@ -2,13 +2,14 @@ package utils;
 
 import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.elementos.Elemento;
-import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -17,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+
+import static utils.Razoes.CARR_ELEM;
 
 public class Utils extends FTABBUtils {
     public static WebDriver getDriver() {
@@ -28,11 +31,9 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static long tempoQTeste(long segundos) {
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            return segundos /= 2L;
-        }
-        return segundos;
+    public static WebElement waitElemento(String seletor) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), CARR_ELEM.getDelay());
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
     }
 
     public void capturaTela() {

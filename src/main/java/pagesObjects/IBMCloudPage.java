@@ -45,7 +45,7 @@ public class IBMCloudPage extends Pagina {
     public Elemento alertMensagem;
 
     public WebElement getAlert(){
-        return getElement("div .p-toast-detail");
+        return waitElemento("div .p-toast-detail");
     }
 
     public String getAlertMensagem(){

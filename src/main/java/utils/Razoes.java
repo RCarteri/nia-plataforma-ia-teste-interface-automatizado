@@ -3,8 +3,7 @@ package utils;
 public enum Razoes {
 	CARR_PAG("o carregamento da pagina", 1), CAP_TELA("a captura de tela", 1),
 	ENC_SEC("o encerramento desta sessão", 1), LOGIN("confirmação de login", 2),
-	CARR_ELEM("o elemento ser apresentado", 4), CARR_PLAT("carregamento da Plataforma", 25),
-	CARR_ELEM_RAPIDO("o elemento ser apresentado", 3);
+	CARR_ELEM("o elemento ser apresentado", 4), CARR_PLAT("carregamento da Plataforma", 25);
 
 	private final String razao;
 	private final long delay;

@@ -7,7 +7,6 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pagesObjects.PlataformaIncialPage;
@@ -20,6 +19,7 @@ import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.*;
 import static utils.SysProps.IS_LOGGED;
 import static utils.Utils.getDriver;
+import static utils.Utils.getElement;
 
 public class Hooks {
     private final Utils utils;
@@ -54,13 +54,13 @@ public class Hooks {
                 System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
             } else {
                 new Utils().esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
-                WebElement elem = getDriver().findElement(By.id("idToken1"));
+                WebElement elem = getElement("#idToken1");
                 elem.sendKeys(datapool.get("chave"));
 
-                elem = getDriver().findElement(By.id("idToken2"));
+                elem = getElement("#idToken2");
                 elem.sendKeys(datapool.get("senha"));
 
-                elem = getDriver().findElement(By.id("loginButton_0"));
+                elem = getElement("#loginButton_0");
                 elem.click();
                 int count = 0;
                 while (!isLogged) {
@@ -81,7 +81,6 @@ public class Hooks {
             System.err.println("\n    ERRO - Um elemento não foi localizado.");
             System.err.println("    ERRO - Não foi possível localizar o elemento \"" + noSuchElement + "\"");
             getDriver().navigate().refresh();
-            //utils.esperar(Razoes.LOGIN.getDelay(), Razoes.LOGIN.getRazao());
 
             if (++count <= MAX_BOUND)
                 realizeOLoginNoSistema();

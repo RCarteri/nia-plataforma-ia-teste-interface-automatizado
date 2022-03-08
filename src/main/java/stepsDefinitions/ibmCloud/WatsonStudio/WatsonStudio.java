@@ -37,15 +37,15 @@ public class WatsonStudio {
         wSP.atualizarProjetos();
     }
 
-    @Quando("^não existir notebook$")
-    public void naoExistirNotebook() {
-        assertFalse("Todos os projetos possuem notebooks.\nNão foi possível realizar este teste.",
-                wSP.existeNotebook(false));
+    @Quando("^não existir \"([^\"]*)\"$")
+    public void naoExistirOpcao(String opcao) {
+        assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
+                wSP.existeOpcao(false, opcao));
     }
 
-    @Quando("^existir notebook$")
-    public void existirNotebook() {
-        assertTrue("Nenhum projeto possui notebook.\nNão foi possível realizar este teste.",
-                wSP.existeNotebook(true));
+    @Quando("^existir \"([^\"]*)\"$")
+    public void existirOpcao(String opcao) {
+        assertTrue("Nenhum projeto possui  " + opcao + ".\nNão foi possível realizar este teste.",
+                wSP.existeOpcao(true, opcao));
     }
 }

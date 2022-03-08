@@ -73,12 +73,18 @@ Funcionalidade: Watson Studio
 
 	@Notebook
 	Cenario: CT009 - Validar mensagem inexistência de notebooks no projeto
-		Quando não existir notebook
+		Quando não existir "Notebooks"
 		Então deverá apresentar a mensagem de alerta "Não há nenhum notebook disponível para o projeto atualmente."
 
 	@Notebook
 	Cenario: CT010 - Exibir notebook
-		Quando existir notebook
+		Quando existir "Notebooks"
 		Então deverá apresentar o titulo "Notebooks" no modal
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista com elementos
+
+	@Modelo
+	Cenario: CT011 - Validar mensagem inexistência de modelos no projeto
+		Quando não existir "Modelos"
+		Então deverá apresentar a mensagem de alerta "Não há nenhum modelo disponível para o projeto atualmente."
+

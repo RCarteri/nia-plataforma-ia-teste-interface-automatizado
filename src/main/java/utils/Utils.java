@@ -32,7 +32,7 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static long tempoQTeste(long tempo){
+    public static long tempoQTeste(long tempo) {
         if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
             return tempo /= 2L;
         }

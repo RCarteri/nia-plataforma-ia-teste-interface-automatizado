@@ -1,8 +1,8 @@
-package stepsDefinitions;
+package stepsDefinitions.ibmCloud;
 
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
-import pagesObjects.ModalAdicionarMembroPage;
+import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
 import utils.Utils;
 
 import static org.junit.Assert.assertFalse;

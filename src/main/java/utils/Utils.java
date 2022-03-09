@@ -28,15 +28,11 @@ public class Utils extends FTABBUtils {
     }
 
     public void esperar(long segundos, String razao) {
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            segundos /= 2L;
+        }
         System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
         sleep(segundos);
-    }
-
-    public static long tempoQTeste(long tempo) {
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            return tempo /= 2L;
-        }
-        return tempo;
     }
 
     public static WebElement waitElemento(String seletor) {

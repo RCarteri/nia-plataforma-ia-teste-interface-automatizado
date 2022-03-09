@@ -1,4 +1,4 @@
-package runners.componentes;
+package runners.funcionalidades;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -14,10 +14,10 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@WatsonStudio" },
+		tags = { "@TestarModeloTriton" },
 		monochrome = true
 )
-public class TestCaseWatsonStudio {
+public class TestCaseTestarModeloTriton {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

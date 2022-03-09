@@ -1,10 +1,9 @@
 package stepsDefinitions.ibmCloud.WatsonStudio;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.IBMCloudPage;
-import pagesObjects.WatsonStudio.WatsonStudioPage;
+import pagesObjects.ibmCloud.WatsonStudio.WatsonStudioPage;
 import utils.Utils;
 
 import static org.junit.Assert.assertFalse;
@@ -15,13 +14,8 @@ public class WatsonStudio {
     WatsonStudioPage wSP = new WatsonStudioPage();
     Utils utils = new Utils();
 
-    @Quando("^escolher \"([^\"]*)\"$")
-    public void escolher(String opcao){
-        wSP.clicarBotaoOpcao(opcao);
-    }
-
     @Quando("^selecionar a sigla \"([^\"]*)\"$")
-    public void selecionarASigla(String sigla) throws ElementoNaoLocalizadoException {
+    public void selecionarASigla(String sigla) {
         this.sigla = sigla;
         wSP.selecionarSigla(sigla);
     }

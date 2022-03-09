@@ -8,7 +8,7 @@ Funcionalidade: Grupos de Acesso
 		E se não estiver logado, realiza o login no Sistema
 		Quando acessar a pagina "Analytics | IA (hm)"
 		E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
-		E acessar a pagina do provedor IBM Cloud
+		E acessar a pagina do provedor "IBM Cloud"
 		E selecionar o componente "Grupos de Acesso"
 
 	@Smoke
@@ -16,7 +16,7 @@ Funcionalidade: Grupos de Acesso
 		Então deverá apresentar o título "Lista de Grupos de acesso" na página
 
 	@ExibirComponente
-	Cenario: CT002 - Exibir componente
+	Cenario: CT003 - Exibir componente
 		Quando exibir "grupo"
 		Então deverá apresentar o titulo "Grupos de acesso" no modal
 		E deverá apresentar as informações sobre ID e nome

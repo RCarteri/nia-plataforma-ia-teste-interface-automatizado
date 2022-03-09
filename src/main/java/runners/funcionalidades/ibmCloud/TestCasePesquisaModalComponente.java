@@ -1,4 +1,4 @@
-package runners.funcionalidades;
+package runners.funcionalidades.ibmCloud;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -14,10 +14,10 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@AdicionarMembroException" },
+		tags = { "@PesquisaModalComponente" },
 		monochrome = true
 )
-public class TestCaseAdicionarMembroException {
+public class TestCasePesquisaModalComponente {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

@@ -1,5 +1,8 @@
 # Datapool de Login
 
+primeiroAcesso:
+  chave: F2177895
+  senha: 12365478
 chaveF:
   chave: F7990759
   senha: 56561212

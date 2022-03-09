@@ -7,7 +7,6 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.IBMCloudPage;
 import pagesObjects.ModalComponentePage;
 import pagesObjects.PaginacaoSection;
-import pagesObjects.ProvedorPage;
 import utils.Utils;
 
 import java.util.List;
@@ -22,11 +21,6 @@ public class Componentes {
     private int quantResultadosAntes;
     private String palavraPesquisada;
     private String local;
-
-    @Quando("^acessar a pagina do provedor IBM Cloud$")
-    public void queEstejaNaPaginaDoProvedorIBMCloud() throws ElementoNaoLocalizadoException {
-        new ProvedorPage().acessarIBMCLoud();
-    }
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
@@ -44,24 +38,6 @@ public class Componentes {
     public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
         utils.capturaTela();
         assertEquals(titulo, modalComponentePage.getTituloModal());
-    }
-
-    @Quando("^exibir \"([^\"]*)\"$")
-    public void exibir(String option){
-        int localizacao = 0;
-        switch (option) {
-            case "instância":
-                localizacao = 4; // Está sendo sitado 4 pois os anteriores estão retornando erro ao abrir
-                break;
-            case "projeto":
-            case "grupo":
-            case "catálogo":
-            case "storage":
-            case "modelo":
-                localizacao = 1;
-                break;
-        }
-        new IBMCloudPage().clicarBotaoLista(--localizacao); // sem criar uma nova instância ele não retorna a lista de botoes
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")

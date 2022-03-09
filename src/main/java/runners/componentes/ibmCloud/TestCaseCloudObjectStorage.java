@@ -1,4 +1,4 @@
-package runners.componentes;
+package runners.componentes.ibmCloud;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -14,10 +14,10 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@WatsonAssistant" },
+		tags = { "@CloudObjectStorage" },
 		monochrome = true
 )
-public class TestCaseWatsonAssistant {
+public class TestCaseCloudObjectStorage {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

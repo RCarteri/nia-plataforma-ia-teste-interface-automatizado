@@ -1,4 +1,4 @@
-package runners.componentes;
+package runners.componentes.ibmCloud;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -14,10 +14,10 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@GruposDeAcesso" },
+		tags = { "@WatsonStudio" },
 		monochrome = true
 )
-public class TestCaseGruposDeAcesso {
+public class TestCaseWatsonStudio {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

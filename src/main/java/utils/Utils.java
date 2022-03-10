@@ -92,11 +92,16 @@ public class Utils extends FTABBUtils {
         return false;
     }
 
-    public Dictionary<String, String> getDatapool() {
+    public Dictionary<String, String> getDatapool(String opcao) {
         try {
             final Dictionary<String, String> result = new Hashtable<>();
-            result.put("chave", $("login_plataforma.chaveF.chave"));
-            result.put("senha", $("login_plataforma.chaveF.senha"));
+            if (opcao.equals("chaveF")) {
+                result.put("chave", $("login_plataforma.chaveF.chave"));
+                result.put("senha", $("login_plataforma.chaveF.senha"));
+            } else {
+                result.put("chave", $("login_plataforma.primeiroAcesso.chave"));
+                result.put("senha", $("login_plataforma.primeiroAcesso.senha"));
+            }
             return result;
         } catch (DataPoolException e) {
             logError(e);

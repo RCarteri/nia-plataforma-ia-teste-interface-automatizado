@@ -97,10 +97,10 @@ public class Hooks {
         e.printStackTrace();
     }
 
-    @E("^se não estiver logado, realiza o login no Sistema com \"([^\"]*)\"$")
-        public void realizeOLoginNoSistema(String opcao) {
+    @E("^se não estiver logado, realiza o login no Sistema$")
+        public void realizeOLoginNoSistema() {
             try {
-                final Dictionary<String, String> datapool = utils.getDatapool(opcao);
+                final Dictionary<String, String> datapool = utils.getDatapool();
                 boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
                 if (isLogged) {
                     assertTrue(isLogged);
@@ -136,7 +136,7 @@ public class Hooks {
                 getDriver().navigate().refresh();
 
                 if (++count <= MAX_BOUND)
-                    realizeOLoginNoSistema(opcao);
+                    realizeOLoginNoSistema();
                 else {
                     Plataforma.fecharPlataforma();
                     fail("Não foi possível logar na Plataforma.");

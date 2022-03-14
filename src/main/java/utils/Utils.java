@@ -9,8 +9,6 @@ import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -20,15 +18,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static utils.Razoes.CARR_ELEM;
-
 public class Utils extends FTABBUtils {
     public static WebDriver getDriver() {
         return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
     }
 
     public void esperar(long segundos, String razao) {
-//
         System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
         sleep(segundos);
     }
@@ -38,11 +33,6 @@ public class Utils extends FTABBUtils {
             segundos /= 2L;
         }
         return segundos;
-    }
-
-    public static WebElement waitElemento(String seletor) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Utils.tempoQTeste(CARR_ELEM.getDelay()));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
     }
 
     public void capturaTela() {

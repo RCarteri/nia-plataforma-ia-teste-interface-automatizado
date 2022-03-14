@@ -4,22 +4,24 @@ import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import utils.Utils;
 
 import java.util.List;
 
-import static br.com.bb.ath.ftabb.utilitarios.Utils.sleep;
 import static org.junit.Assert.*;
+import static utils.Razoes.CARR_ELEM;
 import static utils.Utils.*;
 
-public class PrimeiroAcessoPage extends Pagina {
+public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
     @MapearElementoWeb(css = "span.p-inline-message-text")
     private ElementoTexto txtMensagem;
 
     private int posicao = 0;
     private WebElement btnFinalizar;
     private int nPaginaFalha;
+    private int nTentativas;
 
     private List<WebElement> getStepsItens() {
         return getElements(".p-steps-item");
@@ -37,6 +39,10 @@ public class PrimeiroAcessoPage extends Pagina {
 
     private WebElement getBtnVoltar() {
         return getElement(".p-button-secondary");
+    }
+
+    private WebElement getMensagemConvite() {
+        return getElement(".p-toast-message-success .p-toast-summary");
     }
 
     private WebElement getBtnAvancar() {
@@ -104,10 +110,21 @@ public class PrimeiroAcessoPage extends Pagina {
     }
 
     private void isMensagemOK() {
-        sleep(4);
-        List<WebElement> listMensagens = getElements(".p-toast-bottom-center .p-toast-summary");
-        System.out.println(listMensagens.get(0).getText());
-        assertEquals("Convite enviado com sucesso.", listMensagens.get(0).getText());
+        Utils utils = new Utils();
+        try{
+            utils.esperar(2, CARR_ELEM.getRazao());
+            assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
+                    "Convite enviado com sucesso.", getMensagemConvite().getText());
+            rolarPaginaAteElemento(getMensagemConvite());
+            utils.capturaTela();
+        }catch (NoSuchElementException e){
+            int nMaxTentativas = 2;
+            if (++nTentativas <= nMaxTentativas) {
+                System.out.println("    O elemento não foi apresentado na tela tentando localizar novamente " +
+                        nTentativas + "\\" + nMaxTentativas);
+                isMensagemOK();
+            }
+        }
     }
 
     private boolean isBotaoAvancarDesabilitado() {

@@ -79,6 +79,7 @@ public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
         segundaPagina();
         for (int i = 0; i < getStepsItens().size(); ++i) {
             if (i == getStepsItens().size() - 1) {
+                new Utils().capturaTela();
                 this.btnFinalizar = getBtnAvancar();
                 break;
             }

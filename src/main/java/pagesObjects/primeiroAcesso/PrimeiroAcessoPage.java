@@ -113,7 +113,7 @@ public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
     private void isMensagemOK() {
         Utils utils = new Utils();
         try{
-            utils.esperar(2, CARR_ELEM.getRazao());
+            utils.esperar(tempoQTeste(2L), CARR_ELEM.getRazao());
             assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
                     "Convite enviado com sucesso.", getMensagemConvite().getText());
             rolarPaginaAteElemento(getMensagemConvite());

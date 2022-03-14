@@ -89,7 +89,7 @@ public class WatsonStudioPage extends Pagina {
         rolarPaginaAteElemento(nItem);
         nItem.click();
         boolean continuar = new ProvedorPage().clicarBotaoOpcao(opcao);
-        new Utils().esperar(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+        new Utils().esperar(Utils.tempoQTeste(CARR_ELEM.getDelay()), CARR_ELEM.getRazao());
         if (!continuar) {
             nItem.click();
             return false;

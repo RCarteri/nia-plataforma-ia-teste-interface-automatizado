@@ -28,15 +28,20 @@ public class Utils extends FTABBUtils {
     }
 
     public void esperar(long segundos, String razao) {
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            segundos /= 2L;
-        }
+//
         System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
         sleep(segundos);
     }
 
+    public static long tempoQTeste(long segundos){
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            segundos /= 2L;
+        }
+        return segundos;
+    }
+
     public static WebElement waitElemento(String seletor) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), CARR_ELEM.getDelay());
+        WebDriverWait wait = new WebDriverWait(getDriver(), Utils.tempoQTeste(CARR_ELEM.getDelay()));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
     }
 

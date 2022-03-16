@@ -20,8 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static utils.Razoes.CARR_ELEM;
-
 public class Utils extends FTABBUtils {
     public static WebDriver getDriver() {
         return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
@@ -32,8 +30,8 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static WebElement  waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), tempoQTeste(CARR_ELEM.getDelay()));
+    public static WebElement waitElement(String seletor){
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);
     }

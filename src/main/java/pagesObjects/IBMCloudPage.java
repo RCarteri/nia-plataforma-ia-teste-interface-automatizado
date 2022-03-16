@@ -12,7 +12,6 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Razoes.CARR_ELEM;
 import static utils.Utils.*;
 
 public class IBMCloudPage extends Pagina {
@@ -40,16 +39,16 @@ public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroModal;
 
-    public WebElement getAlert(){
-        new Utils().esperar(tempoQTeste(CARR_ELEM.getDelay()), CARR_ELEM.getRazao());
+    public WebElement getAlert() {
+        waitElement("div .p-toast-detail");
         return getElement("div .p-toast-detail");
     }
 
-    private List<WebElement> getListComponente(){
+    private List<WebElement> getListComponente() {
         return getElements(".p-dropdown-items-wrapper span");
     }
 
-    public String getAlertMensagem(){
+    public String getAlertMensagem() {
         new Utils().capturaTela();
         return getAlert().getText();
     }

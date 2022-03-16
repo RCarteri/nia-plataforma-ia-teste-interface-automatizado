@@ -12,8 +12,8 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Razoes.CARR_ELEM;
-import static utils.Utils.*;
+import static utils.Utils.getElements;
+import static utils.Utils.waitElement;
 
 public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(id = "p-panel-1-titlebar")
@@ -40,16 +40,15 @@ public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroModal;
 
-    public WebElement getAlert(){
-        new Utils().esperar(tempoQTeste(CARR_ELEM.getDelay()), CARR_ELEM.getRazao());
-        return getElement("div .p-toast-detail");
+    public WebElement getAlert() {
+        return waitElement("div .p-toast-detail");
     }
 
-    private List<WebElement> getListComponente(){
+    private List<WebElement> getListComponente() {
         return getElements(".p-dropdown-items-wrapper span");
     }
 
-    public String getAlertMensagem(){
+    public String getAlertMensagem() {
         new Utils().capturaTela();
         return getAlert().getText();
     }

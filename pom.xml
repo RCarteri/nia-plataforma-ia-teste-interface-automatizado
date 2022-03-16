@@ -5,7 +5,7 @@
     <groupId>br.com.bb.nia</groupId>
     <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
     <packaging>jar</packaging>
-    <version>3.12.3-SNAPSHOT</version>
+    <version>3.12.4-SNAPSHOT</version>
     <name>nia-plataforma-ia-teste-interface-automatizado</name>
 
     <properties>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>br.com.bb.ath</groupId>
             <artifactId>ath-ftabb2-gaw-web</artifactId>
-            <version>2022.3.1</version>
+            <version>2022.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.jacoco</groupId>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>br.com.bb.ath</groupId>
             <artifactId>ath-ftabb2-autoatendimento-web</artifactId>
-            <version>2021.8.2</version>
+            <version>2022.3.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>

@@ -4,14 +4,12 @@ import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import utils.Utils;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static utils.Razoes.CARR_ELEM;
 import static utils.Utils.*;
 
 public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
@@ -42,7 +40,7 @@ public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
     }
 
     private WebElement getMensagemConvite() {
-        return getElement(".p-toast-message-success .p-toast-summary");
+        return waitElement(".p-toast-bottom-center .p-toast-message-success");
     }
 
     private WebElement getBtnAvancar() {
@@ -111,21 +109,10 @@ public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
     }
 
     private void isMensagemOK() {
-        Utils utils = new Utils();
-        try{
-            utils.esperar(tempoQTeste(2L), CARR_ELEM.getRazao());
-            assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
-                    "Convite enviado com sucesso.", getMensagemConvite().getText());
-            rolarPaginaAteElemento(getMensagemConvite());
-            utils.capturaTela();
-        }catch (NoSuchElementException e){
-            int nMaxTentativas = 2;
-            if (++nTentativas <= nMaxTentativas) {
-                System.out.println("    O elemento não foi apresentado na tela tentando localizar novamente " +
-                        nTentativas + "\\" + nMaxTentativas);
-                isMensagemOK();
-            }
-        }
+        rolarPaginaAteElemento(getMensagemConvite());
+        assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
+                "Convite enviado com sucesso.", getMensagemConvite().getText());
+        new Utils().capturaTela();
     }
 
     private boolean isBotaoAvancarDesabilitado() {

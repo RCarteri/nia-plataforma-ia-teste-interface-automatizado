@@ -32,9 +32,10 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static void  waitElement(String seletor){
+    public static WebElement  waitElement(String seletor){
         WebDriverWait wait = new WebDriverWait(getDriver(), tempoQTeste(CARR_ELEM.getDelay()));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
+        return getElement(seletor);
     }
 
     public static long tempoQTeste(long segundos){

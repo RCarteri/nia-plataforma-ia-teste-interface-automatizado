@@ -12,7 +12,8 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Utils.*;
+import static utils.Utils.getElements;
+import static utils.Utils.waitElement;
 
 public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(id = "p-panel-1-titlebar")
@@ -40,8 +41,7 @@ public class IBMCloudPage extends Pagina {
     private ElementoBotao btnLimparFiltroModal;
 
     public WebElement getAlert() {
-        waitElement("div .p-toast-detail");
-        return getElement("div .p-toast-detail");
+        return waitElement("div .p-toast-detail");
     }
 
     private List<WebElement> getListComponente() {

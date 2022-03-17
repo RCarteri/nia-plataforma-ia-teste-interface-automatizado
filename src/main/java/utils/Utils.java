@@ -8,6 +8,7 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,16 +34,21 @@ public class Utils extends FTABBUtils {
     }
 
     public static WebElement waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), CARR_ELEM.getDelay());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
-        return getElement(seletor);
+        try{
+            return getElement(seletor);
+        }catch (NoSuchElementException e) {
+            WebDriverWait wait = new WebDriverWait(getDriver(), CARR_ELEM.getDelay());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
+            return getElement(seletor);
+        }
     }
 
-    public static long tempoQTeste(long segundos){
+    public void esperarQTeste(long segundos, String razao){
+        System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
         if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
             segundos /= 2L;
         }
-        return segundos;
+        sleep(segundos);
     }
 
     public void capturaTela() {

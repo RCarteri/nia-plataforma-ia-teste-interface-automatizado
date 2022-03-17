@@ -59,7 +59,7 @@ public class WatsonStudioPage extends Pagina {
                 ProvedorPage pP = new ProvedorPage();
                 for (WebElement nItem : pP.listBtnExibir) {
                     if (!avancarItem(nItem, pP.listBtnExibir, opcao)) continue;
-                    new Utils().esperar(Utils.tempoQTeste(CARR_ELEM.getDelay()), CARR_ELEM.getRazao());
+                    new Utils().esperarQTeste(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
                     if (!esperado && iCP.getAlert().isDisplayed()) {
                         System.out.println("Encontrado projeto sem " + opcao + ".");
                         return false;

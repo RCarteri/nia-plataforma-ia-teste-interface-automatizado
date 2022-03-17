@@ -48,11 +48,6 @@ public class IBMCloudPage extends Pagina {
         return getElements(".p-dropdown-items-wrapper span");
     }
 
-    public String getAlertMensagem() {
-        new Utils().capturaTela();
-        return getAlert().getText();
-    }
-
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         dropDownComponente.clicar();
         List<WebElement> listComponente = getListComponente();

@@ -2,7 +2,6 @@ package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.elementos.ElementoBotao;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
@@ -21,9 +20,6 @@ public class ModalComponentePage extends Pagina {
 
     @MapearElementoWeb(css=".p-dialog-title")
     private ElementoTexto spanTituloModal;
-
-    @MapearElementoWeb(css=".p-dialog-content td")
-    public Elemento listElementosModal;
 
     @MapearElementoWeb(css=".pi-times")
     public ElementoBotao btnFechar;

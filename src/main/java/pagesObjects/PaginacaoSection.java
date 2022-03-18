@@ -17,7 +17,7 @@ public class PaginacaoSection extends Pagina {
     @MapearElementoWeb(css = "nia-platia-table .p-paginator-current")
     private ElementoTexto txtPaginacao;
 
-    @MapearElementoWeb(css = "nia-membros-table .p-paginator-current")
+    @MapearElementoWeb(css = ".p-dialog-mask .p-paginator-current")
     private ElementoTexto txtPaginacaoModal;
 
     public int getQuantResultados(String local) {

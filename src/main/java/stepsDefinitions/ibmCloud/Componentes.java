@@ -7,13 +7,11 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.IBMCloudPage;
 import pagesObjects.ModalComponentePage;
 import pagesObjects.PaginacaoSection;
-import pagesObjects.ProvedorPage;
 import utils.Utils;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class Componentes {
     private final IBMCloudPage ibmCloudPage = new IBMCloudPage();
@@ -24,14 +22,10 @@ public class Componentes {
     private String palavraPesquisada;
     private String local;
 
-    @Quando("^acessar a pagina do provedor IBM Cloud$")
-    public void queEstejaNaPaginaDoProvedorIBMCloud() throws ElementoNaoLocalizadoException {
-        new ProvedorPage().acessarIBMCLoud();
-    }
-
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
         ibmCloudPage.acessarComponente(componente);
+        assertNotNull(ibmCloudPage.getTituloComponente());
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
@@ -44,24 +38,6 @@ public class Componentes {
     public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
         utils.capturaTela();
         assertEquals(titulo, modalComponentePage.getTituloModal());
-    }
-
-    @Quando("^exibir \"([^\"]*)\"$")
-    public void exibir(String option){
-        int localizacao = 0;
-        switch (option) {
-            case "instância":
-                localizacao = 4; // Está sendo sitado 4 pois os anteriores estão retornando erro ao abrir
-                break;
-            case "projeto":
-            case "grupo":
-            case "catálogo":
-            case "storage":
-            case "modelo":
-                localizacao = 1;
-                break;
-        }
-        new IBMCloudPage().clicarBotaoLista(--localizacao); // sem criar uma nova instância ele não retorna a lista de botoes
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")
@@ -120,8 +96,8 @@ public class Componentes {
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemNaTela(String mensagem) {
-        assertEquals(mensagem, new IBMCloudPage().getAlertMensagem());
-        utils.capturaTela();
+        assertEquals(mensagem, new IBMCloudPage().getAlert().getText());
+        new Utils().capturaTela();
     }
 
     @E("^deverá mostrar a lista com elementos$")

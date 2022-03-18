@@ -20,8 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static utils.Razoes.CARR_ELEM;
-
 public class Utils extends FTABBUtils {
     public static WebDriver getDriver() {
         return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
@@ -32,16 +30,18 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static long tempoQTeste(long tempo){
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            return tempo /= 2L;
-        }
-        return tempo;
+    public static WebElement waitElement(String seletor){
+        WebDriverWait wait = new WebDriverWait(getDriver(), 6);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
+        return getElement(seletor);
     }
 
-    public static WebElement waitElemento(String seletor) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), CARR_ELEM.getDelay());
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
+    public void esperarQTeste(long segundos, String razao){
+        System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            segundos /= 2L;
+        }
+        sleep(segundos);
     }
 
     public void capturaTela() {

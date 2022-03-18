@@ -1,4 +1,4 @@
-package runners.componentes;
+package runners.componentes.ibmCloud;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;

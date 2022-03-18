@@ -1,4 +1,4 @@
-package runners.funcionalidades;
+package runners.componentes;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -14,10 +14,10 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@PesquisaModalComponente" },
+		tags = { "@PrimeiroAcesso" },
 		monochrome = true
 )
-public class TestCasePesquisaModalComponente {
+public class TestCasePrimeiroAcesso {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

@@ -5,7 +5,7 @@
     <groupId>br.com.bb.nia</groupId>
     <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
     <packaging>jar</packaging>
-    <version>3.9.10</version>
+    <version>3.12.8-SNAPSHOT</version>
     <name>nia-plataforma-ia-teste-interface-automatizado</name>
 
     <properties>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber2-jvm</artifactId>
-            <version>2.17.2</version>
+            <version>2.17.3</version>
         </dependency>
         <!-- Dependência BB-Allure-Docker-Service-BB para instalação no ARQ3.0 -->
         <dependency>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>br.com.bb.ath</groupId>
             <artifactId>ath-ftabb2-gaw-web</artifactId>
-            <version>2022.3.1</version>
+            <version>2022.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.jacoco</groupId>
@@ -67,22 +67,22 @@
         <dependency>
             <groupId>br.com.bb.ath</groupId>
             <artifactId>ath-ftabb2-autoatendimento-web</artifactId>
-            <version>2021.8.2</version>
+            <version>2022.3.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-            <version>1.10.11</version>
+            <version>1.10.12</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>31.1-jre</version>
         </dependency>
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client-appengine</artifactId>
-            <version>1.33.1</version>
+            <version>1.33.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -103,7 +103,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.5.0</version>
+            <version>4.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

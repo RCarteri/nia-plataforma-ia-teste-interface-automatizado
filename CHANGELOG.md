@@ -11,7 +11,6 @@ Task: 416902
 - Versão 3.9.10 no qTeste
 - Método waitElemento: Esperar até o elemento aparecer
 - Método tempoQteste: Manter o tempo de wait mesmo executando no qTeste
-### Mudado
 
 ### Resolvido
 - Corrigir step: Então deverá apresentar o titulo "Grupos de acesso" no modal
@@ -24,7 +23,7 @@ Task: 415993
 ## [3.7.0] - 02-03-2022
 Task: 413574
 ### Adicionado
-- Cenário: CT009 - Exibir notebook
+- Cenário: CT010 - Exibir notebook
 ### Mudado
 - Extração de mapeamento de elemntos para paginação
 ### Corrigido
@@ -33,25 +32,25 @@ Task: 413574
 ## [3.6.0] - 01-03-2022
 Task: 413536
 ### Adicionado
-- Cenário: CT008 - Validar mensagem inexistência de notebooks no projeto
+- Cenário: CT009 - Validar mensagem inexistência de notebooks no projeto
 - Método para mapear lista de elementos sem o FTABB
 
 ## [3.5.0] - 01-03-2022
 Task: 413525
 ### Adicionado
-- Cenário:  CT007 - Atualizar listagem de projetos
+- Cenário:  CT008 - Atualizar listagem de projetos
 
 ## [3.4.0] - 01-03-2022
 Task: 413471
 ### Adicionado
-- Cenário:  CT006 - Filtrar projetos por sigla
+- Cenário:  CT007 - Filtrar projetos por sigla
 ### Removido
 - Delay para captuar tela
 
 ## [3.3.0] - 28-02-2022
 Task: 411831
 ### Adicionado
-- Cenário de exceção: CT005 - Adicionar membro exceção
+- Cenário de exceção: CT006 - Adicionar membro exceção
 - Page Object para Modal Adicionar Membro
 - Runner: TestCaseAdicionarMembroException e TestCasePesquisaModalComponente
 - Atualizar página caso não apareca o formulário de login
@@ -61,20 +60,20 @@ Task: 411831
 ## [3.2.0] - 24-02-2022
 Task: 409547
 ### Adicionado
-- Cenário: CT004 - Pesquisar no modal
+- Cenário: CT005 - Pesquisar no modal
 - Page Object para o Watson Studio
-- Cenário: CT002 - Exibir componente no Watson Studio
+- Cenário: CT003 - Exibir componente no Watson Studio
 ### Mudado
 - Adequação dos sufixos das classes de object page para terminar com Page
 - Refatoração dos seletores dos mapeamentos CSS
 - Globalização da resposta de erro ElementoNaoLocalizadoException
-- União dos steps referente ao CT003
+- União dos steps referente ao CT004
 - Diferenciação de pesquisa entre modal e componente
 
 ## [3.2.0] - 24-02-2022
 Task: 406210
 ### Adicionado
-- Cenário: CT003 - Pesquisar componente, CT004 - Filtrar componente sem resultado e CT005 - Limpar pesquisa de componente
+- Cenário: CT004 - Pesquisar componente, CT004 - Filtrar componente sem resultado e CT005 - Limpar pesquisa de componente
 - Runner: TestCaseExibirComponente e TestCasePesquisarComponente
 ### Mudado
 - Runners passaram a usar tags

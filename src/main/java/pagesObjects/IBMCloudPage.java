@@ -12,11 +12,10 @@ import utils.Utils;
 
 import java.util.List;
 
-import static utils.Utils.*;
+import static utils.Utils.getElements;
+import static utils.Utils.waitElement;
 
 public class IBMCloudPage extends Pagina {
-    public final List<WebElement> listBtnExibir = getElements("td button.ng-star-inserted.p-button-secondary");
-
     @MapearElementoWeb(id = "p-panel-1-titlebar")
     private ElementoTexto divTituloComponente;
 
@@ -41,25 +40,17 @@ public class IBMCloudPage extends Pagina {
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroModal;
 
-    @MapearElementoWeb(css = "div .p-toast-detail")
-    public Elemento alertMensagem;
-
-    public WebElement getAlert(){
-        return waitElemento("div .p-toast-detail");
+    public WebElement getAlert() {
+        return waitElement("div .p-toast-detail");
     }
 
-    public String getAlertMensagem(){
-        return getAlert().getText();
-    }
-
-    public void clicarBotaoLista(int localizacao) {
-        rolarPaginaAteElemento(listBtnExibir.get(localizacao));
-        listBtnExibir.get(localizacao).click();
+    private List<WebElement> getListComponente() {
+        return getElements(".p-dropdown-items-wrapper span");
     }
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         dropDownComponente.clicar();
-        List<WebElement> listComponente = getElements(".p-dropdown-items-wrapper span");
+        List<WebElement> listComponente = getListComponente();
         for (WebElement webElement : listComponente) {
             if (webElement.getText().intern().equals(componente.intern())) {
                 webElement.click();

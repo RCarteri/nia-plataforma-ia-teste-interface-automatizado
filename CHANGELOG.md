@@ -5,6 +5,20 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.8] - 18-03-2022
+Task: 416902, 421557, 421902, 423159, 425165, 431616
+### Adicionado
+- Versão 3.12.8 no qTeste
+- Funcionalidade: Modelos Triton
+- Funcionalidade: Primeiro acesso
+- Cenario: CT011 - Validar mensagem inexistência de modelos no projeto
+- Cenario: CT012 - Testar modelo Triton
+- Cenario: CT013 - Cadastrar usuário na IBM Cloud
+### Mudado
+- Cenário: CT002 - Validar componente
+### Corrigido
+- Delay para as mensagens de alerta
+
 ## [3.9.10] - 07-03-2022
 Task: 416902
 ### Adicionado

@@ -10,7 +10,7 @@ Funcionalidade: Primeiro acesso
 		E acessar a tela "Soluções e Serviços de IA" e "Primeiro acesso (Cloud)"
 		Então verficar se a pagina "Primeiro acesso e convite para IBM Cloud" foi carregada com sucesso
 
-	Cenario: CT013 - Cadastrar usuário na IBM Cloud
+	Cenario: CT012 - Cadastrar usuário na IBM Cloud
 		Dado que apresente a mensagem "Não encontramos nenhuma conta na IBM Cloud registrada para seu email:"
 		Quando seguir tutorial
 		Então a página deverá atualizar corretamente

@@ -24,7 +24,7 @@ Funcionalidade: Modelos Triton
 		E deverá apresentar mais detalhes
 
 	@TestarModeloTriton
-	Cenario: CT012 - Testar modelo Triton
+	Cenario: CT011 - Testar modelo Triton
 		Quando exibir "modelo"
 		E escolher "Testar Modelo"
 		Então deverá apresentar as informações do request

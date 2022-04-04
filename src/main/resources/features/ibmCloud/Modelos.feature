@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@Modelos
-Funcionalidade: Modelos
+@S004
+Funcionalidade: Suite004 - Modelos
 
 	Contexto: Acessar plataforma IA
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -11,17 +11,17 @@ Funcionalidade: Modelos
 		E acessar a pagina do provedor "IBM Cloud"
 		E selecionar o componente "Modelos"
 
-	@Smoke
+	@ID-004-002 @CT002 @Smoke
 	Cenario: CT002 - Validar componente
 		Então deverá apresentar o título "Lista de Modelos" na página
 
-	@ExibirComponente
+	@ID-004-003 @CT003
 	Cenario: CT003 - Exibir componente
 		Quando exibir "modelo"
 		Então deverá apresentar o titulo "Detalhes do Modelo" no modal
 		E deverá apresentar as informações sobre ID e nome
 
-	@PesquisaComponente
+	@ID-004-004 @CT004
 	Cenario: CT004 - Pesquisar componente
 		Quando pesquisar "Zoltar" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior

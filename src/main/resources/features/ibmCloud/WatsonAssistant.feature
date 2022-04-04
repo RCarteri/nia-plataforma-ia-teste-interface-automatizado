@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@WatsonAssistant
-Funcionalidade: Watson Assistant
+@S005
+Funcionalidade: Suite005 - Watson Assistant
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -11,18 +11,18 @@ Funcionalidade: Watson Assistant
         E acessar a pagina do provedor "IBM Cloud"
         E selecionar o componente "Watson Assistant"
 
-    @Smoke
+    @ID-005-002 @CT002 @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Instâncias" na página
 
-    @ExibirComponente
+    @ID-005-003 @CT003
     Cenario: CT003 - Exibir componente
         Quando exibir "instância"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista com elementos
 
-    @PesquisaComponente
+    @ID-005-004 @CT004
     Cenario: CT004 - Pesquisar componente
         Quando pesquisar "Watson" no "componente"
         Então deverá apresentar um total de resultados diferente do anterior

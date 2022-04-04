@@ -1,8 +1,9 @@
 #language: pt
 #encoding: utf-8
-@AcessarPlataforma @Smoke
-Funcionalidade: Acessar plataforma IA
+@S001 @Smoke
+Funcionalidade: Suite001 - Acessar plataforma IA
 
+	@ID-001-001 @CT001
 	Cenario: CT001 - Acessar plataforma IA
 		Dado que a Plataforma esteja fechada, abra a Plataforma
 		E se não estiver logado, realiza o login no Sistema

@@ -38,7 +38,7 @@ public class Componentes {
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
     public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
         utils.capturaTela();
-        assertEquals(titulo, modalComponentePage.getTituloModal());
+        assertEquals(titulo, modalComponentePage.getTituloModal().recuperarTexto());
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")
@@ -100,7 +100,7 @@ public class Componentes {
         assertTrue(new ModalComponentePage().getCountLinhas() > 1);
     }
 
-    @Quando("^não existir '(.*)'$")
+    @Quando("^não existir \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
                 new PanelContentSection().existeOpcao(false, opcao));
@@ -112,7 +112,7 @@ public class Componentes {
                 new PanelContentSection().existeOpcao(true, opcao));
     }
 
-    @Então("^deverá apresentar a mensagem de alerta '(.*)'$")
+    @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemDeAlerta(String mensagem) {
         assertEquals(mensagem, new IBMCloudPage().getAlert().getText());
         new Utils().capturaTela();

@@ -16,12 +16,15 @@ Funcionalidade: Suite007 - Watson Studio
     Então deverá apresentar o título "Lista de Projetos" na página
 
   @ID-007-003 @CT003
-  Cenario: CT003 - Exibir componente
-    Quando exibir "projeto"
-    E escolher "Membros"
-    Então deverá apresentar o titulo "Membros do projeto" no modal
+  Esquema do Cenario: CT003 - Exibir componente
+    Quando existir "<opção>"
+    Então deverá apresentar o titulo "<título>" no modal
     E deverá apresentar as informações sobre ID e nome
     E deverá mostrar a lista com elementos
+    Exemplos:
+      | opção     | título             |
+      | Membros   | Membros do projeto |
+      | Notebooks | Notebooks          |
 
   @ID-007-004 @CT004
   Cenario: CT004 - Pesquisar componente
@@ -37,8 +40,7 @@ Funcionalidade: Suite007 - Watson Studio
 
   @ID-007-005 @CT005
   Cenario: CT005 - Pesquisar no modal
-    Quando exibir "projeto"
-    E escolher "Membros"
+    Quando existir "Membros"
     E pesquisar "Bruno" no "modal"
     Então deverá apresentar um total de resultados diferente do anterior
     E os resultados apresentados devem conter a palavra pesquisada
@@ -51,8 +53,7 @@ Funcionalidade: Suite007 - Watson Studio
 
   @ID-007-006 @CT006
   Esquema do Cenario: CT006 - Adicionar membro exceção
-    Quando exibir "projeto"
-    E escolher "Membros"
+    Quando existir "Membros"
     E adicionar membro com os dados <função> '<chave>'
     Então deverá apresentar a mensagem '<mensagem>' de erro
     Exemplos:
@@ -69,20 +70,13 @@ Funcionalidade: Suite007 - Watson Studio
   @ID-007-008 @CT008
   Cenario: CT008 - Atualizar listagem de projetos
     Quando atualizar a listagem de projetos
-    Então deverá apresentar a mensagem de alerta 'Carregamento dos projetos em andamento!'
+    Então deverá apresentar a mensagem de alerta "Carregamento dos projetos em andamento!"
 
   @ID-007-009 @CT009
-  Esquema do Cenario: CT009 - Validar mensagem de alerta de inexistência de opção no projeto
-    Quando não existir '<opção>'
-    Então deverá apresentar a mensagem de alerta '<mensagem>'
+  Esquema do Cenario: CT009 - Inexistência do componente
+    Quando não existir "<opção>"
+    Então deverá apresentar a mensagem de alerta "<mensagem>"
     Exemplos:
       | opção     | mensagem                                                     |
       | Notebooks | Não há nenhum notebook disponível para o projeto atualmente. |
       | Modelos   | Não há nenhum modelo disponível para o projeto atualmente.   |
-
-  @ID-007-010 @CT010
-  Cenario: CT010 - Exibir notebook
-    Quando existir "Notebooks"
-    Então deverá apresentar o titulo "Notebooks" no modal
-    E deverá apresentar as informações sobre ID e nome
-    E deverá mostrar a lista com elementos

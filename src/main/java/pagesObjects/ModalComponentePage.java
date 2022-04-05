@@ -4,7 +4,6 @@ import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
 import br.com.bb.ath.ftabb.elementos.ElementoBotao;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ModalComponentePage extends Pagina {
         return listaElementosVazios;
     }
 
-    public String getTituloModal() throws ElementoNaoLocalizadoException {
-        return spanTituloModal.recuperarTexto();
+    public ElementoTexto getTituloModal(){
+        return spanTituloModal;
     }
 }

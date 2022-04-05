@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@S012 @Smoke
-Funcionalidade: Suite012 - Primeiro acesso
+@S009 @Smoke
+Funcionalidade: Suite009 - Primeiro acesso
 
 	Contexto: Acessar plataforma IA
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -10,8 +10,8 @@ Funcionalidade: Suite012 - Primeiro acesso
 		E acessar a tela "Soluções e Serviços de IA" e "Primeiro acesso (Cloud)"
 		Então verficar se a pagina "Primeiro acesso e convite para IBM Cloud" foi carregada com sucesso
 
-	@ID-012-012 @CT012
-	Cenario: CT012 - Cadastrar usuário na IBM Cloud
+	@ID-009-011 @CT011
+	Cenario: CT011 - Cadastrar usuário na IBM Cloud
 		Dado que apresente a mensagem "Não encontramos nenhuma conta na IBM Cloud registrada para seu email:"
 		Quando seguir tutorial
 		Então a página deverá atualizar corretamente

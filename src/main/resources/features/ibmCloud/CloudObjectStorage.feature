@@ -33,3 +33,8 @@ Funcionalidade: Suite002 - Cloud Object Storage
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum storage com este nome."
 		E a quantidade de resultados deve ser 0
+
+	@ID-002-009 @CT009
+	Cenario: CT009 - Validar mensagem de alerta de inexistência de opção no projeto
+		Quando não existir 'Bucket'
+		Então deverá apresentar a mensagem de alerta 'Não há nenhum bucket disponível para o projeto atualmente.'

@@ -19,11 +19,11 @@ public class PanelContentSection extends Pagina {
             for (WebElement nItem : pP.listBtnExibir) {
                 avancarItem(nItem, pP.listBtnExibir, opcao);
                 if(acessarSubMenu(nItem, opcao)) continue;
-                new Utils().esperarQTeste(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+                if (esperado) new Utils().esperarQTeste(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
-                } else if (esperado && new ModalComponentePage().getCountLinhas() >= 1) {
+                } else if (esperado && isModalDisplayed()) {
                     System.out.println("Projeto com " + opcao + " encontrado.");
                     return true;
                 }
@@ -31,6 +31,10 @@ public class PanelContentSection extends Pagina {
             avancarPagina(nPagina);
         }
         return false;
+    }
+
+    private boolean isModalDisplayed(){
+        return new ModalComponentePage().getCountLinhas() >= 1;
     }
 
     private boolean isGetAlertDisplayed(){

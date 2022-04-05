@@ -14,7 +14,7 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@PrimeiroAcesso" },
+		tags = { "@S009" },
 		monochrome = true
 )
 public class TestCasePrimeiroAcesso {

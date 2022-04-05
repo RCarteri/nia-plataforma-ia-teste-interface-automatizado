@@ -14,7 +14,7 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@CloudObjectStorage" },
+		tags = { "@S002" },
 		monochrome = true
 )
 public class TestCaseCloudObjectStorage {

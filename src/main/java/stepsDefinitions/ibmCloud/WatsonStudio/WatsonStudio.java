@@ -2,7 +2,7 @@ package stepsDefinitions.ibmCloud.WatsonStudio;
 
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import pagesObjects.IBMCloudPage;
+import pagesObjects.PanelContentSection;
 import pagesObjects.ibmCloud.WatsonStudio.WatsonStudioPage;
 import utils.Utils;
 
@@ -22,7 +22,7 @@ public class WatsonStudio {
     @Então("^deverá mostrar a lista de projetos com essa sigla$")
     public void deveraMostrarAListaDeProjetosComEssaSigla() {
         utils.capturaTela();
-        assertTrue(new IBMCloudPage().resultadosContemString(this.sigla, "sigla"));
+        assertTrue(new PanelContentSection().resultadosContemString(this.sigla, "sigla"));
     }
 
     @Quando("^atualizar a listagem de projetos$")

@@ -3,6 +3,7 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
 import br.com.bb.ath.ftabb.elementos.Elemento;
+import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import org.openqa.selenium.WebElement;
 import utils.Utils;
@@ -21,6 +22,15 @@ public class PanelContentSection extends Pagina {
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(4)")
     private Elemento terceiraOpcao;
 
+    @MapearElementoWeb(css = "nia-platia-table td")
+    private ElementoTexto txtNenhumResultado;
+
+    @MapearElementoWeb(css = "nia-membros-table td")
+    private ElementoTexto txtNenhumResultadoModal;
+
+    private final ModalComponentePage mCP = new ModalComponentePage();
+    private final PaginacaoSection pS = new PaginacaoSection();
+
     private WebElement getPrimeiraOpcao() {
         return getElements("a.ng-star-inserted").get(0);
     }
@@ -33,27 +43,23 @@ public class PanelContentSection extends Pagina {
             for (WebElement nItem : pP.listBtnExibir) {
                 avancarItem(nItem, pP.listBtnExibir);
                 if (opcoes.contains(opcao)) if (acessarSubMenu(nItem, opcao)) continue;
-                    if (!esperado && isGetAlertDisplayed()) {
-                        System.out.println("Encontrado projeto sem " + opcao + ".");
-                        return false;
-                    } else if (esperado && isModalDisplayed()) {
-                        System.out.println("Projeto com " + opcao + " encontrado.");
-                        return true;
-                    }
+                if (!esperado && isGetAlertDisplayed()) {
+                    System.out.println("Encontrado projeto sem " + opcao + ".");
+                    return false;
+                } else if (esperado && mCP.isModalDisplayed()) {
+                    System.out.println("Projeto com " + opcao + " encontrado.");
+                    return true;
+                }
             }
-            avancarPagina(nPagina);
+            pS.avancarPagina(nPagina);
         }
         return false;
-    }
-
-    private boolean isModalDisplayed() {
-        return new ModalComponentePage().getTituloModal().elementoExiste();
     }
 
     private boolean isGetAlertDisplayed() {
         ModalComponentePage mCP = new ModalComponentePage();
         try {
-            new IBMCloudPage().getAlert().isDisplayed();
+            new ComponentePage().getAlert().isDisplayed();
         } catch (Exception e) {
             if (mCP.btnFechar.elementoExiste()) {
                 System.out.println("Fechando modal");
@@ -66,12 +72,6 @@ public class PanelContentSection extends Pagina {
             } else e.printStackTrace();
         }
         return true;
-    }
-
-    private void avancarPagina(WebElement nPagina) {
-        System.out.println("Avançando para a página " + nPagina.getText());
-        rolarPaginaAteElemento(nPagina);
-        nPagina.click();
     }
 
     private void avancarItem(WebElement nItem, List<WebElement> listBtnExibir) {
@@ -110,5 +110,44 @@ public class PanelContentSection extends Pagina {
             Utils.logError(e);
         }
         return true;
+    }
+
+    public String getTxtNenhumResultado(String local) {
+        try {
+            switch (local) {
+                case "componente":
+                    return txtNenhumResultado.recuperarTexto();
+                case "modal":
+                    return txtNenhumResultadoModal.recuperarTexto();
+            }
+        } catch (ElementoNaoLocalizadoException e) {
+            Utils.logError(e);
+        }
+        return null;
+    }
+
+    public boolean resultadosContemString(String palavraPesquisada, String local) {
+        boolean resultadosOk = true;
+        List<WebElement> listTxt;
+        switch (local) {
+            case "componente":
+                listTxt = getElements("nia-platia-table td:first-child");
+                break;
+            case "modal":
+                listTxt = getElements("nia-membros-table td:nth-child(2)");
+                break;
+            case "sigla":
+                listTxt = getElements(".p-datatable-tbody td:nth-child(2)");
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + local);
+        }
+        for (WebElement webElement : listTxt) {
+            if (!(webElement.getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))) {
+                resultadosOk = false;
+                break;
+            }
+        }
+        return resultadosOk;
     }
 }

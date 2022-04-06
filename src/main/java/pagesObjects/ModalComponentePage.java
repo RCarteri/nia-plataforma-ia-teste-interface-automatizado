@@ -42,4 +42,9 @@ public class ModalComponentePage extends Pagina {
     public ElementoTexto getTituloModal(){
         return spanTituloModal;
     }
+
+    protected boolean isModalDisplayed() {
+        return new ModalComponentePage().getTituloModal().elementoExiste();
+    }
+
 }

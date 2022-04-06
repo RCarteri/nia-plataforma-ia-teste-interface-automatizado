@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@ModelosTriton
-Funcionalidade: Modelos Triton
+@S008
+Funcionalidade: Suite008 - Modelos Triton
 
 	Contexto: Acessar plataforma IA
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -11,20 +11,18 @@ Funcionalidade: Modelos Triton
 		E acessar a pagina do provedor "Triton"
 		E selecionar o componente "Modelos Triton"
 
-	@Smoke
+	@ID-008-002 @CT002 @Smoke
 	Cenario: CT002 - Validar componente
-		Então deverá apresentar o título "Lista de Modelos Triton" na página
+		Então deverá apresentar o título "Lista de Modelos" na página
 
-	@ExibirComponente
+	@ID-008-003 @CT003
 	Cenario: CT003 - Exibir componente
-		Quando exibir "modelo"
-		E escolher "Detalhes"
+		Quando existir "Detalhes"
 		Então deverá apresentar o titulo "Detalhes do Modelo Triton" no modal
 		E deverá mostrar a lista com detalhes
 		E deverá apresentar mais detalhes
 
-	@TestarModeloTriton
-	Cenario: CT012 - Testar modelo Triton
-		Quando exibir "modelo"
-		E escolher "Testar Modelo"
+	@ID-008-010 @CT010
+	Cenario: CT010 - Testar modelo Triton
+		Quando existir "Testar Modelo"
 		Então deverá apresentar as informações do request

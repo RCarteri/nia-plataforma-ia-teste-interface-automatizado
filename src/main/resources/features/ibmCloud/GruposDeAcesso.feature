@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@GruposDeAcesso
-Funcionalidade: Grupos de Acesso
+@S003
+Funcionalidade: Suite003 - Grupos de Acesso
 
 	Contexto: Acessar plataforma IA
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -11,18 +11,18 @@ Funcionalidade: Grupos de Acesso
 		E acessar a pagina do provedor "IBM Cloud"
 		E selecionar o componente "Grupos de Acesso"
 
-	@Smoke
+	@ID-003-002 @CT002 @Smoke
 	Cenario: CT002 - Validar componente
 		Então deverá apresentar o título "Lista de Grupos de acesso" na página
 
-	@ExibirComponente
+	@ID-003-003 @CT003
 	Cenario: CT003 - Exibir componente
-		Quando exibir "grupo"
+		Quando existir "Grupo"
 		Então deverá apresentar o titulo "Grupos de acesso" no modal
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista com elementos
 
-	@PesquisaComponente
+	@ID-003-004 @CT004
 	Cenario: CT004 - Pesquisar componente
 		Quando pesquisar "Grupo" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
@@ -34,9 +34,9 @@ Funcionalidade: Grupos de Acesso
 		Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
 		E a quantidade de resultados deve ser 0
 
-	@PesquisaModalComponente
+	@ID-003-005 @CT005
 	Cenario: CT005 - Pesquisar no modal
-		Quando exibir "grupo"
+		Quando existir "Grupo"
 		E pesquisar "Rafael" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
@@ -47,9 +47,9 @@ Funcionalidade: Grupos de Acesso
 		Então deverá apresentar a mensagem "Nenhum membro encontrado."
 		E a quantidade de resultados deve ser 0
 
-	@AdicionarMembroException
+	@ID-003-006 @CT006
 	Esquema do Cenario: CT006 - Adicionar membro exceção
-		Quando exibir "grupo"
+		Quando existir "Grupo"
 		E adicionar membro com os dados  '<chave>'
 		Então deverá apresentar a mensagem '<mensagem>' de erro
 		Exemplos:

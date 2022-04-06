@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@WatsonKnowledgeCatalog
-Funcionalidade: Watson Knowledge Catalog
+@S006
+Funcionalidade: Suite006 - Watson Knowledge Catalog
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -11,18 +11,18 @@ Funcionalidade: Watson Knowledge Catalog
         E acessar a pagina do provedor "IBM Cloud"
         E selecionar o componente "Watson Knowledge Catalog"
 
-    @Smoke
+    @ID-006-002 @CT002 @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Catálogos" na página
 
-    @ExibirComponente
+    @ID-006-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando exibir "catálogo"
+        Quando existir "Catálogo"
         Então deverá apresentar o titulo "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista com elementos
 
-    @PesquisaComponente
+    @ID-006-004 @CT004
     Cenario: CT004 - Pesquisar componente
         Quando pesquisar "Catalog" no "componente"
         Então deverá apresentar um total de resultados diferente do anterior
@@ -34,9 +34,9 @@ Funcionalidade: Watson Knowledge Catalog
         Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
         E a quantidade de resultados deve ser 0
 
-    @PesquisaModalComponente
+    @ID-006-005 @CT005
     Cenario: CT005 - Pesquisar no modal
-        Quando exibir "catálogo"
+        Quando existir "Catálogo"
         E pesquisar "Bruno" no "modal"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
@@ -47,9 +47,9 @@ Funcionalidade: Watson Knowledge Catalog
         Então deverá apresentar a mensagem "Nenhum membro encontrado."
         E a quantidade de resultados deve ser 0
 
-    @AdicionarMembroException
+    @ID-006-006 @CT006
     Esquema do Cenario: CT006 - Adicionar membro exceção
-        Quando exibir "catálogo"
+        Quando existir "Catálogo"
         E adicionar membro com os dados <função> '<chave>'
         Então deverá apresentar a mensagem '<mensagem>' de erro
         Exemplos:

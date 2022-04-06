@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
-@CloudObjectStorage
-Funcionalidade: Cloud Object Storage
+@S002
+Funcionalidade: Suite002 - Cloud Object Storage
 
 	Contexto: Acessar plataforma IA
 		Dado que a Plataforma esteja fechada, abra a Plataforma
@@ -11,18 +11,18 @@ Funcionalidade: Cloud Object Storage
 		E acessar a pagina do provedor "IBM Cloud"
 		E selecionar o componente "Cloud Object Storage"
 
-	@Smoke
+	@ID-002-002 @CT002 @Smoke
 	Cenario: CT002 - Validar componente
 		Então deverá apresentar o título "Lista de Object Storages" na página
 
-	@ExibirComponente
+	@ID-002-003 @CT003
 	Cenario: CT003 - Exibir componente
-		Quando exibir "storage"
+	Quando existir "Bucket"
 		Então deverá apresentar o titulo "Buckets do storage" no modal
 		E deverá apresentar as informações sobre ID e nome
 		E deverá mostrar a lista com elementos
 
-	@PesquisaComponente
+	@ID-002-004 @CT004
 	Cenario: CT004 - Pesquisar componente
 		Quando pesquisar "Minhas Financas" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
@@ -33,3 +33,8 @@ Funcionalidade: Cloud Object Storage
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum storage com este nome."
 		E a quantidade de resultados deve ser 0
+
+	@ID-002-009 @CT009
+	Cenario: CT009 - Inexistência do componente
+		Quando não existir "Bucket"
+		Então deverá apresentar a mensagem de alerta "Não há nenhum bucket disponível para o projeto atualmente."

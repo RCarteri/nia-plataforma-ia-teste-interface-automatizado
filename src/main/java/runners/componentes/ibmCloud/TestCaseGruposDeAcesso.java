@@ -14,7 +14,7 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@GruposDeAcesso" },
+		tags = { "@S003" },
 		monochrome = true
 )
 public class TestCaseGruposDeAcesso {

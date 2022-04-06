@@ -6,7 +6,6 @@ import pagesObjects.IBMCloudPage;
 import pagesObjects.ibmCloud.WatsonStudio.WatsonStudioPage;
 import utils.Utils;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WatsonStudio {
@@ -29,17 +28,5 @@ public class WatsonStudio {
     @Quando("^atualizar a listagem de projetos$")
     public void atualizarAListagemDeProjetos() {
         wSP.atualizarProjetos();
-    }
-
-    @Quando("^não existir \"([^\"]*)\"$")
-    public void naoExistirOpcao(String opcao) {
-        assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
-                wSP.existeOpcao(false, opcao));
-    }
-
-    @Quando("^existir \"([^\"]*)\"$")
-    public void existirOpcao(String opcao) {
-        assertTrue("Nenhum projeto possui  " + opcao + ".\nNão foi possível realizar este teste.",
-                wSP.existeOpcao(true, opcao));
     }
 }

@@ -7,6 +7,7 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.IBMCloudPage;
 import pagesObjects.ModalComponentePage;
 import pagesObjects.PaginacaoSection;
+import pagesObjects.PanelContentSection;
 import utils.Utils;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class Componentes {
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
     public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
         utils.capturaTela();
-        assertEquals(titulo, modalComponentePage.getTituloModal());
+        assertEquals(titulo, modalComponentePage.getTituloModal().recuperarTexto());
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")
@@ -94,14 +95,27 @@ public class Componentes {
         assertEquals(this.quantResultadosAntes, pS.getQuantResultados(this.local));
     }
 
-    @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
-    public void deveraApresentarAMensagemNaTela(String mensagem) {
-        assertEquals(mensagem, new IBMCloudPage().getAlert().getText());
-        new Utils().capturaTela();
-    }
-
     @E("^deverá mostrar a lista com elementos$")
     public void deveraMostrarAListaComElementos() {
         assertTrue(new ModalComponentePage().getCountLinhas() > 1);
     }
+
+    @Quando("^não existir \"([^\"]*)\"$")
+    public void naoExistirOpcao(String opcao) {
+        assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
+                new PanelContentSection().existeOpcao(false, opcao));
+    }
+
+    @Quando("^existir \"([^\"]*)\"$")
+    public void existirOpcao(String opcao) {
+        assertTrue("Nenhum projeto possui  " + opcao + ".\nNão foi possível realizar este teste.",
+                new PanelContentSection().existeOpcao(true, opcao));
+    }
+
+    @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
+    public void deveraApresentarAMensagemDeAlerta(String mensagem) {
+        assertEquals(mensagem, new IBMCloudPage().getAlert().getText());
+        new Utils().capturaTela();
+    }
+
 }

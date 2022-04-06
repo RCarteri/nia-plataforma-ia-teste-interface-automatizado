@@ -5,6 +5,18 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.13.1] - 05-04-2022
+Task: 423083
+###Adicionado
+- S002 CloudObjectStorage - CT009 Inexistência do componente
+- PanelContentSection para isolar as ações que acontecem só nesse frame do resto da página
+###Mudado
+- Identificação das tags e cenários por CT e Suites
+- S007 WatsonStudio - S009 Inexistência do componente
+###Removido
+- Steps "Quando exibir 'String'" e 
+        "E escolher 'String'"
+
 ## [3.12.8] - 18-03-2022
 Task: 416902, 421557, 421902, 423159, 425165, 431616
 ### Adicionado

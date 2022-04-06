@@ -14,7 +14,7 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@WatsonStudio" },
+		tags = { "@S007" },
 		monochrome = true
 )
 public class TestCaseWatsonStudio {

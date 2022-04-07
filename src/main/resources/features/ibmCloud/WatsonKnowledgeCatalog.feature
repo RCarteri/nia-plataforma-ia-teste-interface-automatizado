@@ -46,6 +46,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Quando pesquisar "#invalido" no "modal"
         Então deverá apresentar a mensagem "Nenhum membro encontrado."
         E a quantidade de resultados deve ser 0
+        E todas as validações devem retornar sucesso
 
     @ID-006-006 @CT006
     Esquema do Cenario: CT006 - Adicionar membro exceção

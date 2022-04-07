@@ -33,6 +33,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum storage com este nome."
 		E a quantidade de resultados deve ser 0
+		E todas as validações devem retornar sucesso
 
 	@ID-002-009 @CT009
 	Cenario: CT009 - Inexistência do componente

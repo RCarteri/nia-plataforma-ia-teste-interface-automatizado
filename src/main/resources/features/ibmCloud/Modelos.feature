@@ -32,3 +32,4 @@ Funcionalidade: Suite004 - Modelos
 		Quando pesquisar "#invalido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum modelo com este nome."
 		E a quantidade de resultados deve ser 0
+		E todas as validações devem retornar sucesso

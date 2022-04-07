@@ -37,6 +37,7 @@ Funcionalidade: Suite007 - Watson Studio
     Quando pesquisar "#invalido" no "componente"
     Então deverá apresentar a mensagem "Não há nenhum projeto com este nome."
     E a quantidade de resultados deve ser 0
+    E todas as validações devem retornar sucesso
 
   @ID-007-005 @CT005
   Cenario: CT005 - Pesquisar no modal
@@ -50,6 +51,7 @@ Funcionalidade: Suite007 - Watson Studio
     Quando pesquisar "#invalido" no "modal"
     Então deverá apresentar a mensagem "Nenhum membro encontrado."
     E a quantidade de resultados deve ser 0
+    E todas as validações devem retornar sucesso
 
   @ID-007-006 @CT006
   Esquema do Cenario: CT006 - Adicionar membro exceção

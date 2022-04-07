@@ -33,3 +33,4 @@ Funcionalidade: Suite005 - Watson Assistant
         Quando pesquisar "#invalido" no "componente"
         Então deverá apresentar a mensagem "Não há nenhuma instância com este nome."
         E a quantidade de resultados deve ser 0
+        E todas as validações devem retornar sucesso

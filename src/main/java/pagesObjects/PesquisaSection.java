@@ -7,6 +7,9 @@ import br.com.bb.ath.ftabb.elementos.ElementoInput;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import utils.Utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PesquisaSection extends Pagina {
 
     @MapearElementoWeb(css = "nia-platia-table th input.p-inputtext")
@@ -20,6 +23,9 @@ public class PesquisaSection extends Pagina {
 
     @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
     private ElementoBotao btnLimparFiltroPesquisa;
+
+    private final Map<String, Boolean> validacaoPesquisa = new HashMap<>();
+    private String mensagemPesquisaInvalida = "";
 
     public void pesquisar(String palavra, String local) {
         try {
@@ -63,5 +69,23 @@ public class PesquisaSection extends Pagina {
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
+    }
+    public void validarPesquisa(String mensagem, Boolean validacao) {
+        this.validacaoPesquisa.put(mensagem, validacao);
+    }
+
+    public boolean getValidacaoPesquisa(){
+        StringBuilder strBuilder = new StringBuilder(this.mensagemPesquisaInvalida);
+        for (Map.Entry<String, Boolean> entry : validacaoPesquisa.entrySet()){
+            if(!entry.getValue()) {
+                strBuilder.append(entry.getKey()).append(" ");
+            }
+        }
+        this.mensagemPesquisaInvalida = strBuilder.toString();
+        return this.mensagemPesquisaInvalida.equals("");
+    }
+
+    public String getMensagemPesquisaInvalida(){
+        return this.mensagemPesquisaInvalida;
     }
 }

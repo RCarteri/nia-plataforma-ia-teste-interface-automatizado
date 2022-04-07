@@ -8,7 +8,6 @@ import pagesObjects.PanelContentSection;
 import pagesObjects.PesquisaSection;
 import utils.Utils;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Pesquisa {
@@ -19,6 +18,7 @@ public class Pesquisa {
     private int quantResultadosAntes;
     private String palavraPesquisada;
     private String local;
+    private Boolean validacao;
 
     @Quando("^pesquisar \"([^\"]*)\" no \"([^\"]*)\"$")
     public void pesquisar(String palavraPesquisada, String local) {
@@ -32,18 +32,23 @@ public class Pesquisa {
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         utils.capturaTela();
-        if (this.quantResultadosAntes != 1)
-            assertTrue(this.quantResultadosAntes != pS.getQuantResultados(this.local));
+        int quantResultadosObtida = pS.getQuantResultados(this.local);
+        int quantResultadosAntes = (this.quantResultadosAntes == 1) ? 0 : this.quantResultadosAntes;
+        this.validacao = quantResultadosAntes != quantResultadosObtida;
+        pqS.validarPesquisa("O total de resultados esperado é '" + this.quantResultadosAntes + "' e o obtido é '" + quantResultadosObtida + " eles deveriam ser diferentes.", validacao);
     }
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")
     public void osResultadosApresentadosDevemConterAPalavraPesquisada() {
-        assertTrue(pCS.resultadosContemString(palavraPesquisada, this.local));
+        this.validacao = pCS.resultadosContemString(palavraPesquisada, this.local);
+        pqS.validarPesquisa("Os resultados apresentados não contem a palavra pesquisada." , validacao);
     }
 
     @E("^a quantidade de resultados deve ser (\\d+)$")
     public void osResultadosDevemSer(int quantResultados) {
-        assertEquals(quantResultados, pS.getQuantResultados(this.local));
+        int quantResultadosObtida = pS.getQuantResultados(this.local);
+        this.validacao = quantResultados == quantResultadosObtida;
+        pqS.validarPesquisa("A quantidade de resultados deveria ser '" + quantResultados + "' mas retornou '" + quantResultadosObtida + "'." , validacao);
     }
 
     @E("^limpar pesquisa$")
@@ -54,17 +59,28 @@ public class Pesquisa {
     @Então("^o input deve estar vazio$")
     public void oInputDeveEstarVazio() {
         utils.capturaTela();
-        assertEquals(pqS.getTxtInputFiltro(this.local), "");
+        this.validacao = pqS.getTxtInputFiltro(this.local).equals("");
+        pqS.validarPesquisa("O input não está vazio.", validacao);
     }
 
     @E("^o total de resultados deverá mostrar a quantidade anterior$")
     public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
-        assertEquals(this.quantResultadosAntes, pS.getQuantResultados(this.local));
+        int quantResultadosObtida = pS.getQuantResultados(this.local);
+        this.validacao = this.quantResultadosAntes == quantResultadosObtida;
+        pqS.validarPesquisa("O total de resultados esperado é '" + this.quantResultadosAntes + "' e o obtido é '" + quantResultadosObtida, validacao);
     }
 
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
     public void deveraApresentarAMensagem(String mensagem){
         utils.capturaTela();
-        assertEquals(mensagem, pCS.getTxtNenhumResultado(this.local));
+        String mensagemObtida = pCS.getTxtNenhumResultado(this.local);
+        this.validacao = mensagem.equals(mensagemObtida);
+        pqS.validarPesquisa("A mensagem esperada é '" + mensagem + "' e a obtida é '" + mensagemObtida, validacao);
+    }
+
+    @E("^todas as validações devem retornar sucesso$")
+    public void todasAsValidacoesDevemRetornarSucesso() {
+        boolean validacao = pqS.getValidacaoPesquisa();
+        assertTrue(pqS.getMensagemPesquisaInvalida(), validacao);
     }
 }

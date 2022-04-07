@@ -24,13 +24,13 @@ Funcionalidade: Suite008 - Modelos Triton
 
 	@ID-008-004 @CT004
 	Cenario: CT004 - Pesquisar componente
-		Quando pesquisar "zoltar" no "componente"
+		Quando pesquisar um dado "válido" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
 		Quando limpar pesquisa
 		Então o input deve estar vazio
 		E o total de resultados deverá mostrar a quantidade anterior
-		Quando pesquisar "#invalido" no "componente"
+		Quando pesquisar um dado "inválido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum modelo com este nome."
 		E a quantidade de resultados deve ser 0
 		E todas as validações devem retornar sucesso

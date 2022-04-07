@@ -125,29 +125,4 @@ public class PanelContentSection extends Pagina {
         }
         return null;
     }
-
-    public boolean resultadosContemString(String palavraPesquisada, String local) {
-        boolean resultadosOk = true;
-        List<WebElement> listTxt;
-        switch (local) {
-            case "componente":
-                listTxt = getElements("nia-platia-table td:first-child");
-                break;
-            case "modal":
-                listTxt = getElements("nia-membros-table td:nth-child(2)");
-                break;
-            case "sigla":
-                listTxt = getElements(".p-datatable-tbody td:nth-child(2)");
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + local);
-        }
-        for (WebElement webElement : listTxt) {
-            if (!(webElement.getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))) {
-                resultadosOk = false;
-                break;
-            }
-        }
-        return resultadosOk;
-    }
 }

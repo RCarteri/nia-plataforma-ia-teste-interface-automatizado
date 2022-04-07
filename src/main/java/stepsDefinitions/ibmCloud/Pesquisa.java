@@ -20,12 +20,12 @@ public class Pesquisa {
     private String local;
     private Boolean validacao;
 
-    @Quando("^pesquisar \"([^\"]*)\" no \"([^\"]*)\"$")
-    public void pesquisar(String palavraPesquisada, String local) {
+    @Quando("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\"$")
+    public void pesquisar(String dado, String local) {
         this.local = local;
         pqS.limparPesquisa(this.local);
         this.quantResultadosAntes = pS.getQuantResultados(local);
-        this.palavraPesquisada = palavraPesquisada;
+        this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
         pqS.pesquisar(palavraPesquisada, local);
     }
 
@@ -33,6 +33,7 @@ public class Pesquisa {
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         utils.capturaTela();
         int quantResultadosObtida = pS.getQuantResultados(this.local);
+        //Teste para quando desde o início retornar só um resultado na lista
         int quantResultadosAntes = (this.quantResultadosAntes == 1) ? 0 : this.quantResultadosAntes;
         this.validacao = quantResultadosAntes != quantResultadosObtida;
         pqS.validarPesquisa("O total de resultados esperado é '" + this.quantResultadosAntes + "' e o obtido é '" + quantResultadosObtida + " eles deveriam ser diferentes.", validacao);
@@ -40,7 +41,7 @@ public class Pesquisa {
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")
     public void osResultadosApresentadosDevemConterAPalavraPesquisada() {
-        this.validacao = pCS.resultadosContemString(palavraPesquisada, this.local);
+        this.validacao = pqS.resultadosContemString(palavraPesquisada, this.local);
         pqS.validarPesquisa("Os resultados apresentados não contem a palavra pesquisada." , validacao);
     }
 
@@ -75,7 +76,7 @@ public class Pesquisa {
         utils.capturaTela();
         String mensagemObtida = pCS.getTxtNenhumResultado(this.local);
         this.validacao = mensagem.equals(mensagemObtida);
-        pqS.validarPesquisa("A mensagem esperada é '" + mensagem + "' e a obtida é '" + mensagemObtida, validacao);
+        pqS.validarPesquisa("A mensagem esperada é '" + mensagem + "' e a obtida é '" + mensagemObtida + "'.", validacao);
     }
 
     @E("^todas as validações devem retornar sucesso$")

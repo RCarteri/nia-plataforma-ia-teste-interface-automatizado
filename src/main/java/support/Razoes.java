@@ -1,4 +1,4 @@
-package utils;
+package support;
 
 public enum Razoes {
 	CARR_PAG("o carregamento da pagina", 2), CAP_TELA("a captura de tela", 0),

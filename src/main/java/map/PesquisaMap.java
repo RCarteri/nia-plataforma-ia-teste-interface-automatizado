@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static utils.Utils.getElements;
+import static support.Utils.getElements;
 
 public class PesquisaMap extends Pagina {
     @MapearElementoWeb(css = "nia-platia-table th input.p-inputtext")

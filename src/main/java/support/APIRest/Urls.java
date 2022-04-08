@@ -1,4 +1,4 @@
-package utils.APIRest;
+package support.APIRest;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

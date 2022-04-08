@@ -4,13 +4,13 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.*;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static utils.Razoes.CARR_ELEM;
-import static utils.Utils.rolarPaginaAteElemento;
+import static support.Razoes.CARR_ELEM;
+import static support.Utils.rolarPaginaAteElemento;
 
 public class PanelContentSection {
     private final PanelContentMap pCM = new PanelContentMap();

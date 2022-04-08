@@ -4,7 +4,7 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ModalAdicionarMembroMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
 public class ModalAdicionarMembroPage {
     private final ModalAdicionarMembroMap mAMM = new ModalAdicionarMembroMap();

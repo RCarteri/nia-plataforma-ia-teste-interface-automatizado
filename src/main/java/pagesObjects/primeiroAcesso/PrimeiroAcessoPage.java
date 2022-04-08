@@ -3,11 +3,11 @@ package pagesObjects.primeiroAcesso;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PrimeiroAcessoMap;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
 import static org.junit.Assert.*;
-import static utils.Utils.getElement;
-import static utils.Utils.rolarPaginaAteElemento;
+import static support.Utils.getElement;
+import static support.Utils.rolarPaginaAteElemento;
 
 public class PrimeiroAcessoPage {
     private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();

@@ -2,9 +2,9 @@ package runners;
 
 import ath_allure_arq3.main.AllureARQ3;
 import stepsDefinitions.Login;
-import utils.APIRest.APIRest;
-import utils.APIRest.Urls;
-import utils.Utils;
+import support.APIRest.APIRest;
+import support.APIRest.Urls;
+import support.Utils;
 
 public class ConfRunner {
     static APIRest apiRest = new APIRest();

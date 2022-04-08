@@ -6,7 +6,7 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.PaginacaoSection;
 import pagesObjects.PanelContentSection;
 import pagesObjects.PesquisaSection;
-import utils.Utils;
+import support.Utils;
 
 import static org.junit.Assert.assertTrue;
 

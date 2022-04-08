@@ -6,7 +6,7 @@ import cucumber.api.java.pt.Quando;
 import map.ComponenteMap;
 import pagesObjects.ComponentePage;
 import pagesObjects.PanelContentSection;
-import utils.Utils;
+import support.Utils;
 
 import static org.junit.Assert.*;
 

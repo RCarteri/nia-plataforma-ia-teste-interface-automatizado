@@ -4,9 +4,9 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PaginacaoMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
-import static utils.Utils.rolarPaginaAteElemento;
+import static support.Utils.rolarPaginaAteElemento;
 
 public class PaginacaoSection {
     private final PaginacaoMap pM = new PaginacaoMap();

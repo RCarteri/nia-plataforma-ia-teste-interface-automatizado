@@ -3,7 +3,7 @@ package pagesObjects.ibmCloud.WatsonStudio;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.WatsonStudioMap;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
 public class WatsonStudioPage {
     private final WatsonStudioMap wSM = new WatsonStudioMap();

@@ -4,7 +4,7 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import pagesObjects.ModalComponentePage;
-import utils.Utils;
+import support.Utils;
 
 import java.util.List;
 

@@ -5,22 +5,31 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.13.2] - 08-04-2022
+Task: 458281
+###Adicionado
+- Cenário: S008 Triton - CT004 Pesquisar componente
+- Classe: Map para isolar o mapeamento dos elementos das páginas
+- Classe: ModalComponente, Pesquisa e PesquisaSection
+- Step: E todas as validações devem retornar sucesso
+###Mudado
+- Step: Quando pesquisar "String" no "String", retornando dados o primeiro dado da lista para pesquisa válida
+
 ## [3.13.1] - 05-04-2022
 Task: 423083
 ###Adicionado
-- S002 CloudObjectStorage - CT009 Inexistência do componente
-- PanelContentSection para isolar as ações que acontecem só nesse frame do resto da página
+- Cenário: S002 CloudObjectStorage - CT009 Inexistência do componente
+- Classe: PanelContentSection para isolar as ações que acontecem só nesse frame do resto da página
 ###Mudado
 - Identificação das tags e cenários por CT e Suites
-- S007 WatsonStudio - S009 Inexistência do componente
+- Cenário: S007 WatsonStudio - S009 Inexistência do componente
 ###Removido
-- Steps "Quando exibir 'String'" e 
+- Step: "Quando exibir 'String'" e 
         "E escolher 'String'"
 
 ## [3.12.8] - 18-03-2022
 Task: 416902, 421557, 421902, 423159, 425165, 431616
 ### Adicionado
-- Versão 3.12.8 no qTeste
 - Funcionalidade: Modelos Triton
 - Funcionalidade: Primeiro acesso
 - Cenario: CT011 - Validar mensagem inexistência de modelos no projeto
@@ -34,12 +43,11 @@ Task: 416902, 421557, 421902, 423159, 425165, 431616
 ## [3.9.10] - 07-03-2022
 Task: 416902
 ### Adicionado
-- Versão 3.9.10 no qTeste
 - Método waitElemento: Esperar até o elemento aparecer
 - Método tempoQteste: Manter o tempo de wait mesmo executando no qTeste
 
 ### Resolvido
-- Corrigir step: Então deverá apresentar o titulo "Grupos de acesso" no modal
+- Step: Então deverá apresentar o titulo "Grupos de acesso" no modal
 
 ## [3.8.0] - 03-03-2022
 Task: 415993
@@ -51,7 +59,7 @@ Task: 413574
 ### Adicionado
 - Cenário: CT010 - Exibir notebook
 ### Mudado
-- Extração de mapeamento de elemntos para paginação
+- Extração de mapeamento de elementos para paginação
 ### Corrigido
 - Delay para abrir notebook
 
@@ -59,7 +67,7 @@ Task: 413574
 Task: 413536
 ### Adicionado
 - Cenário: CT009 - Validar mensagem inexistência de notebooks no projeto
-- Método para mapear lista de elementos sem o FTABB
+- Método: getElement(), para mapear lista de elementos sem o FTABB
 
 ## [3.5.0] - 01-03-2022
 Task: 413525
@@ -76,7 +84,7 @@ Task: 413471
 ## [3.3.0] - 28-02-2022
 Task: 411831
 ### Adicionado
-- Cenário de exceção: CT006 - Adicionar membro exceção
+- Cenário: CT006 - Adicionar membro exceção
 - Page Object para Modal Adicionar Membro
 - Runner: TestCaseAdicionarMembroException e TestCasePesquisaModalComponente
 - Atualizar página caso não apareca o formulário de login

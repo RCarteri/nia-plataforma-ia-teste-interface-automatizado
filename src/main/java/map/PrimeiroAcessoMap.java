@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static utils.Utils.*;
+import static support.Utils.*;
 
 public class PrimeiroAcessoMap extends Pagina {
     @MapearElementoWeb(css = "span.p-inline-message-text")

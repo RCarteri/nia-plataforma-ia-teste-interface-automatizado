@@ -3,7 +3,7 @@ package stepsDefinitions.triton;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import pagesObjects.triton.TritonPage;
-import utils.Utils;
+import support.Utils;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

@@ -6,7 +6,7 @@ import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import org.openqa.selenium.WebElement;
 
-import static utils.Utils.getElements;
+import static support.Utils.getElements;
 
 public class PanelContentMap extends Pagina {
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(3)")

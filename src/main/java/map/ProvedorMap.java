@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static utils.Utils.getElements;
+import static support.Utils.getElements;
 
 public class ProvedorMap extends Pagina {
     @MapearElementoWeb(css = "figure .mi--person")

@@ -4,7 +4,7 @@ import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.PesquisaSection;
 import pagesObjects.ibmCloud.WatsonStudio.WatsonStudioPage;
-import utils.Utils;
+import support.Utils;
 
 import static org.junit.Assert.assertTrue;
 

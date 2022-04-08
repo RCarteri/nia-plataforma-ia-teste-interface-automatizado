@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static utils.Utils.getElement;
-import static utils.Utils.getElements;
+import static support.Utils.getElement;
+import static support.Utils.getElements;
 
 public class TritonMap extends Pagina {
     public WebElement getBtnMaisDetalhes() {

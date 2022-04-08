@@ -5,7 +5,7 @@ import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
 import java.util.HashMap;
 import java.util.List;

@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static utils.Utils.getElements;
-import static utils.Utils.waitElement;
+import static support.Utils.getElements;
+import static support.Utils.waitElement;
 
 public class ComponenteMap extends Pagina {
     @MapearElementoWeb(id = "p-panel-1-titlebar")

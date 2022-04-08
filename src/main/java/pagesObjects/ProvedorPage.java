@@ -1,32 +1,19 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import org.openqa.selenium.WebElement;
+import map.ProvedorMap;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-import static utils.Utils.getElements;
-
-public class ProvedorPage extends Pagina {
-    @MapearElementoWeb(xPath = "//h3[contains(text(), 'IBM Cloud')]")
-    private ElementoTexto btnIBMCloud;
-
-    @MapearElementoWeb(xPath = "//h3[contains(text(), 'Triton')]")
-    private ElementoTexto btnTriton;
-
-    public final List<WebElement> listBtnExibir = getElements("td button.ng-star-inserted.p-button-secondary");
-
-    public void acessarProvedor(String provedor) {
+public class ProvedorPage {
+    public void acessarProvedor(@NotNull String provedor) {
+        final ProvedorMap pM = new ProvedorMap();
         try {
             switch (provedor) {
                 case "IBM Cloud":
-                    btnIBMCloud.clicar();
+                    pM.getBtnIBMCloud().clicar();
                     break;
                 case "Triton":
-                    btnTriton.clicar();
+                    pM.getBtnTriton().clicar();
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {

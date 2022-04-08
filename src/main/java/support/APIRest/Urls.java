@@ -1,4 +1,7 @@
-package utils.APIRest;
+package support.APIRest;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public enum Urls {
     GERAR_RELATORIO("/generate-report"),
@@ -11,7 +14,8 @@ public enum Urls {
         this.url = url;
     }
 
-    public String getUrl() {
+    @Contract(pure = true)
+    public @NotNull String getUrl() {
         String dominio = "http://plataforma-ia-teste-interface-automatizado-allure-arq3.nia.desenv.bb.com.br/allure-docker-service";
         return dominio + url;
     }

@@ -17,7 +17,7 @@ import runners.ConfRunner;
 		tags = { "@PesquisaModalComponente" },
 		monochrome = true
 )
-public class TestCasePesquisaModalComponente {
+public class TestCasePesquisaModalComponenteMap {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

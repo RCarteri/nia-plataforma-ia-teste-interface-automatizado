@@ -10,7 +10,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PimeiroAcesso {
-    PrimeiroAcessoPage pAP = new PrimeiroAcessoPage();
+    private final PrimeiroAcessoPage pAP = new PrimeiroAcessoPage();
+
     @Dado("^que apresente a mensagem \"([^\"]*)\"$")
     public void queApresenteAMensagem(String mensagem) {
         assertTrue("Mensagem de que o usuário não possui cadastro na IBM Cloud não foi apresentada",

@@ -24,26 +24,27 @@ Funcionalidade: Suite003 - Grupos de Acesso
 
 	@ID-003-004 @CT004
 	Cenario: CT004 - Pesquisar componente
-		Quando pesquisar "Grupo" no "componente"
+		Quando pesquisar um dado "válido" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
 		Quando limpar pesquisa
 		Então o input deve estar vazio
 		E o total de resultados deverá mostrar a quantidade anterior
-		Quando pesquisar "#invalido" no "componente"
+		Quando pesquisar um dado "inválido" no "componente"
 		Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
 		E a quantidade de resultados deve ser 0
+		E todas as validações devem retornar sucesso
 
 	@ID-003-005 @CT005
 	Cenario: CT005 - Pesquisar no modal
 		Quando existir "Grupo"
-		E pesquisar "Rafael" no "modal"
+		E pesquisar um dado "válido" no "modal"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
 		Quando limpar pesquisa
 		Então o input deve estar vazio
 		E o total de resultados deverá mostrar a quantidade anterior
-		Quando pesquisar "#invalido" no "modal"
+		Quando pesquisar um dado "inválido" no "modal"
 		Então deverá apresentar a mensagem "Nenhum membro encontrado."
 		E a quantidade de resultados deve ser 0
 

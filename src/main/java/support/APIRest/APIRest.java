@@ -1,4 +1,4 @@
-package utils.APIRest;
+package support.APIRest;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

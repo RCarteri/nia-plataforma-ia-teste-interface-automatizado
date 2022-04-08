@@ -1,44 +1,24 @@
 package pagesObjects.triton;
 
+import map.TritonMap;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
-
-import java.util.List;
 
 public class TritonPage {
-    private WebElement getBtnMaisDetalhes() {
-        return Utils.getElement(".p-dialog-content button");
-    }
-
-    private WebElement getTdNomeModelo(){
-        return Utils.getElement(".p-dialog-content td:first-child");
-    }
-
-    private WebElement getBtnPreMaisDetalhes(){
-        return Utils.getElement(".p-dialog-content pre");
-    }
-
-    private WebElement getRequest(){
-        return Utils.getElement("#request");
-    }
-
-    private List<WebElement> getInformacoes(){
-        return Utils.getElements(".p-mb-2 span");
-    }
+    private final TritonMap tM = new TritonMap();
 
     public String getNomeModelo() {
-        return getTdNomeModelo().getText();
+        return tM.getTdNomeModelo().getText();
     }
 
     public String getPreMaisDetalhes() {
-        getBtnMaisDetalhes().click();
-        return getBtnPreMaisDetalhes().getText();
+        tM.getBtnMaisDetalhes().click();
+        return tM.getBtnPreMaisDetalhes().getText();
     }
 
     public boolean estaRetornandoInformacoes() {
-        for (WebElement info : getInformacoes()) {
+        for (WebElement info : tM.getInformacoes()) {
             if (info.getText() == null) return false;
         }
-        return getRequest() != null;
+        return tM.getRequest() != null;
     }
 }

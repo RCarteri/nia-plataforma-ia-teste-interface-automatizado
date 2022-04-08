@@ -3,7 +3,7 @@ package stepsDefinitions.ibmCloud;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
-import utils.Utils;
+import support.Utils;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

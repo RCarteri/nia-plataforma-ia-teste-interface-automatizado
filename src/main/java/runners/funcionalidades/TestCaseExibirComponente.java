@@ -14,7 +14,7 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@ExibirComponente" },
+		tags = { "@CT003" },
 		monochrome = true
 )
 public class TestCaseExibirComponente {

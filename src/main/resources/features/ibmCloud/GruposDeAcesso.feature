@@ -23,7 +23,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
 		E deverá mostrar a lista com elementos
 
 	@ID-003-004 @CT004
-	Cenario: CT004 - Pesquisar componente
+	Cenario: CT004 - Pesquisar
 		Quando pesquisar um dado "válido" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada
@@ -35,7 +35,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
 		E a quantidade de resultados deve ser 0
 		E todas as validações devem retornar sucesso
 
-	@ID-003-005 @CT005
+	@ID-003-005 @CT005 @CT004
 	Cenario: CT005 - Pesquisar no modal
 		Quando existir "Grupo"
 		E pesquisar um dado "válido" no "modal"

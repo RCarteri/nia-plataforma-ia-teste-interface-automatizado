@@ -14,10 +14,10 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@Notebook" },
+		tags = { "@CT009" },
 		monochrome = true
 )
-public class TestCaseNotebook {
+public class TestCaseInexistenciaComponente {
 	@BeforeClass
 	public static void init(){
 		ConfRunner.init();

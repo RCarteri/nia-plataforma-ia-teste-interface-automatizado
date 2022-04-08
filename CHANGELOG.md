@@ -5,10 +5,10 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.13.3] - 08-04-2022
+## [3.13.4] - 08-04-2022
 Task: 458281
 ###Adicionado
-- Cenário: S008 Triton - CT004 Pesquisar componente
+- Cenário: S008 Triton - CT004 Pesquisar
 - Classe: Map para isolar o mapeamento dos elementos das páginas
 - Classe: ModalComponente, Pesquisa e PesquisaSection
 - Step: E todas as validações devem retornar sucesso
@@ -107,7 +107,7 @@ Task: 409547
 ## [3.2.0] - 24-02-2022
 Task: 406210
 ### Adicionado
-- Cenário: CT004 - Pesquisar componente, CT004 - Filtrar componente sem resultado e CT005 - Limpar pesquisa de componente
+- Cenário: CT004 - Pesquisar, CT004 - Filtrar componente sem resultado e CT005 - Limpar pesquisa de componente
 - Runner: TestCaseExibirComponente e TestCasePesquisarComponente
 ### Mudado
 - Runners passaram a usar tags

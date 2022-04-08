@@ -27,7 +27,7 @@ Funcionalidade: Suite007 - Watson Studio
       | Notebooks | Notebooks          |
 
   @ID-007-004 @CT004
-  Cenario: CT004 - Pesquisar componente
+  Cenario: CT004 - Pesquisar
     Quando pesquisar um dado "válido" no "componente"
     Então deverá apresentar um total de resultados diferente do anterior
     E os resultados apresentados devem conter a palavra pesquisada
@@ -39,9 +39,8 @@ Funcionalidade: Suite007 - Watson Studio
     E a quantidade de resultados deve ser 0
     E todas as validações devem retornar sucesso
 
-  @ID-007-005 @CT005
+  @ID-007-005 @CT005 @CT004
   Cenario: CT005 - Pesquisar no modal
-    Quando existir "Membros"
     E pesquisar um dado "válido" no "modal"
     Então deverá apresentar um total de resultados diferente do anterior
     E os resultados apresentados devem conter a palavra pesquisada

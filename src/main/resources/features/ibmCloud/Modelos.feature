@@ -22,7 +22,7 @@ Funcionalidade: Suite004 - Modelos
 		E deverá apresentar as informações sobre ID e nome
 
 	@ID-004-004 @CT004
-	Cenario: CT004 - Pesquisar componente
+	Cenario: CT004 - Pesquisar
 		Quando pesquisar um dado "válido" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada

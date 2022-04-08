@@ -23,7 +23,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E deverá mostrar a lista com elementos
 
     @ID-006-004 @CT004
-    Cenario: CT004 - Pesquisar componente
+    Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "componente"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
@@ -34,7 +34,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
         E a quantidade de resultados deve ser 0
 
-    @ID-006-005 @CT005
+    @ID-006-005 @CT005 @CT004
     Cenario: CT005 - Pesquisar no modal
         Quando existir "Catálogo"
         E pesquisar um dado "válido" no "modal"

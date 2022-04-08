@@ -23,7 +23,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
 		E deverá mostrar a lista com elementos
 
 	@ID-002-004 @CT004
-	Cenario: CT004 - Pesquisar componente
+	Cenario: CT004 - Pesquisar
 		Quando pesquisar um dado "válido" no "componente"
 		Então deverá apresentar um total de resultados diferente do anterior
 		E os resultados apresentados devem conter a palavra pesquisada

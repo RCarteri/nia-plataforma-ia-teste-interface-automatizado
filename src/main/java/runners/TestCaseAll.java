@@ -19,11 +19,11 @@ import org.junit.runner.RunWith;
 public class TestCaseAll {
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		//ConfRunner.init();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		//ConfRunner.finish();
 	}
 }

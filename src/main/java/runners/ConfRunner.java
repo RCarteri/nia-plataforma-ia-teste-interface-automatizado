@@ -1,7 +1,7 @@
 package runners;
 
 import ath_allure_arq3.main.AllureARQ3;
-import stepsDefinitions.Hooks;
+import stepsDefinitions.Login;
 import utils.APIRest.APIRest;
 import utils.APIRest.Urls;
 import utils.Utils;
@@ -17,7 +17,7 @@ public class ConfRunner {
     }
 
     public static void finish() {
-        new Hooks().realizarOLogOutNaPlataformaEFechaLa();
+        new Login().realizarOLogOutNaPlataformaEFechaLa();
         new AllureARQ3().enviarRelatorio("servidor.allure.docker.ulr1");
         apiRest.atualizarAllureArq3(Urls.GERAR_RELATORIO.getUrl());
     }

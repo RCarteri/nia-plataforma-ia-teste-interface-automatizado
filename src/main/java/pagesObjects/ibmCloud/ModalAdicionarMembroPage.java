@@ -1,60 +1,32 @@
 package pagesObjects.ibmCloud;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
-import br.com.bb.ath.ftabb.elementos.ElementoBotao;
-import br.com.bb.ath.ftabb.elementos.ElementoInput;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import map.ModalAdicionarMembroMap;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import utils.Utils;
 
-import java.util.List;
-
-import static utils.Utils.getElements;
-
-public class ModalAdicionarMembroPage extends Pagina {
-    @MapearElementoWeb(css = ".p-button-secondary.p-ml-auto")
-    private ElementoBotao btnAdicionarMembro;
-
-    @MapearElementoWeb(css = ".p-button-success")
-    private ElementoBotao btnConfirmar;
-
-    @MapearElementoWeb(css = ".p-component.ng-invalid")
-    private ElementoInput inputAdicionarMembro;
-
-    @MapearElementoWeb(css = ".p-m-3 .pi-chevron-down")
-    private Elemento dropDownFuncao;
-
-    @MapearElementoWeb(css = "p-dropdownitem .ng-star-inserted")
-    private Elemento spanFuncao;
-
-    private List<WebElement> getListSpanFuncao(){
-        return getElements("p-dropdownitem .ng-star-inserted");
-    }
-
-    private List<WebElement> getListSmallMsg(){
-        return getElements("small.p-invalid");
-    }
+public class ModalAdicionarMembroPage {
+    private final ModalAdicionarMembroMap mAMM = new ModalAdicionarMembroMap();
 
     public void adicionarMembro(String funcao, String chave) {
         try {
-            inputAdicionarMembro.escrever(chave);
-            inputAdicionarMembro.clicar();
-            if (dropDownFuncao.elementoExiste()) selecionarFuncao(funcao);
+            mAMM.getInputAdicionarMembro().escrever(chave);
+            mAMM.getInputAdicionarMembro().clicar();
+            if (mAMM.getDropDownFuncao().elementoExiste()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
     }
 
-    private void selecionarFuncao(String funcao) throws ElementoNaoLocalizadoException {
-        dropDownFuncao.clicar();
+    private void selecionarFuncao(@NotNull String funcao) throws ElementoNaoLocalizadoException {
+        mAMM.getDropDownFuncao().clicar();
         if (funcao.equals("")) {
-            dropDownFuncao.clicar();
-            inputAdicionarMembro.clicar();
+            mAMM.getDropDownFuncao().clicar();
+            mAMM.getInputAdicionarMembro().clicar();
             return;
         }
-        for (WebElement wE : getListSpanFuncao()) {
+        for (WebElement wE : mAMM.getListSpanFuncao()) {
             if (wE.getText().equals(funcao)) {
                 wE.click();
                 break;
@@ -64,15 +36,15 @@ public class ModalAdicionarMembroPage extends Pagina {
 
     public void acessarAdicionarMembro() {
         try {
-            btnAdicionarMembro.clicar();
+            mAMM.getBtnAdicionarMembro().clicar();
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
     }
 
-    public boolean isBtnConfirmarAtivo(){
+    public boolean isBtnConfirmarAtivo() {
         try {
-            return btnConfirmar.elementoAtivo();
+            return mAMM.getBtnConfirmar().elementoAtivo();
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
@@ -81,7 +53,7 @@ public class ModalAdicionarMembroPage extends Pagina {
 
     public String getMensagem() {
         StringBuilder mensagem = new StringBuilder();
-        for (WebElement webElement : getListSmallMsg()) {
+        for (WebElement webElement : mAMM.getListSmallMsg()) {
             mensagem.append(webElement.getText().replaceAll("\\n", ""));
         }
         return mensagem.toString();

@@ -8,6 +8,7 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -66,7 +67,7 @@ public class Utils extends FTABBUtils {
             System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
     }
 
-    public boolean elementoExisteEstaVisivel(Elemento elem) {
+    public boolean elementoExisteEstaVisivel(@NotNull Elemento elem) {
         try {
             if (elem.elementoExiste()) {
                 if (!elem.elementoEstaVisivel())
@@ -82,7 +83,7 @@ public class Utils extends FTABBUtils {
         return false;
     }
 
-    public boolean oTituloEigual(String titulo) {
+    public boolean oTituloEigual(@NotNull String titulo) {
         try {
             final String paginaTitulo = Plataforma.recuperarTituloPagina().toLowerCase();
             if (paginaTitulo.intern().equals(titulo.toLowerCase().intern()))
@@ -127,9 +128,15 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public static void logError(Exception e) {
+    public static void logError(@NotNull Exception e) {
         System.err.println("\nAlgum erro ocorreu!");
         System.err.println("Mensagem: " + e.getMessage() + "\n");
+        e.printStackTrace();
+    }
+
+    public static void respostaErroElementoNaoLocalizado(@NotNull ElementoNaoLocalizadoException e) {
+        System.err.println("Um elemento não foi localizado.");
+        System.err.println("Mensagem: " + e.getMessage());
         e.printStackTrace();
     }
 

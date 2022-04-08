@@ -3,6 +3,7 @@ package stepsDefinitions.ibmCloud;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import map.ComponenteMap;
 import pagesObjects.ComponentePage;
 import pagesObjects.PanelContentSection;
 import utils.Utils;
@@ -39,7 +40,7 @@ public class Componente {
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemDeAlerta(String mensagem) {
-        assertEquals(mensagem, new ComponentePage().getAlert().getText());
+        assertEquals(mensagem, new ComponenteMap().getAlert().getText());
         new Utils().capturaTela();
     }
 }

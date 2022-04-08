@@ -1,11 +1,9 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.ElementoBotao;
-import br.com.bb.ath.ftabb.elementos.ElementoInput;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
 import utils.Utils;
 
@@ -13,33 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static utils.Utils.getElements;
-
-public class PesquisaSection extends Pagina {
-
-    @MapearElementoWeb(css = "nia-platia-table th input.p-inputtext")
-    private ElementoInput inputPesquisa;
-
-    @MapearElementoWeb(css = "nia-membros-table thead .p-inputtext")
-    private ElementoInput inputPesquisaModal;
-
-    @MapearElementoWeb(css = "nia-platia-table .deleteicon span")
-    private ElementoBotao btnLimparPesquisa;
-
-    @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
-    private ElementoBotao btnLimparFiltroPesquisa;
-
+public class PesquisaSection {
+    private final PesquisaMap pM = new PesquisaMap();
     private final Map<String, Boolean> validacaoPesquisa = new HashMap<>();
     private String mensagemPesquisaInvalida = "";
 
-    public void pesquisar(String palavra, String local) {
+    public void pesquisar(String palavra, @NotNull String local) {
         try {
             switch (local) {
                 case "componente":
-                    inputPesquisa.escrever(palavra);
+                    pM.getInputPesquisa().escrever(palavra);
                     break;
                 case "modal":
-                    inputPesquisaModal.escrever(palavra);
+                    pM.getInputPesquisaModal().escrever(palavra);
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
@@ -47,13 +31,13 @@ public class PesquisaSection extends Pagina {
         }
     }
 
-    public String getTxtInputFiltro(String local) {
+    public String getTxtInputFiltro(@NotNull String local) {
         try {
             switch (local) {
                 case "componente":
-                    return inputPesquisa.recuperarTexto();
+                    return pM.getInputPesquisa().recuperarTexto();
                 case "modal":
-                    return inputPesquisaModal.recuperarTexto();
+                    return pM.getInputPesquisaModal().recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
@@ -61,14 +45,14 @@ public class PesquisaSection extends Pagina {
         return null;
     }
 
-    public void limparPesquisa(String local) {
+    public void limparPesquisa(@NotNull String local) {
         try {
             switch (local) {
                 case "componente":
-                    btnLimparPesquisa.clicar();
+                    pM.getBtnLimparPesquisa().clicar();
                     break;
                 case "modal":
-                    btnLimparFiltroPesquisa.clicar();
+                    pM.getBtnLimparFiltroPesquisa().clicar();
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
@@ -95,7 +79,7 @@ public class PesquisaSection extends Pagina {
         return this.mensagemPesquisaInvalida;
     }
 
-    public String getDadoPesquisa(String local, String dado) {
+    public String getDadoPesquisa(String local, @NotNull String dado) {
         switch (dado) {
             case "inválido":
                 return "#inválido";
@@ -106,41 +90,30 @@ public class PesquisaSection extends Pagina {
         }
     }
 
-    private String getDadoValido(String local) {
+    private @Nullable String getDadoValido(@NotNull String local) {
         switch (local) {
             case "componente":
-                return getListaNomesComponente().get(0).getText();
+                return pM.getListaNomesComponente().get(0).getText();
             case "modal":
-                return getListaNomesModal().get(0).getText();
+                return pM.getListaNomesModal().get(0).getText();
             default:
                 return null;
         }
     }
 
-    private List<WebElement> getListaNomesComponente() {
-        return getElements("nia-platia-table td:first-child");
-    }
-
-    private List<WebElement> getListaNomesModal() {
-        return getElements("nia-membros-table td:nth-child(2)");
-    }
-
-    private List<WebElement> getListaSigla() {
-        return getElements(".p-datatable-tbody td:nth-child(2)");
-    }
 
     public boolean resultadosContemString(String palavraPesquisada, @NotNull String local) {
         boolean resultadosOk = true;
         List<WebElement> listTxt;
         switch (local) {
             case "componente":
-                listTxt = getListaNomesComponente();
+                listTxt = pM.getListaNomesComponente();
                 break;
             case "modal":
-                listTxt = getListaNomesModal();
+                listTxt = pM.getListaNomesModal();
                 break;
             case "sigla":
-                listTxt = getListaSigla();
+                listTxt = pM.getListaSigla();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + local);

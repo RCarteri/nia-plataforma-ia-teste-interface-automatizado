@@ -6,12 +6,10 @@ import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import support.Utils;
 
 import java.util.List;
 
-import static support.Utils.getElements;
-import static support.Utils.waitElement;
+import static support.Utils.*;
 
 public class ComponenteMap extends Pagina {
     @MapearElementoWeb(id = "p-panel-1-titlebar")
@@ -25,7 +23,7 @@ public class ComponenteMap extends Pagina {
         try {
              webElement = waitElement("div .p-toast-detail");
         }catch (TimeoutException e){
-            Utils.logError(e);
+            logError(e);
         }
         return webElement;
     }

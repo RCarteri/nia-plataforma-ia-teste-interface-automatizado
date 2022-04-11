@@ -4,7 +4,8 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ModalAdicionarMembroMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
-import support.Utils;
+
+import static support.Utils.logError;
 
 public class ModalAdicionarMembroPage {
     private final ModalAdicionarMembroMap mAMM = new ModalAdicionarMembroMap();
@@ -15,7 +16,7 @@ public class ModalAdicionarMembroPage {
             mAMM.getInputAdicionarMembro().clicar();
             if (mAMM.getDropDownFuncao().elementoExiste()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
     }
 
@@ -38,7 +39,7 @@ public class ModalAdicionarMembroPage {
         try {
             mAMM.getBtnAdicionarMembro().clicar();
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
     }
 
@@ -46,7 +47,7 @@ public class ModalAdicionarMembroPage {
         try {
             return mAMM.getBtnConfirmar().elementoAtivo();
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
         return true;
     }

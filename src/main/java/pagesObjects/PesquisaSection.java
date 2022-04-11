@@ -5,11 +5,12 @@ import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
-import support.Utils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static support.Utils.logError;
 
 public class PesquisaSection {
     private final PesquisaMap pM = new PesquisaMap();
@@ -27,7 +28,7 @@ public class PesquisaSection {
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
     }
 
@@ -40,7 +41,7 @@ public class PesquisaSection {
                     return pM.getInputPesquisaModal().recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
         return null;
     }
@@ -56,7 +57,7 @@ public class PesquisaSection {
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
     }
 

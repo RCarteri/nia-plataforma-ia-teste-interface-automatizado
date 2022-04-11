@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.Utils.getElement;
-import static support.Utils.rolarPaginaAteElemento;
+import static support.Utils.*;
 
 public class PrimeiroAcessoPage {
     private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();
@@ -33,7 +32,7 @@ public class PrimeiroAcessoPage {
         try {
             return pAM.getTxtMensagem().recuperarTexto();
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
         return null;
     }

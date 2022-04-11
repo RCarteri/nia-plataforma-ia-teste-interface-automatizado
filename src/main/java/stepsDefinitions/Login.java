@@ -18,8 +18,7 @@ import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static support.SysProps.IS_LOGGED;
-import static support.Utils.getDriver;
-import static support.Utils.getElement;
+import static support.Utils.*;
 
 public class Login {
     private final Utils utils;
@@ -99,7 +98,7 @@ public class Login {
                 Plataforma.selecionarAreaDeTrabalho(nomePagina);
             }
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
     }
 
@@ -115,7 +114,7 @@ public class Login {
         try {
             Plataforma.abrirMenu(nivel1, nivel2);
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
     }
 

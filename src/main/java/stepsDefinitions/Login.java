@@ -21,15 +21,8 @@ import static support.SysProps.IS_LOGGED;
 import static support.Utils.*;
 
 public class Login {
-    private final Utils utils;
-    private final short MAX_BOUND;
+    private final Utils utils = new Utils();
     private short count;
-
-    public Login() {
-        utils = new Utils();
-        MAX_BOUND = 5;
-        count = 0;
-    }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
@@ -45,6 +38,7 @@ public class Login {
 
     @E("^se não estiver logado, realiza o login no Sistema$")
     public void realizeOLoginNoSistema() {
+        short MAX_BOUND = 5;
         try {
             final Dictionary<String, String> datapool = utils.getDatapool();
             boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
@@ -119,6 +113,7 @@ public class Login {
     }
 
     public void realizarOLogOutNaPlataformaEFechaLa() {
-        utils.fecharSitema(new ProvedorMap().getBtnPerfil());
+        ProvedorMap pM = new ProvedorMap();
+        utils.fecharSitema(pM.getBtnPerfil());
     }
 }

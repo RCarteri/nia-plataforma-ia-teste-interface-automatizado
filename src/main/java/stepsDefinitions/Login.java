@@ -6,9 +6,9 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import map.LoginMap;
 import map.ProvedorMap;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import support.Razoes;
 import support.Utils;
 
@@ -18,7 +18,8 @@ import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static support.SysProps.IS_LOGGED;
-import static support.Utils.*;
+import static support.Utils.getDriver;
+import static support.Utils.logError;
 
 public class Login {
     private final Utils utils = new Utils();
@@ -47,14 +48,10 @@ public class Login {
                 System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
             } else {
                 new Utils().esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
-                WebElement elem = getElement("#idToken1");
-                elem.sendKeys(datapool.get("chave"));
-
-                elem = getElement("#idToken2");
-                elem.sendKeys(datapool.get("senha"));
-
-                elem = getElement("#loginButton_0");
-                elem.click();
+                LoginMap lM = new LoginMap();
+                lM.getInputUsername().sendKeys(datapool.get("chave"));
+                lM.getInputPassword().sendKeys(datapool.get("senha"));
+                lM.getBtnLogin().click();
                 int count = 0;
                 while (!isLogged) {
                     if (++count == MAX_BOUND) {

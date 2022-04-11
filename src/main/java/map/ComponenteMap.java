@@ -4,7 +4,9 @@ import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
 import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.elementos.ElementoTexto;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import support.Utils;
 
 import java.util.List;
 
@@ -19,7 +21,13 @@ public class ComponenteMap extends Pagina {
     private Elemento dropDownComponente;
 
     public WebElement getAlert() {
-        return waitElement("div .p-toast-detail");
+        WebElement webElement = null;
+        try {
+             webElement = waitElement("div .p-toast-detail");
+        }catch (TimeoutException e){
+            Utils.logError(e);
+        }
+        return webElement;
     }
 
     public List<WebElement> getListComponente() {

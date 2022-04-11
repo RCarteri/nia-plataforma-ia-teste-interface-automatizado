@@ -31,7 +31,7 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static WebElement waitElement(String seletor){
+    public static WebElement waitElement(String seletor) throws TimeoutException{
         WebDriverWait wait = new WebDriverWait(getDriver(), 6);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);
@@ -129,14 +129,8 @@ public class Utils extends FTABBUtils {
     }
 
     public static void logError(@NotNull Exception e) {
-        System.err.println("\nAlgum erro ocorreu!");
-        System.err.println("Mensagem: " + e.getMessage() + "\n");
-        e.printStackTrace();
-    }
-
-    public static void respostaErroElementoNaoLocalizado(@NotNull ElementoNaoLocalizadoException e) {
-        System.err.println("Um elemento não foi localizado.");
-        System.err.println("Mensagem: " + e.getMessage());
+        System.err.println("\nUm erro de '" + e.getClass().getSimpleName() + "' ocorreu!");
+        System.err.println("Mensagem: '" + e.getMessage() + "'\n");
         e.printStackTrace();
     }
 

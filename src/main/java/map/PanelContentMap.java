@@ -15,6 +15,9 @@ public class PanelContentMap extends Pagina {
     @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(4)")
     private Elemento terceiraOpcao;
 
+    @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(5)")
+    private Elemento quartaOpcao;
+
     @MapearElementoWeb(css = "nia-platia-table td")
     private ElementoTexto txtNenhumResultado;
 
@@ -27,6 +30,10 @@ public class PanelContentMap extends Pagina {
 
     public Elemento getTerceiraOpcao() {
         return terceiraOpcao;
+    }
+
+    public Elemento getQuartaOpcao() {
+        return quartaOpcao;
     }
 
     public ElementoTexto getTxtNenhumResultado() {

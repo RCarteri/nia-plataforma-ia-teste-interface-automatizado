@@ -6,7 +6,6 @@ import cucumber.api.java.After;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static support.Utils.respostaErroElementoNaoLocalizado;
 
 public class Hooks {
     @After
@@ -20,7 +19,7 @@ public class Hooks {
             } else
                 assertFalse(estaLogado);
         } catch (ElementoNaoLocalizadoException e) {
-            respostaErroElementoNaoLocalizado(e);
+            Utils.logError(e);
         }
     }
 }

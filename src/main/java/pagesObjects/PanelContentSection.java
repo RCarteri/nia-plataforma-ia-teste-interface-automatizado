@@ -16,7 +16,7 @@ public class PanelContentSection {
     private final PanelContentMap pCM = new PanelContentMap();
 
     public boolean existeOpcao(boolean esperado, String opcao) {
-        List<String> opcoes = Arrays.asList("Modelos", "Notebooks", "Membros", "Detalhes", "Testar Modelo");
+        List<String> opcoes = Arrays.asList("Modelos", "Notebooks", "Membros", "Detalhes", "Testar Modelo", "Data assets");
         final PaginacaoMap pM = new PaginacaoMap();
         final ModalComponentePage mCP = new ModalComponentePage();
         for (WebElement nPagina : pM.getListBtnNPaginacao()) {
@@ -74,6 +74,9 @@ public class PanelContentSection {
     private boolean clicarBotaoOpcao(@NotNull String opcao) {
         try {
             switch (opcao) {
+                case "Data assets":
+                    pCM.getQuartaOpcao().clicar();
+                    break;
                 case "Notebooks":
                     pCM.getTerceiraOpcao().clicar();
                     break;

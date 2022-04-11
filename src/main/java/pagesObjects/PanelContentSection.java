@@ -3,27 +3,29 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.*;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static support.Razoes.CARR_ELEM;
+import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PanelContentSection {
     private final PanelContentMap pCM = new PanelContentMap();
 
     public boolean existeOpcao(boolean esperado, String opcao) {
-        List<String> opcoes = Arrays.asList("Modelos", "Notebooks", "Membros", "Detalhes", "Testar Modelo", "Data assets");
         final PaginacaoMap pM = new PaginacaoMap();
         final ModalComponentePage mCP = new ModalComponentePage();
         for (WebElement nPagina : pM.getListBtnNPaginacao()) {
             final ProvedorMap prM = new ProvedorMap();
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
-                if (opcoes.contains(opcao)) if (acessarSubMenu(nItem, opcao)) continue;
+                if (isListaOpcoesDisplayed())
+                    if (acessarSubMenu(nItem, opcao))
+                        continue;
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
@@ -37,6 +39,14 @@ public class PanelContentSection {
         return false;
     }
 
+    private boolean isListaOpcoesDisplayed(){
+        try{
+            return pCM.getListaOpcoes().isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
     private boolean isGetAlertDisplayed() {
         final ModalComponenteMap mCM = new ModalComponenteMap();
         try {
@@ -47,7 +57,7 @@ public class PanelContentSection {
                 try {
                     mCM.getBtnFechar().clicar();
                 } catch (ElementoNaoLocalizadoException ex) {
-                    Utils.logError(ex);
+                    logError(ex);
                 }
                 return false;
             } else e.printStackTrace();
@@ -56,6 +66,7 @@ public class PanelContentSection {
     }
 
     private void avancarItem(WebElement nItem, @NotNull List<WebElement> listBtnExibir) {
+        if(listBtnExibir.indexOf(nItem) > 0) System.out.println("Elemento procurado não encontrado.");
         System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
         rolarPaginaAteElemento(nItem);
         nItem.click();
@@ -91,7 +102,7 @@ public class PanelContentSection {
                     return pCM.getTxtNenhumResultadoModal().recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
         }
         return null;
     }

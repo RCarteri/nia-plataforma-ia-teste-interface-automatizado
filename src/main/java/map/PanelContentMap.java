@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static support.Utils.getElement;
 import static support.Utils.getElements;
 
 public class PanelContentMap extends Pagina {
@@ -18,6 +19,10 @@ public class PanelContentMap extends Pagina {
 
     public ElementoTexto getTxtNenhumResultado() {
         return txtNenhumResultado;
+    }
+
+    public WebElement getListaOpcoes() {
+        return getElement("div.p-menu");
     }
 
     public ElementoTexto getTxtNenhumResultadoModal() {

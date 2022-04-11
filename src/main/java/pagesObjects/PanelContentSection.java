@@ -72,26 +72,12 @@ public class PanelContentSection {
     }
 
     private boolean clicarBotaoOpcao(@NotNull String opcao) {
-        try {
-            switch (opcao) {
-                case "Data assets":
-                    pCM.getQuartaOpcao().clicar();
-                    break;
-                case "Notebooks":
-                    pCM.getTerceiraOpcao().clicar();
-                    break;
-                case "Membros":
-                case "Testar Modelo":
-                    pCM.getSegundaOpcao().clicar();
-                    break;
-                case "Modelos":
-                case "Detalhes":
-                    if (pCM.getPrimeiraOpcao().getAttribute("class").contains("disabled")) return false;
-                    pCM.getPrimeiraOpcao().click();
-                    break;
+        for (WebElement webElement : pCM.getListaOpcoesSubmenu()) {
+            if (webElement.getText().intern().equals(opcao)) {
+                if (webElement.getAttribute("class").contains("disabled")) return false;
+                webElement.click();
+                break;
             }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
         }
         return true;
     }

@@ -7,7 +7,6 @@ import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import map.LoginMap;
-import map.ProvedorMap;
 import org.openqa.selenium.NoSuchElementException;
 import support.Razoes;
 import support.Utils;
@@ -109,8 +108,14 @@ public class Login {
         }
     }
 
-    public void realizarOLogOutNaPlataformaEFechaLa() {
-        ProvedorMap pM = new ProvedorMap();
-        utils.fecharSitema(pM.getBtnPerfil());
+    public void logoutEFecharPlataforma() {
+        try {
+            Plataforma.encerrarSessao();
+            System.out.println("Sessão encerrada");
+            Plataforma.fecharPlataforma();
+            System.out.println("Plataforma fechada");
+        } catch (ElementoNaoLocalizadoException e) {
+            logError(e);
+        }
     }
 }

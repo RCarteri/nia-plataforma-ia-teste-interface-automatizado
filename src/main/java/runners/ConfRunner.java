@@ -17,7 +17,7 @@ public class ConfRunner {
     }
 
     public static void finish() {
-        new Login().realizarOLogOutNaPlataformaEFechaLa();
+        new Login().logoutEFecharPlataforma();
         new AllureARQ3().enviarRelatorio("servidor.allure.docker.ulr1");
         apiRest.atualizarAllureArq3(Urls.GERAR_RELATORIO.getUrl());
     }

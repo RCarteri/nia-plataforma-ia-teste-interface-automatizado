@@ -79,6 +79,7 @@ Funcionalidade: Suite007 - Watson Studio
     Quando não existir "<opção>"
     Então deverá apresentar a mensagem de alerta "<mensagem>"
     Exemplos:
-      | opção     | mensagem                                                     |
-      | Notebooks | Não há nenhum notebook disponível para o projeto atualmente. |
-      | Modelos   | Não há nenhum modelo disponível para o projeto atualmente.   |
+      | opção       | mensagem                                                       |
+      | Notebooks   | Não há nenhum notebook disponível para o projeto atualmente.   |
+      | Modelos     | Não há nenhum modelo disponível para o projeto atualmente.     |
+      | Data assets | Não há nenhum data asset disponível para o projeto atualmente. |

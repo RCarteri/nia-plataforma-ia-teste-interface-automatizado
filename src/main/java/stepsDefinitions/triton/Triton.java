@@ -9,23 +9,21 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class Triton {
-    TritonPage tP = new TritonPage();
-    Utils utils = new Utils();
-
+    TritonPage tritonPage = new TritonPage();
     @E("^deverá mostrar a lista com detalhes$")
     public void deveraMostrarAListaComDetalhes() {
-        assertNotNull(tP.getNomeModelo());
+        assertNotNull(tritonPage.getNomeModelo());
     }
 
     @E("^deverá apresentar mais detalhes$")
     public void deveraApresentarMaisDetalhes() {
-        assertNotNull(tP.getPreMaisDetalhes());
-        utils.capturaTela();
+        assertNotNull(tritonPage.getPreMaisDetalhes());
+        new Utils().capturaTela();
     }
 
     @Então("^deverá apresentar as informações do request$")
     public void deveraApresentarAsInformacoesDoRequest() {
-        utils.capturaTela();
-        assertTrue(tP.estaRetornandoInformacoes());
+        new Utils().capturaTela();
+        assertTrue(tritonPage.estaRetornandoInformacoes());
     }
 }

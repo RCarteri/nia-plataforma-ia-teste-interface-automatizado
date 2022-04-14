@@ -1,12 +1,12 @@
 package pagesObjects.ibmCloud.WatsonStudio;
 
+import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.WatsonStudioMap;
 import org.openqa.selenium.WebElement;
+import support.Utils;
 
-import static support.Utils.logError;
-
-public class WatsonStudioPage {
+public class WatsonStudioPage extends Pagina {
     private final WatsonStudioMap wSM = new WatsonStudioMap();
 
     public void selecionarSigla(String sigla) {
@@ -19,7 +19,7 @@ public class WatsonStudioPage {
                 }
             }
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
     }
 
@@ -27,7 +27,7 @@ public class WatsonStudioPage {
         try {
             wSM.getBtnAtualizar().clicar();
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
     }
 }

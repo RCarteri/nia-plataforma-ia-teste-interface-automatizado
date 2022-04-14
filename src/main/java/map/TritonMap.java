@@ -1,5 +1,6 @@
 package map;
 
+import br.com.bb.ath.ftabb.Pagina;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 import static support.Utils.getElement;
 import static support.Utils.getElements;
 
-public class TritonMap {
+public class TritonMap extends Pagina {
     public WebElement getBtnMaisDetalhes() {
         return getElement(".p-dialog-content button");
     }

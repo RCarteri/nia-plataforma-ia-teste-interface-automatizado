@@ -1,18 +1,18 @@
 package pagesObjects;
 
+import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
+import support.Utils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static support.Utils.logError;
-
-public class PesquisaSection {
+public class PesquisaSection extends Pagina {
     private final PesquisaMap pM = new PesquisaMap();
     private final Map<String, Boolean> validacaoPesquisa = new HashMap<>();
     private String mensagemPesquisaInvalida = "";
@@ -28,7 +28,7 @@ public class PesquisaSection {
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
     }
 
@@ -41,7 +41,7 @@ public class PesquisaSection {
                     return pM.getInputPesquisaModal().recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
         return null;
     }
@@ -57,7 +57,7 @@ public class PesquisaSection {
                     break;
             }
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
     }
 
@@ -101,7 +101,6 @@ public class PesquisaSection {
                 return null;
         }
     }
-
 
     public boolean resultadosContemString(String palavraPesquisada, @NotNull String local) {
         boolean resultadosOk = true;

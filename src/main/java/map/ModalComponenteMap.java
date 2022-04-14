@@ -17,7 +17,7 @@ public class ModalComponenteMap extends Pagina {
     @MapearElementoWeb(css=".pi-times")
     private ElementoBotao btnFechar;
 
-    public ElementoTexto getSpanTituloModal() {
+    public ElementoTexto getTituloModal() {
         return spanTituloModal;
     }
 

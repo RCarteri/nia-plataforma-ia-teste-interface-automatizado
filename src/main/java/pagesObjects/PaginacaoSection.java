@@ -1,15 +1,17 @@
 package pagesObjects;
 
+import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PaginacaoMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
+import support.Utils;
 
-import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
-public class PaginacaoSection {
+public class PaginacaoSection extends Pagina {
     private final PaginacaoMap pM = new PaginacaoMap();
+
     public int getQuantResultados(@NotNull String local) {
         String quantResultados = null;
         String frase = null;
@@ -25,7 +27,7 @@ public class PaginacaoSection {
             assert frase != null;
             quantResultados = frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
         assert quantResultados != null;
         return Integer.parseInt(quantResultados);

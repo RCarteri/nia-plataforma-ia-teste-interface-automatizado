@@ -1,18 +1,22 @@
 package pagesObjects.primeiroAcesso;
 
+import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PrimeiroAcessoMap;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.Utils.*;
+import static support.Utils.logError;
+import static support.Utils.rolarPaginaAteElemento;
 
-public class PrimeiroAcessoPage {
-    private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();
+public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
+   private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();
+
     private int posicao = 0;
     private WebElement btnFinalizar;
     private int nPaginaFalha;
+    private int nTentativas;
 
     private void voltarPagina() {
         rolarPaginaAteElemento(pAM.getBtnVoltar());
@@ -25,14 +29,18 @@ public class PrimeiroAcessoPage {
     }
 
     private void getAcao() {
-        getElement(".p-text-center .p-button-primary").click();
+        try {
+            pAM.getBtnAcao().clicar();
+        } catch (ElementoNaoLocalizadoException e) {
+            logError(e);
+        }
     }
 
     public String getMensagem() {
         try {
             return pAM.getTxtMensagem().recuperarTexto();
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            Utils.logError(e);
         }
         return null;
     }

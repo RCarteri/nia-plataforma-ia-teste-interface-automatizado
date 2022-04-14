@@ -8,7 +8,6 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,7 +30,7 @@ public class Utils extends FTABBUtils {
         sleep(segundos);
     }
 
-    public static WebElement waitElement(String seletor) throws TimeoutException{
+    public static WebElement waitElement(String seletor){
         WebDriverWait wait = new WebDriverWait(getDriver(), 6);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);
@@ -67,7 +66,7 @@ public class Utils extends FTABBUtils {
             System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
     }
 
-    public boolean elementoExisteEstaVisivel(@NotNull Elemento elem) {
+    public boolean elementoExisteEstaVisivel(Elemento elem) {
         try {
             if (elem.elementoExiste()) {
                 if (!elem.elementoEstaVisivel())
@@ -83,7 +82,7 @@ public class Utils extends FTABBUtils {
         return false;
     }
 
-    public boolean oTituloEigual(@NotNull String titulo) {
+    public boolean oTituloEigual(String titulo) {
         try {
             final String paginaTitulo = Plataforma.recuperarTituloPagina().toLowerCase();
             if (paginaTitulo.intern().equals(titulo.toLowerCase().intern()))
@@ -109,13 +108,28 @@ public class Utils extends FTABBUtils {
         }
     }
 
+    public void fecharSitema(Elemento btnPerfil) {
+        try {
+            if (elementoExisteEstaVisivel(btnPerfil)) {
+                btnPerfil.clicar();
+                Plataforma.encerrarSessao();
+                System.out.println("Sessão encerrada");
+                esperar(Razoes.ENC_SEC.getDelay(), Razoes.ENC_SEC.getRazao());
+                Plataforma.fecharPlataforma();
+                System.out.println("Plataforma fechada");
+            }
+        } catch (ElementoNaoLocalizadoException e) {
+            logError(e);
+        }
+    }
+
     public static void rolarPaginaAteElemento(WebElement elemento) {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public static void logError(@NotNull Exception e) {
-        System.err.println("\nUm erro de '" + e.getClass().getSimpleName() + "' ocorreu!");
-        System.err.println("Mensagem: '" + e.getMessage() + "'\n");
+    public static void logError(Exception e) {
+        System.err.println("\nAlgum erro ocorreu!");
+        System.err.println("Mensagem: " + e.getMessage() + "\n");
         e.printStackTrace();
     }
 

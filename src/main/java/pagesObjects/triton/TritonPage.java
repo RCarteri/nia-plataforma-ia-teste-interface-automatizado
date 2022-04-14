@@ -4,7 +4,7 @@ import map.TritonMap;
 import org.openqa.selenium.WebElement;
 
 public class TritonPage {
-    private final TritonMap tM = new TritonMap();
+ private final TritonMap tM = new TritonMap();
 
     public String getNomeModelo() {
         return tM.getTdNomeModelo().getText();

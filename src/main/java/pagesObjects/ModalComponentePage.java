@@ -1,19 +1,20 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
+import br.com.bb.ath.ftabb.Pagina;
 import map.ModalComponenteMap;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModalComponentePage {
+public class ModalComponentePage extends Pagina {
     private final ModalComponenteMap mCM = new ModalComponenteMap();
-    public int getCountLinhas(){
+
+    public int getCountLinhas() {
         return mCM.getListaElementosModal().size();
     }
 
-    public List<String> getListaInfoNomeID(){
+    public List<String> getListaInfoNomeID() {
         List<String> listaElementosVazios = new ArrayList<>();
         int index = 0;
         for (WebElement info : mCM.getListInfoNomeID()) {
@@ -25,11 +26,7 @@ public class ModalComponentePage {
         return listaElementosVazios;
     }
 
-    public ElementoTexto getTituloModal(){
-        return mCM.getSpanTituloModal();
-    }
-
     protected boolean isModalDisplayed() {
-        return new ModalComponentePage().getTituloModal().elementoExiste();
+        return new ModalComponenteMap().getTituloModal().elementoExiste();
     }
 }

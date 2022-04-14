@@ -1,12 +1,13 @@
 package pagesObjects;
 
+import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ProvedorMap;
 import org.jetbrains.annotations.NotNull;
 
-public class ProvedorPage {
+public class ProvedorPage extends Pagina {
+   private final ProvedorMap pM = new ProvedorMap();
     public void acessarProvedor(@NotNull String provedor) {
-        final ProvedorMap pM = new ProvedorMap();
         try {
             switch (provedor) {
                 case "IBM Cloud":

@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class Pesquisa {
     private final PesquisaSection pqS = new PesquisaSection();
     private final PaginacaoSection pS = new PaginacaoSection();
+    private final PanelContentSection pCS = new PanelContentSection();
     private final Utils utils = new Utils();
     private int quantResultadosAntes;
     private String palavraPesquisada;
@@ -73,7 +74,7 @@ public class Pesquisa {
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
     public void deveraApresentarAMensagem(String mensagem){
         utils.capturaTela();
-        String mensagemObtida = new PanelContentSection().getTxtNenhumResultado(this.local);
+        String mensagemObtida = pCS.getTxtNenhumResultado(this.local);
         this.validacao = mensagem.equals(mensagemObtida);
         pqS.validarPesquisa("A mensagem esperada é '" + mensagem + "' e a obtida é '" + mensagemObtida + "'.", validacao);
     }

@@ -1,4 +1,4 @@
-package support;
+package stepsDefinitions;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;

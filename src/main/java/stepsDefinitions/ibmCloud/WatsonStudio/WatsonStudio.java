@@ -10,7 +10,8 @@ import static org.junit.Assert.assertTrue;
 
 public class WatsonStudio {
     private String sigla;
-    private final WatsonStudioPage wSP = new WatsonStudioPage();
+    WatsonStudioPage wSP = new WatsonStudioPage();
+    Utils utils = new Utils();
 
     @Quando("^selecionar a sigla \"([^\"]*)\"$")
     public void selecionarASigla(String sigla) {
@@ -20,7 +21,7 @@ public class WatsonStudio {
 
     @Então("^deverá mostrar a lista de projetos com essa sigla$")
     public void deveraMostrarAListaDeProjetosComEssaSigla() {
-        new Utils().capturaTela();
+        utils.capturaTela();
         assertTrue(new PesquisaSection().resultadosContemString(this.sigla, "sigla"));
     }
 

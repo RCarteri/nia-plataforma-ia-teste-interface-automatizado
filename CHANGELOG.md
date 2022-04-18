@@ -5,6 +5,12 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.13.6] - 18-04-2022
+Task: 462267
+###Adicionado
+- Step: S007 Watson Studio - CT009 Inexistência do componente. Exemplo Data Assets
+- Método: isListaOpcoesDisplayed para validar as opçoes dos componentes que possuem o submenu como Watson Studio e Modelos Triton
+
 ## [3.13.4] - 08-04-2022
 Task: 458281
 ###Adicionado

@@ -1,64 +1,50 @@
 package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import map.*;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
-import utils.Utils;
+import support.Utils;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static utils.Razoes.CARR_ELEM;
-import static utils.Utils.getElements;
-import static utils.Utils.rolarPaginaAteElemento;
+import static support.Razoes.CARR_ELEM;
+import static support.Utils.rolarPaginaAteElemento;
 
 public class PanelContentSection extends Pagina {
-    @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(3)")
-    private Elemento segundaOpcao;
-
-    @MapearElementoWeb(css = "li.ng-star-inserted:nth-child(4)")
-    private Elemento terceiraOpcao;
-
-    private WebElement getPrimeiraOpcao() {
-        return getElements("a.ng-star-inserted").get(0);
-    }
+    private final PanelContentMap pCM = new PanelContentMap();
 
     public boolean existeOpcao(boolean esperado, String opcao) {
-        List<String> opcoes = Arrays.asList("Modelos", "Notebooks", "Membros", "Detalhes", "Testar Modelo");
-        PaginacaoSection pS = new PaginacaoSection();
-        for (WebElement nPagina : pS.listBtnNPaginacao) {
-            ProvedorPage pP = new ProvedorPage();
-            for (WebElement nItem : pP.listBtnExibir) {
-                avancarItem(nItem, pP.listBtnExibir);
-                if (opcoes.contains(opcao)) if (acessarSubMenu(nItem, opcao)) continue;
-                    if (!esperado && isGetAlertDisplayed()) {
-                        System.out.println("Encontrado projeto sem " + opcao + ".");
-                        return false;
-                    } else if (esperado && isModalDisplayed()) {
-                        System.out.println("Projeto com " + opcao + " encontrado.");
-                        return true;
-                    }
+        PaginacaoMap pM = new PaginacaoMap();
+        for (WebElement nPagina : pM.getListBtnNPaginacao()) {
+            ProvedorMap prM = new ProvedorMap();
+            for (WebElement nItem : prM.getListBtnExibir()) {
+                avancarItem(nItem, prM.getListBtnExibir());
+                if (isListaOpcoesDisplayed())
+                    if (acessarSubMenu(nItem, opcao)) continue;
+                if (!esperado && isGetAlertDisplayed()) {
+                    System.out.println("Encontrado projeto sem " + opcao + ".");
+                    return false;
+                } else if (esperado && new ModalComponentePage().isModalDisplayed()) {
+                    System.out.println("Projeto com " + opcao + " encontrado.");
+                    return true;
+                }
             }
-            avancarPagina(nPagina);
+            new PaginacaoSection().avancarPagina(nPagina);
         }
         return false;
     }
 
-    private boolean isModalDisplayed() {
-        return new ModalComponentePage().getTituloModal().elementoExiste();
-    }
-
     private boolean isGetAlertDisplayed() {
-        ModalComponentePage mCP = new ModalComponentePage();
+        ModalComponenteMap mCM = new ModalComponenteMap();
         try {
-            new IBMCloudPage().getAlert().isDisplayed();
+            new ComponenteMap().getAlert().isDisplayed();
         } catch (Exception e) {
-            if (mCP.btnFechar.elementoExiste()) {
+            if (mCM.getBtnFechar().elementoExiste()) {
                 System.out.println("Fechando modal");
                 try {
-                    mCP.btnFechar.clicar();
+                    mCM.getBtnFechar().clicar();
                 } catch (ElementoNaoLocalizadoException ex) {
                     Utils.logError(ex);
                 }
@@ -68,13 +54,8 @@ public class PanelContentSection extends Pagina {
         return true;
     }
 
-    private void avancarPagina(WebElement nPagina) {
-        System.out.println("Avançando para a página " + nPagina.getText());
-        rolarPaginaAteElemento(nPagina);
-        nPagina.click();
-    }
-
-    private void avancarItem(WebElement nItem, List<WebElement> listBtnExibir) {
+    private void avancarItem(WebElement nItem, @NotNull List<WebElement> listBtnExibir) {
+        if (listBtnExibir.indexOf(nItem) > 0) System.out.println("Elemento procurado não encontrado.");
         System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
         rolarPaginaAteElemento(nItem);
         nItem.click();
@@ -90,25 +71,37 @@ public class PanelContentSection extends Pagina {
         return false;
     }
 
-    private boolean clicarBotaoOpcao(String opcao) {
+    private boolean clicarBotaoOpcao(@NotNull String opcao) {
+        for (WebElement webElement : pCM.getListaOpcoesSubmenu()) {
+            if (webElement.getText().intern().equals(opcao)) {
+                if (webElement.getAttribute("class").contains("disabled")) return false;
+                webElement.click();
+                break;
+            }
+        }
+        return true;
+    }
+
+    private boolean isListaOpcoesDisplayed() {
         try {
-            switch (opcao) {
-                case "Notebooks":
-                    terceiraOpcao.clicar();
-                    break;
-                case "Membros":
-                case "Testar Modelo":
-                    segundaOpcao.clicar();
-                    break;
-                case "Modelos":
-                case "Detalhes":
-                    if (getPrimeiraOpcao().getAttribute("class").contains("disabled")) return false;
-                    getPrimeiraOpcao().click();
-                    break;
+            pCM.getListaOpcoes().isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public String getTxtNenhumResultado(@NotNull String local) {
+        try {
+            switch (local) {
+                case "componente":
+                    return pCM.getTxtNenhumResultado().recuperarTexto();
+                case "modal":
+                    return pCM.getTxtNenhumResultadoModal().recuperarTexto();
             }
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
-        return true;
+        return null;
     }
 }

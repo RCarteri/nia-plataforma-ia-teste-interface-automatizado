@@ -7,7 +7,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a pagina "Analytics | IA (hm)"
-        E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
+        E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a pagina do provedor "IBM Cloud"
         E selecionar o componente "Watson Knowledge Catalog"
 
@@ -23,29 +23,30 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E deverá mostrar a lista com elementos
 
     @ID-006-004 @CT004
-    Cenario: CT004 - Pesquisar componente
-        Quando pesquisar "Catalog" no "componente"
+    Cenario: CT004 - Pesquisar
+        Quando pesquisar um dado "válido" no "componente"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
         Quando limpar pesquisa
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar "#invalido" no "componente"
+        Quando pesquisar um dado "inválido" no "componente"
         Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
         E a quantidade de resultados deve ser 0
 
-    @ID-006-005 @CT005
+    @ID-006-005 @CT005 @CT004
     Cenario: CT005 - Pesquisar no modal
         Quando existir "Catálogo"
-        E pesquisar "Bruno" no "modal"
+        E pesquisar um dado "válido" no "modal"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
         Quando limpar pesquisa
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar "#invalido" no "modal"
+        Quando pesquisar um dado "inválido" no "modal"
         Então deverá apresentar a mensagem "Nenhum membro encontrado."
         E a quantidade de resultados deve ser 0
+        E todas as validações devem retornar sucesso
 
     @ID-006-006 @CT006
     Esquema do Cenario: CT006 - Adicionar membro exceção

@@ -5,7 +5,7 @@
     <groupId>br.com.bb.nia</groupId>
     <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
     <packaging>jar</packaging>
-    <version>3.13.1</version>
+    <version>3.13.6-SNAPSHOT</version>
     <name>nia-plataforma-ia-teste-interface-automatizado</name>
 
     <properties>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>br.com.bb.ath</groupId>
             <artifactId>ath-ftabb2-gaw-web</artifactId>
-            <version>2022.5.1</version>
+            <version>2022.6.1</version>
         </dependency>
         <dependency>
             <groupId>org.jacoco</groupId>
@@ -114,6 +114,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

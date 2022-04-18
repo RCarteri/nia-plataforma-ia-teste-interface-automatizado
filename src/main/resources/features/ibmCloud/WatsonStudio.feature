@@ -7,7 +7,7 @@ Funcionalidade: Suite007 - Watson Studio
     Dado que a Plataforma esteja fechada, abra a Plataforma
     E se não estiver logado, realiza o login no Sistema
     Quando acessar a pagina "Analytics | IA (hm)"
-    E acessar a tela "Soluções e Serviços de IA" e "Gestão (Cloud)"
+    E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
     E acessar a pagina do provedor "IBM Cloud"
     E selecionar o componente "Watson Studio"
 
@@ -27,29 +27,31 @@ Funcionalidade: Suite007 - Watson Studio
       | Notebooks | Notebooks          |
 
   @ID-007-004 @CT004
-  Cenario: CT004 - Pesquisar componente
-    Quando pesquisar "Teste" no "componente"
+  Cenario: CT004 - Pesquisar
+    Quando pesquisar um dado "válido" no "componente"
     Então deverá apresentar um total de resultados diferente do anterior
     E os resultados apresentados devem conter a palavra pesquisada
     Quando limpar pesquisa
     Então o input deve estar vazio
     E o total de resultados deverá mostrar a quantidade anterior
-    Quando pesquisar "#invalido" no "componente"
+    Quando pesquisar um dado "inválido" no "componente"
     Então deverá apresentar a mensagem "Não há nenhum projeto com este nome."
     E a quantidade de resultados deve ser 0
+    E todas as validações devem retornar sucesso
 
-  @ID-007-005 @CT005
+  @ID-007-005 @CT005 @CT004
   Cenario: CT005 - Pesquisar no modal
     Quando existir "Membros"
-    E pesquisar "Bruno" no "modal"
+    E pesquisar um dado "válido" no "modal"
     Então deverá apresentar um total de resultados diferente do anterior
     E os resultados apresentados devem conter a palavra pesquisada
     Quando limpar pesquisa
     Então o input deve estar vazio
     E o total de resultados deverá mostrar a quantidade anterior
-    Quando pesquisar "#invalido" no "modal"
+    Quando pesquisar um dado "inválido" no "modal"
     Então deverá apresentar a mensagem "Nenhum membro encontrado."
     E a quantidade de resultados deve ser 0
+    E todas as validações devem retornar sucesso
 
   @ID-007-006 @CT006
   Esquema do Cenario: CT006 - Adicionar membro exceção
@@ -77,6 +79,7 @@ Funcionalidade: Suite007 - Watson Studio
     Quando não existir "<opção>"
     Então deverá apresentar a mensagem de alerta "<mensagem>"
     Exemplos:
-      | opção     | mensagem                                                     |
-      | Notebooks | Não há nenhum notebook disponível para o projeto atualmente. |
-      | Modelos   | Não há nenhum modelo disponível para o projeto atualmente.   |
+      | opção       | mensagem                                                       |
+      | Notebooks   | Não há nenhum notebook disponível para o projeto atualmente.   |
+      | Modelos     | Não há nenhum modelo disponível para o projeto atualmente.     |
+      | Data assets | Não há nenhum data asset disponível para o projeto atualmente. |

@@ -7,7 +7,7 @@ Funcionalidade: Suite009 - Primeiro acesso
 		Dado que a Plataforma esteja fechada, abra a Plataforma
 		E se não estiver logado, realiza o login no Sistema
 		Quando acessar a pagina "Analytics | IA (hm)"
-		E acessar a tela "Soluções e Serviços de IA" e "Primeiro acesso (Cloud)"
+		E acessar o menu "Soluções e Serviços de IA" e "Primeiro acesso (Cloud)"
 		Então verficar se a pagina "Primeiro acesso e convite para IBM Cloud" foi carregada com sucesso
 
 	@ID-009-011 @CT011

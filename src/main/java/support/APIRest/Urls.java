@@ -1,4 +1,4 @@
-package utils.APIRest;
+package support.APIRest;
 
 public enum Urls {
     GERAR_RELATORIO("/generate-report"),

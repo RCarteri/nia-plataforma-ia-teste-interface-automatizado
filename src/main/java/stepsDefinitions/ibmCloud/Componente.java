@@ -34,7 +34,7 @@ public class Componente {
 
     @Quando("^existir \"([^\"]*)\"$")
     public void existirOpcao(String opcao) {
-        assertTrue("Nenhum projeto possui  " + opcao + ".\nNão foi possível realizar este teste.",
+        assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
                 new PanelContentSection().existeOpcao(true, opcao));
     }
 

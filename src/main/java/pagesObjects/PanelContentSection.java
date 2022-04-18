@@ -7,20 +7,15 @@ import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static support.Razoes.CARR_ELEM;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
-        private final ModalComponentePage mCP = new ModalComponentePage();
-    private final PaginacaoSection pS = new PaginacaoSection();
 
     public boolean existeOpcao(boolean esperado, String opcao) {
-        List<String> opcoes = Arrays.asList("Modelos", "Notebooks", "Membros", "Detalhes", "Testar Modelo");
         PaginacaoMap pM = new PaginacaoMap();
         for (WebElement nPagina : pM.getListBtnNPaginacao()) {
             ProvedorMap prM = new ProvedorMap();
@@ -31,12 +26,12 @@ public class PanelContentSection extends Pagina {
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
-                } else if (esperado && mCP.isModalDisplayed()) {
+                } else if (esperado && new ModalComponentePage().isModalDisplayed()) {
                     System.out.println("Projeto com " + opcao + " encontrado.");
                     return true;
                 }
             }
-            pS.avancarPagina(nPagina);
+            new PaginacaoSection().avancarPagina(nPagina);
         }
         return false;
     }
@@ -60,7 +55,7 @@ public class PanelContentSection extends Pagina {
     }
 
     private void avancarItem(WebElement nItem, @NotNull List<WebElement> listBtnExibir) {
-        if(listBtnExibir.indexOf(nItem) > 0) System.out.println("Elemento procurado não encontrado.");
+        if (listBtnExibir.indexOf(nItem) > 0) System.out.println("Elemento procurado não encontrado.");
         System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
         rolarPaginaAteElemento(nItem);
         nItem.click();
@@ -87,12 +82,13 @@ public class PanelContentSection extends Pagina {
         return true;
     }
 
-    private boolean isListaOpcoesDisplayed(){
-        try{
-            return pCM.getListaOpcoes().isDisplayed();
-        }catch (NoSuchElementException e){
+    private boolean isListaOpcoesDisplayed() {
+        try {
+            pCM.getListaOpcoes().isDisplayed();
+        } catch (Exception e) {
             return false;
         }
+        return true;
     }
 
     public String getTxtNenhumResultado(@NotNull String local) {

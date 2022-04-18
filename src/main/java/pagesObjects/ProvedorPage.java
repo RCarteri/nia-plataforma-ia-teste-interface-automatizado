@@ -6,8 +6,8 @@ import map.ProvedorMap;
 import org.jetbrains.annotations.NotNull;
 
 public class ProvedorPage extends Pagina {
-   private final ProvedorMap pM = new ProvedorMap();
     public void acessarProvedor(@NotNull String provedor) {
+        ProvedorMap pM = new ProvedorMap();
         try {
             switch (provedor) {
                 case "IBM Cloud":

@@ -10,11 +10,10 @@ import support.Utils;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PaginacaoSection extends Pagina {
-    private final PaginacaoMap pM = new PaginacaoMap();
-
     public int getQuantResultados(@NotNull String local) {
         String quantResultados = null;
         String frase = null;
+        PaginacaoMap pM = new PaginacaoMap();
         try {
             switch (local) {
                 case "componente":

@@ -10,13 +10,12 @@ import static org.junit.Assert.*;
 import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
-public class PrimeiroAcessoPage<nMaxTentativas> extends Pagina {
+public class PrimeiroAcessoPage extends Pagina {
    private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();
 
     private int posicao = 0;
     private WebElement btnFinalizar;
     private int nPaginaFalha;
-    private int nTentativas;
 
     private void voltarPagina() {
         rolarPaginaAteElemento(pAM.getBtnVoltar());

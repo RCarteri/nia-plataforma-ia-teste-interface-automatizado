@@ -20,11 +20,13 @@ Funcionalidade: Suite007 - Watson Studio
     Quando existir "<opção>"
     Então deverá apresentar o titulo "<título>" no modal
     E deverá apresentar as informações sobre ID e nome
+    E deverá apresentar o mesmo nome do item selecionado
     E deverá mostrar a lista com elementos
     Exemplos:
-      | opção     | título             |
-      | Membros   | Membros do projeto |
-      | Notebooks | Notebooks          |
+      | opção       | título             |
+      | Membros     | Membros do projeto |
+      | Notebooks   | Notebooks          |
+      | Data assets | Data Assets        |
 
   @ID-007-004 @CT004
   Cenario: CT004 - Pesquisar

@@ -24,8 +24,8 @@ public class ProvedorMap extends Pagina {
         return getElements("td button.ng-star-inserted.p-button-secondary");
     }
 
-    public Elemento getBtnPerfil() {
-        return btnPerfil;
+    public List<WebElement> getListNomes() {
+        return getElements("td.ng-star-inserted:first-child");
     }
 
     public ElementoTexto getBtnIBMCloud() {

@@ -20,6 +20,7 @@ Funcionalidade: Suite005 - Watson Assistant
         Quando existir "Instância"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
+        E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
 
     @ID-005-004 @CT004

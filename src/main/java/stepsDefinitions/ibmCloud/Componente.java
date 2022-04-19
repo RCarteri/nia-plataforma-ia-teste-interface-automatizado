@@ -1,10 +1,12 @@
 package stepsDefinitions.ibmCloud;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import map.ComponenteMap;
 import pagesObjects.ComponentePage;
+import pagesObjects.ModalComponentePage;
 import pagesObjects.PanelContentSection;
 import support.Utils;
 
@@ -14,6 +16,7 @@ public class Componente {
     private final ComponentePage cP = new ComponentePage();
     private final PanelContentSection pCS = new PanelContentSection();
     private final Utils utils = new Utils();
+    private String nomeItemSelecionado;
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
@@ -23,8 +26,8 @@ public class Componente {
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
-       utils.capturaTela();
-       assertEquals(titulo, cP.getTituloComponente());
+        utils.capturaTela();
+        assertEquals(titulo, cP.getTituloComponente());
     }
 
     @Quando("^não existir \"([^\"]*)\"$")
@@ -37,6 +40,12 @@ public class Componente {
     public void existirOpcao(String opcao) {
         assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
                 pCS.existeOpcao(true, opcao));
+        this.nomeItemSelecionado = pCS.getNomeItemSelecionado();
+    }
+
+    @E("^deverá apresentar o mesmo nome do item selecionado$")
+    public void deveraApresentarOMesmoNomeDoItemSelecionado() {
+        assertTrue(new ModalComponentePage().isNomeIgual(this.nomeItemSelecionado));
     }
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")

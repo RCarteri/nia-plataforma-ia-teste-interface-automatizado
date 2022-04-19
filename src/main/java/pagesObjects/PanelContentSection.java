@@ -14,6 +14,11 @@ import static support.Utils.rolarPaginaAteElemento;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
+    private String nomeItemSelecionado;
+
+    public String getNomeItemSelecionado() {
+        return nomeItemSelecionado;
+    }
 
     public boolean existeOpcao(boolean esperado, String opcao) {
         PaginacaoMap pM = new PaginacaoMap();
@@ -28,6 +33,7 @@ public class PanelContentSection extends Pagina {
                     return false;
                 } else if (esperado && new ModalComponentePage().isModalDisplayed()) {
                     System.out.println("Projeto com " + opcao + " encontrado.");
+                    this.nomeItemSelecionado = prM.getListNomes().get(prM.getListBtnExibir().indexOf(nItem)).getText();
                     return true;
                 }
             }

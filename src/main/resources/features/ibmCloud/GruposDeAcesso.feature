@@ -20,6 +20,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
 		Quando existir "Grupo"
 		Então deverá apresentar o titulo "Grupos de acesso" no modal
 		E deverá apresentar as informações sobre ID e nome
+		E deverá apresentar o mesmo nome do item selecionado
 		E deverá mostrar a lista com elementos
 
 	@ID-003-004 @CT004

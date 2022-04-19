@@ -29,4 +29,8 @@ public class ModalComponentePage extends Pagina {
     protected boolean isModalDisplayed() {
         return new ModalComponenteMap().getTituloModal().elementoExiste();
     }
+
+    public boolean isNomeIgual(String nomeItemSelecionado) {
+        return mCM.getListCabecalhoNomeID().get(0).getText().equals(nomeItemSelecionado);
+    }
 }

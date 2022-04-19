@@ -25,6 +25,6 @@ public class PaginacaoMap extends Pagina {
     }
 
     public List<WebElement> getListBtnNPaginacao() {
-        return getElements("button.p-paginator-page:nth-child(n+1):nth-child(-n+5)");
+        return getElements("button.p-paginator-page:nth-child(n+2):nth-child(-n+5)");
     }
 }

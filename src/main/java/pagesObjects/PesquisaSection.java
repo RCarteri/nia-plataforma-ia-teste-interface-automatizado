@@ -11,6 +11,7 @@ import support.Utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PesquisaSection extends Pagina {
     private final PesquisaMap pM = new PesquisaMap();
@@ -19,6 +20,7 @@ public class PesquisaSection extends Pagina {
 
     public void pesquisar(String palavra, @NotNull String local) {
         try {
+            System.out.println("Pesquisando por: '" + palavra + "' no " + local);
             switch (local) {
                 case "componente":
                     pM.getInputPesquisa().escrever(palavra);
@@ -66,13 +68,10 @@ public class PesquisaSection extends Pagina {
     }
 
     public boolean getValidacaoPesquisa() {
-        StringBuilder strBuilder = new StringBuilder(this.mensagemPesquisaInvalida);
-        for (Map.Entry<String, Boolean> entry : validacaoPesquisa.entrySet()) {
-            if (!entry.getValue()) {
-                strBuilder.append(entry.getKey()).append("\n");
-            }
-        }
-        this.mensagemPesquisaInvalida = strBuilder.toString();
+        this.mensagemPesquisaInvalida = validacaoPesquisa.entrySet().stream()
+                .filter(entry -> !entry.getValue())
+                .map(entry -> entry.getKey() + "\n")
+                .collect(Collectors.joining("", this.mensagemPesquisaInvalida, ""));
         return this.mensagemPesquisaInvalida.equals("");
     }
 
@@ -103,7 +102,7 @@ public class PesquisaSection extends Pagina {
     }
 
     public boolean resultadosContemString(String palavraPesquisada, @NotNull String local) {
-        boolean resultadosOk = true;
+        boolean resultadosOk;
         List<WebElement> listTxt;
         switch (local) {
             case "componente":
@@ -116,14 +115,12 @@ public class PesquisaSection extends Pagina {
                 listTxt = pM.getListaSigla();
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + local);
+                throw new IllegalStateException("Valor inesperado: " + local);
         }
-        for (WebElement webElement : listTxt) {
-            if (!(webElement.getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))) {
-                resultadosOk = false;
-                break;
-            }
-        }
+        resultadosOk = listTxt.stream()
+                .allMatch(webElement ->
+                        webElement.getText().toLowerCase()
+                                .contains(palavraPesquisada.toLowerCase()));
         return resultadosOk;
     }
 }

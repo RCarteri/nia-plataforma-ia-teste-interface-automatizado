@@ -24,10 +24,10 @@ public class PanelContentSection extends Pagina {
         PaginacaoMap pM = new PaginacaoMap();
         for (WebElement nPagina : pM.getListBtnNPaginacao()) {
             ProvedorMap prM = new ProvedorMap();
+            new PaginacaoSection().avancarPagina(nPagina);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
-                if (isListaOpcoesDisplayed())
-                    if (acessarSubMenu(nItem, opcao)) continue;
+                if (checkListaOpcoes(opcao, nItem)) continue;
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
@@ -37,8 +37,13 @@ public class PanelContentSection extends Pagina {
                     return true;
                 }
             }
-            new PaginacaoSection().avancarPagina(nPagina);
         }
+        return false;
+    }
+
+    private boolean checkListaOpcoes(String opcao, WebElement nItem) {
+        if (isListaOpcoesDisplayed())
+            return acessarSubMenu(nItem, opcao);
         return false;
     }
 

@@ -45,12 +45,14 @@ public class Componente {
 
     @E("^deverá apresentar o mesmo nome do item selecionado$")
     public void deveraApresentarOMesmoNomeDoItemSelecionado() {
-        assertTrue(new ModalComponentePage().isNomeIgual(this.nomeItemSelecionado));
+        ModalComponentePage mCP = new ModalComponentePage();
+        assertTrue("Nome esperado: '" + this.nomeItemSelecionado + "'. Nome obtido: '" + mCP.getNomeElemento() + "'.",
+                mCP.isNomeIgual(this.nomeItemSelecionado));
     }
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemDeAlerta(String mensagem) {
+        utils.capturaTela();
         assertEquals(mensagem, new ComponenteMap().getAlert().getText());
-        new Utils().capturaTela();
     }
 }

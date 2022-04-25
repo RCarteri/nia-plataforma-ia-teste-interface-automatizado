@@ -1,27 +1,48 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.ElementoBotao;
-import br.com.bb.ath.ftabb.elementos.ElementoInput;
 import org.openqa.selenium.WebElement;
+import support.annotations.FindBy;
 
 import java.util.List;
 
 import static support.GetElements.getElements;
 
-public class PesquisaMap extends Pagina {
-    @MapearElementoWeb(css = "nia-platia-table th input.p-inputtext")
-    private ElementoInput inputPesquisa;
+public class PesquisaMap extends BasePageObjects {
+    @FindBy(cssSelector = "nia-platia-table th input.p-inputtext")
+    private WebElement inputPesquisa;
 
-    @MapearElementoWeb(css = "nia-membros-table thead .p-inputtext")
-    private ElementoInput inputPesquisaModal;
+    public WebElement getInputPesquisa() {
+        if (inputPesquisa == null)
+            inputPesquisa = setElement("inputPesquisa");
+        return inputPesquisa;
+    }
 
-    @MapearElementoWeb(css = "nia-platia-table .deleteicon span")
-    private ElementoBotao btnLimparPesquisa;
+    @FindBy(cssSelector = "nia-membros-table thead .p-inputtext")
+    private WebElement inputPesquisaModal;
 
-    @MapearElementoWeb(css = "nia-membros-table .deleteicon span")
-    private ElementoBotao btnLimparFiltroPesquisa;
+    public WebElement getInputPesquisaModal() {
+        if (inputPesquisaModal == null)
+            inputPesquisaModal = setElement("inputPesquisaModal");
+        return inputPesquisaModal;
+    }
+
+    @FindBy(cssSelector = "nia-platia-table .deleteicon span")
+    private WebElement btnLimparPesquisa;
+
+    public WebElement getBtnLimparPesquisa() {
+        if (btnLimparPesquisa == null)
+            btnLimparPesquisa = setElement("btnLimparPesquisa");
+        return btnLimparPesquisa;
+    }
+
+    @FindBy(cssSelector = "nia-membros-table .deleteicon span")
+    private WebElement btnLimparFiltroPesquisa;
+
+    public WebElement getBtnLimparFiltroPesquisa() {
+        if (btnLimparFiltroPesquisa == null)
+            btnLimparFiltroPesquisa = setElement("btnLimparFiltroPesquisa");
+        return btnLimparFiltroPesquisa;
+    }
 
     public List<WebElement> getListaNomesModal() {
         return getElements("nia-membros-table td:nth-child(2)");
@@ -33,21 +54,5 @@ public class PesquisaMap extends Pagina {
 
     public List<WebElement> getListaNomesComponente() {
         return getElements("nia-platia-table td:first-child");
-    }
-
-    public ElementoInput getInputPesquisa() {
-        return inputPesquisa;
-    }
-
-    public ElementoInput getInputPesquisaModal() {
-        return inputPesquisaModal;
-    }
-
-    public ElementoBotao getBtnLimparPesquisa() {
-        return btnLimparPesquisa;
-    }
-
-    public ElementoBotao getBtnLimparFiltroPesquisa() {
-        return btnLimparFiltroPesquisa;
     }
 }

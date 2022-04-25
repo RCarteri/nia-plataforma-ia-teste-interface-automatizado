@@ -1,12 +1,10 @@
 package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
-import support.Utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,46 +16,34 @@ public class PesquisaSection extends Pagina {
     private String mensagemPesquisaInvalida = "";
 
     public void pesquisar(String palavra, @NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    pM.getInputPesquisa().escrever(palavra);
-                    break;
-                case "modal":
-                    pM.getInputPesquisaModal().escrever(palavra);
-                    break;
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                pM.getInputPesquisa().sendKeys(palavra);
+                break;
+            case "modal":
+                pM.getInputPesquisaModal().sendKeys(palavra);
+                break;
         }
     }
 
     public String getTxtInputFiltro(@NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    return pM.getInputPesquisa().recuperarTexto();
-                case "modal":
-                    return pM.getInputPesquisaModal().recuperarTexto();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                return pM.getInputPesquisa().getText();
+            case "modal":
+                return pM.getInputPesquisaModal().getText();
         }
         return null;
     }
 
     public void limparPesquisa(@NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    pM.getBtnLimparPesquisa().clicar();
-                    break;
-                case "modal":
-                    pM.getBtnLimparFiltroPesquisa().clicar();
-                    break;
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                pM.getBtnLimparPesquisa().click();
+                break;
+            case "modal":
+                pM.getBtnLimparFiltroPesquisa().click();
+                break;
         }
     }
 

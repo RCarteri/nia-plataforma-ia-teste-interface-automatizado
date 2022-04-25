@@ -1,30 +1,32 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import org.openqa.selenium.WebElement;
+import support.annotations.FindBy;
 
 import java.util.List;
 
 import static support.GetElements.getElements;
 
-public class PaginacaoMap extends Pagina {
-    @MapearElementoWeb(css = "nia-platia-table .p-paginator-current")
-    private ElementoTexto txtPaginacao;
+public class PaginacaoMap extends BasePageObjects {
+    @FindBy(cssSelector = "nia-platia-table .p-paginator-current")
+    private WebElement txtPaginacao;
 
-    @MapearElementoWeb(css = ".p-dialog-mask .p-paginator-current")
-    private ElementoTexto txtPaginacaoModal;
-
-    public ElementoTexto getTxtPaginacao() {
-        return txtPaginacao;
-    }
-
-    public ElementoTexto getTxtPaginacaoModal() {
-        return txtPaginacaoModal;
-    }
+    @FindBy(cssSelector = ".p-dialog-mask .p-paginator-current")
+    private WebElement txtPaginacaoModal;
 
     public List<WebElement> getListBtnNPaginacao() {
         return getElements("button.p-paginator-page:nth-child(n+1):nth-child(-n+5)");
+    }
+
+    public WebElement getTxtPaginacao() {
+        if (txtPaginacao == null)
+            txtPaginacao = setElement("txtPaginacao");
+        return txtPaginacao;
+    }
+
+    public WebElement getTxtPaginacaoModal() {
+        if (txtPaginacaoModal == null)
+            txtPaginacaoModal = setElement("txtPaginacaoModal");
+        return txtPaginacaoModal;
     }
 }

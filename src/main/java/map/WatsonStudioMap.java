@@ -1,31 +1,32 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
-import br.com.bb.ath.ftabb.elementos.ElementoBotao;
 import org.openqa.selenium.WebElement;
+import support.annotations.FindBy;
 
 import java.util.List;
 
 import static support.GetElements.getElements;
 
-public class WatsonStudioMap extends Pagina {
-    @MapearElementoWeb(css = ".p-dropdown-clearable .pi-chevron-down")
-    private Elemento dropDownSigla;
+public class WatsonStudioMap extends BasePageObjects {
+    @FindBy(cssSelector = ".p-dropdown-clearable .pi-chevron-down")
+    private WebElement dropDownSigla;
 
-    @MapearElementoWeb(css = ".pi-refresh")
-    private ElementoBotao btnAtualizar;
+    @FindBy(cssSelector = ".pi-refresh")
+    private WebElement btnAtualizar;
 
-    public List<WebElement> getListaSigla() {
-        return getElements("p-dropdownitem span");
-    }
-
-    public Elemento getDropDownSigla() {
+    public WebElement getDropDownSigla() {
+        if (dropDownSigla == null)
+            dropDownSigla = setElement("dropDownSigla");
         return dropDownSigla;
     }
 
-    public ElementoBotao getBtnAtualizar() {
+    public WebElement getBtnAtualizar() {
+        if (btnAtualizar == null)
+            btnAtualizar = setElement("btnAtualizar");
         return btnAtualizar;
+    }
+
+    public List<WebElement> getListaSigla() {
+        return getElements("p-dropdownitem span");
     }
 }

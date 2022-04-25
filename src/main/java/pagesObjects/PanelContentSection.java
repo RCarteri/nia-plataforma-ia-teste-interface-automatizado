@@ -41,13 +41,9 @@ public class PanelContentSection extends Pagina {
         try {
             new ComponenteMap().getAlert().isDisplayed();
         } catch (Exception e) {
-            if (mCM.getBtnFechar().elementoExiste()) {
+            if (mCM.getBtnFechar().isDisplayed()) {
                 System.out.println("Fechando modal");
-                try {
-                    mCM.getBtnFechar().clicar();
-                } catch (ElementoNaoLocalizadoException ex) {
-                    Utils.logError(ex);
-                }
+                mCM.getBtnFechar().click();
                 return false;
             } else e.printStackTrace();
         }

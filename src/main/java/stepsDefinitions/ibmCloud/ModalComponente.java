@@ -1,6 +1,5 @@
 package stepsDefinitions.ibmCloud;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import map.ModalComponenteMap;
@@ -17,9 +16,9 @@ public class ModalComponente {
     private final Utils utils = new Utils();
 
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
-    public void deveraApresentarOTitulo(String titulo) throws ElementoNaoLocalizadoException {
+    public void deveraApresentarOTitulo(String titulo) {
         utils.capturaTela();
-        assertEquals(titulo, mCM.getTituloModal().recuperarTexto());
+        assertEquals(titulo, mCM.getTituloModal().getText());
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")

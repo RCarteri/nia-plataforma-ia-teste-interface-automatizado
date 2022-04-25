@@ -3,6 +3,7 @@ package stepsDefinitions.ibmCloud;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import org.jetbrains.annotations.NotNull;
 import pagesObjects.PaginacaoSection;
 import pagesObjects.PanelContentSection;
 import pagesObjects.PesquisaSection;
@@ -72,7 +73,7 @@ public class Pesquisa {
     }
 
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
-    public void deveraApresentarAMensagem(String mensagem){
+    public void deveraApresentarAMensagem(@NotNull String mensagem){
         utils.capturaTela();
         String mensagemObtida = pCS.getTxtNenhumResultado(this.local);
         this.validacao = mensagem.equals(mensagemObtida);

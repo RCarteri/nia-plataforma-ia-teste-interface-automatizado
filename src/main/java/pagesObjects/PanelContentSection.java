@@ -1,7 +1,6 @@
 package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.*;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
@@ -88,15 +87,11 @@ public class PanelContentSection extends Pagina {
     }
 
     public String getTxtNenhumResultado(@NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    return pCM.getTxtNenhumResultado().recuperarTexto();
-                case "modal":
-                    return pCM.getTxtNenhumResultadoModal().recuperarTexto();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                return pCM.getTxtNenhumResultado().getText();
+            case "modal":
+                return pCM.getTxtNenhumResultadoModal().getText();
         }
         return null;
     }

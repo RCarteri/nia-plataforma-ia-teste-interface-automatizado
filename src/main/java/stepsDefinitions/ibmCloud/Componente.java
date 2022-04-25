@@ -1,6 +1,5 @@
 package stepsDefinitions.ibmCloud;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import map.ComponenteMap;
@@ -15,15 +14,15 @@ public class Componente {
     private final Utils utils = new Utils();
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
-    public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
+    public void selecionarOComponente(String componente) {
         componentePage.acessarComponente(componente);
-        assertNotNull(componentePage.getTituloComponente());
+        assertNotNull(componentePage.getTxtTituloComponente());
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
-    public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
+    public void deveApresentarOTituloNaPagina(String titulo) {
        utils.capturaTela();
-       assertEquals(titulo, componentePage.getTituloComponente());
+       assertEquals(titulo, componentePage.getTxtTituloComponente());
     }
 
     @Quando("^não existir \"([^\"]*)\"$")

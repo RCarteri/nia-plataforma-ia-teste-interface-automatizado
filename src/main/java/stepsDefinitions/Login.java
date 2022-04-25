@@ -1,5 +1,7 @@
 package stepsDefinitions;
 
+import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import br.com.bb.ath.ftabb.gaw.Plataforma;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
@@ -7,7 +9,7 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.LoginPage;
 import support.Utils;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class Login {
     private final LoginPage lP = new LoginPage();
@@ -28,10 +30,10 @@ public class Login {
     }
 
     @Então("^verficar se a pagina \"([^\"]*)\" foi carregada com sucesso$")
-    public void verficarSeAPaginaFoiCarregadaComSucesso(String titulo) {
+    public void verficarSeAPaginaFoiCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         Utils utils = new Utils();
         utils.capturaTela();
-        assertTrue(utils.oTituloEigual(titulo));
+        assertEquals(Plataforma.recuperarTituloPagina(), titulo);
         System.out.println("Página carregada com sucesso");
     }
 

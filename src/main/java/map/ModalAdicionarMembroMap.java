@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.getElements;
+import static support.GetElements.getElements;
 
 public class ModalAdicionarMembroMap extends Pagina {
     @MapearElementoWeb(css = ".p-button-secondary.p-ml-auto")

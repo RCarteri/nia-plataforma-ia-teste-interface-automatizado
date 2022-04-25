@@ -4,7 +4,6 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import map.LoginMap;
 import org.openqa.selenium.NoSuchElementException;
-import support.Razoes;
 import support.Utils;
 
 import java.util.Dictionary;
@@ -12,13 +11,14 @@ import java.util.Dictionary;
 import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static support.SysProps.IS_LOGGED;
-import static support.Utils.getDriver;
+import static support.GetElements.getDriver;
 import static support.Utils.logError;
+import static support.enums.SysProps.IS_LOGGED;
+import static support.enums.TimesAndReasons.CARR_PAG;
 
 public class LoginPage {
     private final Utils utils = new Utils();
-    private short count;
+    private short count = 0;
 
     public void abrirPlataforma(){
         System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
@@ -51,7 +51,7 @@ public class LoginPage {
     }
 
     public void logar(){
-        short MAX_BOUND = 5;
+        short MAX_BOUND = 3;
         try {
             final Dictionary<String, String> datapool = utils.getDatapool();
             boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
@@ -59,12 +59,11 @@ public class LoginPage {
                 assertTrue(isLogged);
                 System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
             } else {
-                new Utils().esperar(Razoes.CARR_PAG.getDelay(), Razoes.CARR_PAG.getRazao());
+                new Utils().esperar(CARR_PAG);
                 LoginMap lM = new LoginMap();
                 lM.getInputUsername().sendKeys(datapool.get("chave"));
                 lM.getInputPassword().sendKeys(datapool.get("senha"));
                 lM.getBtnLogin().click();
-                int count = 0;
                 while (!isLogged) {
                     if (++count == MAX_BOUND) {
                         Plataforma.fecharPlataforma();
@@ -79,7 +78,6 @@ public class LoginPage {
         } catch (NoSuchElementException e) {
             String noSuchElement = e.getMessage().split(" ")[4];
             noSuchElement = noSuchElement.substring(0, noSuchElement.length() - 4);
-
             System.err.println("\n    ERRO - Um elemento não foi localizado.");
             System.err.println("    ERRO - Não foi possível localizar o elemento \"" + noSuchElement + "\"");
             getDriver().navigate().refresh();
@@ -92,6 +90,7 @@ public class LoginPage {
             }
         }
     }
+
     public void logoutEFecharPlataforma() {
         try {
             Plataforma.encerrarSessao();

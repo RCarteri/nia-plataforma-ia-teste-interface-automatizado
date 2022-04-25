@@ -9,8 +9,8 @@ import support.Utils;
 
 import java.util.List;
 
-import static support.Razoes.CARR_ELEM;
 import static support.Utils.rolarPaginaAteElemento;
+import static support.enums.TimesAndReasons.CARR_ELEM;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
@@ -19,6 +19,7 @@ public class PanelContentSection extends Pagina {
         PaginacaoMap pM = new PaginacaoMap();
         for (WebElement nPagina : pM.getListBtnNPaginacao()) {
             ProvedorMap prM = new ProvedorMap();
+            new PaginacaoSection().avancarPagina(nPagina);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 if (isListaOpcoesDisplayed())
@@ -31,7 +32,6 @@ public class PanelContentSection extends Pagina {
                     return true;
                 }
             }
-            new PaginacaoSection().avancarPagina(nPagina);
         }
         return false;
     }
@@ -67,7 +67,7 @@ public class PanelContentSection extends Pagina {
             nItem.click();
             return true;
         }
-        new Utils().esperarQTeste(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
+        new Utils().esperarQTeste(CARR_ELEM);
         return false;
     }
 

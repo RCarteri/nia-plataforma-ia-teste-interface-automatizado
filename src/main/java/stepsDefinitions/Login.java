@@ -29,8 +29,8 @@ public class Login {
         lP.acessarPagina(nomePagina);
     }
 
-    @Então("^verficar se a pagina \"([^\"]*)\" foi carregada com sucesso$")
-    public void verficarSeAPaginaFoiCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
+    @Então("^a pagina \"([^\"]*)\" deverá ser carregada com sucesso$")
+    public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         Utils utils = new Utils();
         utils.capturaTela();
         assertEquals(Plataforma.recuperarTituloPagina(), titulo);

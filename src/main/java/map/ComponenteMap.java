@@ -15,6 +15,9 @@ public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-dropdown-trigger span")
     private WebElement dropComponente;
 
+    @FindBy(cssSelector = ".p-toast-message-success .p-toast-detail")
+    private WebElement alertSuccess;
+
     public WebElement getTituloComponente() {
         if (tituloComponente == null)
             tituloComponente = setElement("tituloComponente");
@@ -27,11 +30,21 @@ public class ComponenteMap extends BasePageObjects {
         return dropComponente;
     }
 
-    public WebElement getAlert() {
-        return waitElement("div .p-toast-detail");
+    public WebElement getAlertInfo() {
+        return waitElement(".p-toast-message-info .p-toast-detail");
+    }
+
+    public WebElement getAlertSuccess() {
+        if (alertSuccess == null)
+            alertSuccess = setElement("alertSuccess");
+        return alertSuccess;
     }
 
     public List<WebElement> getListComponente() {
         return getElements(".p-dropdown-items-wrapper span");
+    }
+
+    public List<WebElement> getListBtnFecharAlerta() {
+        return getElements("p-toastitem button");
     }
 }

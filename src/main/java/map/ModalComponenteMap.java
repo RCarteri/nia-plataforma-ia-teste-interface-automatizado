@@ -9,15 +9,12 @@ import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 
 public class ModalComponenteMap extends BasePageObjects {
-    @FindBy(cssSelector = ".p-dialog-title")
-    private WebElement spanTituloModal;
+    @FindBy(cssSelector = ".pi-times")
+    private WebElement btnFechar;
 
     public WebElement getTituloModal() {
         return getElement(".p-dialog-title");
     }
-
-    @FindBy(cssSelector = ".pi-times")
-    private WebElement btnFechar;
 
     public WebElement getBtnFechar() {
         if (btnFechar == null)

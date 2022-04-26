@@ -10,19 +10,19 @@ import support.Utils;
 import static org.junit.Assert.*;
 
 public class Componente {
-    private final ComponentePage componentePage = new ComponentePage();
+    private final ComponentePage cP = new ComponentePage();
     private final Utils utils = new Utils();
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) {
-        componentePage.acessarComponente(componente);
-        assertNotNull(componentePage.getTxtTituloComponente());
+        cP.acessarComponente(componente);
+        assertNotNull(cP.getTxtTituloComponente());
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) {
        utils.capturaTela();
-       assertEquals(titulo, componentePage.getTxtTituloComponente());
+       assertEquals(titulo, cP.getTxtTituloComponente());
     }
 
     @Quando("^não existir \"([^\"]*)\"$")
@@ -39,7 +39,13 @@ public class Componente {
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemDeAlerta(String mensagem) {
-        assertEquals(mensagem, new ComponenteMap().getAlert().getText());
+        assertEquals(mensagem, new ComponenteMap().getAlertInfo().getText());
         new Utils().capturaTela();
+    }
+
+    @Então("^deverá ser apresentada o alerta de sucesso com a mensagem \"([^\"]*)\"$")
+    public void deveraSerApresentadaOAlertaDeSucessoComAMensagem(String mensagem) {
+        assertEquals(mensagem, cP.getTxtMensagemAlertaSuccess());
+        cP.fecharAlertas();
     }
 }

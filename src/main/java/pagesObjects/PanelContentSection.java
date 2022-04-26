@@ -38,7 +38,7 @@ public class PanelContentSection extends Pagina {
     private boolean isGetAlertDisplayed() {
         ModalComponenteMap mCM = new ModalComponenteMap();
         try {
-            new ComponenteMap().getAlert().isDisplayed();
+            new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (Exception e) {
             if (mCM.getBtnFechar().isDisplayed()) {
                 System.out.println("Fechando modal");

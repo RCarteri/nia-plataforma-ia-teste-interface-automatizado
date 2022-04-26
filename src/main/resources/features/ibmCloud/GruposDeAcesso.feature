@@ -8,7 +8,8 @@ Funcionalidade: Suite003 - Grupos de Acesso
 		E se não estiver logado, realiza o login no Sistema
 		Quando acessar a pagina "Analytics | IA (hm)"
 		E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-		E acessar a pagina do provedor "IBM Cloud"
+		Então deverá ser apresentada o alerta de sucesso com a mensagem "Dados do usuário logado carregados com sucesso!"
+		Quando acessar a pagina do provedor "IBM Cloud"
 		E selecionar o componente "Grupos de Acesso"
 
 	@ID-003-002 @CT002 @Smoke

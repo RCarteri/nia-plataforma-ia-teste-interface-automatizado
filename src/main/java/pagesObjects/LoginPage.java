@@ -51,7 +51,7 @@ public class LoginPage {
     }
 
     public void logar(){
-        short MAX_BOUND = 3;
+        short MAX_BOUND = 5;
         try {
             final Dictionary<String, String> datapool = utils.getDatapool();
             boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));

@@ -9,4 +9,5 @@ Funcionalidade: Suite001 - Acessar plataforma IA
 		E se não estiver logado, realiza o login no Sistema
 		Quando acessar a pagina "Analytics | IA (hm)"
 		E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-		Então verficar se a pagina "Gestão (Cloud)" foi carregada com sucesso
+		Então deverá ser apresentada o alerta de sucesso com a mensagem "Dados do usuário logado carregados com sucesso!"
+		E a pagina "Gestão (Cloud)" deverá ser carregada com sucesso

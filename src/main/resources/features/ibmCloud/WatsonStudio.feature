@@ -73,7 +73,7 @@ Funcionalidade: Suite007 - Watson Studio
   @ID-007-008 @CT008
   Cenario: CT008 - Atualizar listagem de projetos
     Quando atualizar a listagem de projetos
-    Então deverá apresentar a mensagem de alerta "Carregamento dos projetos em andamento!"
+    Então deverá ser apresentada o alerta de sucesso com a mensagem "Projetos carregados com sucesso!"
 
   @ID-007-009 @CT009
   Esquema do Cenario: CT009 - Inexistência do componente

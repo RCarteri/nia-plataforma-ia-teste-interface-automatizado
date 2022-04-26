@@ -10,6 +10,7 @@ import java.util.List;
 
 import static support.Utils.rolarPaginaAteElemento;
 import static support.enums.TimesAndReasons.CARR_ELEM;
+import static support.enums.TimesAndReasons.CARR_MODAL;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
@@ -53,6 +54,7 @@ public class PanelContentSection extends Pagina {
         if (listBtnExibir.indexOf(nItem) > 0) System.out.println("Elemento procurado não encontrado.");
         System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
         rolarPaginaAteElemento(nItem);
+        new Utils().esperarQTeste(CARR_ELEM);
         nItem.click();
     }
 
@@ -62,7 +64,7 @@ public class PanelContentSection extends Pagina {
             nItem.click();
             return true;
         }
-        new Utils().esperarQTeste(CARR_ELEM);
+        new Utils().esperarQTeste(CARR_MODAL);
         return false;
     }
 

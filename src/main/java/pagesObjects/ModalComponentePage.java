@@ -4,9 +4,12 @@ import br.com.bb.ath.ftabb.Pagina;
 import map.ModalComponenteMap;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import support.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static support.enums.TimesAndReasons.CARR_ELEM;
 
 public class ModalComponentePage extends Pagina {
     private final ModalComponenteMap mCM = new ModalComponenteMap();
@@ -28,6 +31,7 @@ public class ModalComponentePage extends Pagina {
     }
 
     protected boolean isModalDisplayed() {
+        new Utils().esperarQTeste(CARR_ELEM);
         try {
             return new ModalComponenteMap().getTituloModal().isDisplayed();
         }catch (NoSuchElementException e){

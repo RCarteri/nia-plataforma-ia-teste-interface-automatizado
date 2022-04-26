@@ -1,18 +1,17 @@
 package map;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import support.annotations.FindBy;
 
 import java.util.List;
 
+import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 
 public class ModalAdicionarMembroMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-button-secondary.p-ml-auto")
     private WebElement btnAdicionarMembro;
-
-    @FindBy(cssSelector = ".p-m-3 .pi-chevron-down")
-    private WebElement dropDownFuncao;
 
     @FindBy(cssSelector = ".p-button-success")
     private WebElement btnConfirmar;
@@ -47,8 +46,11 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
     }
 
     public WebElement getDropDownFuncao() {
-        if (dropDownFuncao == null)
-            dropDownFuncao = setElement("dropDownFuncao");
-        return dropDownFuncao;
+        try {
+            return getElement(".p-m-3 .pi-chevron-down");
+        }catch (NoSuchElementException e){
+            System.out.println("Dropdown de função não existe nesta opção.");
+            return null;
+        }
     }
 }

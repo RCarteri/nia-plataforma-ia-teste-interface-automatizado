@@ -13,9 +13,18 @@ public class ModalAdicionarMembroPage {
         try {
             mAMM.getInputAdicionarMembro().sendKeys(chave);
             mAMM.getInputAdicionarMembro().click();
-            if (mAMM.getDropDownFuncao().isDisplayed()) selecionarFuncao(funcao);
+            if (isDropDowndisplayed()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
+        }
+    }
+
+    private boolean isDropDowndisplayed(){
+        try{
+            return mAMM.getDropDownFuncao().isDisplayed();
+        }catch (NullPointerException e){
+            System.out.println("Dropdown função não está sendo exibido.");
+            return false;
         }
     }
 

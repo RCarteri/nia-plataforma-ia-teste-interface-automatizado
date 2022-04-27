@@ -1,33 +1,19 @@
 package map;
 
 import org.openqa.selenium.WebElement;
-import support.annotations.FindBy;
 
-public class LoginMap extends BasePageObjects{
-    @FindBy(cssSelector = "#idToken1")
-    private WebElement inputUsername;
+import static support.GetElements.getElement;
 
-    @FindBy(cssSelector = "#idToken2")
-    private WebElement inputPassword;
-
-    @FindBy(cssSelector = "#loginButton_0")
-    private WebElement btnLogin;
-
+public class LoginMap {
     public WebElement getInputUsername() {
-        if (inputUsername == null)
-            inputUsername = setElement("inputUsername");
-        return inputUsername;
+        return getElement("#idToken1");
     }
 
     public WebElement getInputPassword() {
-        if (inputPassword == null)
-            inputPassword = setElement("inputPassword");
-        return inputPassword;
+        return getElement("#idToken2");
     }
 
     public WebElement getBtnLogin() {
-        if (btnLogin == null)
-            btnLogin = setElement("btnLogin");
-        return btnLogin;
+        return getElement("#loginButton_0");
     }
 }

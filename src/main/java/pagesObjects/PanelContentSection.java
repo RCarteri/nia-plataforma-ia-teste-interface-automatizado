@@ -1,7 +1,6 @@
 package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.*;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
@@ -9,8 +8,8 @@ import support.Utils;
 
 import java.util.List;
 
-import static support.Razoes.CARR_ELEM;
 import static support.Utils.rolarPaginaAteElemento;
+import static support.enums.TimesAndReasons.CARR_MODAL;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
@@ -28,6 +27,7 @@ public class PanelContentSection extends Pagina {
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 if (checkListaOpcoes(opcao, nItem)) continue;
+                new Utils().esperarQTeste(CARR_MODAL);
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
@@ -50,15 +50,11 @@ public class PanelContentSection extends Pagina {
     private boolean isGetAlertDisplayed() {
         ModalComponenteMap mCM = new ModalComponenteMap();
         try {
-            new ComponenteMap().getAlert().isDisplayed();
+            new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (Exception e) {
-            if (mCM.getBtnFechar().elementoExiste()) {
+            if (mCM.getBtnFechar().isDisplayed()) {
                 System.out.println("Fechando modal");
-                try {
-                    mCM.getBtnFechar().clicar();
-                } catch (ElementoNaoLocalizadoException ex) {
-                    Utils.logError(ex);
-                }
+                mCM.getBtnFechar().click();
                 return false;
             } else e.printStackTrace();
         }
@@ -78,7 +74,6 @@ public class PanelContentSection extends Pagina {
             nItem.click();
             return true;
         }
-        new Utils().esperarQTeste(CARR_ELEM.getDelay(), CARR_ELEM.getRazao());
         return false;
     }
 
@@ -103,15 +98,11 @@ public class PanelContentSection extends Pagina {
     }
 
     public String getTxtNenhumResultado(@NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    return pCM.getTxtNenhumResultado().recuperarTexto();
-                case "modal":
-                    return pCM.getTxtNenhumResultadoModal().recuperarTexto();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                return pCM.getTxtNenhumResultado().getText();
+            case "modal":
+                return pCM.getTxtNenhumResultadoModal().getText();
         }
         return null;
     }

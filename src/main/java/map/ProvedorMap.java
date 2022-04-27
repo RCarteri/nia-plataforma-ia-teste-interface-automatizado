@@ -1,24 +1,30 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import org.openqa.selenium.WebElement;
+import support.annotations.FindBy;
 
 import java.util.List;
 
-import static support.Utils.getElements;
+import static support.GetElements.getElements;
 
-public class ProvedorMap extends Pagina {
-    @MapearElementoWeb(css = "figure .mi--person")
-    private Elemento btnPerfil;
+public class ProvedorMap extends BasePageObjects {
+    @FindBy(xPath = "//h3[contains(text(), 'IBM Cloud')]")
+    private WebElement btnIBMCloud;
 
-    @MapearElementoWeb(xPath = "//h3[contains(text(), 'IBM Cloud')]")
-    private ElementoTexto btnIBMCloud;
+    @FindBy(xPath = "//h3[contains(text(), 'Triton')]")
+    private WebElement btnTriton;
 
-    @MapearElementoWeb(xPath = "//h3[contains(text(), 'Triton')]")
-    private ElementoTexto btnTriton;
+    public WebElement getBtnIBMCloud() {
+        if (btnIBMCloud == null)
+            btnIBMCloud = setElement("btnIBMCloud");
+        return btnIBMCloud;
+    }
+
+    public WebElement getBtnTriton() {
+        if (btnTriton == null)
+            btnTriton = setElement("btnTriton");
+        return btnTriton;
+    }
 
     public List<WebElement> getListBtnExibir() {
         return getElements("td button.ng-star-inserted.p-button-secondary");
@@ -26,13 +32,5 @@ public class ProvedorMap extends Pagina {
 
     public List<WebElement> getListNomes() {
         return getElements("td.ng-star-inserted:first-child");
-    }
-
-    public ElementoTexto getBtnIBMCloud() {
-        return btnIBMCloud;
-    }
-
-    public ElementoTexto getBtnTriton() {
-        return btnTriton;
     }
 }

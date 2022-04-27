@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PrimeiroAcessoPage extends Pagina {
@@ -29,11 +28,7 @@ public class PrimeiroAcessoPage extends Pagina {
     }
 
     private void getAcao() {
-        try {
-            pAM.getBtnAcao().clicar();
-        } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
-        }
+        pAM.getBtnAcao().click();
     }
 
     public String getMensagem() {

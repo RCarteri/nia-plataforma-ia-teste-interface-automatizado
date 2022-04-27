@@ -1,27 +1,24 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.ElementoBotao;
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import org.openqa.selenium.WebElement;
+import support.annotations.FindBy;
 
 import java.util.List;
 
-import static support.Utils.getElements;
+import static support.GetElements.getElement;
+import static support.GetElements.getElements;
 
-public class ModalComponenteMap extends Pagina {
-    @MapearElementoWeb(css=".p-dialog-title")
-    private ElementoTexto spanTituloModal;
+public class ModalComponenteMap extends BasePageObjects {
+    @FindBy(cssSelector = ".pi-times")
+    private WebElement btnFechar;
 
-    @MapearElementoWeb(css=".pi-times")
-    private ElementoBotao btnFechar;
-
-    public ElementoTexto getTituloModal() {
-        return spanTituloModal;
+    public WebElement getTituloModal() {
+        return getElement(".p-dialog-title");
     }
 
-    public ElementoBotao getBtnFechar() {
+    public WebElement getBtnFechar() {
+        if (btnFechar == null)
+            btnFechar = setElement("btnFechar");
         return btnFechar;
     }
 

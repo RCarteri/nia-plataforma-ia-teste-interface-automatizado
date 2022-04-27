@@ -1,6 +1,5 @@
 package stepsDefinitions.ibmCloud;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
@@ -19,15 +18,15 @@ public class Componente {
     private String nomeItemSelecionado;
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
-    public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
+    public void selecionarOComponente(String componente) {
         cP.acessarComponente(componente);
-        assertNotNull(cP.getTituloComponente());
+        assertNotNull(cP.getTxtTituloComponente());
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
-    public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
-        utils.capturaTela();
-        assertEquals(titulo, cP.getTituloComponente());
+    public void deveApresentarOTituloNaPagina(String titulo) {
+       utils.capturaTela();
+       assertEquals(titulo, cP.getTxtTituloComponente());
     }
 
     @Quando("^não existir \"([^\"]*)\"$")
@@ -52,7 +51,13 @@ public class Componente {
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemDeAlerta(String mensagem) {
-        utils.capturaTela();
-        assertEquals(mensagem, new ComponenteMap().getAlert().getText());
+        assertEquals(mensagem, new ComponenteMap().getAlertInfo().getText());
+        new Utils().capturaTela();
+    }
+
+    @Então("^deverá ser apresentada o alerta de sucesso com a mensagem \"([^\"]*)\"$")
+    public void deveraSerApresentadaOAlertaDeSucessoComAMensagem(String mensagem) {
+        assertEquals(mensagem, cP.getTxtMensagemAlertaSuccess());
+        cP.fecharAlertas();
     }
 }

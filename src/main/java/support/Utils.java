@@ -1,16 +1,15 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
-import br.com.bb.ath.ftabb.elementos.Elemento;
 import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import br.com.bb.ath.ftabb.gaw.Plataforma;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import support.enums.TimesAndReasons;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -18,16 +17,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.UUID;
+
+import static support.GetElements.getDriver;
+import static support.GetElements.getElement;
 
 public class Utils extends FTABBUtils {
-    public static WebDriver getDriver() {
-        return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
-    }
-
-    public void esperar(long segundos, String razao) {
-        System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
-        sleep(segundos);
+    public void esperar(@NotNull TimesAndReasons tar) {
+        System.out.println("    Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...");
+        sleep(tar.getDelay());
     }
 
     public static WebElement waitElement(String seletor){
@@ -36,8 +37,9 @@ public class Utils extends FTABBUtils {
         return getElement(seletor);
     }
 
-    public void esperarQTeste(long segundos, String razao){
-        System.out.println("    Aguardando " + segundos + " segundo(s) para " + razao + "...");
+    public void esperarQTeste(@NotNull TimesAndReasons tar){
+        long segundos = tar.getDelay();
+        System.out.println("    Aguardando " + segundos + " segundo(s) para " + tar.getReason() + "...");
         if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
             segundos /= 2L;
         }
@@ -66,36 +68,6 @@ public class Utils extends FTABBUtils {
             System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
     }
 
-    public boolean elementoExisteEstaVisivel(Elemento elem) {
-        try {
-            if (elem.elementoExiste()) {
-                if (!elem.elementoEstaVisivel())
-                    throw new ElementoNaoLocalizadoException(
-                            "O elemento \"" + elem.getNome() + "\" existe, mas não está visível.");
-                return true;
-            }
-            throw new ElementoNaoLocalizadoException(
-                    "Não foi possível localizar o elemento \"" + elem.getNome() + "\".");
-        } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
-        }
-        return false;
-    }
-
-    public boolean oTituloEigual(String titulo) {
-        try {
-            final String paginaTitulo = Plataforma.recuperarTituloPagina().toLowerCase();
-            if (paginaTitulo.intern().equals(titulo.toLowerCase().intern()))
-                return true;
-            else
-                throw new ElementoNaoLocalizadoException("\n\nO título buscado é: " + titulo.toLowerCase()
-                        + "\nO título recuperado é: " + paginaTitulo + "\n");
-        } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
-        }
-        return false;
-    }
-
     public Dictionary<String, String> getDatapool() {
         try {
             final Dictionary<String, String> result = new Hashtable<>();
@@ -108,26 +80,11 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public void fecharSitema(Elemento btnPerfil) {
-        try {
-            if (elementoExisteEstaVisivel(btnPerfil)) {
-                btnPerfil.clicar();
-                Plataforma.encerrarSessao();
-                System.out.println("Sessão encerrada");
-                esperar(Razoes.ENC_SEC.getDelay(), Razoes.ENC_SEC.getRazao());
-                Plataforma.fecharPlataforma();
-                System.out.println("Plataforma fechada");
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
-        }
-    }
-
     public static void rolarPaginaAteElemento(WebElement elemento) {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public static void logError(Exception e) {
+    public static void logError(@NotNull Exception e) {
         System.err.println("\nAlgum erro ocorreu!");
         System.err.println("Mensagem: " + e.getMessage() + "\n");
         e.printStackTrace();
@@ -140,13 +97,4 @@ public class Utils extends FTABBUtils {
         final String uuid = UUID.randomUUID().toString().substring(0, 8);
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
-
-    public static List<WebElement> getElements(String seletor) {
-        return getDriver().findElements(By.cssSelector(seletor));
-    }
-
-    public static WebElement getElement(String seletor) {
-        return getDriver().findElement(By.cssSelector(seletor));
-    }
-
 }

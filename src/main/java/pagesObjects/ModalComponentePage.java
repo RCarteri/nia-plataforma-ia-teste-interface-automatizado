@@ -2,6 +2,7 @@ package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
 import map.ModalComponenteMap;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -26,7 +27,11 @@ public class ModalComponentePage extends Pagina {
     }
 
     protected boolean isModalDisplayed() {
-        return new ModalComponenteMap().getTituloModal().elementoExiste();
+        try {
+            return new ModalComponenteMap().getTituloModal().isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     public boolean isNomeIgual(String nomeItemSelecionado) {

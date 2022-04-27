@@ -1,28 +1,23 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
-import br.com.bb.ath.ftabb.elementos.ElementoBotao;
-import br.com.bb.ath.ftabb.elementos.ElementoInput;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import support.annotations.FindBy;
 
 import java.util.List;
 
-import static support.Utils.getElements;
+import static support.GetElements.getElement;
+import static support.GetElements.getElements;
 
-public class ModalAdicionarMembroMap extends Pagina {
-    @MapearElementoWeb(css = ".p-button-secondary.p-ml-auto")
-    private ElementoBotao btnAdicionarMembro;
+public class ModalAdicionarMembroMap extends BasePageObjects {
+    @FindBy(cssSelector = ".p-button-secondary.p-ml-auto")
+    private WebElement btnAdicionarMembro;
 
-    @MapearElementoWeb(css = ".p-button-success")
-    private ElementoBotao btnConfirmar;
+    @FindBy(cssSelector = ".p-button-success")
+    private WebElement btnConfirmar;
 
-    @MapearElementoWeb(css = ".p-component.ng-invalid")
-    private ElementoInput inputAdicionarMembro;
-
-    @MapearElementoWeb(css = ".p-m-3 .pi-chevron-down")
-    private Elemento dropDownFuncao;
+    @FindBy(cssSelector = ".p-component.ng-invalid")
+    private WebElement inputAdicionarMembro;
 
     public List<WebElement> getListSpanFuncao() {
         return getElements("p-dropdownitem .ng-star-inserted");
@@ -32,19 +27,30 @@ public class ModalAdicionarMembroMap extends Pagina {
         return getElements("small.p-invalid");
     }
 
-    public ElementoBotao getBtnAdicionarMembro() {
-        return btnAdicionarMembro;
-    }
-
-    public ElementoBotao getBtnConfirmar() {
+    public WebElement getBtnConfirmar() {
+        if (btnConfirmar == null)
+            btnConfirmar = setElement("btnConfirmar");
         return btnConfirmar;
     }
 
-    public ElementoInput getInputAdicionarMembro() {
+    public WebElement getBtnAdicionarMembro() {
+        if (btnAdicionarMembro == null)
+            btnAdicionarMembro = setElement("btnAdicionarMembro");
+        return btnAdicionarMembro;
+    }
+
+    public WebElement getInputAdicionarMembro() {
+        if (inputAdicionarMembro == null)
+            inputAdicionarMembro = setElement("inputAdicionarMembro");
         return inputAdicionarMembro;
     }
 
-    public Elemento getDropDownFuncao() {
-        return dropDownFuncao;
+    public WebElement getDropDownFuncao() {
+        try {
+            return getElement(".p-m-3 .pi-chevron-down");
+        }catch (NoSuchElementException e){
+            System.out.println("Dropdown de função não existe nesta opção.");
+            return null;
+        }
     }
 }

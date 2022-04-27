@@ -1,7 +1,6 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
-import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
@@ -37,13 +36,10 @@ public class Utils extends FTABBUtils {
         return getElement(seletor);
     }
 
-    public void esperarQTeste(@NotNull TimesAndReasons tar){
-        long segundos = tar.getDelay();
-        System.out.println("    Aguardando " + segundos + " segundo(s) para " + tar.getReason() + "...");
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            segundos /= 2L;
-        }
-        sleep(segundos);
+    public static void waitLoadPage(){
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".gaw-blockui.ng-star-inserted")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".p-progress-spinner-circle")));
     }
 
     public void capturaTela() {

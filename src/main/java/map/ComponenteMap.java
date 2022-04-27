@@ -5,8 +5,9 @@ import support.annotations.FindBy;
 
 import java.util.List;
 
+import static support.GetElements.getElement;
 import static support.GetElements.getElements;
-import static support.Utils.waitElement;
+import static support.Utils.waitLoadPage;
 
 public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = "#p-panel-1-titlebar")
@@ -31,7 +32,8 @@ public class ComponenteMap extends BasePageObjects {
     }
 
     public WebElement getAlertInfo() {
-        return waitElement(".p-toast-message-info .p-toast-detail");
+        waitLoadPage();
+        return getElement(".p-toast-message-info .p-toast-detail");
     }
 
     public WebElement getAlertSuccess() {

@@ -3,6 +3,7 @@ package pagesObjects.primeiroAcesso;
 import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PrimeiroAcessoMap;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
@@ -71,10 +72,11 @@ public class PrimeiroAcessoPage extends Pagina {
 
     private void segundaPagina() {
         paginaOK();
-        assertTrue("O botão avançar está habilitado.", isBotaoAvancarDesabilitado());
+        assertTrue("O botão avançar está habilitado.", isBotaoDesabilitado(pAM.getBtnAvancar()));
+        assertTrue("O botão voltar está habilitado.", isBotaoDesabilitado(pAM.getBtnVoltar()));
         getAcao();
         isMensagemOK();
-        assertFalse("O botão avançar está desabilitado.", isBotaoAvancarDesabilitado());
+        assertFalse("O botão avançar está desabilitado.", isBotaoDesabilitado(pAM.getBtnAvancar()));
     }
 
     private void percorrerPaginas() {
@@ -99,7 +101,7 @@ public class PrimeiroAcessoPage extends Pagina {
         new Utils().capturaTela();
     }
 
-    private boolean isBotaoAvancarDesabilitado() {
-        return pAM.getBtnAvancar().getAttribute("disabled") != null;
+    private boolean isBotaoDesabilitado(@NotNull WebElement botao){
+        return botao.getAttribute("disabled") != null;
     }
 }

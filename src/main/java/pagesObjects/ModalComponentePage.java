@@ -18,9 +18,8 @@ public class ModalComponentePage extends Pagina {
         List<String> listaElementosVazios = new ArrayList<>();
         int index = 0;
         for (WebElement info : mCM.getListInfoNomeID()) {
-            if (info.getText().length() == 0) {
+            if (info.getText().length() == 0)
                 listaElementosVazios.add(mCM.getListCabecalhoNomeID().get(index).getText());
-            }
             index++;
         }
         return listaElementosVazios;
@@ -28,5 +27,13 @@ public class ModalComponentePage extends Pagina {
 
     protected boolean isModalDisplayed() {
         return new ModalComponenteMap().getTituloModal().elementoExiste();
+    }
+
+    public boolean isNomeIgual(String nomeItemSelecionado) {
+        return getNomeElemento().equals(nomeItemSelecionado);
+    }
+
+    public String getNomeElemento(){
+        return mCM.getListCabecalhoNomeID().get(0).getText();
     }
 }

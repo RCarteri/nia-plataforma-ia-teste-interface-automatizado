@@ -20,6 +20,7 @@ Funcionalidade: Suite004 - Modelos
 		Quando existir "Modelo"
 		Então deverá apresentar o titulo "Detalhes do Modelo" no modal
 		E deverá apresentar as informações sobre ID e nome
+		E deverá apresentar o mesmo nome do item selecionado
 
 	@ID-004-004 @CT004
 	Cenario: CT004 - Pesquisar

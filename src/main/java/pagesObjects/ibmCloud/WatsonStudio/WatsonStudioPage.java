@@ -12,12 +12,10 @@ public class WatsonStudioPage extends Pagina {
     public void selecionarSigla(String sigla) {
         try {
             wSM.getDropDownSigla().clicar();
-            for (WebElement webElement : wSM.getListaSigla()) {
-                if (webElement.getText().intern().equals(sigla.intern())) {
-                    webElement.click();
-                    break;
-                }
-            }
+            wSM.getListaSigla().stream()
+                    .filter(webElement -> webElement.getText().intern().equals(sigla.intern()))
+                    .findFirst()
+                    .ifPresent(WebElement::click);
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }

@@ -1,46 +1,58 @@
 package stepsDefinitions.ibmCloud;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import map.ComponenteMap;
 import pagesObjects.ComponentePage;
+import pagesObjects.ModalComponentePage;
 import pagesObjects.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;
 
 public class Componente {
-    private final ComponentePage componentePage = new ComponentePage();
+    private final ComponentePage cP = new ComponentePage();
+    private final PanelContentSection pCS = new PanelContentSection();
     private final Utils utils = new Utils();
+    private String nomeItemSelecionado;
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) throws ElementoNaoLocalizadoException {
-        componentePage.acessarComponente(componente);
-        assertNotNull(componentePage.getTituloComponente());
+        cP.acessarComponente(componente);
+        assertNotNull(cP.getTituloComponente());
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) throws ElementoNaoLocalizadoException {
-       utils.capturaTela();
-       assertEquals(titulo, componentePage.getTituloComponente());
+        utils.capturaTela();
+        assertEquals(titulo, cP.getTituloComponente());
     }
 
     @Quando("^não existir \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
-                new PanelContentSection().existeOpcao(false, opcao));
+                pCS.existeOpcao(false, opcao));
     }
 
     @Quando("^existir \"([^\"]*)\"$")
     public void existirOpcao(String opcao) {
         assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
-                new PanelContentSection().existeOpcao(true, opcao));
+                pCS.existeOpcao(true, opcao));
+        this.nomeItemSelecionado = pCS.getNomeItemSelecionado();
+    }
+
+    @E("^deverá apresentar o mesmo nome do item selecionado$")
+    public void deveraApresentarOMesmoNomeDoItemSelecionado() {
+        ModalComponentePage mCP = new ModalComponentePage();
+        assertTrue("Nome esperado: '" + this.nomeItemSelecionado + "'. Nome obtido: '" + mCP.getNomeElemento() + "'.",
+                mCP.isNomeIgual(this.nomeItemSelecionado));
     }
 
     @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
     public void deveraApresentarAMensagemDeAlerta(String mensagem) {
+        utils.capturaTela();
         assertEquals(mensagem, new ComponenteMap().getAlert().getText());
-        new Utils().capturaTela();
     }
 }

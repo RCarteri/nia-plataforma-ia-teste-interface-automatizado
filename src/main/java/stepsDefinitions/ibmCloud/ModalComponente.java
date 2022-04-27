@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class ModalComponente {
     private final ModalComponenteMap mCM = new ModalComponenteMap();
+    private final ModalComponentePage mCP = new ModalComponentePage();
     private final Utils utils = new Utils();
 
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
@@ -24,12 +25,12 @@ public class ModalComponente {
 
     @E("^deverá apresentar as informações sobre ID e nome$")
     public void deveraApresentarAsInformacoesIDeNome() {
-        List<String> listaInfoNomeID = new ModalComponentePage().getListaInfoNomeID();
+        List<String> listaInfoNomeID = mCP.getListaInfoNomeID();
         assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
     }
 
     @E("^deverá mostrar a lista com elementos$")
     public void deveraMostrarAListaComElementos() {
-        assertTrue(new ModalComponentePage().getCountLinhas() > 1);
+        assertTrue(mCP.getCountLinhas() > 1);
     }
 }

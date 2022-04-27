@@ -14,25 +14,36 @@ import static support.Utils.rolarPaginaAteElemento;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
+    private String nomeItemSelecionado;
+
+    public String getNomeItemSelecionado() {
+        return nomeItemSelecionado;
+    }
 
     public boolean existeOpcao(boolean esperado, String opcao) {
         PaginacaoMap pM = new PaginacaoMap();
         for (WebElement nPagina : pM.getListBtnNPaginacao()) {
             ProvedorMap prM = new ProvedorMap();
+            new PaginacaoSection().avancarPagina(nPagina);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
-                if (isListaOpcoesDisplayed())
-                    if (acessarSubMenu(nItem, opcao)) continue;
+                if (checkListaOpcoes(opcao, nItem)) continue;
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
                 } else if (esperado && new ModalComponentePage().isModalDisplayed()) {
                     System.out.println("Projeto com " + opcao + " encontrado.");
+                    this.nomeItemSelecionado = prM.getListNomes().get(prM.getListBtnExibir().indexOf(nItem)).getText();
                     return true;
                 }
             }
-            new PaginacaoSection().avancarPagina(nPagina);
         }
+        return false;
+    }
+
+    private boolean checkListaOpcoes(String opcao, WebElement nItem) {
+        if (isListaOpcoesDisplayed())
+            return acessarSubMenu(nItem, opcao);
         return false;
     }
 

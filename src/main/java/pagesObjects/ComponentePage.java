@@ -5,20 +5,15 @@ import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ComponenteMap;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
 public class ComponentePage extends Pagina {
     private final ComponenteMap cM = new ComponenteMap();
 
     public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
         cM.getDropDownComponente().clicar();
-        List<WebElement> listComponente = cM.getListComponente();
-        for (WebElement webElement : listComponente) {
-            if (webElement.getText().intern().equals(componente.intern())) {
-                webElement.click();
-                break;
-            }
-        }
+        cM.getListComponente().stream()
+                .filter(webElement -> webElement.getText().intern().equals(componente.intern()))
+                .findFirst()
+                .ifPresent(WebElement::click);
     }
 
     public String getTituloComponente() throws ElementoNaoLocalizadoException {

@@ -20,6 +20,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Quando existir "Catálogo"
         Então deverá apresentar o titulo "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
+        E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
 
     @ID-006-004 @CT004

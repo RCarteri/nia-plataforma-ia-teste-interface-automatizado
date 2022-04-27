@@ -1,7 +1,6 @@
 package pagesObjects.triton;
 
 import map.TritonMap;
-import org.openqa.selenium.WebElement;
 
 public class TritonPage {
  private final TritonMap tM = new TritonMap();
@@ -16,9 +15,7 @@ public class TritonPage {
     }
 
     public boolean estaRetornandoInformacoes() {
-        for (WebElement info : tM.getInformacoes()) {
-            if (info.getText() == null) return false;
-        }
-        return tM.getRequest() != null;
+        return tM.getInformacoes().stream()
+                .noneMatch(info -> info.getText() == null) && tM.getRequest() != null;
     }
 }

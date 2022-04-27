@@ -34,6 +34,6 @@ public class ModalComponenteMap extends Pagina {
     }
 
     public List<WebElement> getListCabecalhoNomeID() {
-        return getElements("div[class*='p-ai-center ng-tns-c47'] span");
+        return getElements("div[class*='p-ai-center ng-tns'] h4");
     }
 }

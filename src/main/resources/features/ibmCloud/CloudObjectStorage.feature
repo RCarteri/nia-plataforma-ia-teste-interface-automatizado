@@ -17,9 +17,10 @@ Funcionalidade: Suite002 - Cloud Object Storage
 
 	@ID-002-003 @CT003
 	Cenario: CT003 - Exibir componente
-	Quando existir "Bucket"
+		Quando existir "Bucket"
 		Então deverá apresentar o titulo "Buckets do storage" no modal
 		E deverá apresentar as informações sobre ID e nome
+		E deverá apresentar o mesmo nome do item selecionado
 		E deverá mostrar a lista com elementos
 
 	@ID-002-004 @CT004

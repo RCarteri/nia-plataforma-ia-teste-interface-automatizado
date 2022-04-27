@@ -32,13 +32,13 @@ public class Componente {
     @Quando("^não existir \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
-                new PanelContentSection().existeOpcao(false, opcao));
+                pCS.existeOpcao(false, opcao));
     }
 
     @Quando("^existir \"([^\"]*)\"$")
     public void existirOpcao(String opcao) {
         assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
-                new PanelContentSection().existeOpcao(true, opcao));
+                pCS.existeOpcao(true, opcao));
         this.nomeItemSelecionado = pCS.getNomeItemSelecionado();
     }
 

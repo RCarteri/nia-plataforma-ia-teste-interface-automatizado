@@ -33,7 +33,7 @@ public class ModalComponentePage extends Pagina {
     protected boolean isModalDisplayed() {
         new Utils().esperarQTeste(CARR_ELEM);
         try {
-            return new ModalComponenteMap().getTituloModal().isDisplayed();
+            return new ModalComponenteMap().getModal().isDisplayed();
         }catch (NoSuchElementException e){
             return false;
         }

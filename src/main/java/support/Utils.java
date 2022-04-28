@@ -35,7 +35,7 @@ public class Utils extends FTABBUtils {
     }
 
     public static @NotNull String printResultadoEsperadoObtido(String esperado, String obtido){
-        return "\n Resultado esperado:\n    '" +
+        return "\nResultado esperado:\n    '" +
                 esperado +
                 "'.\nResultado obtido:\n    '" +
                 obtido;

@@ -33,6 +33,7 @@ public class Componente {
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
                 pCS.existeOpcao(false, opcao));
+        utils.capturaTela();
     }
 
     @Quando("^existir \"([^\"]*)\"$")
@@ -40,6 +41,7 @@ public class Componente {
         assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
                 pCS.existeOpcao(true, opcao));
         this.nomeItemSelecionado = pCS.getNomeItemSelecionado();
+        utils.capturaTela();
     }
 
     @E("^deverá apresentar o mesmo nome do item selecionado$")

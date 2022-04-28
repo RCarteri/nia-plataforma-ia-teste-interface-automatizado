@@ -25,8 +25,7 @@ public class PaginacaoSection extends Pagina {
     }
 
     protected void avancarPagina(@NotNull WebElement nPagina) {
-        if (nPagina.getText().equals("1")) return;
-        System.out.println("Avançando para a página " + nPagina.getText());
+        System.out.println("Testando a página " + nPagina.getText());
         rolarPaginaAteElemento(nPagina);
         nPagina.click();
     }

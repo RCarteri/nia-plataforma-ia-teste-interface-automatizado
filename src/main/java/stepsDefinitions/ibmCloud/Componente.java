@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 public class Componente {
     private final ComponentePage cP = new ComponentePage();
+    private final PanelContentSection pCS = new PanelContentSection();
     private final Utils utils = new Utils();
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
@@ -27,18 +28,19 @@ public class Componente {
     @Quando("^não existir \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
-                new PanelContentSection().existeOpcao(false, opcao));
+                pCS.existeOpcao(false, opcao));
     }
 
     @Quando("^existir \"([^\"]*)\"$")
     public void existirOpcao(String opcao) {
         assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
-                new PanelContentSection().existeOpcao(true, opcao));
+               pCS.existeOpcao(true, opcao));
     }
 
     @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
     public void deveraSerApresentadaOAlertaComAMensagem(String opcao, String mensagem) {
-        assertEquals(mensagem, cP.getTxtMensagemAlerta(opcao));
+        assertEquals("Resultado esperado: '" + mensagem + "'. Resultado obtido: '" + cP.getTxtMensagemAlerta(opcao) + "'.",
+                mensagem, cP.getTxtMensagemAlerta(opcao));
         cP.fecharAlertas();
     }
 }

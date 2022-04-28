@@ -34,6 +34,13 @@ public class Utils extends FTABBUtils {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".p-progress-spinner-circle")));
     }
 
+    public static @NotNull String printResultadoEsperadoObtido(String esperado, String obtido){
+        return "\n Resultado esperado:\n    '" +
+                esperado +
+                "'.\nResultado obtido:\n    '" +
+                obtido;
+    }
+
     public void capturaTela() {
         capturarTela();
         allureCapturarTela();

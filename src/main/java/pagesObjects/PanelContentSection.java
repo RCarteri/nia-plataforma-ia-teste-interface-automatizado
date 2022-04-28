@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.rolarPaginaAteElemento;
-import static support.Utils.waitLoadPage;
+import static support.Utils.*;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
@@ -20,8 +19,7 @@ public class PanelContentSection extends Pagina {
     }
 
     public boolean existeOpcao(boolean esperado, String opcao) {
-        PaginacaoMap pM = new PaginacaoMap();
-        for (WebElement nPagina : pM.getListBtnNPaginacao()) {
+        for (WebElement nPagina : new PaginacaoMap().getListBtnNPaginacao()) {
             ProvedorMap prM = new ProvedorMap();
             new PaginacaoSection().avancarPagina(nPagina);
             for (WebElement nItem : prM.getListBtnExibir()) {
@@ -48,15 +46,14 @@ public class PanelContentSection extends Pagina {
     }
 
     private boolean isGetAlertDisplayed() {
-        ModalComponenteMap mCM = new ModalComponenteMap();
         try {
             return new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (NoSuchElementException e) {
+            ModalComponenteMap mCM = new ModalComponenteMap();
             if (mCM.getBtnFechar().isDisplayed()) {
                 System.out.println("Fechando modal");
                 mCM.getBtnFechar().click();
-
-            } else e.printStackTrace();
+            } else logError(e);
             return false;
         }
     }

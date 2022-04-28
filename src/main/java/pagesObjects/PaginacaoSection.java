@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PaginacaoSection extends Pagina {
-    public int getQuantResultados(@NotNull String local) {
+    public String getQuantResultados(@NotNull String local) {
         String frase = null;
         PaginacaoMap pM = new PaginacaoMap();
         switch (local) {
@@ -20,12 +20,11 @@ public class PaginacaoSection extends Pagina {
                 break;
         }
         assert frase != null;
-        String quantResultados = frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
-        return Integer.parseInt(quantResultados);
+        return frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
     }
 
     protected void avancarPagina(@NotNull WebElement nPagina) {
-        System.out.println("Testando a página " + nPagina.getText());
+        System.out.println("Testando a página " + nPagina.getText() + ".");
         rolarPaginaAteElemento(nPagina);
         nPagina.click();
     }

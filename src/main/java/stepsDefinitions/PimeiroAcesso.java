@@ -4,6 +4,7 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import org.jetbrains.annotations.NotNull;
 import pagesObjects.primeiroAcesso.PrimeiroAcessoPage;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +14,7 @@ public class PimeiroAcesso {
     private final PrimeiroAcessoPage pAP = new PrimeiroAcessoPage();
 
     @Dado("^que apresente a mensagem \"([^\"]*)\"$")
-    public void queApresenteAMensagem(String mensagem) {
+    public void queApresenteAMensagem(@NotNull String mensagem) {
         assertTrue("Mensagem de que o usuário não possui cadastro na IBM Cloud não foi apresentada",
                 pAP.getMensagem().toLowerCase().contains(mensagem.toLowerCase()));
     }

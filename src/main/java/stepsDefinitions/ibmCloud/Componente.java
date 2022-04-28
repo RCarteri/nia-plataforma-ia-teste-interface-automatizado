@@ -9,6 +9,7 @@ import pagesObjects.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;
+import static support.Utils.printResultadoEsperadoObtido;
 
 public class Componente {
     private final ComponentePage cP = new ComponentePage();
@@ -44,13 +45,13 @@ public class Componente {
     @E("^deverá apresentar o mesmo nome do item selecionado$")
     public void deveraApresentarOMesmoNomeDoItemSelecionado() {
         ModalComponentePage mCP = new ModalComponentePage();
-        assertTrue("Nome esperado: '" + this.nomeItemSelecionado + "'. Nome obtido: '" + mCP.getNomeElemento() + "'.",
+        assertTrue(printResultadoEsperadoObtido(this.nomeItemSelecionado, mCP.getNomeElemento()),
                 mCP.isNomeIgual(this.nomeItemSelecionado));
     }
 
     @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
-        assertEquals("Resultado esperado: '" + mensagem + "'. Resultado obtido: '" + cP.getTxtMensagemAlerta(opcao) + "'.",
+        assertEquals(printResultadoEsperadoObtido(mensagem,cP.getTxtMensagemAlerta(opcao)),
                 mensagem, cP.getTxtMensagemAlerta(opcao));
         cP.fecharAlertas();
     }

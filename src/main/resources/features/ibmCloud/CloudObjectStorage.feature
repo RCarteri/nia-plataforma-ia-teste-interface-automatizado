@@ -8,7 +8,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
 		E se não estiver logado, realiza o login no Sistema
 		Quando acessar a pagina "Analytics | IA (hm)"
 		E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-		Então deverá ser apresentada o alerta de sucesso com a mensagem "Dados do usuário logado carregados com sucesso!"
+		Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
 		Quando acessar a pagina do provedor "IBM Cloud"
 		E selecionar o componente "Cloud Object Storage"
 
@@ -40,4 +40,4 @@ Funcionalidade: Suite002 - Cloud Object Storage
 	@ID-002-009 @CT009
 	Cenario: CT009 - Inexistência do componente
 		Quando não existir "Bucket"
-		Então deverá apresentar a mensagem de alerta "Não há nenhum bucket disponível para o projeto atualmente."
+		Então deverá ser apresentado o alerta de "informação" com a mensagem "Não há nenhum bucket disponível para o projeto atualmente."

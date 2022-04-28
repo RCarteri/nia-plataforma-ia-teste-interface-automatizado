@@ -19,7 +19,7 @@ public class ModalComponente {
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
     public void deveraApresentarOTitulo(String titulo) {
         utils.capturaTela();
-        assertEquals(titulo, mCM.getTituloModal().getText());
+        assertEquals(titulo, new ModalComponenteMap().getTituloModal().getText());
     }
 
     @E("^deverá apresentar as informações sobre ID e nome$")

@@ -3,13 +3,13 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.Pagina;
 import map.*;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import support.Utils;
 
 import java.util.List;
 
 import static support.Utils.rolarPaginaAteElemento;
-import static support.enums.TimesAndReasons.CARR_MODAL;
+import static support.Utils.waitLoadPage;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
@@ -27,7 +27,7 @@ public class PanelContentSection extends Pagina {
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 if (checkListaOpcoes(opcao, nItem)) continue;
-                new Utils().esperarQTeste(CARR_MODAL);
+                waitLoadPage();
                 if (!esperado && isGetAlertDisplayed()) {
                     System.out.println("Encontrado projeto sem " + opcao + ".");
                     return false;
@@ -50,15 +50,15 @@ public class PanelContentSection extends Pagina {
     private boolean isGetAlertDisplayed() {
         ModalComponenteMap mCM = new ModalComponenteMap();
         try {
-            new ComponenteMap().getAlertInfo().isDisplayed();
-        } catch (Exception e) {
+            return new ComponenteMap().getAlertInfo().isDisplayed();
+        } catch (NoSuchElementException e) {
             if (mCM.getBtnFechar().isDisplayed()) {
                 System.out.println("Fechando modal");
                 mCM.getBtnFechar().click();
-                return false;
+
             } else e.printStackTrace();
+            return false;
         }
-        return true;
     }
 
     private void avancarItem(WebElement nItem, @NotNull List<WebElement> listBtnExibir) {
@@ -90,11 +90,10 @@ public class PanelContentSection extends Pagina {
 
     private boolean isListaOpcoesDisplayed() {
         try {
-            pCM.getListaOpcoes().isDisplayed();
-        } catch (Exception e) {
+            return pCM.getListaOpcoes().isDisplayed();
+        } catch (NoSuchElementException e) {
             return false;
         }
-        return true;
     }
 
     public String getTxtNenhumResultado(@NotNull String local) {

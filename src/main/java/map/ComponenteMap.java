@@ -6,7 +6,7 @@ import support.annotations.FindBy;
 import java.util.List;
 
 import static support.GetElements.getElements;
-import static support.Utils.waitElement;
+import static support.Utils.waitLoadPage;
 
 public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = "#p-panel-1-titlebar")
@@ -15,8 +15,11 @@ public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-dropdown-trigger span")
     private WebElement dropComponente;
 
-    @FindBy(cssSelector = ".p-toast-message-success .p-toast-detail")
+    @FindBy(cssSelector = ".p-toast-message-success")
     private WebElement alertSuccess;
+
+    @FindBy(cssSelector = ".p-toast-message-info .p-toast-detail")
+    private WebElement alertInfo;
 
     public WebElement getTituloComponente() {
         if (tituloComponente == null)
@@ -31,10 +34,14 @@ public class ComponenteMap extends BasePageObjects {
     }
 
     public WebElement getAlertInfo() {
-        return waitElement(".p-toast-message-info .p-toast-detail");
+        waitLoadPage();
+        if (alertInfo == null)
+            alertInfo = setElement("alertInfo");
+        return alertInfo;
     }
 
     public WebElement getAlertSuccess() {
+        waitLoadPage();
         if (alertSuccess == null)
             alertSuccess = setElement("alertSuccess");
         return alertSuccess;

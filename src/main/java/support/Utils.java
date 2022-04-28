@@ -1,7 +1,6 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
-import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
@@ -23,7 +22,6 @@ import java.util.Hashtable;
 import java.util.UUID;
 
 import static support.GetElements.getDriver;
-import static support.GetElements.getElement;
 
 public class Utils extends FTABBUtils {
     public void esperar(@NotNull TimesAndReasons tar) {
@@ -31,19 +29,9 @@ public class Utils extends FTABBUtils {
         sleep(tar.getDelay());
     }
 
-    public static WebElement waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 6);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
-        return getElement(seletor);
-    }
-
-    public void esperarQTeste(@NotNull TimesAndReasons tar){
-        long segundos = tar.getDelay();
-        System.out.println("    Aguardando " + segundos + " segundo(s) para " + tar.getReason() + "...");
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
-            segundos /= 2L;
-        }
-        sleep(segundos);
+    public static void waitLoadPage(){
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".p-progress-spinner-circle")));
     }
 
     public void capturaTela() {

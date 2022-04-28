@@ -16,6 +16,10 @@ public class ModalComponenteMap extends BasePageObjects {
         return getElement(".p-dialog-title");
     }
 
+    public WebElement getModal() {
+        return getElement("div.p-ai-center");
+    }
+
     public WebElement getBtnFechar() {
         if (btnFechar == null)
             btnFechar = setElement("btnFechar");

@@ -2,6 +2,7 @@ package pagesObjects.primeiroAcesso;
 
 import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import map.ComponenteMap;
 import map.PrimeiroAcessoMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
@@ -90,9 +91,10 @@ public class PrimeiroAcessoPage extends Pagina {
     }
 
     private void isMensagemOK() {
-        rolarPaginaAteElemento(pAM.getMensagemConvite());
+        ComponenteMap cM = new ComponenteMap();
+        rolarPaginaAteElemento(cM.getAlertSuccess());
         assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
-                "Convite enviado com sucesso.", pAM.getMensagemConvite().getText());
+                "Convite enviado com sucesso.", cM.getAlertSuccess().getText());
         new Utils().capturaTela();
     }
 

@@ -3,7 +3,6 @@ package stepsDefinitions.ibmCloud;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import map.ComponenteMap;
 import pagesObjects.ComponentePage;
 import pagesObjects.ModalComponentePage;
 import pagesObjects.PanelContentSection;
@@ -49,15 +48,10 @@ public class Componente {
                 mCP.isNomeIgual(this.nomeItemSelecionado));
     }
 
-    @Então("^deverá apresentar a mensagem de alerta \"([^\"]*)\"$")
-    public void deveraApresentarAMensagemDeAlerta(String mensagem) {
-        assertEquals(mensagem, new ComponenteMap().getAlertInfo().getText());
-        new Utils().capturaTela();
-    }
-
-    @Então("^deverá ser apresentada o alerta de sucesso com a mensagem \"([^\"]*)\"$")
-    public void deveraSerApresentadaOAlertaDeSucessoComAMensagem(String mensagem) {
-        assertEquals(mensagem, cP.getTxtMensagemAlertaSuccess());
+    @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
+    public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
+        assertEquals("Resultado esperado: '" + mensagem + "'. Resultado obtido: '" + cP.getTxtMensagemAlerta(opcao) + "'.",
+                mensagem, cP.getTxtMensagemAlerta(opcao));
         cP.fecharAlertas();
     }
 }

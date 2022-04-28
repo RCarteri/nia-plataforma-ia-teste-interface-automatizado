@@ -22,7 +22,6 @@ import java.util.Hashtable;
 import java.util.UUID;
 
 import static support.GetElements.getDriver;
-import static support.GetElements.getElement;
 
 public class Utils extends FTABBUtils {
     public void esperar(@NotNull TimesAndReasons tar) {
@@ -30,15 +29,8 @@ public class Utils extends FTABBUtils {
         sleep(tar.getDelay());
     }
 
-    public static WebElement waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 6);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
-        return getElement(seletor);
-    }
-
     public static void waitLoadPage(){
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".gaw-blockui.ng-star-inserted")));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".p-progress-spinner-circle")));
     }
 

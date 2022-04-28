@@ -9,7 +9,6 @@ import java.util.List;
 
 import static support.GetElements.getElement;
 import static support.GetElements.getElements;
-import static support.Utils.waitElement;
 
 public class PrimeiroAcessoMap extends Pagina {
     @MapearElementoWeb(css = "span.p-inline-message-text")
@@ -21,10 +20,6 @@ public class PrimeiroAcessoMap extends Pagina {
 
     public WebElement getBtnVoltar() {
         return getElement(".p-button-secondary");
-    }
-
-    public WebElement getMensagemConvite() {
-        return waitElement(".p-toast-bottom-center .p-toast-message-success");
     }
 
     public WebElement getBtnAvancar() {

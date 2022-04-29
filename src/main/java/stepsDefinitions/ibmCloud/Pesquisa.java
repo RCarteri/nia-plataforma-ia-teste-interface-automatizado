@@ -36,7 +36,7 @@ public class Pesquisa {
         utils.capturaTela();
         String quantResultadosObtida = pS.getQuantResultados(this.local);
         //Teste para quando desde o início retornar só um resultado na lista
-        quantResultadosAntes = (this.quantResultadosAntes.equals("1")) ? "0" : this.quantResultadosAntes;
+        String quantResultadosAntes = (this.quantResultadosAntes.equals("1")) ? "0" : this.quantResultadosAntes;
         this.validacao = !quantResultadosAntes.equals(quantResultadosObtida);
         pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
     }

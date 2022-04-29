@@ -13,7 +13,7 @@ public class ModalComponenteMap extends BasePageObjects {
     }
 
     public WebElement getModal() {
-        return getElement("div.p-ai-center");
+        return getElement("div.p-dialog-header");
     }
 
     public List<WebElement> getListInfoNomeID() {

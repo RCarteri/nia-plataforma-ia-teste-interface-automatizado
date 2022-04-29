@@ -22,18 +22,21 @@ public class ComponentePage extends Pagina {
         return cM.getTituloComponente().getText();
     }
 
-    public void clickBtnFechar(String local) {
+    public void clickBtnFechar(boolean elemNaoExiste, String local) {
+        if (elemNaoExiste) {
+            System.out.println(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.");
+        }
         try {
             new ComponenteMap().getListBtnFechar().forEach(WebElement::click);
             System.out.println("O " + local + " presente na página foi fechado.");
-        }catch (NoSuchElementException | StaleElementReferenceException e){
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             System.out.println("Não existe " + local + " presente na página para ser fechado.");
         }
     }
 
     public String getTxtMensagemAlerta(@NotNull String opcao) {
         ComponenteMap cM = new ComponenteMap();
-        switch (opcao){
+        switch (opcao) {
             case "sucesso":
                 return cM.getAlertSuccess().getText();
             case "informação":

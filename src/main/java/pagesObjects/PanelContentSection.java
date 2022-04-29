@@ -51,9 +51,10 @@ public class PanelContentSection extends Pagina {
 
     private boolean isGetAlertDisplayed() {
         try {
+            System.out.println(new ComponenteMap().getAlertInfo().isDisplayed() + "alerta esta sendo mostrado");
             return new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (NoSuchElementException e) {
-            new ComponentePage().clickBtnFechar("modal");
+            new ComponentePage().clickBtnFechar(true,"modal");
             return false;
         }
     }

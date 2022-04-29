@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static support.Utils.waitLoadPage;
-
 public class ModalComponentePage extends Pagina {
     private final ModalComponenteMap mCM = new ModalComponenteMap();
 
@@ -29,12 +27,10 @@ public class ModalComponentePage extends Pagina {
     }
 
     protected boolean isModalDisplayed() {
-        //Estava falhando ao adicionar membro exceção no Catalogo, retornando que não existia nenhum catálogo
-        waitLoadPage();
         try {
            return new ModalComponenteMap().getModal().isDisplayed();
         } catch (NoSuchElementException e) {
-            new ComponentePage().clickBtnFechar("alerta");
+            new ComponentePage().clickBtnFechar(true,"alerta");
             return false;
         }
     }

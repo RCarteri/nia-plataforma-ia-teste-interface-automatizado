@@ -55,6 +55,6 @@ public class Componente {
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
         assertEquals(printResultadoEsperadoObtido(mensagem,cP.getTxtMensagemAlerta(opcao)),
                 mensagem, cP.getTxtMensagemAlerta(opcao));
-        cP.clickBtnFechar("alerta");
+        cP.clickBtnFechar(false,"alerta");
     }
 }

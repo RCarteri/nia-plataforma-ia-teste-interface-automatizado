@@ -1,14 +1,18 @@
 package pagesObjects;
 
 import br.com.bb.ath.ftabb.Pagina;
-import map.*;
+import map.ComponenteMap;
+import map.PaginacaoMap;
+import map.PanelContentMap;
+import map.ProvedorMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.*;
+import static support.Utils.rolarPaginaAteElemento;
+import static support.Utils.waitLoadPage;
 
 public class PanelContentSection extends Pagina {
     private final PanelContentMap pCM = new PanelContentMap();
@@ -49,11 +53,7 @@ public class PanelContentSection extends Pagina {
         try {
             return new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (NoSuchElementException e) {
-            ModalComponenteMap mCM = new ModalComponenteMap();
-            if (mCM.getBtnFechar().isDisplayed()) {
-                System.out.println("Fechando modal");
-                mCM.getBtnFechar().click();
-            } else logError(e);
+            new ComponentePage().clickBtnFechar("modal");
             return false;
         }
     }

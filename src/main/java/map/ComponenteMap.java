@@ -48,7 +48,7 @@ public class ComponenteMap extends BasePageObjects {
         return getElements(".p-dropdown-items-wrapper span");
     }
 
-    public List<WebElement> getListBtnFecharAlerta() {
-        return getElements("p-toastitem button");
+    public List<WebElement> getListBtnFechar() {
+        return getElements("span.pi-times");
     }
 }

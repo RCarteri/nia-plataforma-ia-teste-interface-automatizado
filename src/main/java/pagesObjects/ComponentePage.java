@@ -4,6 +4,7 @@ import br.com.bb.ath.ftabb.Pagina;
 import map.ComponenteMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 public class ComponentePage extends Pagina {
@@ -21,12 +22,12 @@ public class ComponentePage extends Pagina {
         return cM.getTituloComponente().getText();
     }
 
-    public void fecharAlertas() {
+    public void clickBtnFechar(String local) {
         try {
-            new ComponenteMap().getListBtnFecharAlerta().forEach(WebElement::click);
-            System.out.println("Alertas fechados.");
-        }catch (NoSuchElementException e){
-            System.out.println("Não existem alertas presentes na página para serem fechados.");
+            new ComponenteMap().getListBtnFechar().forEach(WebElement::click);
+            System.out.println("O " + local + " presente na página foi fechado.");
+        }catch (NoSuchElementException | StaleElementReferenceException e){
+            System.out.println("Não existe " + local + " presente na página para ser fechado.");
         }
     }
 

@@ -38,7 +38,7 @@ public class Utils extends FTABBUtils {
         return "\nResultado esperado:\n    '" +
                 esperado +
                 "'.\nResultado obtido:\n    '" +
-                obtido;
+                obtido + "'.";
     }
 
     public void capturaTela() {

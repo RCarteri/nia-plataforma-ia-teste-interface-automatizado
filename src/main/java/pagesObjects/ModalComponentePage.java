@@ -32,8 +32,9 @@ public class ModalComponentePage extends Pagina {
         //Estava falhando ao adicionar membro exceção no Catalogo, retornando que não existia nenhum catálogo
         waitLoadPage();
         try {
-            return new ModalComponenteMap().getModal().isDisplayed();
-        }catch (NoSuchElementException e){
+           return new ModalComponenteMap().getModal().isDisplayed();
+        } catch (NoSuchElementException e) {
+            new ComponentePage().clickBtnFechar("alerta");
             return false;
         }
     }
@@ -42,7 +43,7 @@ public class ModalComponentePage extends Pagina {
         return getNomeElemento().equals(nomeItemSelecionado);
     }
 
-    public String getNomeElemento(){
+    public String getNomeElemento() {
         return mCM.getListCabecalhoNomeID().get(0).getText();
     }
 }

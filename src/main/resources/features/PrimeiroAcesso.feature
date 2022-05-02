@@ -11,8 +11,8 @@ Funcionalidade: Suite009 - Primeiro acesso
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
         E a pagina "Primeiro acesso e convite para IBM Cloud" deverá ser carregada com sucesso
 
-    @ID-009-011 @CT011
-    Cenario: CT011 - Cadastrar usuário na IBM Cloud
+    @ID-009-011 @CT010
+    Cenario: CT010 - Cadastrar usuário na IBM Cloud
         Dado que apresente a mensagem "Não encontramos nenhuma conta na IBM Cloud registrada para seu email:"
         Quando seguir tutorial
         Então a página deverá atualizar corretamente

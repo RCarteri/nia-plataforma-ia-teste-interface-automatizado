@@ -39,7 +39,7 @@ Funcionalidade: Suite008 - Modelos Triton
             | local      | modal | mensagem                            |
             | componente |       | Não há nenhum modelo com este nome. |
 
-    @ID-008-010 @CT010
-    Cenario: CT010 - Testar modelo Triton
+    @ID-008-009 @CT009
+    Cenario: CT009 - Testar modelo Triton
         Quando existir "Testar Modelo"
         Então deverá apresentar as informações do request

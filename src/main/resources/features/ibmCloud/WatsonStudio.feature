@@ -44,8 +44,8 @@ Funcionalidade: Suite007 - Watson Studio
             | componente |         | Não há nenhum projeto com este nome. |
             | modal      | Membros | Nenhum membro encontrado.            |
 
-    @ID-007-006 @CT006
-    Esquema do Cenario: CT006 - Adicionar membro exceção
+    @ID-007-006 @CT005
+    Esquema do Cenario: CT005 - Adicionar membro exceção
         Quando existir "Membros"
         E adicionar membro com os dados <função> '<chave>'
         Então deverá apresentar a mensagem '<mensagem>' de erro
@@ -55,18 +55,18 @@ Funcionalidade: Suite007 - Watson Studio
             | F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
             | 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
 
-    @ID-007-007 @CT007
-    Cenario: CT007 - Filtrar projetos por sigla
+    @ID-007-007 @CT006
+    Cenario: CT006 - Filtrar projetos por sigla
         Quando selecionar a sigla "NIA"
         Então deverá mostrar a lista de projetos com essa sigla
 
-    @ID-007-008 @CT008
-    Cenario: CT008 - Atualizar listagem de projetos
+    @ID-007-008 @CT007
+    Cenario: CT007 - Atualizar listagem de projetos
         Quando atualizar a listagem de projetos
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Projetos carregados com sucesso!"
 
-    @ID-007-009 @CT009
-    Esquema do Cenario: CT009 - Inexistência do componente
+    @ID-007-009 @CT008
+    Esquema do Cenario: CT008 - Inexistência do componente
         Quando não existir "<opção>"
         Então deverá ser apresentado o alerta de "informação" com a mensagem "<mensagem>"
         Exemplos:

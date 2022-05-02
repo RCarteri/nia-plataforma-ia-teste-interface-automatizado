@@ -35,13 +35,14 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Quando pesquisar um dado "inválido" no "<local>" ""
         Então deverá apresentar a mensagem "<mensagem>"
         E a quantidade de resultados deve ser 0
+        E todas as validações devem retornar sucesso
         Exemplos:
             | local      | modal    | mensagem                              |
             | componente |          | Não há nenhum catálogo com este nome. |
             | modal      | Catálogo | Nenhum membro encontrado.             |
 
-    @ID-006-006 @CT006
-    Esquema do Cenario: CT006 - Adicionar membro exceção
+    @ID-006-006 @CT005
+    Esquema do Cenario: CT005 - Adicionar membro exceção
         Quando existir "Catálogo"
         E adicionar membro com os dados <função> '<chave>'
         Então deverá apresentar a mensagem '<mensagem>' de erro

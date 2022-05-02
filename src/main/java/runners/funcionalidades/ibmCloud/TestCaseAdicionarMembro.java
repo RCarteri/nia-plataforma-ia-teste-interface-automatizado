@@ -14,7 +14,7 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@CT006" },
+		tags = { "@CT005" },
 		monochrome = true
 )
 public class TestCaseAdicionarMembro {

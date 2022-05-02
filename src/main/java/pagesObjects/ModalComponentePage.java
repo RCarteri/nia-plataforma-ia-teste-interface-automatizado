@@ -8,23 +8,17 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModalComponentePage {
-    private final ModalComponenteMap mCM;
-
-    public ModalComponentePage() {
-        this.mCM = new ModalComponenteMap();
-    }
-
+public class ModalComponentePage extends ModalComponenteMap{
     public int getCountLinhas() {
-        return mCM.getListaElementosModal().size();
+        return getListaElementosModal().size();
     }
 
     public List<String> getListaInfoNomeID() {
         List<String> listaElementosVazios = new ArrayList<>();
         int index = 0;
-        for (WebElement info : mCM.getListInfoNomeID()) {
+        for (WebElement info : getListInfoNomeID()) {
             if (info.getText().length() == 0)
-                listaElementosVazios.add(mCM.getListCabecalhoNomeID().get(index).getText());
+                listaElementosVazios.add(getListCabecalhoNomeID().get(index).getText());
             index++;
         }
         return listaElementosVazios;
@@ -44,6 +38,6 @@ public class ModalComponentePage {
     }
 
     public String getNomeElemento() {
-        return mCM.getListCabecalhoNomeID().get(0).getText();
+        return getListCabecalhoNomeID().get(0).getText();
     }
 }

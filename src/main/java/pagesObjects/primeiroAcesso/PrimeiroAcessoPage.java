@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import support.Utils;
 
 import static org.junit.Assert.*;
+import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PrimeiroAcessoPage {
@@ -39,9 +40,9 @@ public class PrimeiroAcessoPage {
         try {
             return pAM.getTxtMensagem().recuperarTexto();
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
+            return null;
         }
-        return null;
     }
 
     public void paginaOK() {

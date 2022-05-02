@@ -2,24 +2,18 @@ package pagesObjects.triton;
 
 import map.TritonMap;
 
-public class TritonPage {
-    private final TritonMap tM;
-
-    public TritonPage() {
-        this.tM = new TritonMap();
-    }
-
+public class TritonPage extends TritonMap{
     public String getNomeModelo() {
-        return tM.getTdNomeModelo().getText();
+        return getTdNomeModelo().getText();
     }
 
     public String getPreMaisDetalhes() {
-        tM.getBtnMaisDetalhes().click();
-        return tM.getBtnPreMaisDetalhes().getText();
+        getBtnMaisDetalhes().click();
+        return getBtnPreMaisDetalhes().getText();
     }
 
     public boolean estaRetornandoInformacoes() {
-        return tM.getInformacoes().stream()
-                .noneMatch(info -> info.getText() == null) && tM.getRequest() != null;
+        return getInformacoes().stream()
+                .noneMatch(info -> info.getText() == null) && getRequest() != null;
     }
 }

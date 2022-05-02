@@ -8,7 +8,7 @@ import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 import static support.Utils.waitElement;
 
-public class ModalComponenteMap extends BasePageObjects {
+public class ModalComponenteMap {
     public WebElement getTituloModal() {
         return getElement(".p-dialog-title");
     }

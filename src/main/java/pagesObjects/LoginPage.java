@@ -16,7 +16,7 @@ import static support.Utils.logError;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.TimesAndReasons.CARR_PAG;
 
-public class LoginPage {
+public class LoginPage extends LoginMap{
     private final Utils utils;
     private short count;
 
@@ -65,10 +65,9 @@ public class LoginPage {
                 System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
             } else {
                 new Utils().esperar(CARR_PAG);
-                LoginMap lM = new LoginMap();
-                lM.getInputUsername().sendKeys(datapool.get("chave"));
-                lM.getInputPassword().sendKeys(datapool.get("senha"));
-                lM.getBtnLogin().click();
+                getInputUsername().sendKeys(datapool.get("chave"));
+                getInputPassword().sendKeys(datapool.get("senha"));
+                getBtnLogin().click();
                 while (!isLogged) {
                     if (++count == MAX_BOUND) {
                         Plataforma.fecharPlataforma();

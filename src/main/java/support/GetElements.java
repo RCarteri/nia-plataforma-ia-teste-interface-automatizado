@@ -7,6 +7,8 @@ import support.enums.LogTypes;
 import java.util.ArrayList;
 import java.util.List;
 
+import static support.enums.LogTypes.ERROR;
+import static support.enums.LogTypes.INFO;
 import static support.enums.TimesAndReasons.LOAD_IFRAMES;
 
 public class GetElements {
@@ -38,18 +40,18 @@ public class GetElements {
                         .append(", não encontrou resultado(s) no iframe \"")
                         .append(iframesList.get(iframesCount++));
 
-                log(logTxt.toString(), LogTypes.INFO);
+                log(logTxt.toString(), INFO);
                 logTxt.delete(0, logTxt.length());
 
                 logTxt.append("Buscando o elemento com os parâmetros acima no iframe \"")
                         .append(iframesList.get(iframesCount));
-                log(logTxt.toString(), LogTypes.INFO);
+                log(logTxt.toString(), INFO);
 
                 getDriver().switchTo().frame(iframesList.get(iframesCount));
                 return findElement(by);
             }
-        } catch (WebDriverException | IndexOutOfBoundsException wde) {
-            log("O mapeamento não iniciou no iframe inicial.", LogTypes.INFO);
+        } catch (WebDriverException | IndexOutOfBoundsException e) {
+            log("O mapeamento não iniciou no iframe inicial.", INFO);
             utils.esperar(LOAD_IFRAMES);
             iframesList.clear();
             return findElement(by);
@@ -64,14 +66,14 @@ public class GetElements {
         if (iframesList.size() > 0) {
             String msg = "Voltando para o \"MAIN_IFRAME (" + iframesList.get(0) + ")\"...";
 
-            log(msg, LogTypes.INFO);
+            log(msg, INFO);
         }
     }
 
     public void log(String msg, LogTypes type) {
-        if (type == LogTypes.INFO)
+        if (type == INFO)
             System.out.println("\n    INFO - " + msg);
-        else if (type == LogTypes.ERROR)
+        else if (type == ERROR)
             System.err.println("\n    ERRO - " + msg);
     }
 }

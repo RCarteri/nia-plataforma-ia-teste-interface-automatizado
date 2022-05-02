@@ -17,5 +17,3 @@ Funcionalidade: Suite009 - Primeiro acesso
         Quando seguir tutorial
         Então a página deverá atualizar corretamente
         E o ultimo botão será de finalizar
-
-

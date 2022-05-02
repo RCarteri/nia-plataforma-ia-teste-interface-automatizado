@@ -1,13 +1,12 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
 import map.PaginacaoMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 
 import static support.Utils.rolarPaginaAteElemento;
 
-public class PaginacaoSection extends Pagina {
+public class PaginacaoSection {
     public String getQuantResultados(@NotNull String local) {
         String frase = null;
         PaginacaoMap pM = new PaginacaoMap();

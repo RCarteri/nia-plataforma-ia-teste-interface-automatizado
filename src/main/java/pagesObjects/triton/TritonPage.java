@@ -3,7 +3,11 @@ package pagesObjects.triton;
 import map.TritonMap;
 
 public class TritonPage {
- private final TritonMap tM = new TritonMap();
+    private final TritonMap tM;
+
+    public TritonPage() {
+        this.tM = new TritonMap();
+    }
 
     public String getNomeModelo() {
         return tM.getTdNomeModelo().getText();

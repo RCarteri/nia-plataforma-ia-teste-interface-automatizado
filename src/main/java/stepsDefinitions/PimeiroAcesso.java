@@ -11,7 +11,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PimeiroAcesso {
-    private final PrimeiroAcessoPage pAP = new PrimeiroAcessoPage();
+    private final PrimeiroAcessoPage pAP;
+
+    public PimeiroAcesso() {
+        this.pAP = new PrimeiroAcessoPage();
+    }
 
     @Dado("^que apresente a mensagem \"([^\"]*)\"$")
     public void queApresenteAMensagem(@NotNull String mensagem) {

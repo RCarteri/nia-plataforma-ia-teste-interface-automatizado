@@ -12,7 +12,11 @@ import support.Utils;
 import static org.junit.Assert.assertEquals;
 
 public class Login {
-    private final LoginPage lP = new LoginPage();
+    private final LoginPage lP;
+
+    public Login() {
+        this.lP = new LoginPage();
+    }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {

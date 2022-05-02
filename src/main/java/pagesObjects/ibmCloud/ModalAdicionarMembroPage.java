@@ -9,7 +9,11 @@ import support.Utils;
 import java.util.stream.Collectors;
 
 public class ModalAdicionarMembroPage {
-    private final ModalAdicionarMembroMap mAMM = new ModalAdicionarMembroMap();
+    private final ModalAdicionarMembroMap mAMM;
+
+    public ModalAdicionarMembroPage() {
+        this.mAMM = new ModalAdicionarMembroMap();
+    }
 
     public void adicionarMembro(String funcao, String chave) {
         try {

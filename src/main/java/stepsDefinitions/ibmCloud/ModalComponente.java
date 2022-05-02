@@ -11,7 +11,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ModalComponente {
-    private final ModalComponentePage mCP = new ModalComponentePage();
+    private final ModalComponentePage mCP;
+
+    public ModalComponente() {
+        this.mCP = new ModalComponentePage();
+    }
 
     @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
     public void deveraApresentarOTitulo(String titulo) {

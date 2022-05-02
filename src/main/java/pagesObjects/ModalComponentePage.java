@@ -1,6 +1,5 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
 import map.ModalComponenteMap;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -9,8 +8,12 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModalComponentePage extends Pagina {
-    private final ModalComponenteMap mCM = new ModalComponenteMap();
+public class ModalComponentePage {
+    private final ModalComponenteMap mCM;
+
+    public ModalComponentePage() {
+        this.mCM = new ModalComponenteMap();
+    }
 
     public int getCountLinhas() {
         return mCM.getListaElementosModal().size();

@@ -1,6 +1,5 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
 import map.ComponenteMap;
 import map.PaginacaoMap;
 import map.PanelContentMap;
@@ -14,9 +13,13 @@ import java.util.List;
 import static support.Utils.rolarPaginaAteElemento;
 import static support.Utils.waitLoadPage;
 
-public class PanelContentSection extends Pagina {
-    private final PanelContentMap pCM = new PanelContentMap();
+public class PanelContentSection {
+    private final PanelContentMap pCM;
     private String nomeItemSelecionado;
+
+    public PanelContentSection() {
+        this.pCM = new PanelContentMap();
+    }
 
     public String getNomeItemSelecionado() {
         return nomeItemSelecionado;

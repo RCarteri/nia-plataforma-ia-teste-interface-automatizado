@@ -13,14 +13,21 @@ import static org.junit.Assert.assertTrue;
 import static support.Utils.printResultadoEsperadoObtido;
 
 public class Pesquisa {
-    private final PesquisaSection pqS = new PesquisaSection();
-    private final PaginacaoSection pS = new PaginacaoSection();
-    private final PanelContentSection pCS = new PanelContentSection();
-    private final Utils utils = new Utils();
+    private final PesquisaSection pqS;
+    private final PaginacaoSection pS;
+    private final PanelContentSection pCS;
+    private final Utils utils;
     private String quantResultadosAntes;
     private String palavraPesquisada;
     private String local;
     private Boolean validacao;
+
+    public Pesquisa() {
+        this.pqS = new PesquisaSection();
+        this.pS = new PaginacaoSection();
+        this.pCS = new PanelContentSection();
+        this.utils = new Utils();
+    }
 
     @Quando("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\"$")
     public void pesquisar(String dado, String local) {

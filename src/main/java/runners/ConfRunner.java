@@ -7,7 +7,11 @@ import support.APIRest.Urls;
 import support.Utils;
 
 public class ConfRunner {
-    static APIRest apiRest = new APIRest();
+    private static APIRest apiRest;
+
+    public ConfRunner() {
+        apiRest = new APIRest();
+    }
 
     public static void confInit(){
         new Utils().deletarAllureResults();
@@ -22,7 +26,7 @@ public class ConfRunner {
         apiRest.atualizarAllureArq3(Urls.GERAR_RELATORIO.getUrl());
     }
 
-    private static void limparRelatoriosAllure(){
+    private void limparRelatoriosAllure(){
         apiRest.atualizarAllureArq3(Urls.LIMPAR_RESULTADOS.getUrl());
         apiRest.atualizarAllureArq3(Urls.LIMPAR_HISTORICO.getUrl());
     }

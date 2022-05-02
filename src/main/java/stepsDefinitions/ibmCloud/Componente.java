@@ -12,10 +12,16 @@ import static org.junit.Assert.*;
 import static support.Utils.printResultadoEsperadoObtido;
 
 public class Componente {
-    private final ComponentePage cP = new ComponentePage();
-    private final PanelContentSection pCS = new PanelContentSection();
-    private final Utils utils = new Utils();
+    private final ComponentePage cP;
+    private final PanelContentSection pCS;
+    private final Utils utils;
     private String nomeItemSelecionado;
+
+    public Componente() {
+        this.cP = new ComponentePage();
+        this.pCS = new PanelContentSection();
+        this.utils = new Utils();
+    }
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) {

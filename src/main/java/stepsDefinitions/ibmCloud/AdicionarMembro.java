@@ -10,8 +10,13 @@ import static org.junit.Assert.assertTrue;
 import static support.Utils.printResultadoEsperadoObtido;
 
 public class AdicionarMembro {
-    ModalAdicionarMembroPage mAMP = new ModalAdicionarMembroPage();
-    Utils utils = new Utils();
+    private final ModalAdicionarMembroPage mAMP;
+    private final Utils utils;
+
+    public AdicionarMembro( ) {
+        this.mAMP = new ModalAdicionarMembroPage();
+        this.utils = new Utils();
+    }
 
     @E("^adicionar membro com os dados (.*) '(.*)'$")
     public void adicionarMembroComAChave(String funcao, String chave) {

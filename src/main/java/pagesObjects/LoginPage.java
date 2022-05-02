@@ -17,8 +17,13 @@ import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.TimesAndReasons.CARR_PAG;
 
 public class LoginPage {
-    private final Utils utils = new Utils();
-    private short count = 0;
+    private final Utils utils;
+    private short count;
+
+    public LoginPage() {
+        this.utils = new Utils();
+        this.count = 0;
+    }
 
     public void abrirPlataforma(){
         System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));

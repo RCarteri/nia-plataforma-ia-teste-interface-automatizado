@@ -1,6 +1,5 @@
 package pagesObjects.primeiroAcesso;
 
-import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ComponenteMap;
 import map.PrimeiroAcessoMap;
@@ -11,12 +10,16 @@ import support.Utils;
 import static org.junit.Assert.*;
 import static support.Utils.rolarPaginaAteElemento;
 
-public class PrimeiroAcessoPage extends Pagina {
-   private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();
-
-    private int posicao = 0;
+public class PrimeiroAcessoPage {
+    private int posicao;
     private WebElement btnFinalizar;
     private int nPaginaFalha;
+    private final PrimeiroAcessoMap pAM;
+
+    public PrimeiroAcessoPage() {
+        this.posicao = 0;
+        this.pAM = new PrimeiroAcessoMap();
+    }
 
     private void voltarPagina() {
         rolarPaginaAteElemento(pAM.getBtnVoltar());
@@ -98,7 +101,7 @@ public class PrimeiroAcessoPage extends Pagina {
         new Utils().capturaTela();
     }
 
-    private boolean isBotaoDesabilitado(@NotNull WebElement botao){
+    private boolean isBotaoDesabilitado(@NotNull WebElement botao) {
         return botao.getAttribute("disabled") != null;
     }
 }

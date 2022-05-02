@@ -1,6 +1,5 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
 import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,10 +10,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class PesquisaSection extends Pagina {
-    private final PesquisaMap pM = new PesquisaMap();
-    private final Map<String, Boolean> validacaoPesquisa = new HashMap<>();
-    private String mensagemPesquisaInvalida = "";
+public class PesquisaSection {
+    private final PesquisaMap pM;
+    private final Map<String, Boolean> validacaoPesquisa;
+    private String mensagemPesquisaInvalida;
+
+    public PesquisaSection() {
+        this.mensagemPesquisaInvalida = "";
+        this.pM = new PesquisaMap();
+        this.validacaoPesquisa = new HashMap<>();
+    }
 
     public void pesquisar(String palavra, @NotNull String local) {
         System.out.println("Pesquisando por: '" + palavra + "' no " + local);

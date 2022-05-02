@@ -1,14 +1,17 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
 import map.ComponenteMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-public class ComponentePage extends Pagina {
-    private final ComponenteMap cM = new ComponenteMap();
+public class ComponentePage{
+    private final ComponenteMap cM;
+
+    public ComponentePage() {
+        this.cM = new ComponenteMap();
+    }
 
     public void acessarComponente(String componente) {
         cM.getDropDownComponente().click();

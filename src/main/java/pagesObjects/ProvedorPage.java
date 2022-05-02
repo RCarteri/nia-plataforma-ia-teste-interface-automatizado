@@ -1,12 +1,16 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
 import map.ProvedorMap;
 import org.jetbrains.annotations.NotNull;
 
-public class ProvedorPage extends Pagina {
+public class ProvedorPage {
+    private final ProvedorMap pM;
+
+    public ProvedorPage() {
+       this.pM = new ProvedorMap();
+    }
+
     public void acessarProvedor(@NotNull String provedor) {
-        ProvedorMap pM = new ProvedorMap();
         switch (provedor) {
             case "IBM Cloud":
                 pM.getBtnIBMCloud().click();

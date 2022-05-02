@@ -13,7 +13,7 @@ public class ConfRunner {
         new Utils().deletarAllureResults();
         AllureARQ3.ConfigInicialAllureARQ3();
         // Descomentar para limpar o histórico de relatóios no Allure caso esteja travando muito
-        limparRelatoriosAllure();
+        //limparRelatoriosAllure();
     }
 
     public static void finish() {

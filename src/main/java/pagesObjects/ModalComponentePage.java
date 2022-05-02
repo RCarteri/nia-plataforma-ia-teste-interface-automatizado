@@ -3,12 +3,11 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.Pagina;
 import map.ModalComponenteMap;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static support.Utils.espera;
 
 public class ModalComponentePage extends Pagina {
     private final ModalComponenteMap mCM = new ModalComponenteMap();
@@ -30,9 +29,8 @@ public class ModalComponentePage extends Pagina {
 
     protected boolean isModalDisplayed() {
         try {
-            espera(40);
            return new ModalComponenteMap().getModal().isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | TimeoutException e) {
             new ComponentePage().clickBtnFechar(true,"alerta");
             return false;
         }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import static support.GetElements.getElement;
 import static support.GetElements.getElements;
+import static support.Utils.waitElement;
 
 public class ModalComponenteMap extends BasePageObjects {
     public WebElement getTituloModal() {
@@ -13,7 +14,7 @@ public class ModalComponenteMap extends BasePageObjects {
     }
 
     public WebElement getModal() {
-        return getElement("div.p-dialog-header");
+        return waitElement("div.p-dialog-header");
     }
 
     public List<WebElement> getListInfoNomeID() {

@@ -16,14 +16,14 @@ import org.junit.runner.RunWith;
 		tags = { "@S001" },
 		monochrome = true
 )
-public class TestCaseAcessarPlataforma {
+public class TestCaseAcessarPlataforma extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

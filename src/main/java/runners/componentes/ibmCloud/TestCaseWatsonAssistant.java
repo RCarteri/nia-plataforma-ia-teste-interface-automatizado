@@ -17,14 +17,14 @@ import runners.ConfRunner;
 		tags = { "@S005" },
 		monochrome = true
 )
-public class TestCaseWatsonAssistant {
+public class TestCaseWatsonAssistant extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

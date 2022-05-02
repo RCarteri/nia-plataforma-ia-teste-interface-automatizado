@@ -17,14 +17,14 @@ import runners.ConfRunner;
 		tags = { "@CT004" },
 		monochrome = true
 )
-public class TestCasePesquisa {
+public class TestCasePesquisa extends ConfRunner {
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

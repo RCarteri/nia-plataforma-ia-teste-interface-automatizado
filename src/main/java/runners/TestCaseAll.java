@@ -16,14 +16,14 @@ import org.junit.runner.RunWith;
 		tags = { "" },
 		monochrome = true
 )
-public class TestCaseAll {
+public class TestCaseAll extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

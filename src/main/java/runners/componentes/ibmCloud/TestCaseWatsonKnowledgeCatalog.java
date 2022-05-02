@@ -17,14 +17,14 @@ import runners.ConfRunner;
 		tags = { "@S006" },
 		monochrome = true
 )
-public class TestCaseWatsonKnowledgeCatalog {
+public class TestCaseWatsonKnowledgeCatalog extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

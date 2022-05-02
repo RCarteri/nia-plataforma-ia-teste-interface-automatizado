@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static support.Utils.espera;
+
 public class ModalComponentePage extends Pagina {
     private final ModalComponenteMap mCM = new ModalComponenteMap();
 
@@ -28,6 +30,7 @@ public class ModalComponentePage extends Pagina {
 
     protected boolean isModalDisplayed() {
         try {
+            espera(40);
            return new ModalComponenteMap().getModal().isDisplayed();
         } catch (NoSuchElementException e) {
             new ComponentePage().clickBtnFechar(true,"alerta");

@@ -28,12 +28,12 @@ public class Login {
         lP.logar();
     }
 
-    @Quando("^acessar a pagina \"([^\"]*)\"$")
+    @Quando("^acessar a página \"([^\"]*)\"$")
     public void acessarAPagina(String nomePagina) {
         lP.acessarPagina(nomePagina);
     }
 
-    @Então("^a pagina \"([^\"]*)\" deverá ser carregada com sucesso$")
+    @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         new Utils().capturaTela();
         assertEquals(Plataforma.recuperarTituloPagina(), titulo);

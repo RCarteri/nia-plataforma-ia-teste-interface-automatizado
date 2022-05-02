@@ -6,10 +6,10 @@ Funcionalidade: Suite003 - Grupos de Acesso
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login no Sistema
-        Quando acessar a pagina "Analytics | IA (hm)"
+        Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
-        Quando acessar a pagina do provedor "IBM Cloud"
+        Quando acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Grupos de Acesso"
 
     @ID-003-002 @CT002 @Smoke

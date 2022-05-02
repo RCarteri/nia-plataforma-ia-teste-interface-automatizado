@@ -10,7 +10,7 @@ public class Provedor {
         this.pP = new ProvedorPage();
     }
 
-    @Quando("^acessar a pagina do provedor \"([^\"]*)\"$")
+    @Quando("^acessar a página do provedor \"([^\"]*)\"$")
     public void acessarAPaginaDoProvedor(String provedor) {
         pP.acessarProvedor(provedor);
     }

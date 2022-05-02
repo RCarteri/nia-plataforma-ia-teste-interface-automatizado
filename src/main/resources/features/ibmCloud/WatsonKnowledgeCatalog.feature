@@ -25,30 +25,20 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E deverá mostrar a lista com elementos
 
     @ID-006-004 @CT004
-    Cenario: CT004 - Pesquisar
-        Quando pesquisar um dado "válido" no "componente"
+    Esquema do Cenario: Cenario: CT004 - Pesquisar
+        Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
         Quando limpar pesquisa
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar um dado "inválido" no "componente"
-        Então deverá apresentar a mensagem "Não há nenhum catálogo com este nome."
+        Quando pesquisar um dado "inválido" no "<local>" ""
+        Então deverá apresentar a mensagem "<mensagem>"
         E a quantidade de resultados deve ser 0
-
-    @ID-006-005 @CT005 @CT004
-    Cenario: CT005 - Pesquisar no modal
-        Quando existir "Catálogo"
-        E pesquisar um dado "válido" no "modal"
-        Então deverá apresentar um total de resultados diferente do anterior
-        E os resultados apresentados devem conter a palavra pesquisada
-        Quando limpar pesquisa
-        Então o input deve estar vazio
-        E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar um dado "inválido" no "modal"
-        Então deverá apresentar a mensagem "Nenhum membro encontrado."
-        E a quantidade de resultados deve ser 0
-        E todas as validações devem retornar sucesso
+        Exemplos:
+            | local      | modal    | mensagem                              |
+            | componente |          | Não há nenhum catálogo com este nome. |
+            | modal      | Catálogo | Nenhum membro encontrado.             |
 
     @ID-006-006 @CT006
     Esquema do Cenario: CT006 - Adicionar membro exceção
@@ -57,6 +47,6 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Então deverá apresentar a mensagem '<mensagem>' de erro
         Exemplos:
             | chave    | função        | mensagem                                                                                                                                 |
-            |          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                                                      |
+            |          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
             | F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
             | 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |

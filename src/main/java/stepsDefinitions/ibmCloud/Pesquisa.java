@@ -86,4 +86,14 @@ public class Pesquisa {
         boolean validacao = pqS.getValidacaoPesquisa();
         assertTrue(pqS.getMensagemPesquisaInvalida(), validacao);
     }
+
+    @E("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\" \"([^\"]*)\"$")
+    public void pesquisarUmDado(String dado, @NotNull String local, String componente) {
+        if (local.equals("modal") && !componente.equals("")) new Componente().existirOpcao(componente);
+        this.local = local;
+        pqS.limparPesquisa(this.local);
+        this.quantResultadosAntes = pS.getQuantResultados(local);
+        this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
+        pqS.pesquisar(palavraPesquisada, local);
+    }
 }

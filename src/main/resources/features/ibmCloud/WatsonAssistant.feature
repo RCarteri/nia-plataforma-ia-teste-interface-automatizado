@@ -25,14 +25,17 @@ Funcionalidade: Suite005 - Watson Assistant
         E deverá mostrar a lista com elementos
 
     @ID-005-004 @CT004
-    Cenario: CT004 - Pesquisar
-        Quando pesquisar um dado "válido" no "componente"
+    Esquema do Cenario: Cenario: CT004 - Pesquisar
+        Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
         Quando limpar pesquisa
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar um dado "inválido" no "componente"
-        Então deverá apresentar a mensagem "Não há nenhuma instância com este nome."
+        Quando pesquisar um dado "inválido" no "<local>" ""
+        Então deverá apresentar a mensagem "<mensagem>"
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
+        Exemplos:
+            | local      | modal | mensagem                                |
+            | componente |       | Não há nenhuma instância com este nome. |

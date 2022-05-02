@@ -28,31 +28,21 @@ Funcionalidade: Suite007 - Watson Studio
             | Notebooks | Notebooks          |
 
     @ID-007-004 @CT004
-    Cenario: CT004 - Pesquisar
-        Quando pesquisar um dado "válido" no "componente"
+    Esquema do Cenario: CT004 - Pesquisar
+        Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
         Quando limpar pesquisa
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar um dado "inválido" no "componente"
-        Então deverá apresentar a mensagem "Não há nenhum projeto com este nome."
+        Quando pesquisar um dado "inválido" no "<local>" ""
+        Então deverá apresentar a mensagem "<mensagem>"
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
-
-    @ID-007-005 @CT005 @CT004
-    Cenario: CT005 - Pesquisar no modal
-        Quando existir "Membros"
-        E pesquisar um dado "válido" no "modal"
-        Então deverá apresentar um total de resultados diferente do anterior
-        E os resultados apresentados devem conter a palavra pesquisada
-        Quando limpar pesquisa
-        Então o input deve estar vazio
-        E o total de resultados deverá mostrar a quantidade anterior
-        Quando pesquisar um dado "inválido" no "modal"
-        Então deverá apresentar a mensagem "Nenhum membro encontrado."
-        E a quantidade de resultados deve ser 0
-        E todas as validações devem retornar sucesso
+        Exemplos:
+            | local      | modal   | mensagem                             |
+            | componente |         | Não há nenhum projeto com este nome. |
+            | modal      | Membros | Nenhum membro encontrado.            |
 
     @ID-007-006 @CT006
     Esquema do Cenario: CT006 - Adicionar membro exceção

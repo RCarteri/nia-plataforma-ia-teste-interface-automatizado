@@ -13,10 +13,10 @@ public class ProvedorPage {
     public void acessarProvedor(@NotNull String provedor) {
         switch (provedor) {
             case "IBM Cloud":
-                pM.getBtnIBMCloud().click();
+                pM.getListProvedor().get(0).click();
                 break;
             case "Triton":
-                pM.getBtnTriton().click();
+                pM.getListProvedor().get(1).click();
                 break;
         }
     }

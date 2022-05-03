@@ -1,38 +1,21 @@
 package map;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.anotacoes.MapearElementoWeb;
-import br.com.bb.ath.ftabb.elementos.Elemento;
-import br.com.bb.ath.ftabb.elementos.ElementoTexto;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.getElements;
+import static support.GetElements.getElements;
 
-public class ProvedorMap extends Pagina {
-    @MapearElementoWeb(css = "figure .mi--person")
-    private Elemento btnPerfil;
-
-    @MapearElementoWeb(xPath = "//h3[contains(text(), 'IBM Cloud')]")
-    private ElementoTexto btnIBMCloud;
-
-    @MapearElementoWeb(xPath = "//h3[contains(text(), 'Triton')]")
-    private ElementoTexto btnTriton;
+public class ProvedorMap extends BasePageObjects {
+    public List<WebElement> getListProvedor(){
+        return getElements("div.p-card-body");
+    }
 
     public List<WebElement> getListBtnExibir() {
         return getElements("td button.ng-star-inserted.p-button-secondary");
     }
 
-    public Elemento getBtnPerfil() {
-        return btnPerfil;
-    }
-
-    public ElementoTexto getBtnIBMCloud() {
-        return btnIBMCloud;
-    }
-
-    public ElementoTexto getBtnTriton() {
-        return btnTriton;
+    public List<WebElement> getListNomes() {
+        return getElements("td.ng-star-inserted:first-child");
     }
 }

@@ -4,8 +4,14 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.ProvedorPage;
 
 public class Provedor {
-    @Quando("^acessar a pagina do provedor \"([^\"]*)\"$")
+    private final ProvedorPage pP;
+
+    public Provedor() {
+        this.pP = new ProvedorPage();
+    }
+
+    @Quando("^acessar a página do provedor \"([^\"]*)\"$")
     public void acessarAPaginaDoProvedor(String provedor) {
-        new ProvedorPage().acessarProvedor(provedor);
+        pP.acessarProvedor(provedor);
     }
 }

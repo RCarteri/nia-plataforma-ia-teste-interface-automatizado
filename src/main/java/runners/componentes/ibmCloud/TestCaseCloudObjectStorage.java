@@ -17,14 +17,14 @@ import runners.ConfRunner;
 		tags = { "@S002" },
 		monochrome = true
 )
-public class TestCaseCloudObjectStorage {
+public class TestCaseCloudObjectStorage extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

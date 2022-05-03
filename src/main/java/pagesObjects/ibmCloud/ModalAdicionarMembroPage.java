@@ -6,24 +6,39 @@ import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
+import java.util.stream.Collectors;
+
 public class ModalAdicionarMembroPage {
-    private final ModalAdicionarMembroMap mAMM = new ModalAdicionarMembroMap();
+    private final ModalAdicionarMembroMap mAMM;
+
+    public ModalAdicionarMembroPage() {
+        this.mAMM = new ModalAdicionarMembroMap();
+    }
 
     public void adicionarMembro(String funcao, String chave) {
         try {
-            mAMM.getInputAdicionarMembro().escrever(chave);
-            mAMM.getInputAdicionarMembro().clicar();
-            if (mAMM.getDropDownFuncao().elementoExiste()) selecionarFuncao(funcao);
+            mAMM.getInputAdicionarMembro().sendKeys(chave);
+            mAMM.getInputAdicionarMembro().click();
+            if (isDropDowndisplayed()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
             Utils.logError(e);
         }
     }
 
+    private boolean isDropDowndisplayed(){
+        try{
+            return mAMM.getDropDownFuncao().isDisplayed();
+        }catch (NullPointerException e){
+            System.out.println("Dropdown função não está sendo exibido.");
+            return false;
+        }
+    }
+
     private void selecionarFuncao(@NotNull String funcao) throws ElementoNaoLocalizadoException {
-        mAMM.getDropDownFuncao().clicar();
+        mAMM.getDropDownFuncao().click();
         if (funcao.equals("")) {
-            mAMM.getDropDownFuncao().clicar();
-            mAMM.getInputAdicionarMembro().clicar();
+            mAMM.getDropDownFuncao().click();
+            mAMM.getInputAdicionarMembro().click();
             return;
         }
         for (WebElement wE : mAMM.getListSpanFuncao()) {
@@ -35,27 +50,16 @@ public class ModalAdicionarMembroPage {
     }
 
     public void acessarAdicionarMembro() {
-        try {
-            mAMM.getBtnAdicionarMembro().clicar();
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
-        }
+        mAMM.getBtnAdicionarMembro().click();
     }
 
     public boolean isBtnConfirmarAtivo(){
-        try {
-            return mAMM.getBtnConfirmar().elementoAtivo();
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
-        }
-        return true;
+        return mAMM.getBtnConfirmar().isEnabled();
     }
 
     public String getMensagem() {
-        StringBuilder mensagem = new StringBuilder();
-        for (WebElement webElement : mAMM.getListSmallMsg()) {
-            mensagem.append(webElement.getText().replaceAll("\\n", ""));
-        }
-        return mensagem.toString();
+        return mAMM.getListSmallMsg().stream()
+                .map(webElement -> webElement.getText().replaceAll("\\n", ""))
+                .collect(Collectors.joining());
     }
 }

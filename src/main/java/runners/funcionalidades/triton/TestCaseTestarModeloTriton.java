@@ -1,4 +1,4 @@
-package runners.funcionalidades;
+package runners.funcionalidades.triton;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -14,17 +14,17 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@CT010" },
+		tags = { "@CT009" },
 		monochrome = true
 )
-public class TestCaseTestarModeloTriton {
+public class TestCaseTestarModeloTriton extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

@@ -14,17 +14,17 @@ import runners.ConfRunner;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@CT006" },
+		tags = { "@CT005" },
 		monochrome = true
 )
-public class TestCaseAdicionarMembro {
+public class TestCaseAdicionarMembro extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

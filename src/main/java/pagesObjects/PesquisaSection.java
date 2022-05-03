@@ -1,63 +1,56 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.PesquisaMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
-import support.Utils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class PesquisaSection extends Pagina {
-    private final PesquisaMap pM = new PesquisaMap();
-    private final Map<String, Boolean> validacaoPesquisa = new HashMap<>();
-    private String mensagemPesquisaInvalida = "";
+public class PesquisaSection {
+    private final PesquisaMap pM;
+    private final Map<String, Boolean> validacaoPesquisa;
+    private String mensagemPesquisaInvalida;
+
+    public PesquisaSection() {
+        this.mensagemPesquisaInvalida = "";
+        this.pM = new PesquisaMap();
+        this.validacaoPesquisa = new HashMap<>();
+    }
 
     public void pesquisar(String palavra, @NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    pM.getInputPesquisa().escrever(palavra);
-                    break;
-                case "modal":
-                    pM.getInputPesquisaModal().escrever(palavra);
-                    break;
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        System.out.println("Pesquisando por: '" + palavra + "' no " + local);
+        switch (local) {
+            case "componente":
+                pM.getInputPesquisa().sendKeys(palavra);
+                break;
+            case "modal":
+                pM.getInputPesquisaModal().sendKeys(palavra);
+                break;
         }
     }
 
     public String getTxtInputFiltro(@NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    return pM.getInputPesquisa().recuperarTexto();
-                case "modal":
-                    return pM.getInputPesquisaModal().recuperarTexto();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                return pM.getInputPesquisa().getText();
+            case "modal":
+                return pM.getInputPesquisaModal().getText();
         }
         return null;
     }
 
     public void limparPesquisa(@NotNull String local) {
-        try {
-            switch (local) {
-                case "componente":
-                    pM.getBtnLimparPesquisa().clicar();
-                    break;
-                case "modal":
-                    pM.getBtnLimparFiltroPesquisa().clicar();
-                    break;
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+        switch (local) {
+            case "componente":
+                pM.getBtnLimparPesquisa().click();
+                break;
+            case "modal":
+                pM.getBtnLimparFiltroPesquisa().click();
+                break;
         }
     }
 
@@ -66,13 +59,10 @@ public class PesquisaSection extends Pagina {
     }
 
     public boolean getValidacaoPesquisa() {
-        StringBuilder strBuilder = new StringBuilder(this.mensagemPesquisaInvalida);
-        for (Map.Entry<String, Boolean> entry : validacaoPesquisa.entrySet()) {
-            if (!entry.getValue()) {
-                strBuilder.append(entry.getKey()).append("\n");
-            }
-        }
-        this.mensagemPesquisaInvalida = strBuilder.toString();
+        this.mensagemPesquisaInvalida = validacaoPesquisa.entrySet().stream()
+                .filter(entry -> !entry.getValue())
+                .map(entry -> entry.getKey() + "\n")
+                .collect(Collectors.joining("", this.mensagemPesquisaInvalida, ""));
         return this.mensagemPesquisaInvalida.equals("");
     }
 
@@ -103,7 +93,7 @@ public class PesquisaSection extends Pagina {
     }
 
     public boolean resultadosContemString(String palavraPesquisada, @NotNull String local) {
-        boolean resultadosOk = true;
+        boolean resultadosOk;
         List<WebElement> listTxt;
         switch (local) {
             case "componente":
@@ -116,14 +106,12 @@ public class PesquisaSection extends Pagina {
                 listTxt = pM.getListaSigla();
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + local);
+                throw new IllegalStateException("Valor inesperado: " + local);
         }
-        for (WebElement webElement : listTxt) {
-            if (!(webElement.getText().toLowerCase().contains(palavraPesquisada.toLowerCase()))) {
-                resultadosOk = false;
-                break;
-            }
-        }
+        resultadosOk = listTxt.stream()
+                .allMatch(webElement ->
+                        webElement.getText().toLowerCase()
+                                .contains(palavraPesquisada.toLowerCase()));
         return resultadosOk;
     }
 }

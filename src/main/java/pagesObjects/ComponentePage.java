@@ -1,28 +1,51 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.Pagina;
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ComponenteMap;
+import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+public class ComponentePage{
+    private final ComponenteMap cM;
 
-public class ComponentePage extends Pagina {
-    private final ComponenteMap cM = new ComponenteMap();
+    public ComponentePage() {
+        this.cM = new ComponenteMap();
+    }
 
-    public void acessarComponente(String componente) throws ElementoNaoLocalizadoException {
-        cM.getDropDownComponente().clicar();
-        List<WebElement> listComponente = cM.getListComponente();
-        for (WebElement webElement : listComponente) {
-            if (webElement.getText().intern().equals(componente.intern())) {
-                webElement.click();
-                break;
-            }
+    public void acessarComponente(String componente) {
+        cM.getDropDownComponente().click();
+        cM.getListComponente().stream()
+                .filter(webElement -> webElement.getText().intern().equals(componente.intern()))
+                .findFirst()
+                .ifPresent(WebElement::click);
+    }
+
+    public String getTxtTituloComponente() {
+        return cM.getTituloComponente().getText();
+    }
+
+    public void clickBtnFechar(boolean elemNaoExiste, String local) {
+        if (elemNaoExiste) {
+            System.out.println(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.");
+        }
+        try {
+            new ComponenteMap().getListBtnFechar().forEach(WebElement::click);
+            System.out.println("O " + local + " presente na página foi fechado.");
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            System.out.println("Não existe " + local + " presente na página para ser fechado.");
         }
     }
 
-    public String getTituloComponente() throws ElementoNaoLocalizadoException {
-        return cM.getDivTituloComponente().recuperarTexto();
+    public String getTxtMensagemAlerta(@NotNull String opcao) {
+        ComponenteMap cM = new ComponenteMap();
+        switch (opcao) {
+            case "sucesso":
+                return cM.getAlertSuccess().getText();
+            case "informação":
+                return cM.getAlertInfo().getText();
+            default:
+                return null;
+        }
     }
-
 }

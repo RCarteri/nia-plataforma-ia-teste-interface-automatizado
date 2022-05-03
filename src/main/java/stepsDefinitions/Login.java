@@ -1,5 +1,7 @@
 package stepsDefinitions;
 
+import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import br.com.bb.ath.ftabb.gaw.Plataforma;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
@@ -7,10 +9,14 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.LoginPage;
 import support.Utils;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class Login {
-    private final LoginPage lP = new LoginPage();
+    private final LoginPage lP;
+
+    public Login() {
+        this.lP = new LoginPage();
+    }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
@@ -22,16 +28,15 @@ public class Login {
         lP.logar();
     }
 
-    @Quando("^acessar a pagina \"([^\"]*)\"$")
+    @Quando("^acessar a página \"([^\"]*)\"$")
     public void acessarAPagina(String nomePagina) {
         lP.acessarPagina(nomePagina);
     }
 
-    @Então("^verficar se a pagina \"([^\"]*)\" foi carregada com sucesso$")
-    public void verficarSeAPaginaFoiCarregadaComSucesso(String titulo) {
-        Utils utils = new Utils();
-        utils.capturaTela();
-        assertTrue(utils.oTituloEigual(titulo));
+    @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
+    public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
+        new Utils().capturaTela();
+        assertEquals(Plataforma.recuperarTituloPagina(), titulo);
         System.out.println("Página carregada com sucesso");
     }
 

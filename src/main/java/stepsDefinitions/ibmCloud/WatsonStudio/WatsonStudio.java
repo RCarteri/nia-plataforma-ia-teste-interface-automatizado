@@ -10,8 +10,13 @@ import static org.junit.Assert.assertTrue;
 
 public class WatsonStudio {
     private String sigla;
-    WatsonStudioPage wSP = new WatsonStudioPage();
-    Utils utils = new Utils();
+    private final WatsonStudioPage wSP;
+    private final Utils utils;
+
+    public WatsonStudio() {
+        this.wSP = new WatsonStudioPage();
+        this.utils  = new Utils();
+    }
 
     @Quando("^selecionar a sigla \"([^\"]*)\"$")
     public void selecionarASigla(String sigla) {

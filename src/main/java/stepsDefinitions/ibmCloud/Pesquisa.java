@@ -3,22 +3,31 @@ package stepsDefinitions.ibmCloud;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import org.jetbrains.annotations.NotNull;
 import pagesObjects.PaginacaoSection;
 import pagesObjects.PanelContentSection;
 import pagesObjects.PesquisaSection;
 import support.Utils;
 
 import static org.junit.Assert.assertTrue;
+import static support.Utils.printResultadoEsperadoObtido;
 
 public class Pesquisa {
-    private final PesquisaSection pqS = new PesquisaSection();
-    private final PaginacaoSection pS = new PaginacaoSection();
-    private final PanelContentSection pCS = new PanelContentSection();
-    private final Utils utils = new Utils();
-    private int quantResultadosAntes;
+    private final PesquisaSection pqS;
+    private final PaginacaoSection pS;
+    private final PanelContentSection pCS;
+    private final Utils utils;
+    private String quantResultadosAntes;
     private String palavraPesquisada;
     private String local;
     private Boolean validacao;
+
+    public Pesquisa() {
+        this.pqS = new PesquisaSection();
+        this.pS = new PaginacaoSection();
+        this.pCS = new PanelContentSection();
+        this.utils = new Utils();
+    }
 
     @Quando("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\"$")
     public void pesquisar(String dado, String local) {
@@ -32,11 +41,11 @@ public class Pesquisa {
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         utils.capturaTela();
-        int quantResultadosObtida = pS.getQuantResultados(this.local);
+        String quantResultadosObtida = pS.getQuantResultados(this.local);
         //Teste para quando desde o início retornar só um resultado na lista
-        int quantResultadosAntes = (this.quantResultadosAntes == 1) ? 0 : this.quantResultadosAntes;
-        this.validacao = quantResultadosAntes != quantResultadosObtida;
-        pqS.validarPesquisa("O total de resultados esperado é '" + this.quantResultadosAntes + "' e o obtido é '" + quantResultadosObtida + " eles deveriam ser diferentes.", validacao);
+        String quantResultadosAntes = (this.quantResultadosAntes.equals("1")) ? "0" : this.quantResultadosAntes;
+        this.validacao = !quantResultadosAntes.equals(quantResultadosObtida);
+        pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
     }
 
     @E("^os resultados apresentados devem conter a palavra pesquisada$")
@@ -46,10 +55,10 @@ public class Pesquisa {
     }
 
     @E("^a quantidade de resultados deve ser (\\d+)$")
-    public void osResultadosDevemSer(int quantResultados) {
-        int quantResultadosObtida = pS.getQuantResultados(this.local);
-        this.validacao = quantResultados == quantResultadosObtida;
-        pqS.validarPesquisa("A quantidade de resultados deveria ser '" + quantResultados + "' mas retornou '" + quantResultadosObtida + "'." , validacao);
+    public void osResultadosDevemSer(@NotNull String quantResultados) {
+        String quantResultadosObtida = pS.getQuantResultados(this.local);
+        this.validacao = quantResultados.equals(quantResultadosObtida);
+        pqS.validarPesquisa(printResultadoEsperadoObtido(quantResultados, quantResultadosObtida), validacao);
     }
 
     @E("^limpar pesquisa$")
@@ -66,22 +75,32 @@ public class Pesquisa {
 
     @E("^o total de resultados deverá mostrar a quantidade anterior$")
     public void oTotalDeResultadosDeveraMostrarAQuantidadeAnterior() {
-        int quantResultadosObtida = pS.getQuantResultados(this.local);
-        this.validacao = this.quantResultadosAntes == quantResultadosObtida;
-        pqS.validarPesquisa("O total de resultados esperado é '" + this.quantResultadosAntes + "' e o obtido é '" + quantResultadosObtida, validacao);
+        String quantResultadosObtida = pS.getQuantResultados(this.local);
+        this.validacao = this.quantResultadosAntes.equals(quantResultadosObtida);
+        pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
     }
 
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
-    public void deveraApresentarAMensagem(String mensagem){
+    public void deveraApresentarAMensagem(@NotNull String mensagem){
         utils.capturaTela();
         String mensagemObtida = pCS.getTxtNenhumResultado(this.local);
         this.validacao = mensagem.equals(mensagemObtida);
-        pqS.validarPesquisa("A mensagem esperada é '" + mensagem + "' e a obtida é '" + mensagemObtida + "'.", validacao);
+        pqS.validarPesquisa(printResultadoEsperadoObtido(mensagem, mensagemObtida), validacao);
     }
 
     @E("^todas as validações devem retornar sucesso$")
     public void todasAsValidacoesDevemRetornarSucesso() {
         boolean validacao = pqS.getValidacaoPesquisa();
         assertTrue(pqS.getMensagemPesquisaInvalida(), validacao);
+    }
+
+    @E("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\" \"([^\"]*)\"$")
+    public void pesquisarUmDado(String dado, @NotNull String local, String componente) {
+        if (local.equals("modal") && !componente.equals("")) new Componente().existirOpcao(componente);
+        this.local = local;
+        pqS.limparPesquisa(this.local);
+        this.quantResultadosAntes = pS.getQuantResultados(local);
+        this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
+        pqS.pesquisar(palavraPesquisada, local);
     }
 }

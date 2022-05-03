@@ -1,8 +1,9 @@
 package pagesObjects.primeiroAcesso;
 
-import br.com.bb.ath.ftabb.Pagina;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import map.ComponenteMap;
 import map.PrimeiroAcessoMap;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
@@ -10,12 +11,16 @@ import static org.junit.Assert.*;
 import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
-public class PrimeiroAcessoPage extends Pagina {
-   private final PrimeiroAcessoMap pAM = new PrimeiroAcessoMap();
-
-    private int posicao = 0;
+public class PrimeiroAcessoPage {
+    private int posicao;
     private WebElement btnFinalizar;
     private int nPaginaFalha;
+    private final PrimeiroAcessoMap pAM;
+
+    public PrimeiroAcessoPage() {
+        this.posicao = 0;
+        this.pAM = new PrimeiroAcessoMap();
+    }
 
     private void voltarPagina() {
         rolarPaginaAteElemento(pAM.getBtnVoltar());
@@ -28,20 +33,16 @@ public class PrimeiroAcessoPage extends Pagina {
     }
 
     private void getAcao() {
-        try {
-            pAM.getBtnAcao().clicar();
-        } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
-        }
+        pAM.getBtnAcao().click();
     }
 
     public String getMensagem() {
         try {
             return pAM.getTxtMensagem().recuperarTexto();
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            logError(e);
+            return null;
         }
-        return null;
     }
 
     public void paginaOK() {
@@ -71,10 +72,11 @@ public class PrimeiroAcessoPage extends Pagina {
 
     private void segundaPagina() {
         paginaOK();
-        assertTrue("O botão avançar está habilitado.", isBotaoAvancarDesabilitado());
+        assertTrue("O botão avançar está habilitado.", isBotaoDesabilitado(pAM.getBtnAvancar()));
+        assertTrue("O botão voltar está habilitado.", isBotaoDesabilitado(pAM.getBtnVoltar()));
         getAcao();
         isMensagemOK();
-        assertFalse("O botão avançar está desabilitado.", isBotaoAvancarDesabilitado());
+        assertFalse("O botão avançar está desabilitado.", isBotaoDesabilitado(pAM.getBtnAvancar()));
     }
 
     private void percorrerPaginas() {
@@ -93,13 +95,14 @@ public class PrimeiroAcessoPage extends Pagina {
     }
 
     private void isMensagemOK() {
-        rolarPaginaAteElemento(pAM.getMensagemConvite());
+        ComponenteMap cM = new ComponenteMap();
+        rolarPaginaAteElemento(cM.getAlertSuccess());
         assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
-                "Convite enviado com sucesso.", pAM.getMensagemConvite().getText());
+                "Convite enviado com sucesso.", cM.getAlertSuccess().getText());
         new Utils().capturaTela();
     }
 
-    private boolean isBotaoAvancarDesabilitado() {
-        return pAM.getBtnAvancar().getAttribute("disabled") != null;
+    private boolean isBotaoDesabilitado(@NotNull WebElement botao) {
+        return botao.getAttribute("disabled") != null;
     }
 }

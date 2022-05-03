@@ -16,14 +16,14 @@ import org.junit.runner.RunWith;
 		tags = { "@Smoke" },
 		monochrome = true
 )
-public class TestCaseSmoke {
+public class TestCaseSmoke extends ConfRunner{
 	@BeforeClass
 	public static void init(){
-		ConfRunner.init();
+		confInit();
 	}
 
 	@AfterClass
 	public static void finish(){
-		ConfRunner.finish();
+		confFinish();
 	}
 }

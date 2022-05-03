@@ -5,6 +5,22 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.1] - 23-05-2022
+Task: 469729, 478473, 480126
+###Adicionado
+- Cenário: S007 Watson Studio - CT003 Exemplo Data Assets
+- Step: E deverá apresenter o mesmo nome do item selecionado
+- Step: Então deverá ser apresentado o alerta com a mensagem
+- Validação: Botão voltar do primeiro acesso desabilitado
+- Annotation: FindBy por CSSSelector para não usar o mapeamento do FTABB
+- Método: waitLoadPage(), printResultadoEsperadoObtito(), waitElement()
+- Construtores nas classes
+### Mudado
+- Implementação de stream no código
+- Mapeamento: Identificação do modal aberto
+- Unificação do mapeamento dos alertas de sucesso, de informação e do btnFechar
+- Uniao do CT004 e CT005 para CT004 - Pesquisa
+
 ## [3.13.6] - 18-04-2022
 Task: 462267
 ###Adicionado

@@ -1,4 +1,4 @@
-package pagesObjects;
+package pagesObjects.sections;
 
 import map.PaginacaoMap;
 import org.jetbrains.annotations.NotNull;

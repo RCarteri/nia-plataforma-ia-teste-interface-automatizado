@@ -1,4 +1,4 @@
-package pagesObjects;
+package pagesObjects.sections;
 
 import map.ComponenteMap;
 import map.PaginacaoMap;
@@ -7,6 +7,8 @@ import map.ProvedorMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pagesObjects.ComponentePage;
+import pagesObjects.ModalComponentePage;
 
 import java.util.List;
 

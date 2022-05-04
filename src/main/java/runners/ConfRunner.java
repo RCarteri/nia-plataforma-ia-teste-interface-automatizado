@@ -26,7 +26,7 @@ public class ConfRunner {
         apiRest.atualizarAllureArq3(Urls.GERAR_RELATORIO.getUrl());
     }
 
-    private void limparRelatoriosAllure(){
+    private static void limparRelatoriosAllure(){
         apiRest.atualizarAllureArq3(Urls.LIMPAR_RESULTADOS.getUrl());
         apiRest.atualizarAllureArq3(Urls.LIMPAR_HISTORICO.getUrl());
     }

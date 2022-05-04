@@ -1,14 +1,14 @@
-package runners.suites;
+package runners.suites.suites;
 
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import runners.features.TestCaseCloudObjectStorage;
+import runners.suites.TestSuiteS002CloudObjectStorage;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-        TestCaseCloudObjectStorage.class
+        TestSuiteS002CloudObjectStorage.class
 })
 public class TestSuite002 {
 }

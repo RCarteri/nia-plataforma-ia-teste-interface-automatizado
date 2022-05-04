@@ -1,14 +1,14 @@
-package runners.suites;
+package runners.suites.suites;
 
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import runners.features.TestCaseWatsonStudio;
+import runners.suites.TestSuiteS003GruposDeAcesso;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-        TestCaseWatsonStudio.class
+        TestSuiteS003GruposDeAcesso.class
 })
-public class TestSuite007 {
+public class TestSuite003 {
 }

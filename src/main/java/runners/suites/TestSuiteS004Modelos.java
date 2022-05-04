@@ -1,23 +1,23 @@
-package runners.componentes;
+package runners.suites;
 
+import br.com.bb.ath.ftabb.runner.FTABBCucumberRunner;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
-import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
-@RunWith(Cucumber.class)
+@RunWith(FTABBCucumberRunner.class)
 @CucumberOptions(
-		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
+		plugin = { "pretty", "support.parallel.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "@S009" },
+		tags = { "@S004" },
 		monochrome = true
 )
-public class TestCasePrimeiroAcesso extends ConfRunner{
+public class TestSuiteS004Modelos extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

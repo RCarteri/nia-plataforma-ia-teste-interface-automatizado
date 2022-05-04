@@ -4,7 +4,7 @@ package runners.suites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import runners.componentes.ibmCloud.TestCaseWatsonAssistant;
+import runners.features.TestCaseWatsonAssistant;
 
 @RunWith(Suite.class)
 @SuiteClasses({

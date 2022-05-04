@@ -1,4 +1,4 @@
-package runners;
+package runners.testCases;
 
 import br.com.bb.ath.ftabb.runner.FTABBCucumberRunner;
 import cucumber.api.CucumberOptions;
@@ -6,6 +6,7 @@ import cucumber.api.SnippetType;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import runners.ConfRunner;
 
 @RunWith(FTABBCucumberRunner.class)
 @CucumberOptions(
@@ -13,10 +14,10 @@ import org.junit.runner.RunWith;
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
-		tags = { "" },
+		tags = { "@CT003" },
 		monochrome = true
 )
-public class TestCaseAll extends ConfRunner{
+public class TestCase003ExibirComponente extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

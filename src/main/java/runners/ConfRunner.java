@@ -7,11 +7,7 @@ import support.APIRest.Urls;
 import support.Utils;
 
 public class ConfRunner {
-    private static APIRest apiRest;
-
-    public ConfRunner() {
-        apiRest = new APIRest();
-    }
+    private static final APIRest apiRest = new APIRest();
 
     public static void confInit(){
         new Utils().deletarAllureResults();

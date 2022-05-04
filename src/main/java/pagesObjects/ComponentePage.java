@@ -1,10 +1,14 @@
 package pagesObjects;
 
+import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ComponenteMap;
+import map.MensagemMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+
+import static support.Utils.logError;
 
 public class ComponentePage{
     private final ComponenteMap cM;
@@ -38,12 +42,15 @@ public class ComponentePage{
     }
 
     public String getTxtMensagemAlerta(@NotNull String opcao) {
-        ComponenteMap cM = new ComponenteMap();
         switch (opcao) {
             case "sucesso":
-                return cM.getAlertSuccess().getText();
+                try {
+                    return new MensagemMap().getAlertSuccess().recuperarTexto();
+                } catch (ElementoNaoLocalizadoException e) {
+                    logError(e);
+                }
             case "informação":
-                return cM.getAlertInfo().getText();
+                return new ComponenteMap().getAlertInfo().getText();
             default:
                 return null;
         }

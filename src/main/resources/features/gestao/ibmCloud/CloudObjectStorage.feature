@@ -40,7 +40,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
             | local      | modal | mensagem                             |
             | componente |       | Não há nenhum storage com este nome. |
 
-    @ID-002-009 @CT008
+    @ID-002-008 @CT008
     Cenario: CT008 - Inexistência do componente
         Quando não existir "Bucket"
         Então deverá ser apresentado o alerta de "informação" com a mensagem "Não há nenhum bucket disponível para o projeto atualmente."

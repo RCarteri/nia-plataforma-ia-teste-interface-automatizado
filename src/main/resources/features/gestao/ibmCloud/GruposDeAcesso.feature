@@ -41,7 +41,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
             | componente |       | Não há nenhum catálogo com este nome. |
             | modal      | Grupo | Nenhum membro encontrado.             |
 
-    @ID-003-006 @CT005
+    @ID-003-005 @CT005
     Esquema do Cenario: CT005 - Adicionar membro exceção
         Quando existir "Grupo"
         E adicionar membro com os dados  '<chave>'

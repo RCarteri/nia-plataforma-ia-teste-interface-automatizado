@@ -1,13 +1,13 @@
 package runners;
 
-import br.com.bb.ath.ftabb.runner.FTABBCucumberRunner;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
+import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-@RunWith(FTABBCucumberRunner.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "support.parallel.AllureCucumber2Jvm" },
 		features = "classpath:features/",

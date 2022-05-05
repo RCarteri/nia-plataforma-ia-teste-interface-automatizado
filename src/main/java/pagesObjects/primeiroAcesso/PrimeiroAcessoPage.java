@@ -1,7 +1,7 @@
 package pagesObjects.primeiroAcesso;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import map.MensagemMap;
+import map.ComponenteMap;
 import map.PrimeiroAcessoMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
@@ -95,14 +95,10 @@ public class PrimeiroAcessoPage {
     }
 
     private void isMensagemOK() {
-        MensagemMap mM = new MensagemMap();
-        rolarPaginaAteElemento((WebElement) mM.getAlertSuccess());
-        try {
-            assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
-                    "Convite enviado com sucesso.", mM.getAlertSuccess().recuperarTexto());
-        } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
-        }
+        ComponenteMap cM = new ComponenteMap();
+        rolarPaginaAteElemento(cM.getAlertSuccess());
+        assertEquals("Mensagem de convite enviado com sucesso não apareceu.",
+                "Convite enviado com sucesso.", cM.getAlertSuccess().getText());
         new Utils().capturaTela();
     }
 

@@ -4,7 +4,9 @@ import map.PaginacaoMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 
+import static support.Utils.printLog;
 import static support.Utils.rolarPaginaAteElemento;
+import static support.enums.LogTypes.INFO;
 
 public class PaginacaoSection {
     public String getQuantResultados(@NotNull String local) {
@@ -23,7 +25,7 @@ public class PaginacaoSection {
     }
 
     protected void avancarPagina(@NotNull WebElement nPagina) {
-        System.out.println("Testando a página " + nPagina.getText() + ".");
+        printLog("Testando a página " + nPagina.getText() + ".", INFO);
         rolarPaginaAteElemento(nPagina);
         nPagina.click();
     }

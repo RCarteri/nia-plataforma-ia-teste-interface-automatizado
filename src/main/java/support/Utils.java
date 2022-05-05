@@ -25,12 +25,11 @@ import java.util.UUID;
 
 import static support.GetElements.getDriver;
 import static support.GetElements.getElement;
-import static support.enums.LogTypes.ERROR;
-import static support.enums.LogTypes.INFO;
+import static support.enums.LogTypes.*;
 
 public class Utils extends FTABBUtils {
     public void esperar(@NotNull TimesAndReasons tar) {
-        System.out.println("    Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...");
+        printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...", NULL);
         sleep(esperarQTeste(tar.getDelay()));
     }
 
@@ -62,7 +61,7 @@ public class Utils extends FTABBUtils {
     public void capturaTela() {
         capturarTela();
         allureCapturarTela();
-        System.out.println("        INFO - Tela capturada.");
+        printLog("Tela capturada.", INFO);
     }
 
     public void deletarAllureResults() {
@@ -73,12 +72,12 @@ public class Utils extends FTABBUtils {
                         .map(Path::toFile)
                         .sorted(Comparator.comparing(File::isDirectory))
                         .forEach(File::delete);
-                System.out.println("Diretório " + dirPath + " deletado com sucesso.");
+                printLog("Diretório " + dirPath + " deletado com sucesso.", INFO);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else
-            System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
+           printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
     public Dictionary<String, String> getDatapool() {
@@ -98,8 +97,18 @@ public class Utils extends FTABBUtils {
     }
 
     public static void logError(@NotNull Exception e) {
-        System.err.println("\nAlgum erro ocorreu!");
-        System.err.println("Mensagem: " + e.getMessage() + "\n");
+        printLog("Um erro de " + e.getClass().getSimpleName() + " ocorreu.", ERROR);
+        switch (e.getClass().getSimpleName()){
+            case "NoSuchElementException":
+                String noSuchElement = e.getMessage().split(" ")[4];
+                noSuchElement = noSuchElement.substring(0, noSuchElement.length() - 4);
+                printLog("O elemento " + noSuchElement + " não foi localizado.", ERROR);
+                break;
+            case "ElementoNaoLocalizadoException":
+                System.out.println("oi");
+                break;
+        }
+        printLog("Mensagem: " + e.getMessage(), ERROR);
         e.printStackTrace();
     }
 
@@ -111,10 +120,17 @@ public class Utils extends FTABBUtils {
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
-    public static void log(String msg, LogTypes type) {
-        if (type == INFO)
-            System.out.println("\n    INFO - " + msg);
-        else if (type == ERROR)
-            System.err.println("\n    ERRO - " + msg);
+    public static void printLog(String msg, @NotNull LogTypes type) {
+        switch (type){
+            case INFO:
+                System.out.println("\nINFO - " + msg);
+                break;
+            case ERROR:
+                System.err.println("\nERRO - " + msg);
+                break;
+            case NULL:
+                System.err.println("\n" + msg);
+                break;
+        }
     }
 }

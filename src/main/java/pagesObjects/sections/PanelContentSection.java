@@ -12,8 +12,8 @@ import pagesObjects.ModalComponentePage;
 
 import java.util.List;
 
-import static support.Utils.rolarPaginaAteElemento;
-import static support.Utils.waitLoadPage;
+import static support.Utils.*;
+import static support.enums.LogTypes.INFO;
 
 public class PanelContentSection {
     private final PanelContentMap pCM;
@@ -36,10 +36,10 @@ public class PanelContentSection {
                 if (checkListaOpcoes(opcao, nItem)) continue;
                 waitLoadPage();
                 if (!esperado && isGetAlertDisplayed()) {
-                    System.out.println("Encontrado projeto sem " + opcao + ".");
+                    printLog("Projeto sem " + opcao + "encontrado.", INFO);
                     return false;
                 } else if (esperado && new ModalComponentePage().isModalDisplayed()) {
-                    System.out.println("Projeto com " + opcao + " encontrado.");
+                    printLog("Projeto com " + opcao + " encontrado.", INFO);
                     this.nomeItemSelecionado = prM.getListNomes().get(prM.getListBtnExibir().indexOf(nItem)).getText();
                     return true;
                 }
@@ -56,7 +56,7 @@ public class PanelContentSection {
 
     private boolean isGetAlertDisplayed() {
         try {
-            System.out.println(new ComponenteMap().getAlertInfo().isDisplayed() + "alerta esta sendo mostrado");
+            printLog(new ComponenteMap().getAlertInfo().isDisplayed() + "alerta esta sendo mostrado.", INFO);
             return new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (NoSuchElementException e) {
             new ComponentePage().clickBtnFechar(true,"modal");
@@ -65,8 +65,8 @@ public class PanelContentSection {
     }
 
     private void avancarItem(WebElement nItem, @NotNull List<WebElement> listBtnExibir) {
-        if (listBtnExibir.indexOf(nItem) > 0) System.out.println("Elemento procurado não encontrado.");
-        System.out.println("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.");
+        if (listBtnExibir.indexOf(nItem) > 0) printLog("Elemento procurado não encontrado.", INFO);
+        printLog("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.", INFO);
         rolarPaginaAteElemento(nItem);
         nItem.click();
     }

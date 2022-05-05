@@ -1,14 +1,13 @@
 package pagesObjects;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ComponenteMap;
-import map.MensagemMap;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import static support.Utils.logError;
+import static support.Utils.printLog;
+import static support.enums.LogTypes.INFO;
 
 public class ComponentePage{
     private final ComponenteMap cM;
@@ -31,26 +30,23 @@ public class ComponentePage{
 
     public void clickBtnFechar(boolean elemNaoExiste, String local) {
         if (elemNaoExiste) {
-            System.out.println(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.");
+            printLog(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.", INFO);
         }
         try {
             new ComponenteMap().getListBtnFechar().forEach(WebElement::click);
-            System.out.println("O " + local + " presente na página foi fechado.");
+            printLog("O " + local + " presente na página foi fechado.", INFO);
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-            System.out.println("Não existe " + local + " presente na página para ser fechado.");
+            printLog("Não existe " + local + " presente na página para ser fechado.", INFO);
         }
     }
 
     public String getTxtMensagemAlerta(@NotNull String opcao) {
+        ComponenteMap cM = new ComponenteMap();
         switch (opcao) {
             case "sucesso":
-                try {
-                    return new MensagemMap().getAlertSuccess().recuperarTexto();
-                } catch (ElementoNaoLocalizadoException e) {
-                    logError(e);
-                }
+                return cM.getAlertSuccess().getText();
             case "informação":
-                return new ComponenteMap().getAlertInfo().getText();
+                return cM.getAlertInfo().getText();
             default:
                 return null;
         }

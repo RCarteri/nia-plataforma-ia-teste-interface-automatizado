@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static support.Utils.printLog;
+import static support.enums.LogTypes.INFO;
+
 public class PesquisaSection {
     private final PesquisaMap pM;
     private final Map<String, Boolean> validacaoPesquisa;
@@ -22,7 +25,7 @@ public class PesquisaSection {
     }
 
     public void pesquisar(String palavra, @NotNull String local) {
-        System.out.println("Pesquisando por: '" + palavra + "' no " + local);
+        printLog("Pesquisando por: '" + palavra + "' no " + local + ".", INFO);
         switch (local) {
             case "componente":
                 pM.getInputPesquisa().sendKeys(palavra);

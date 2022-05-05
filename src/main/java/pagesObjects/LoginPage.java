@@ -13,10 +13,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static support.GetElements.getDriver;
 import static support.Utils.logError;
+import static support.Utils.printLog;
+import static support.enums.LogTypes.INFO;
+import static support.enums.LogTypes.NULL;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.TimesAndReasons.CARR_PAG;
 
-public class LoginPage extends LoginMap{
+public class LoginPage extends LoginMap {
     private final Utils utils;
     private short count;
 
@@ -25,18 +28,18 @@ public class LoginPage extends LoginMap{
         this.count = 0;
     }
 
-    public void abrirPlataforma(){
+    public void abrirPlataforma() {
         System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
         final boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
         if (isLogged) {
             assertTrue(isLogged);
-            System.out.println("\n    INFO - A Plataforma esta aberta.\n");
+            printLog("A Plataforma esta aberta.", INFO);
         } else {
             Plataforma.abrirPlataforma();
         }
     }
 
-    public void acessarPagina(String nomePagina){
+    public void acessarPagina(String nomePagina) {
         try {
             String tituloPagina = Plataforma.recuperarTituloPagina();
             if (!(tituloPagina.intern().equals("Plataforma BB | Analytics e Inteligência Artificial"))) {
@@ -47,7 +50,7 @@ public class LoginPage extends LoginMap{
         }
     }
 
-    public void acessarMenu(String nivel1, String nivel2){
+    public void acessarMenu(String nivel1, String nivel2) {
         try {
             Plataforma.abrirMenu(nivel1, nivel2);
         } catch (ElementoNaoLocalizadoException e) {
@@ -55,14 +58,14 @@ public class LoginPage extends LoginMap{
         }
     }
 
-    public void logar(){
+    public void logar() {
         short MAX_BOUND = 5;
         try {
             final Dictionary<String, String> datapool = utils.getDatapool();
             boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
             if (isLogged) {
                 assertTrue(isLogged);
-                System.out.println("\n    INFO - Usuario " + datapool.get("chave") + " esta logado.\n");
+                printLog("Usuario " + datapool.get("chave") + " esta logado.", INFO);
             } else {
                 new Utils().esperar(CARR_PAG);
                 getInputUsername().sendKeys(datapool.get("chave"));
@@ -77,13 +80,10 @@ public class LoginPage extends LoginMap{
                     System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
                     isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
                 }
-                System.out.println("\n    INFO - Login realizado com a chave: " + datapool.get("chave") + "\n");
+                printLog("Login realizado com a chave: " + datapool.get("chave"), INFO);
             }
         } catch (NoSuchElementException e) {
-            String noSuchElement = e.getMessage().split(" ")[4];
-            noSuchElement = noSuchElement.substring(0, noSuchElement.length() - 4);
-            System.err.println("\n    ERRO - Um elemento não foi localizado.");
-            System.err.println("    ERRO - Não foi possível localizar o elemento \"" + noSuchElement + "\"");
+            logError(e);
             getDriver().navigate().refresh();
 
             if (++count <= MAX_BOUND)
@@ -98,9 +98,9 @@ public class LoginPage extends LoginMap{
     public void logoutEFecharPlataforma() {
         try {
             Plataforma.encerrarSessao();
-            System.out.println("Sessão encerrada");
+            printLog("Sessão encerrada.", NULL);
             Plataforma.fecharPlataforma();
-            System.out.println("Plataforma fechada");
+            printLog("Plataforma fechada.", NULL);
         } catch (ElementoNaoLocalizadoException e) {
             logError(e);
         }

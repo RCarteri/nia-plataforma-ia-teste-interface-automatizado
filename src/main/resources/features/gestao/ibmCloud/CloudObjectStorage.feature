@@ -25,7 +25,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
         E deverá mostrar a lista com elementos
 
     @ID-002-004 @CT004
-    Esquema do Cenario: Cenario: CT004 - Pesquisar
+    Esquema do Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada

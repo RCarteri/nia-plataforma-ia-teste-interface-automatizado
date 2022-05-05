@@ -25,7 +25,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E deverá mostrar a lista com elementos
 
     @ID-006-004 @CT004
-    Esquema do Cenario: Cenario: CT004 - Pesquisar
+    Esquema do Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
         E os resultados apresentados devem conter a palavra pesquisada
@@ -41,7 +41,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
             | componente |          | Não há nenhum catálogo com este nome. |
             | modal      | Catálogo | Nenhum membro encontrado.             |
 
-    @ID-006-006 @CT005
+    @ID-006-005 @CT005
     Esquema do Cenario: CT005 - Adicionar membro exceção
         Quando existir "Catálogo"
         E adicionar membro com os dados <função> '<chave>'

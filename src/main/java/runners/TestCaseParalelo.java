@@ -18,6 +18,6 @@ import support.parallel.FTABBCucumberConcurrentRunner.AppConfig;
         TestSuiteS008ModelosTriton.class,
         TestSuiteS009PrimeiroAcesso.class
 })
-@AppConfig(value={"", ""})
+@AppConfig(value={"", "", "", "", "", "", "", ""})
 public class TestCaseParalelo {
 }

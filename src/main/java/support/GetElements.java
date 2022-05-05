@@ -2,12 +2,11 @@ package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
 import org.openqa.selenium.*;
-import support.enums.LogTypes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static support.enums.LogTypes.ERROR;
+import static support.Utils.log;
 import static support.enums.LogTypes.INFO;
 import static support.enums.TimesAndReasons.LOAD_IFRAMES;
 
@@ -68,12 +67,5 @@ public class GetElements {
 
             log(msg, INFO);
         }
-    }
-
-    public void log(String msg, LogTypes type) {
-        if (type == INFO)
-            System.out.println("\n    INFO - " + msg);
-        else if (type == ERROR)
-            System.err.println("\n    ERRO - " + msg);
     }
 }

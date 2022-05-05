@@ -1,6 +1,7 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
+import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import support.enums.LogTypes;
 import support.enums.TimesAndReasons;
 
 import java.io.ByteArrayInputStream;
@@ -23,11 +25,20 @@ import java.util.UUID;
 
 import static support.GetElements.getDriver;
 import static support.GetElements.getElement;
+import static support.enums.LogTypes.ERROR;
+import static support.enums.LogTypes.INFO;
 
 public class Utils extends FTABBUtils {
     public void esperar(@NotNull TimesAndReasons tar) {
         System.out.println("    Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...");
-        sleep(tar.getDelay());
+        sleep(esperarQTeste(tar.getDelay()));
+    }
+
+    private long esperarQTeste(long segundos){
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            segundos /= 2L;
+        }
+        return segundos;
     }
 
     public static void waitLoadPage(){
@@ -98,5 +109,12 @@ public class Utils extends FTABBUtils {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
         final String uuid = UUID.randomUUID().toString().substring(0, 8);
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
+    }
+
+    public static void log(String msg, LogTypes type) {
+        if (type == INFO)
+            System.out.println("\n    INFO - " + msg);
+        else if (type == ERROR)
+            System.err.println("\n    ERRO - " + msg);
     }
 }

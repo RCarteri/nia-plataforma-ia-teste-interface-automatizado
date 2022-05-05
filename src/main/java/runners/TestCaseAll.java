@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @RunWith(FTABBCucumberRunner.class)
 @CucumberOptions(
 		plugin = { "pretty", "support.parallel.AllureCucumber2Jvm" },
-		features = "classpath:features/",
+		features = {"classpath:features/gestao", "classpath:features/primeiroAcesso"},
 		glue = "classpath:stepsDefinitions",
 		snippets = SnippetType.CAMELCASE,
 		tags = { "" },

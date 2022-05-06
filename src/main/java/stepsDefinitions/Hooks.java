@@ -3,10 +3,10 @@ package stepsDefinitions;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import cucumber.api.java.After;
+import support.Utils;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static support.Utils.logError;
 
 public class Hooks {
     @After
@@ -20,7 +20,7 @@ public class Hooks {
             } else
                 assertFalse(estaLogado);
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            new Utils().logError(e);
         }
     }
 }

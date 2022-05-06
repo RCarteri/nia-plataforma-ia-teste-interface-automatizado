@@ -5,7 +5,7 @@ import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.ComponentePage;
 import pagesObjects.ModalComponentePage;
-import pagesObjects.PanelContentSection;
+import pagesObjects.sections.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;

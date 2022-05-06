@@ -9,6 +9,7 @@ import pagesObjects.primeiroAcesso.PrimeiroAcessoPage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static support.Utils.printResultadoEsperadoObtido;
 
 public class PimeiroAcesso {
     private final PrimeiroAcessoPage pAP;
@@ -19,8 +20,8 @@ public class PimeiroAcesso {
 
     @Dado("^que apresente a mensagem \"([^\"]*)\"$")
     public void queApresenteAMensagem(@NotNull String mensagem) {
-        assertTrue("Mensagem de que o usuário não possui cadastro na IBM Cloud não foi apresentada",
-                pAP.getMensagem().toLowerCase().contains(mensagem.toLowerCase()));
+        assertTrue(printResultadoEsperadoObtido(mensagem, pAP.getMensagem()),
+                pAP.getMensagem().contains(mensagem));
     }
 
     @Quando("^seguir tutorial$")

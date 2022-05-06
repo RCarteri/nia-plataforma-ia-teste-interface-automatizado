@@ -4,9 +4,9 @@ import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import org.jetbrains.annotations.NotNull;
-import pagesObjects.PaginacaoSection;
-import pagesObjects.PanelContentSection;
-import pagesObjects.PesquisaSection;
+import pagesObjects.sections.PaginacaoSection;
+import pagesObjects.sections.PanelContentSection;
+import pagesObjects.sections.PesquisaSection;
 import support.Utils;
 
 import static org.junit.Assert.assertTrue;

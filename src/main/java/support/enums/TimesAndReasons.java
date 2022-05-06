@@ -2,8 +2,6 @@ package support.enums;
 
 public enum TimesAndReasons {
 	CARR_PAG("o carregamento da página", 2),
-	CARR_MODAL("o modal ser apresentado", 4),
-	CARR_ELEM("o elemento ser apresentado", 1),
 	LOAD_IFRAMES("uma nova tentativa de pesquisa em todos os iframes", 1);
 
 	private final String reason;

@@ -8,6 +8,8 @@ import java.util.List;
 
 import static support.GetElements.getElement;
 import static support.GetElements.getElements;
+import static support.Utils.printLog;
+import static support.enums.LogTypes.INFO;
 
 public class ModalAdicionarMembroMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-button-secondary.p-ml-auto")
@@ -49,7 +51,7 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
         try {
             return getElement(".p-m-3 .pi-chevron-down");
         }catch (NoSuchElementException e){
-            System.out.println("Dropdown de função não existe nesta opção.");
+            printLog("Dropdown de função não existe nesta opção.", INFO);
             return null;
         }
     }

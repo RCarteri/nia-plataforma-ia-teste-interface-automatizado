@@ -24,7 +24,7 @@ public class ModalComponentePage extends ModalComponenteMap{
         return listaElementosVazios;
     }
 
-    protected boolean isModalDisplayed() {
+    public boolean isModalDisplayed() {
         try {
            return new ModalComponenteMap().getModal().isDisplayed();
         } catch (NoSuchElementException | TimeoutException e) {

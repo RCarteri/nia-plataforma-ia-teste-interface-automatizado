@@ -8,6 +8,9 @@ import support.Utils;
 
 import java.util.stream.Collectors;
 
+import static support.Utils.printLog;
+import static support.enums.LogTypes.INFO;
+
 public class ModalAdicionarMembroPage {
     private final ModalAdicionarMembroMap mAMM;
 
@@ -21,7 +24,7 @@ public class ModalAdicionarMembroPage {
             mAMM.getInputAdicionarMembro().click();
             if (isDropDowndisplayed()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            new Utils().logError(e);
         }
     }
 
@@ -29,7 +32,7 @@ public class ModalAdicionarMembroPage {
         try{
             return mAMM.getDropDownFuncao().isDisplayed();
         }catch (NullPointerException e){
-            System.out.println("Dropdown função não está sendo exibido.");
+            printLog("Dropdown função não está sendo exibido.", INFO);
             return false;
         }
     }

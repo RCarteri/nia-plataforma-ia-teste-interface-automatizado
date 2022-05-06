@@ -36,8 +36,7 @@ public class Login {
     @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         new Utils().capturaTela();
-        assertEquals(Plataforma.recuperarTituloPagina(), titulo);
-        System.out.println("Página carregada com sucesso");
+        assertEquals("A página não foi carregada.", Plataforma.recuperarTituloPagina(), titulo);
     }
 
     @E("^acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")

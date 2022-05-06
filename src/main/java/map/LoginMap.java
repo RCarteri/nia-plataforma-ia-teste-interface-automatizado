@@ -3,10 +3,11 @@ package map;
 import org.openqa.selenium.WebElement;
 
 import static support.GetElements.getElement;
+import static support.Utils.waitElement;
 
 public class LoginMap {
     public WebElement getInputUsername() {
-        return getElement("#idToken1");
+        return waitElement("#idToken1");
     }
 
     public WebElement getInputPassword() {

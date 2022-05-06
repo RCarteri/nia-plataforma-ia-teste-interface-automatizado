@@ -1,6 +1,7 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
+import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import support.enums.LogTypes;
 import support.enums.TimesAndReasons;
 
 import java.io.ByteArrayInputStream;
@@ -23,11 +25,19 @@ import java.util.UUID;
 
 import static support.GetElements.getDriver;
 import static support.GetElements.getElement;
+import static support.enums.LogTypes.*;
 
 public class Utils extends FTABBUtils {
     public void esperar(@NotNull TimesAndReasons tar) {
-        System.out.println("    Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...");
-        sleep(tar.getDelay());
+        printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...", NULL);
+        sleep(esperarQTeste(tar.getDelay()));
+    }
+
+    private long esperarQTeste(long segundos){
+        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+            segundos /= 2L;
+        }
+        return segundos;
     }
 
     public static void waitLoadPage(){
@@ -36,7 +46,7 @@ public class Utils extends FTABBUtils {
     }
 
     public static WebElement waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 1);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 2);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);
     }
@@ -51,7 +61,7 @@ public class Utils extends FTABBUtils {
     public void capturaTela() {
         capturarTela();
         allureCapturarTela();
-        System.out.println("        INFO - Tela capturada.");
+        printLog("Tela capturada.", INFO);
     }
 
     public void deletarAllureResults() {
@@ -62,12 +72,12 @@ public class Utils extends FTABBUtils {
                         .map(Path::toFile)
                         .sorted(Comparator.comparing(File::isDirectory))
                         .forEach(File::delete);
-                System.out.println("Diretório " + dirPath + " deletado com sucesso.");
+                printLog("Diretório " + dirPath + " deletado com sucesso.", INFO);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else
-            System.out.println("Diretório " + dirPath + " não existe, não precisa ser deletado.");
+           printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
     public Dictionary<String, String> getDatapool() {
@@ -86,9 +96,13 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public static void logError(@NotNull Exception e) {
-        System.err.println("\nAlgum erro ocorreu!");
-        System.err.println("Mensagem: " + e.getMessage() + "\n");
+    public void logError(@NotNull Exception e) {
+        capturaTela();
+        printLog("Um erro de " + e.getClass().getSimpleName() + " ocorreu.", ERROR);
+        if ("NoSuchElementException".equals(e.getClass().getSimpleName())) {
+            printLog("O elemento " + e.getMessage() + " não foi localizado.", ERROR);
+        }
+        printLog("Mensagem: " + e.getMessage(), ERROR);
         e.printStackTrace();
     }
 
@@ -98,5 +112,19 @@ public class Utils extends FTABBUtils {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
         final String uuid = UUID.randomUUID().toString().substring(0, 8);
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
+    }
+
+    public static void printLog(String msg, @NotNull LogTypes type) {
+        switch (type){
+            case INFO:
+                System.out.println("\nINFO - " + msg);
+                break;
+            case ERROR:
+                System.err.println("\nERRO - " + msg);
+                break;
+            case NULL:
+                System.err.println("\n" + msg);
+                break;
+        }
     }
 }

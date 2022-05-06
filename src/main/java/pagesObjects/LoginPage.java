@@ -3,14 +3,12 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import map.LoginMap;
-import org.openqa.selenium.NoSuchElementException;
 import support.Utils;
 
 import java.util.Dictionary;
 
 import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.*;
@@ -18,11 +16,9 @@ import static support.enums.SysProps.IS_LOGGED;
 
 public class LoginPage extends LoginMap {
     private final Utils utils;
-    private short count;
 
     public LoginPage() {
         this.utils = new Utils();
-        this.count = 0;
     }
 
     public void abrirPlataforma() {
@@ -56,44 +52,20 @@ public class LoginPage extends LoginMap {
     }
 
     public void logar() {
-        short MAX_BOUND = 5;
-        try {
-            final Dictionary<String, String> datapool = utils.getDatapool();
-            boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
-            if (isLogged) {
-                assertTrue(isLogged);
-                printLog("Usuario " + datapool.get("chave") + " esta logado.", INFO);
-            } else {
-                try {
-                    getInputUsername().sendKeys(datapool.get("chave"));
-                    getInputPassword().sendKeys(datapool.get("senha"));
-                    getBtnLogin().click();
-                }catch (Exception e){
-                    printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
-                    getDriver().navigate().refresh();
-                }
-                while (!isLogged) {
-                    if (++count == MAX_BOUND) {
-                        Plataforma.fecharPlataforma();
-                        fail("Não foi possível carregar a Plataforma após o login.");
-                        System.exit(0);
-                    }
-                    System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
-                    isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
-                }
-                printLog("Login realizado com a chave: " + datapool.get("chave"), INFO);
-            }
-        } catch (NoSuchElementException e) {
-            utils.logError(e);
-            if (++count <= MAX_BOUND) {
-                printLog("Atualizando a página. Tentativa " + count + "/" + MAX_BOUND, ERROR);
+        final Dictionary<String, String> datapool = utils.getDatapool();
+        boolean isLogged = parseBoolean(System.getProperty(IS_LOGGED.toString()));
+        if (isLogged) {
+            printLog("Usuario " + datapool.get("chave") + " esta logado.", INFO);
+        } else {
+            try {
+                getInputUsername().sendKeys(datapool.get("chave"));
+                getInputPassword().sendKeys(datapool.get("senha"));
+                getBtnLogin().click();
+            } catch (Exception e) {
+                printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
                 getDriver().navigate().refresh();
-                printLog("Atualizei no outro", ERROR);
-                logar();
-            } else {
-                Plataforma.fecharPlataforma();
-                printLog("Não foi possível logar na Plataforma.", ERROR);
             }
+            printLog("Login realizado com a chave: " + datapool.get("chave"), INFO);
         }
     }
 

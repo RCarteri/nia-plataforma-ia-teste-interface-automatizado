@@ -10,7 +10,6 @@ import java.util.List;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
-import static support.enums.TimesAndReasons.LOAD_IFRAMES;
 
 public class GetElements {
     private final Utils utils = new Utils();
@@ -61,7 +60,6 @@ public class GetElements {
                 System.exit(0);
             }
             printLog("O mapeamento não iniciou no iframe inicial. Tentativa: " + tentativa + "/" + maxTentativas, INFO);
-            utils.esperar(LOAD_IFRAMES);
             iframesList.clear();
             return findElement(by);
         }
@@ -71,8 +69,8 @@ public class GetElements {
         iframesCount = 0;
         getDriver().switchTo().defaultContent();
         getDriver().findElements(By.xpath("//iframe")).forEach(elem -> iframesList.add(elem.getAttribute("id")));
-        getDriver().switchTo().frame(iframesList.get(1));
+        //getDriver().switchTo().frame(iframesList.get(1));
         if (iframesList.size() > 0)
-            printLog("Voltando para o 'iframe (" + iframesList.get(1) + ")'...", INFO);
+            printLog("Voltando para o 'iframe (" + iframesList.get(0) + ")'...", INFO);
     }
 }

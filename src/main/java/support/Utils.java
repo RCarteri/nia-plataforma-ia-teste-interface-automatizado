@@ -46,7 +46,7 @@ public class Utils extends FTABBUtils {
     }
 
     public static WebElement waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 1);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 2);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);
     }
@@ -97,13 +97,13 @@ public class Utils extends FTABBUtils {
     }
 
     public void logError(@NotNull Exception e) {
+        capturaTela();
         printLog("Um erro de " + e.getClass().getSimpleName() + " ocorreu.", ERROR);
         if ("NoSuchElementException".equals(e.getClass().getSimpleName())) {
             printLog("O elemento " + e.getMessage() + " não foi localizado.", ERROR);
         }
         printLog("Mensagem: " + e.getMessage(), ERROR);
         e.printStackTrace();
-        capturaTela();
     }
 
     private void allureCapturarTela() {

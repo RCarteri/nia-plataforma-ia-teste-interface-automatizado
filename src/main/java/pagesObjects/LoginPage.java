@@ -15,7 +15,6 @@ import static support.GetElements.getDriver;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.*;
 import static support.enums.SysProps.IS_LOGGED;
-import static support.enums.TimesAndReasons.CARR_PAG;
 
 public class LoginPage extends LoginMap {
     private final Utils utils;
@@ -65,10 +64,14 @@ public class LoginPage extends LoginMap {
                 assertTrue(isLogged);
                 printLog("Usuario " + datapool.get("chave") + " esta logado.", INFO);
             } else {
-                new Utils().esperar(CARR_PAG);
-                getInputUsername().sendKeys(datapool.get("chave"));
-                getInputPassword().sendKeys(datapool.get("senha"));
-                getBtnLogin().click();
+                try {
+                    getInputUsername().sendKeys(datapool.get("chave"));
+                    getInputPassword().sendKeys(datapool.get("senha"));
+                    getBtnLogin().click();
+                }catch (Exception e){
+                    printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
+                    getDriver().navigate().refresh();
+                }
                 while (!isLogged) {
                     if (++count == MAX_BOUND) {
                         Plataforma.fecharPlataforma();
@@ -85,6 +88,7 @@ public class LoginPage extends LoginMap {
             if (++count <= MAX_BOUND) {
                 printLog("Atualizando a página. Tentativa " + count + "/" + MAX_BOUND, ERROR);
                 getDriver().navigate().refresh();
+                printLog("Atualizei no outro", ERROR);
                 logar();
             } else {
                 Plataforma.fecharPlataforma();

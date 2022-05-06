@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.Utils.logError;
 import static support.Utils.rolarPaginaAteElemento;
 
 public class PrimeiroAcessoPage {
@@ -16,10 +15,12 @@ public class PrimeiroAcessoPage {
     private WebElement btnFinalizar;
     private int nPaginaFalha;
     private final PrimeiroAcessoMap pAM;
+    private final Utils utils;
 
     public PrimeiroAcessoPage() {
         this.posicao = 0;
         this.pAM = new PrimeiroAcessoMap();
+        this.utils = new Utils();
     }
 
     private void voltarPagina() {
@@ -40,7 +41,7 @@ public class PrimeiroAcessoPage {
         try {
             return pAM.getTxtMensagem().recuperarTexto();
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            utils.logError(e);
             return null;
         }
     }
@@ -62,7 +63,7 @@ public class PrimeiroAcessoPage {
         segundaPagina();
         for (int i = 0; i < pAM.getStepsItens().size(); ++i) {
             if (i == pAM.getStepsItens().size() - 1) {
-                new Utils().capturaTela();
+                utils.capturaTela();
                 this.btnFinalizar = pAM.getBtnAvancar();
                 break;
             }

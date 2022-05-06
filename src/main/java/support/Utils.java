@@ -96,20 +96,14 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public static void logError(@NotNull Exception e) {
+    public void logError(@NotNull Exception e) {
         printLog("Um erro de " + e.getClass().getSimpleName() + " ocorreu.", ERROR);
-        switch (e.getClass().getSimpleName()){
-            case "NoSuchElementException":
-                String noSuchElement = e.getMessage().split(" ")[4];
-                noSuchElement = noSuchElement.substring(0, noSuchElement.length() - 4);
-                printLog("O elemento " + noSuchElement + " não foi localizado.", ERROR);
-                break;
-            case "ElementoNaoLocalizadoException":
-                System.out.println("oi");
-                break;
+        if ("NoSuchElementException".equals(e.getClass().getSimpleName())) {
+            printLog("O elemento " + e.getMessage() + " não foi localizado.", ERROR);
         }
         printLog("Mensagem: " + e.getMessage(), ERROR);
         e.printStackTrace();
+        capturaTela();
     }
 
     private void allureCapturarTela() {

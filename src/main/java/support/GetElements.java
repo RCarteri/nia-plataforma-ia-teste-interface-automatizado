@@ -7,7 +7,6 @@ import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static support.Utils.logError;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
@@ -54,10 +53,10 @@ public class GetElements {
                 return findElement(by);
             }
         } catch (WebDriverException | IndexOutOfBoundsException e) {
-            short maxTentativas = 20;
-            if (tentativa == maxTentativas) {
+            short maxTentativas = 10;
+            if (tentativa++ == maxTentativas) {
                 printLog("O elemento não foi encontrado no iframe.", ERROR);
-                logError(e);
+                utils.logError(e);
                 Plataforma.fecharPlataforma();
                 System.exit(0);
             }
@@ -72,11 +71,8 @@ public class GetElements {
         iframesCount = 0;
         getDriver().switchTo().defaultContent();
         getDriver().findElements(By.xpath("//iframe")).forEach(elem -> iframesList.add(elem.getAttribute("id")));
-
-        if (iframesList.size() > 0) {
-            String msg = "Voltando para o \"MAIN_IFRAME (" + iframesList.get(0) + ")\"...";
-
-            printLog(msg, INFO);
-        }
+        getDriver().switchTo().frame(iframesList.get(1));
+        if (iframesList.size() > 0)
+            printLog("Voltando para o 'iframe (" + iframesList.get(1) + ")'...", INFO);
     }
 }

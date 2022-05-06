@@ -12,10 +12,8 @@ import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static support.GetElements.getDriver;
-import static support.Utils.logError;
 import static support.Utils.printLog;
-import static support.enums.LogTypes.INFO;
-import static support.enums.LogTypes.NULL;
+import static support.enums.LogTypes.*;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.TimesAndReasons.CARR_PAG;
 
@@ -46,7 +44,7 @@ public class LoginPage extends LoginMap {
                 Plataforma.selecionarAreaDeTrabalho(nomePagina);
             }
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            utils.logError(e);
         }
     }
 
@@ -54,7 +52,7 @@ public class LoginPage extends LoginMap {
         try {
             Plataforma.abrirMenu(nivel1, nivel2);
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            utils.logError(e);
         }
     }
 
@@ -83,14 +81,14 @@ public class LoginPage extends LoginMap {
                 printLog("Login realizado com a chave: " + datapool.get("chave"), INFO);
             }
         } catch (NoSuchElementException e) {
-            logError(e);
-            getDriver().navigate().refresh();
-
-            if (++count <= MAX_BOUND)
+            utils.logError(e);
+            if (++count <= MAX_BOUND) {
+                printLog("Atualizando a página. Tentativa " + count + "/" + MAX_BOUND, ERROR);
+                getDriver().navigate().refresh();
                 logar();
-            else {
+            } else {
                 Plataforma.fecharPlataforma();
-                fail("Não foi possível logar na Plataforma.");
+                printLog("Não foi possível logar na Plataforma.", ERROR);
             }
         }
     }
@@ -102,7 +100,7 @@ public class LoginPage extends LoginMap {
             Plataforma.fecharPlataforma();
             printLog("Plataforma fechada.", NULL);
         } catch (ElementoNaoLocalizadoException e) {
-            logError(e);
+            utils.logError(e);
         }
     }
 }

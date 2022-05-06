@@ -24,7 +24,7 @@ public class ModalAdicionarMembroPage {
             mAMM.getInputAdicionarMembro().click();
             if (isDropDowndisplayed()) selecionarFuncao(funcao);
         } catch (ElementoNaoLocalizadoException e) {
-            Utils.logError(e);
+            new Utils().logError(e);
         }
     }
 

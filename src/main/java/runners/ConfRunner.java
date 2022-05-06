@@ -10,7 +10,6 @@ public class ConfRunner {
     private static final APIRest apiRest = new APIRest();
 
     public static void confInit(){
-        new Utils().deletarAllureResults();
         AllureARQ3.ConfigInicialAllureARQ3();
         // Descomentar para limpar o histórico de relatóios no Allure caso esteja travando muito
         //limparRelatoriosAllure();
@@ -23,6 +22,7 @@ public class ConfRunner {
     }
 
     private static void limparRelatoriosAllure(){
+        new Utils().deletarAllureResults();
         apiRest.atualizarAllureArq3(Urls.LIMPAR_RESULTADOS.getUrl());
         apiRest.atualizarAllureArq3(Urls.LIMPAR_HISTORICO.getUrl());
     }

@@ -5,7 +5,7 @@
     <groupId>br.com.bb.nia</groupId>
     <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
     <packaging>jar</packaging>
-    <version>3.15.2-SNAPSHOT</version>
+    <version>3.15.3-SNAPSHOT</version>
     <name>nia-plataforma-ia-teste-interface-automatizado</name>
 
     <properties>

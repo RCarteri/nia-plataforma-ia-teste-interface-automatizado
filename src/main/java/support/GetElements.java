@@ -1,7 +1,6 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
-import br.com.bb.ath.ftabb.gaw.Plataforma;
 import org.openqa.selenium.*;
 
 import java.util.ArrayList;
@@ -56,8 +55,6 @@ public class GetElements {
             if (tentativa++ == maxTentativas) {
                 printLog("O elemento não foi encontrado no iframe.", ERROR);
                 utils.logError(e);
-                Plataforma.fecharPlataforma();
-                System.exit(0);
             }
             printLog("O mapeamento não iniciou no iframe inicial. Tentativa: " + tentativa + "/" + maxTentativas, INFO);
             iframesList.clear();

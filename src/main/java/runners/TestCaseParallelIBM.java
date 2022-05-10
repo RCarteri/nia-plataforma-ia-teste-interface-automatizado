@@ -14,7 +14,9 @@ import support.parallel.FTABBCucumberConcurrentRunner.AppConfig;
         TestSuiteS004Modelos.class,
         TestSuiteS005WatsonAssistant.class,
         TestSuiteS006WatsonKnowledgeCatalog.class,
-        TestSuiteS007WatsonStudio.class
+        TestSuiteS007WatsonStudio.class,
+        TestSuiteS008ModelosTriton.class,
+        TestSuiteS009PrimeiroAcesso.class
 })
-@AppConfig(value = {"", "", "", "", "", "", "", ""}, novasTentativasAposFalharTeste = 1)
+@AppConfig(value = {"", "", "", "", "", "", "", ""})
 public class TestCaseParallelIBM {}

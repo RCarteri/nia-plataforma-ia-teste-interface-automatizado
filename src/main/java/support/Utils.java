@@ -10,7 +10,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.LogTypes;
-import support.enums.TimesAndReasons;
+import support.enums.SelectorsDelays;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -28,8 +28,8 @@ import static support.GetElements.getElement;
 import static support.enums.LogTypes.*;
 
 public class Utils extends FTABBUtils {
-    public void esperar(@NotNull TimesAndReasons tar) {
-        printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getReason() + "...", NULL);
+    public void esperar(@NotNull SelectorsDelays tar) {
+        printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getSelector() + "...", NULL);
         sleep(esperarQTeste(tar.getDelay()));
     }
 
@@ -40,13 +40,13 @@ public class Utils extends FTABBUtils {
         return segundos;
     }
 
-    public static void waitLoadPage(){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".p-progress-spinner-circle")));
+    public static void waitLoadPage(@NotNull SelectorsDelays locator){
+        WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
     }
 
-    public static WebElement waitElement(String seletor){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 2);
+    public static WebElement waitElement(String seletor, @NotNull SelectorsDelays locator){
+        WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);
     }

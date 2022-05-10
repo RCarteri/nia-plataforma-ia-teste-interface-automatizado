@@ -10,6 +10,8 @@ import support.enums.LocatorType;
 
 import java.lang.reflect.Field;
 
+import static support.enums.LocatorType.CSS_SELECTOR;
+
 public class BasePageObjects {
     private final GetElements gE = new GetElements();
     private LocatorType locType;
@@ -22,7 +24,7 @@ public class BasePageObjects {
     private void setLocatorType(String fieldName) {
         for (Field field : this.getClass().getDeclaredFields()) {
             if (isTheFieldAnnotated(field, fieldName)) {
-                this.locType = LocatorType.CSS_SELECTOR;
+                this.locType = CSS_SELECTOR;
             }
         }
     }
@@ -32,7 +34,7 @@ public class BasePageObjects {
 
             if (isTheFieldAnnotated(field, fieldName)) {
                 final FindBy findBy = field.getAnnotation(FindBy.class);
-                if (locType.equals(LocatorType.CSS_SELECTOR))
+                if (locType.equals(CSS_SELECTOR))
                     return gE.findElement(By.cssSelector(findBy.cssSelector()));
             }
         }

@@ -7,6 +7,7 @@ import java.util.List;
 import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 import static support.Utils.waitElement;
+import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class ModalComponenteMap {
     public WebElement getTituloModal() {
@@ -14,7 +15,7 @@ public class ModalComponenteMap {
     }
 
     public WebElement getModal() {
-        return waitElement("div.p-dialog-header");
+        return waitElement("div.p-dialog-header", CARR_PAG);
     }
 
     public List<WebElement> getListInfoNomeID() {

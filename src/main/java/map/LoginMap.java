@@ -4,10 +4,11 @@ import org.openqa.selenium.WebElement;
 
 import static support.GetElements.getElement;
 import static support.Utils.waitElement;
+import static support.enums.SelectorsDelays.LOGIN;
 
 public class LoginMap {
     public WebElement getInputUsername() {
-        return waitElement("#idToken1");
+        return waitElement("#idToken1", LOGIN);
     }
 
     public WebElement getInputPassword() {

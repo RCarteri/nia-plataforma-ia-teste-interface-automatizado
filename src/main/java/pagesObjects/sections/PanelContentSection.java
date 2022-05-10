@@ -14,6 +14,7 @@ import java.util.List;
 
 import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class PanelContentSection {
     private final PanelContentMap pCM;
@@ -34,7 +35,7 @@ public class PanelContentSection {
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 if (checkListaOpcoes(opcao, nItem)) continue;
-                waitLoadPage();
+                waitLoadPage(CARR_PAG);
                 if (!esperado && isGetAlertDisplayed()) {
                     printLog("Projeto sem " + opcao + "encontrado.", INFO);
                     return false;

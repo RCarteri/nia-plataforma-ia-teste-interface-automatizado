@@ -1,14 +1,14 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
+import br.com.bb.ath.ftabb.gaw.Plataforma;
 import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static support.Utils.printLog;
-import static support.enums.LogTypes.ERROR;
-import static support.enums.LogTypes.INFO;
+import static support.enums.LogTypes.*;
 
 public class GetElements {
     private final Utils utils = new Utils();
@@ -52,9 +52,11 @@ public class GetElements {
             }
         } catch (WebDriverException | IndexOutOfBoundsException e) {
             short maxTentativas = 10;
-            if (tentativa++ == maxTentativas) {
-                printLog("O elemento não foi encontrado no iframe.", ERROR);
+            if (++tentativa == maxTentativas) {
+                printLog("O elemento " + by + " não foi encontrado no iframe. Tentativa: " + tentativa + "/" + maxTentativas, ERROR);
                 utils.logError(e);
+                Plataforma.fecharPlataforma();
+                printLog("Plataforma fechada.", NULL);
             }
             printLog("O mapeamento não iniciou no iframe inicial. Tentativa: " + tentativa + "/" + maxTentativas, INFO);
             iframesList.clear();

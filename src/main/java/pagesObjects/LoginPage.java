@@ -3,6 +3,7 @@ package pagesObjects;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
 import map.LoginMap;
+import org.openqa.selenium.TimeoutException;
 import support.Utils;
 
 import java.util.Dictionary;
@@ -11,11 +12,14 @@ import static java.lang.Boolean.parseBoolean;
 import static org.junit.Assert.assertTrue;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
+import static support.Utils.waitLoadPage;
 import static support.enums.LogTypes.*;
+import static support.enums.SelectorsDelays.LOGIN;
 import static support.enums.SysProps.IS_LOGGED;
 
 public class LoginPage extends LoginMap {
     private final Utils utils;
+    int tentativa;
 
     public LoginPage() {
         this.utils = new Utils();
@@ -61,6 +65,16 @@ public class LoginPage extends LoginMap {
                 getInputUsername().sendKeys(datapool.get("chave"));
                 getInputPassword().sendKeys(datapool.get("senha"));
                 getBtnLogin().click();
+                try {
+                    waitLoadPage(LOGIN);
+                } catch (TimeoutException e) {
+                    if (++tentativa == 3) {
+                        printLog("Não foi possível realizar o login pois não saiu da tela de login. A plataforma será fechada.", ERROR);
+                        Plataforma.fecharPlataforma();
+                    }
+                    getDriver().navigate().refresh();
+                    logar();
+                }
             } catch (Exception e) {
                 printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
                 getDriver().navigate().refresh();

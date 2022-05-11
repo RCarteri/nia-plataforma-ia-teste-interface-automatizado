@@ -18,7 +18,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
 
     @ID-002-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Bucket"
+        Dado que exista "Bucket"
         Então deverá apresentar o titulo "Buckets do storage" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
@@ -42,5 +42,5 @@ Funcionalidade: Suite002 - Cloud Object Storage
 
     @ID-002-008 @CT008
     Cenario: CT008 - Inexistência do componente
-        Quando não existir "Bucket"
+        Dado que não exista "Bucket"
         Então deverá ser apresentado o alerta de "informação" com a mensagem "Não há nenhum bucket disponível para o projeto atualmente."

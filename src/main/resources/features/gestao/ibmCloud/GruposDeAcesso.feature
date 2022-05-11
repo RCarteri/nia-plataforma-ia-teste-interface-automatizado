@@ -18,7 +18,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
 
     @ID-003-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Grupo"
+        Dado que exista "Grupo"
         Então deverá apresentar o titulo "Grupos de acesso" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
@@ -43,7 +43,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
 
     @ID-003-005 @CT005
     Esquema do Cenario: CT005 - Adicionar membro exceção
-        Quando existir "Grupo"
+        Dado que exista "Grupo"
         E adicionar membro com os dados  '<chave>'
         Então deverá apresentar a mensagem '<mensagem>' de erro
         Exemplos:

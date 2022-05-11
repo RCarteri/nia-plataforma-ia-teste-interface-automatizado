@@ -18,7 +18,7 @@ Funcionalidade: Suite005 - Watson Assistant
 
     @ID-005-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Instância"
+        Dado que exista "Instância"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado

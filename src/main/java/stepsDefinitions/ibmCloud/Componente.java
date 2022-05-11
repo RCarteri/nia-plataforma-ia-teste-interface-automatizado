@@ -35,14 +35,14 @@ public class Componente {
        assertEquals(titulo, cP.getTxtTituloComponente());
     }
 
-    @Quando("^não existir \"([^\"]*)\"$")
+    @Dado("^que não exista \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
                 pCS.existeOpcao(false, opcao));
         utils.capturaTela();
     }
 
-    @Quando("^existir \"([^\"]*)\"$")
+    @Dado("^que exista \"([^\"]*)\"$")
     public void existirOpcao(String opcao) {
         assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
                 pCS.existeOpcao(true, opcao));

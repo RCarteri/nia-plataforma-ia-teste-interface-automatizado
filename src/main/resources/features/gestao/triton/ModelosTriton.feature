@@ -18,7 +18,7 @@ Funcionalidade: Suite008 - Modelos Triton
 
     @ID-008-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Detalhes"
+        Dado que exista "Detalhes"
         Então deverá apresentar o titulo "Detalhes do Modelo Triton" no modal
         E deverá mostrar a lista com detalhes
         E deverá apresentar mais detalhes
@@ -41,5 +41,5 @@ Funcionalidade: Suite008 - Modelos Triton
 
     @ID-008-009 @CT009
     Cenario: CT009 - Testar modelo Triton
-        Quando existir "Testar Modelo"
+        Dado que exista "Testar Modelo"
         Então deverá apresentar as informações do request

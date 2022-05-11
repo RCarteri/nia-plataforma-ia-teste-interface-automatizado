@@ -18,7 +18,7 @@ Funcionalidade: Suite004 - Modelos
 
     @ID-004-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Modelo"
+        Dado que exista "Modelo"
         Então deverá apresentar o titulo "Detalhes do Modelo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado

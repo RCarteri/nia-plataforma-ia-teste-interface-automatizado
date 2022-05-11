@@ -18,7 +18,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
 
     @ID-006-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Catálogo"
+        Dado que exista "Catálogo"
         Então deverá apresentar o titulo "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
@@ -43,7 +43,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
 
     @ID-006-005 @CT005
     Esquema do Cenario: CT005 - Adicionar membro exceção
-        Quando existir "Catálogo"
+        Dado que exista "Catálogo"
         E adicionar membro com os dados <função> '<chave>'
         Então deverá apresentar a mensagem '<mensagem>' de erro
         Exemplos:

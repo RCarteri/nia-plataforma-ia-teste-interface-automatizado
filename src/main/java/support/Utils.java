@@ -19,13 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.UUID;
 
 import static support.GetElements.getDriver;
 import static support.GetElements.getElement;
 import static support.enums.LogTypes.*;
+import static support.enums.User.*;
 
 public class Utils extends FTABBUtils {
     public void esperar(@NotNull SelectorsDelays tar) {
@@ -80,15 +79,13 @@ public class Utils extends FTABBUtils {
            printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
-    public Dictionary<String, String> getDatapool() {
+    public void setDatapool() {
         try {
-            final Dictionary<String, String> result = new Hashtable<>();
-            result.put("chave", $("login_plataforma.chaveF.chave"));
-            result.put("senha", $("login_plataforma.chaveF.senha"));
-            return result;
+            System.setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
+            System.setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
+            System.setProperty(SENHA.toString(), String.valueOf($("login_plataforma.chaveF.senha")));
         } catch (DataPoolException e) {
             logError(e);
-            return null;
         }
     }
 

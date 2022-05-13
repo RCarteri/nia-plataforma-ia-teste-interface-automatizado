@@ -15,7 +15,7 @@ public class PaginacaoMap extends BasePageObjects {
     private WebElement txtPaginacaoModal;
 
     public List<WebElement> getListBtnNPaginacao() {
-        return getElements("button.p-paginator-page:nth-child(n+1):nth-child(-n+5)");
+        return getElements("nia-platia-table .p-paginator-page:nth-child(n+1):nth-child(-n+5)");
     }
 
     public WebElement getTxtPaginacao() {

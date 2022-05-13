@@ -24,7 +24,7 @@ public class PaginacaoSection {
         return frase.substring(frase.indexOf("de") + 3, frase.length() - 1);
     }
 
-    protected void avancarPagina(@NotNull WebElement nPagina) {
+    public void avancarPagina(@NotNull WebElement nPagina) {
         printLog("Testando a página " + nPagina.getText() + ".", INFO);
         rolarPaginaAteElemento(nPagina);
         nPagina.click();

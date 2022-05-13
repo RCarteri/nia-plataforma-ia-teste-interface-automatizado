@@ -29,4 +29,24 @@ public class ModalComponenteMap {
     public List<WebElement> getListCabecalhoNomeID() {
         return getElements("div[class*='p-ai-center ng-tns'] h4");
     }
+
+    public List<WebElement> getListNome() {
+        return getElements("nia-membros-table td:nth-child(2)");
+    }
+
+    public WebElement getPapel(int i) {
+        return getElements("nia-membros-table td:nth-child(3)").get(i);
+    }
+
+    public List<WebElement> getListPapel() {
+        return getElements("li.p-ripple");
+    }
+
+    public WebElement getBtnSalvar() {
+        return getElement(".pi-save");
+    }
+
+    public WebElement getBtnEditar(int i) {
+        return getElements(".pi-pencil").get(i);
+    }
 }

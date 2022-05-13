@@ -33,7 +33,12 @@ public class ComponentePage{
             printLog(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.", INFO);
         }
         try {
-            new ComponenteMap().getListBtnFechar().forEach(WebElement::click);
+            ComponenteMap cM = new ComponenteMap();
+            if ((local.equals("alerta"))) {
+                cM.getListBtnFecharAlerta().forEach(WebElement::click);
+            } else {
+                cM.getBtnFecharModal().click();
+            }
             printLog("O " + local + " presente na página foi fechado.", INFO);
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             printLog("Não existe " + local + " presente na página para ser fechado.", INFO);

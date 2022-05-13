@@ -49,7 +49,11 @@ public class ComponenteMap extends BasePageObjects {
         return getElements(".p-dropdown-items-wrapper span");
     }
 
-    public List<WebElement> getListBtnFechar() {
-        return getElements("span.pi-times");
+    public List<WebElement> getListBtnFecharAlerta() {
+        return getElements(".p-toast .pi-times");
+    }
+
+    public WebElement getBtnFecharModal(){
+        return getElement(".p-dialog-header .pi-times");
     }
 }

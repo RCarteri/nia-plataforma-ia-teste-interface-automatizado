@@ -8,8 +8,7 @@ Funcionalidade: Suite008 - Modelos Triton
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
-        Quando acessar a página do provedor "Triton"
+        E acessar a página do provedor "Triton"
         E selecionar o componente "Modelos Triton"
 
     @ID-008-002 @CT002 @Smoke
@@ -18,7 +17,7 @@ Funcionalidade: Suite008 - Modelos Triton
 
     @ID-008-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Detalhes"
+        Dado que exista "Detalhes"
         Então deverá apresentar o titulo "Detalhes do Modelo Triton" no modal
         E deverá mostrar a lista com detalhes
         E deverá apresentar mais detalhes
@@ -41,5 +40,5 @@ Funcionalidade: Suite008 - Modelos Triton
 
     @ID-008-009 @CT009
     Cenario: CT009 - Testar modelo Triton
-        Quando existir "Testar Modelo"
+        Dado que exista "Testar Modelo"
         Então deverá apresentar as informações do request

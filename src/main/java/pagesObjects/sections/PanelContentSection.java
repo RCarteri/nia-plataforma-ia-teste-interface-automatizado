@@ -19,6 +19,7 @@ import static support.enums.SelectorsDelays.CARR_PAG;
 public class PanelContentSection {
     private final PanelContentMap pCM;
     private String nomeItemSelecionado;
+    private int indexADM;
 
     public PanelContentSection() {
         this.pCM = new PanelContentMap();
@@ -28,7 +29,11 @@ public class PanelContentSection {
         return nomeItemSelecionado;
     }
 
-    public boolean existeOpcao(boolean esperado, String opcao) {
+    public int getIndexADM() {
+        return indexADM;
+    }
+
+    public boolean existeOpcao(boolean esperado, boolean needBeADM, String opcao) {
         for (WebElement nPagina : new PaginacaoMap().getListBtnNPaginacao()) {
             ProvedorMap prM = new ProvedorMap();
             new PaginacaoSection().avancarPagina(nPagina);
@@ -36,12 +41,20 @@ public class PanelContentSection {
                 avancarItem(nItem, prM.getListBtnExibir());
                 if (checkListaOpcoes(opcao, nItem)) continue;
                 waitLoadPage(CARR_PAG);
+                ModalComponentePage mCP = new ModalComponentePage();
                 if (!esperado && isGetAlertDisplayed()) {
                     printLog("Projeto sem " + opcao + "encontrado.", INFO);
                     return false;
-                } else if (esperado && new ModalComponentePage().isModalDisplayed()) {
+                } else if (esperado && mCP.isModalDisplayed()) {
                     printLog("Projeto com " + opcao + " encontrado.", INFO);
                     this.nomeItemSelecionado = prM.getListNomes().get(prM.getListBtnExibir().indexOf(nItem)).getText();
+                    if (needBeADM){
+                        if (!mCP.isUserLoggedADM()) {
+                            new ComponentePage().clickBtnFechar(true, "modal");
+                            continue;
+                        }
+                        this.indexADM = mCP.getIndexADM();
+                    }
                     return true;
                 }
             }
@@ -60,7 +73,7 @@ public class PanelContentSection {
             printLog(new ComponenteMap().getAlertInfo().isDisplayed() + "alerta esta sendo mostrado.", INFO);
             return new ComponenteMap().getAlertInfo().isDisplayed();
         } catch (NoSuchElementException e) {
-            new ComponentePage().clickBtnFechar(true,"modal");
+            new ComponentePage().clickBtnFechar(true, "modal");
             return false;
         }
     }
@@ -85,6 +98,7 @@ public class PanelContentSection {
         for (WebElement webElement : pCM.getListaOpcoesSubmenu()) {
             if (webElement.getText().intern().equals(opcao)) {
                 if (webElement.getAttribute("class").contains("disabled")) return false;
+                rolarPaginaAteElemento(webElement);
                 webElement.click();
                 break;
             }

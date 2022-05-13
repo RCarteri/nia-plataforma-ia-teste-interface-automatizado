@@ -1,7 +1,7 @@
 package support.enums;
 
 public enum SelectorsDelays {
-	CARR_PAG(".p-progress-spinner-circle", 5),
+	CARR_PAG(".p-progress-spinner-circle", 9),
 	LOGIN("#idToken1", 5);
 
 	private final String selector;

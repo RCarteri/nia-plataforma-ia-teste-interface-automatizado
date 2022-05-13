@@ -1,5 +1,6 @@
 package stepsDefinitions.ibmCloud;
 
+import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
@@ -10,12 +11,12 @@ import support.Utils;
 
 import static org.junit.Assert.*;
 import static support.Utils.printResultadoEsperadoObtido;
+import static support.enums.User.getUser;
 
 public class Componente {
     private final ComponentePage cP;
     private final PanelContentSection pCS;
     private final Utils utils;
-    private String nomeItemSelecionado;
 
     public Componente() {
         this.cP = new ComponentePage();
@@ -35,32 +36,44 @@ public class Componente {
        assertEquals(titulo, cP.getTxtTituloComponente());
     }
 
-    @Quando("^não existir \"([^\"]*)\"$")
+    @Dado("^que não exista \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
-                pCS.existeOpcao(false, opcao));
+                pCS.existeOpcao(false, false, opcao));
+    }
+
+    @Dado("^que exista \"([^\"]*)\"$")
+    public void existirOpcao(String opcao) {
+        assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
+                pCS.existeOpcao(true, false, opcao));
         utils.capturaTela();
     }
 
-    @Quando("^existir \"([^\"]*)\"$")
-    public void existirOpcao(String opcao) {
-        assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
-                pCS.existeOpcao(true, opcao));
-        this.nomeItemSelecionado = pCS.getNomeItemSelecionado();
+    @Dado("^que exista \"([^\"]*)\" onde o usuário logado seja o administrador$")
+    public void queExistaOndeOUsuarioLogadoSejaOAdministrador(String opcao) {
+        assertTrue("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto.\nNão foi possível realizar este teste.",
+                pCS.existeOpcao(true, true, opcao));
+        utils.capturaTela();
+    }
+
+    @Quando("^escolher um papel diferente$")
+    public void escolherUmPapelDiferente() {
+        new ModalComponentePage().editarPapel(pCS.getIndexADM());
         utils.capturaTela();
     }
 
     @E("^deverá apresentar o mesmo nome do item selecionado$")
     public void deveraApresentarOMesmoNomeDoItemSelecionado() {
         ModalComponentePage mCP = new ModalComponentePage();
-        assertTrue(printResultadoEsperadoObtido(this.nomeItemSelecionado, mCP.getNomeElemento()),
-                mCP.isNomeIgual(this.nomeItemSelecionado));
+        assertTrue(printResultadoEsperadoObtido(pCS.getNomeItemSelecionado(), mCP.getNomeElemento()),
+                mCP.isNomeIgual(pCS.getNomeItemSelecionado()));
     }
 
     @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
         assertEquals(printResultadoEsperadoObtido(mensagem,cP.getTxtMensagemAlerta(opcao)),
                 mensagem, cP.getTxtMensagemAlerta(opcao));
+        utils.capturaTela();
         cP.clickBtnFechar(false,"alerta");
     }
 }

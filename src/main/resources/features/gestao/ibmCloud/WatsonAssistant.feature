@@ -8,8 +8,7 @@ Funcionalidade: Suite005 - Watson Assistant
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
-        Quando acessar a página do provedor "IBM Cloud"
+        E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Watson Assistant"
 
     @ID-005-002 @CT002 @Smoke
@@ -18,7 +17,7 @@ Funcionalidade: Suite005 - Watson Assistant
 
     @ID-005-003 @CT003
     Cenario: CT003 - Exibir componente
-        Quando existir "Instância"
+        Dado que exista "Instância"
         Então deverá apresentar o titulo "Skills" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado

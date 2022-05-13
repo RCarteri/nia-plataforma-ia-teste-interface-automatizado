@@ -6,7 +6,7 @@ import java.util.List;
 
 import static support.GetElements.getElements;
 
-public class ProvedorMap extends BasePageObjects {
+public class ProvedorMap {
     public List<WebElement> getListProvedor(){
         return getElements("div.p-card-body");
     }

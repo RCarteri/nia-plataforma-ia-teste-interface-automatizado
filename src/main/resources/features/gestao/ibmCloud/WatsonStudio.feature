@@ -8,8 +8,7 @@ Funcionalidade: Suite007 - Watson Studio
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
-        Quando acessar a página do provedor "IBM Cloud"
+        E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Watson Studio"
 
     @ID-007-002 @CT002 @Smoke
@@ -18,7 +17,7 @@ Funcionalidade: Suite007 - Watson Studio
 
     @ID-007-003 @CT003
     Esquema do Cenario: CT003 - Exibir componente
-        Quando existir "<opção>"
+        Dado que exista "<opção>"
         Então deverá apresentar o titulo "<título>" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista com elementos
@@ -46,7 +45,7 @@ Funcionalidade: Suite007 - Watson Studio
 
     @ID-007-005 @CT005
     Esquema do Cenario: CT005 - Adicionar membro exceção
-        Quando existir "Membros"
+        Dado que exista "Membros"
         E adicionar membro com os dados <função> '<chave>'
         Então deverá apresentar a mensagem '<mensagem>' de erro
         Exemplos:
@@ -67,10 +66,16 @@ Funcionalidade: Suite007 - Watson Studio
 
     @ID-007-008 @CT008
     Esquema do Cenario: CT008 - Inexistência do componente
-        Quando não existir "<opção>"
+        Dado que não exista "<opção>"
         Então deverá ser apresentado o alerta de "informação" com a mensagem "<mensagem>"
         Exemplos:
             | opção       | mensagem                                                       |
             | Notebooks   | Não há nenhum notebook disponível para o projeto atualmente.   |
             | Modelos     | Não há nenhum modelo disponível para o projeto atualmente.     |
             | Data assets | Não há nenhum data asset disponível para o projeto atualmente. |
+
+    @ID-007-011 @CT011
+    Cenario: CT011 - Editar membro
+        Dado que exista "Membros" onde o usuário logado seja o administrador
+        Quando escolher um papel diferente
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"

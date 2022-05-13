@@ -8,8 +8,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
-        Quando acessar a página do provedor "IBM Cloud"
+        E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Cloud Object Storage"
 
     @ID-002-002 @CT002 @Smoke

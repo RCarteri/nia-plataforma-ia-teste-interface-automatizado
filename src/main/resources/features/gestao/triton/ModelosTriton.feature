@@ -8,8 +8,7 @@ Funcionalidade: Suite008 - Modelos Triton
         E se não estiver logado, realiza o login no Sistema
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
-        Quando acessar a página do provedor "Triton"
+        E acessar a página do provedor "Triton"
         E selecionar o componente "Modelos Triton"
 
     @ID-008-002 @CT002 @Smoke

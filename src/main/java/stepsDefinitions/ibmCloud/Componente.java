@@ -40,7 +40,6 @@ public class Componente {
     public void naoExistirOpcao(String opcao) {
         assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
                 pCS.existeOpcao(false, false, opcao));
-        utils.capturaTela();
     }
 
     @Dado("^que exista \"([^\"]*)\"$")
@@ -74,6 +73,7 @@ public class Componente {
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
         assertEquals(printResultadoEsperadoObtido(mensagem,cP.getTxtMensagemAlerta(opcao)),
                 mensagem, cP.getTxtMensagemAlerta(opcao));
+        utils.capturaTela();
         cP.clickBtnFechar(false,"alerta");
     }
 }

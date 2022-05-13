@@ -41,7 +41,11 @@ public class Utils extends FTABBUtils {
 
     public static void waitLoadPage(@NotNull SelectorsDelays locator){
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
+        }catch (TimeoutException e){
+            printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
+        }
     }
 
     public static WebElement waitElement(String seletor, @NotNull SelectorsDelays locator){

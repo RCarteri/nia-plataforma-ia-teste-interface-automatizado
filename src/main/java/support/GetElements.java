@@ -61,7 +61,7 @@ public class GetElements {
                 return findElement(by);
             }
         } catch (WebDriverException | IndexOutOfBoundsException e) {
-            short maxTentativas = 10;
+            short maxTentativas = 20;
             if (++tentativa == maxTentativas) {
                 printLog("O elemento " + by + " não foi encontrado no iframe. Tentativa: " + tentativa + "/" + maxTentativas, ERROR);
                 utils.logError(e);

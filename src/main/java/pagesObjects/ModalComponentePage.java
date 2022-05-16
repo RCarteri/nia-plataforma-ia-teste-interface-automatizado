@@ -52,7 +52,7 @@ public class ModalComponentePage extends ModalComponenteMap {
     public boolean isUserLoggedADM() {
         if (haMaisDeUmMembro())
             for (int i = 0; i < getListNome().size(); i++)
-                return isUserLoggedADM(i);
+                if (isUserLoggedADM(i)) return true;
         return false;
     }
 
@@ -104,7 +104,7 @@ public class ModalComponentePage extends ModalComponenteMap {
 
     private int getIndexRandom(int indexADM) {
         Random rnd = ThreadLocalRandom.current();
-        int indexRandom = rnd.nextInt(getListNome().size() - 1) + 1;
+        int indexRandom = rnd.nextInt(getListNome().size());
         return (indexRandom == indexADM) ? getIndexRandom(indexADM) : indexRandom;
     }
 }

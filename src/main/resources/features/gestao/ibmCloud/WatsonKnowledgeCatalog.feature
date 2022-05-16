@@ -50,3 +50,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
             |          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
             | F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
             | 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
+
+    @ID-006-011 @CT011
+    Cenario: CT011 - Editar membro
+        Dado que exista "Catálogo" onde o usuário logado seja o administrador
+        Quando escolher um papel diferente
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"

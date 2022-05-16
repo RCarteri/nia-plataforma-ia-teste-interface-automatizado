@@ -20,7 +20,7 @@ public class Login {
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
-       lP.abrirPlataforma();
+        lP.abrirPlataforma();
     }
 
     @E("^se não estiver logado, realiza o login no Sistema$")
@@ -35,8 +35,11 @@ public class Login {
 
     @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
-        new Utils().capturaTela();
-        assertEquals("A página não foi carregada.", Plataforma.recuperarTituloPagina(), titulo);
+        try {
+            assertEquals("A página não foi carregada.", Plataforma.recuperarTituloPagina(), titulo);
+        } finally {
+            new Utils().capturaTela();
+        }
     }
 
     @E("^acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")

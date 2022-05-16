@@ -31,11 +31,9 @@ public class BasePageObjects {
 
     private @Nullable WebElement findBy(@NotNull LocatorType locType, String fieldName) {
         for (Field field : this.getClass().getDeclaredFields()) {
-
             if (isTheFieldAnnotated(field, fieldName)) {
-                final FindBy findBy = field.getAnnotation(FindBy.class);
-                if (locType.equals(CSS_SELECTOR))
-                    return gE.findElement(By.cssSelector(findBy.cssSelector()));
+                final String selector = field.getAnnotation(FindBy.class).cssSelector();
+                return gE.findElement(By.cssSelector(selector));
             }
         }
         return null;

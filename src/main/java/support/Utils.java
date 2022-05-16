@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.UUID;
 
 import static support.GetElements.getDriver;
-import static support.GetElements.getElement;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
 
@@ -46,12 +45,6 @@ public class Utils extends FTABBUtils {
         }catch (TimeoutException e){
             printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
-    }
-
-    public static WebElement waitElement(String seletor, @NotNull SelectorsDelays locator){
-        WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
-        return getElement(seletor);
     }
 
     public static @NotNull String printResultadoEsperadoObtido(String esperado, String obtido){

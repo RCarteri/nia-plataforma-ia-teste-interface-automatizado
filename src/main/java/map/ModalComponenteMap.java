@@ -4,9 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.GetElements.getElement;
-import static support.GetElements.getElements;
-import static support.Utils.waitElement;
+import static support.GetElements.*;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class ModalComponenteMap {

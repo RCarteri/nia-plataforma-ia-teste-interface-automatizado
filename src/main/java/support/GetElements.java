@@ -2,7 +2,11 @@ package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import support.enums.SelectorsDelays;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,13 @@ public class GetElements {
     public static WebDriver getDriver() {
         return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
     }
+
+    public static WebElement waitElement(String seletor, @NotNull SelectorsDelays locator){
+        WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
+        return getElement(seletor);
+    }
+
     public static List<WebElement> getElements(String seletor) {
         return getDriver().findElements(By.cssSelector(seletor));
     }
@@ -46,7 +57,6 @@ public class GetElements {
                 logTxt.append("Buscando o elemento com os parâmetros acima no iframe \"")
                         .append(iframesList.get(iframesCount));
                 printLog(logTxt.toString(), INFO);
-
                 getDriver().switchTo().frame(iframesList.get(iframesCount));
                 return findElement(by);
             }

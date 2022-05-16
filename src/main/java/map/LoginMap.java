@@ -3,7 +3,7 @@ package map;
 import org.openqa.selenium.WebElement;
 
 import static support.GetElements.getElement;
-import static support.Utils.waitElement;
+import static support.GetElements.waitElement;
 import static support.enums.SelectorsDelays.LOGIN;
 
 public class LoginMap {

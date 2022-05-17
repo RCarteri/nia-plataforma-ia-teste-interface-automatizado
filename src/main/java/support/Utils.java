@@ -5,7 +5,6 @@ import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.qameta.allure.Allure;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,7 +25,7 @@ import static support.enums.LogTypes.*;
 import static support.enums.User.*;
 
 public class Utils extends FTABBUtils {
-    public void esperar(@NotNull SelectorsDelays tar) {
+    public void esperar(SelectorsDelays tar) {
         printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getSelector() + "...", NULL);
         sleep(esperarQTeste(tar.getDelay()));
     }
@@ -38,7 +37,7 @@ public class Utils extends FTABBUtils {
         return segundos;
     }
 
-    public static void waitLoadPage(@NotNull SelectorsDelays locator){
+    public static void waitLoadPage(SelectorsDelays locator){
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
@@ -47,7 +46,7 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public static @NotNull String printResultadoEsperadoObtido(String esperado, String obtido){
+    public static String printResultadoEsperadoObtido(String esperado, String obtido){
         return "\nResultado esperado:\n    '" +
                 esperado +
                 "'.\nResultado obtido:\n    '" +
@@ -90,7 +89,7 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public void logError(@NotNull Exception e) {
+    public void logError(Exception e) {
         capturaTela();
         printLog("Um erro de " + e.getClass().getSimpleName() + " ocorreu.", ERROR);
         if ("NoSuchElementException".equals(e.getClass().getSimpleName())) {
@@ -108,7 +107,7 @@ public class Utils extends FTABBUtils {
         Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
-    public static void printLog(String msg, @NotNull LogTypes type) {
+    public static void printLog(String msg, LogTypes type) {
         switch (type){
             case INFO:
                 System.out.println("\nINFO - " + msg);

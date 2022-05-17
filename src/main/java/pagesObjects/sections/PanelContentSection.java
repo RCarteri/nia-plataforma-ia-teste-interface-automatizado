@@ -4,7 +4,6 @@ import map.ComponenteMap;
 import map.PaginacaoMap;
 import map.PanelContentMap;
 import map.ProvedorMap;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pagesObjects.ComponentePage;
@@ -78,7 +77,7 @@ public class PanelContentSection {
         }
     }
 
-    private void avancarItem(WebElement nItem, @NotNull List<WebElement> listBtnExibir) {
+    private void avancarItem(WebElement nItem, List<WebElement> listBtnExibir) {
         if (listBtnExibir.indexOf(nItem) > 0) printLog("Elemento procurado não encontrado.", INFO);
         printLog("Testando o " + (listBtnExibir.indexOf(nItem) + 1) + "º projeto da lista.", INFO);
         rolarPaginaAteElemento(nItem);
@@ -94,7 +93,7 @@ public class PanelContentSection {
         return false;
     }
 
-    private boolean clicarBotaoOpcao(@NotNull String opcao) {
+    private boolean clicarBotaoOpcao(String opcao) {
         for (WebElement webElement : pCM.getListaOpcoesSubmenu()) {
             if (webElement.getText().intern().equals(opcao)) {
                 if (webElement.getAttribute("class").contains("disabled")) return false;
@@ -114,7 +113,7 @@ public class PanelContentSection {
         }
     }
 
-    public String getTxtNenhumResultado(@NotNull String local) {
+    public String getTxtNenhumResultado(String local) {
         switch (local) {
             case "componente":
                 return pCM.getTxtNenhumResultado().getText();

@@ -1,7 +1,6 @@
 package pagesObjects;
 
 import map.ComponenteMap;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -45,7 +44,7 @@ public class ComponentePage{
         }
     }
 
-    public String getTxtMensagemAlerta(@NotNull String opcao) {
+    public String getTxtMensagemAlerta(String opcao) {
         ComponenteMap cM = new ComponenteMap();
         switch (opcao) {
             case "sucesso":

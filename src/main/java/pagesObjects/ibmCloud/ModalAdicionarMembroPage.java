@@ -2,7 +2,6 @@ package pagesObjects.ibmCloud;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ModalAdicionarMembroMap;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
@@ -37,7 +36,7 @@ public class ModalAdicionarMembroPage {
         }
     }
 
-    private void selecionarFuncao(@NotNull String funcao) throws ElementoNaoLocalizadoException {
+    private void selecionarFuncao(String funcao) throws ElementoNaoLocalizadoException {
         mAMM.getDropDownFuncao().click();
         if (funcao.equals("")) {
             mAMM.getDropDownFuncao().click();

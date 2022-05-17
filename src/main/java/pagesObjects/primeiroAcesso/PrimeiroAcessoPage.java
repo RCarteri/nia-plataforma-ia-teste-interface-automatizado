@@ -3,7 +3,6 @@ package pagesObjects.primeiroAcesso;
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.ComponenteMap;
 import map.PrimeiroAcessoMap;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
 import support.Utils;
 
@@ -103,7 +102,7 @@ public class PrimeiroAcessoPage {
         new Utils().capturaTela();
     }
 
-    private boolean isBotaoDesabilitado(@NotNull WebElement botao) {
+    private boolean isBotaoDesabilitado(WebElement botao) {
         return botao.getAttribute("disabled") != null;
     }
 }

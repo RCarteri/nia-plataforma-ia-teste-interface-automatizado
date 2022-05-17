@@ -3,7 +3,6 @@ package stepsDefinitions.ibmCloud;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import org.jetbrains.annotations.NotNull;
 import pagesObjects.sections.PaginacaoSection;
 import pagesObjects.sections.PanelContentSection;
 import pagesObjects.sections.PesquisaSection;
@@ -55,7 +54,7 @@ public class Pesquisa {
     }
 
     @E("^a quantidade de resultados deve ser (\\d+)$")
-    public void osResultadosDevemSer(@NotNull String quantResultados) {
+    public void osResultadosDevemSer(String quantResultados) {
         String quantResultadosObtida = pS.getQuantResultados(this.local);
         this.validacao = quantResultados.equals(quantResultadosObtida);
         pqS.validarPesquisa(printResultadoEsperadoObtido(quantResultados, quantResultadosObtida), validacao);
@@ -81,7 +80,7 @@ public class Pesquisa {
     }
 
     @Então("^deverá apresentar a mensagem \"([^\"]*)\"$")
-    public void deveraApresentarAMensagem(@NotNull String mensagem){
+    public void deveraApresentarAMensagem(String mensagem){
         utils.capturaTela();
         String mensagemObtida = pCS.getTxtNenhumResultado(this.local);
         this.validacao = mensagem.equals(mensagemObtida);
@@ -95,7 +94,7 @@ public class Pesquisa {
     }
 
     @E("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\" \"([^\"]*)\"$")
-    public void pesquisarUmDado(String dado, @NotNull String local, String componente) {
+    public void pesquisarUmDado(String dado, String local, String componente) {
         if (local.equals("modal") && !componente.equals("")) new Componente().existirOpcao(componente);
         this.local = local;
         pqS.limparPesquisa(this.local);

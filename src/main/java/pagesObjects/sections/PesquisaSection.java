@@ -1,8 +1,6 @@
 package pagesObjects.sections;
 
 import map.PesquisaMap;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
@@ -24,7 +22,7 @@ public class PesquisaSection {
         this.validacaoPesquisa = new HashMap<>();
     }
 
-    public void pesquisar(String palavra, @NotNull String local) {
+    public void pesquisar(String palavra, String local) {
         printLog("Pesquisando por: '" + palavra + "' no " + local + ".", INFO);
         switch (local) {
             case "componente":
@@ -36,7 +34,7 @@ public class PesquisaSection {
         }
     }
 
-    public String getTxtInputFiltro(@NotNull String local) {
+    public String getTxtInputFiltro(String local) {
         switch (local) {
             case "componente":
                 return pM.getInputPesquisa().getText();
@@ -46,7 +44,7 @@ public class PesquisaSection {
         return null;
     }
 
-    public void limparPesquisa(@NotNull String local) {
+    public void limparPesquisa(String local) {
         switch (local) {
             case "componente":
                 pM.getBtnLimparPesquisa().click();
@@ -73,7 +71,7 @@ public class PesquisaSection {
         return this.mensagemPesquisaInvalida;
     }
 
-    public String getDadoPesquisa(String local, @NotNull String dado) {
+    public String getDadoPesquisa(String local, String dado) {
         switch (dado) {
             case "inválido":
                 return "#inválido";
@@ -84,7 +82,7 @@ public class PesquisaSection {
         }
     }
 
-    private @Nullable String getDadoValido(@NotNull String local) {
+    private String getDadoValido(String local) {
         switch (local) {
             case "componente":
                 return pM.getListaNomesComponente().get(0).getText();
@@ -95,7 +93,7 @@ public class PesquisaSection {
         }
     }
 
-    public boolean resultadosContemString(String palavraPesquisada, @NotNull String local) {
+    public boolean resultadosContemString(String palavraPesquisada, String local) {
         boolean resultadosOk;
         List<WebElement> listTxt;
         switch (local) {

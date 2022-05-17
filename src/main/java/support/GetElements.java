@@ -2,7 +2,6 @@ package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.gaw.Plataforma;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +23,7 @@ public class GetElements {
         return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
     }
 
-    public static WebElement waitElement(String seletor, @NotNull SelectorsDelays locator){
+    public static WebElement waitElement(String seletor, SelectorsDelays locator){
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(seletor)));
         return getElement(seletor);

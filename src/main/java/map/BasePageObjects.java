@@ -1,7 +1,5 @@
 package map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import support.GetElements;
@@ -29,7 +27,7 @@ public class BasePageObjects {
         }
     }
 
-    private @Nullable WebElement findBy(@NotNull LocatorType locType, String fieldName) {
+    private WebElement findBy(LocatorType locType, String fieldName) {
         for (Field field : this.getClass().getDeclaredFields()) {
             if (isTheFieldAnnotated(field, fieldName)) {
                 final String selector = field.getAnnotation(FindBy.class).cssSelector();
@@ -39,7 +37,7 @@ public class BasePageObjects {
         return null;
     }
 
-    private boolean isTheFieldAnnotated(@NotNull Field field, String fieldName) {
+    private boolean isTheFieldAnnotated(Field field, String fieldName) {
         final boolean isTheField = field.getName().intern().equals(fieldName);
         final boolean isAnnotated = field.isAnnotationPresent(FindBy.class);
 

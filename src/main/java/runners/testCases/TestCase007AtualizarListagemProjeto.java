@@ -8,6 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
+import static support.APIRest.Ambiente.DESENV;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
@@ -25,6 +27,6 @@ public class TestCase007AtualizarListagemProjeto extends ConfRunner{
 
 	@AfterClass
 	public static void finish(){
-		confFinish();
+		confFinish(DESENV);
 	}
 }

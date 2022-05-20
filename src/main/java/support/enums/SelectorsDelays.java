@@ -13,7 +13,7 @@ public enum SelectorsDelays {
 	}
 
 	public String getSelector() {
-		return this.selector;
+		return selector;
 	}
 
 	public long getDelay() {

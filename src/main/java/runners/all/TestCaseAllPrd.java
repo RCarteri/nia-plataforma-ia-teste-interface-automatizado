@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
-import static support.APIRest.Ambiente.PROD;
+import static support.APIRest.Dominio.PROD;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(

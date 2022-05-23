@@ -11,7 +11,7 @@ import support.Utils;
 
 import static org.junit.Assert.assertEquals;
 
-public class Login {
+public class Login extends Utils{
     private final LoginPage lP;
 
     public Login() {
@@ -20,17 +20,29 @@ public class Login {
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
-        lP.abrirPlataforma();
+        try {
+            lP.abrirPlataforma();
+        } catch (Exception e) {
+            capturaTela();
+        }
     }
 
     @E("^se não estiver logado, realiza o login no Sistema$")
     public void realizarLogin() {
-        lP.logar();
+        try {
+            lP.logar();
+        } catch (Exception e) {
+            capturaTela();
+        }
     }
 
     @Quando("^acessar a página \"([^\"]*)\"$")
     public void acessarAPagina(String nomePagina) {
-        lP.acessarPagina(nomePagina);
+        try {
+            lP.acessarPagina(nomePagina);
+        } catch (Exception e) {
+            capturaTela();
+        }
     }
 
     @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
@@ -38,12 +50,16 @@ public class Login {
         try {
             assertEquals("A página não foi carregada.", Plataforma.recuperarTituloPagina(), titulo);
         } finally {
-            new Utils().capturaTela();
+            capturaTela();
         }
     }
 
     @E("^acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")
     public void acessarMenu(String nivel1, String nivel2) {
-        lP.acessarMenu(nivel1, nivel2);
+        try {
+            lP.acessarMenu(nivel1, nivel2);
+        } catch (Exception e) {
+            capturaTela();
+        }
     }
 }

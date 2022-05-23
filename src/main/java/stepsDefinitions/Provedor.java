@@ -3,8 +3,9 @@ package stepsDefinitions;
 import cucumber.api.java.pt.E;
 import pagesObjects.ComponentePage;
 import pagesObjects.ProvedorPage;
+import support.Utils;
 
-public class Provedor {
+public class Provedor extends Utils {
     private final ProvedorPage pP;
     private final ComponentePage cP;
 
@@ -15,8 +16,12 @@ public class Provedor {
 
     @E("^acessar a página do provedor \"([^\"]*)\"$")
     public void acessarAPaginaDoProvedor(String provedor) {
-        cP.getTxtMensagemAlerta("sucesso");
-        cP.clickBtnFechar(false,"alerta");
-        pP.acessarProvedor(provedor);
+        try {
+            cP.getTxtMensagemAlerta("sucesso");
+            cP.clickBtnFechar(false, "alerta");
+            pP.acessarProvedor(provedor);
+        } catch (Exception e) {
+            capturaTela();
+        }
     }
 }

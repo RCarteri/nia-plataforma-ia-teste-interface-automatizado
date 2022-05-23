@@ -8,7 +8,7 @@ import support.Utils;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class Triton {
+public class Triton extends Utils {
     private final TritonPage tP;
 
     public Triton() {
@@ -17,18 +17,28 @@ public class Triton {
 
     @E("^deverá mostrar a lista com detalhes$")
     public void deveraMostrarAListaComDetalhes() {
-        assertNotNull(tP.getNomeModelo());
+        try {
+            assertNotNull(tP.getNomeModelo());
+        } catch (Exception e) {
+            capturaTela();
+        }
     }
 
     @E("^deverá apresentar mais detalhes$")
     public void deveraApresentarMaisDetalhes() {
-        assertNotNull(tP.getPreMaisDetalhes());
-        new Utils().capturaTela();
+        try {
+            assertNotNull(tP.getPreMaisDetalhes());
+        } finally {
+            capturaTela();
+        }
     }
 
     @Então("^deverá apresentar as informações do request$")
     public void deveraApresentarAsInformacoesDoRequest() {
-        new Utils().capturaTela();
-        assertTrue(tP.estaRetornandoInformacoes());
+        try {
+            assertTrue(tP.estaRetornandoInformacoes());
+        } finally {
+            capturaTela();
+        }
     }
 }

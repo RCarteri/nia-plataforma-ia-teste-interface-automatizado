@@ -19,7 +19,7 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
     private WebElement btnConfirmar;
 
     @FindBy(cssSelector = ".p-component.ng-invalid")
-    private WebElement inputAdicionarMembro;
+    private WebElement inputChave;
 
     public List<WebElement> getListSpanFuncao() {
         return getElements("p-dropdownitem .ng-star-inserted");
@@ -41,10 +41,10 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
         return btnAdicionarMembro;
     }
 
-    public WebElement getInputAdicionarMembro() {
-        if (inputAdicionarMembro == null)
-            inputAdicionarMembro = setElement("inputAdicionarMembro");
-        return inputAdicionarMembro;
+    public WebElement getInputChave() {
+        if (inputChave == null)
+            inputChave = setElement("inputChave");
+        return inputChave;
     }
 
     public WebElement getDropDownFuncao() {

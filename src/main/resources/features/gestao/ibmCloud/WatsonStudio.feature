@@ -44,15 +44,17 @@ Funcionalidade: Suite007 - Watson Studio
             | modal      | Membros | Nenhum membro encontrado.            |
 
     @ID-007-005 @CT005
-    Esquema do Cenario: CT005 - Adicionar membro exceção
+    Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Membros"
-        E adicionar membro com os dados <função> '<chave>'
-        Então deverá apresentar a mensagem '<mensagem>' de erro
-        Exemplos:
-            | chave    | função        | mensagem                                                                                                                                 |
-            |          |               | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
-            | F        | Administrador | Sua chave deve possuir 8 caracteres.                                                                                                     |
-            | 22222222 | Administrador | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
+        Quando adicionar membro com os dados
+            | chave    | função        |
+            |          |               |
+            | F        | Administrador |
+            | 22222222 | Administrador |
+        Então deverá apresentar a mensagem de erro
+            | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
+            | Sua chave deve possuir 8 caracteres.                                                                                                     |
+            | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
 
     @ID-007-006 @CT006
     Cenario: CT006 - Filtrar projetos por sigla

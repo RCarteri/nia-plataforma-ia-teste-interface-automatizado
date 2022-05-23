@@ -78,7 +78,7 @@ public class Componente extends Utils{
     public void escolherUmPapelDiferente() {
         try {
             new ModalComponentePage().editarPapel(pCS.getIndexADM());
-        } finally {
+        } catch (Exception e){
             capturaTela();
         }
     }

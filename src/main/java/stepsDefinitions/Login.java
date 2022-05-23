@@ -10,6 +10,7 @@ import pagesObjects.LoginPage;
 import support.Utils;
 
 import static org.junit.Assert.assertEquals;
+import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class Login extends Utils{
     private final LoginPage lP;
@@ -51,6 +52,7 @@ public class Login extends Utils{
     @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         try {
+            waitLoadPage(CARR_PAG);
             assertEquals("A página não foi carregada.", Plataforma.recuperarTituloPagina(), titulo);
         } finally {
             capturaTela();

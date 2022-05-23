@@ -23,6 +23,7 @@ public class PimeiroAcesso extends Utils {
             assertTrue(printResultadoEsperadoObtido(mensagem, pAP.getMensagem()),
                     pAP.getMensagem().contains(mensagem));
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -32,6 +33,7 @@ public class PimeiroAcesso extends Utils {
         try {
             pAP.seguirTutorial();
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -42,6 +44,7 @@ public class PimeiroAcesso extends Utils {
             assertEquals("A última página testada não possui o botão de Finalizar.",
                     "FINALIZAR", pAP.getUtlimoBotao().getText());
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -52,6 +55,7 @@ public class PimeiroAcesso extends Utils {
             assertEquals("O step item da página " + pAP.getNPaginaFalha() + " não foi alterado.",
                     0, pAP.getNPaginaFalha());
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

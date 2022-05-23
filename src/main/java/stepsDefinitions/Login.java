@@ -23,6 +23,7 @@ public class Login extends Utils{
         try {
             lP.abrirPlataforma();
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -32,6 +33,7 @@ public class Login extends Utils{
         try {
             lP.logar();
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -41,6 +43,7 @@ public class Login extends Utils{
         try {
             lP.acessarPagina(nomePagina);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -59,6 +62,7 @@ public class Login extends Utils{
         try {
             lP.acessarMenu(nivel1, nivel2);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

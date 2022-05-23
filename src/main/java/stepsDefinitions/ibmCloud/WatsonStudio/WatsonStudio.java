@@ -22,6 +22,7 @@ public class WatsonStudio extends Utils{
         try {
             wSP.selecionarSigla(sigla);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -40,6 +41,7 @@ public class WatsonStudio extends Utils{
         try {
             wSP.atualizarProjetos();
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

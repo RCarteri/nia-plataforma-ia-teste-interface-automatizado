@@ -34,6 +34,7 @@ public class Pesquisa extends Utils{
             this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
             pqS.pesquisar(palavraPesquisada, local);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -57,6 +58,7 @@ public class Pesquisa extends Utils{
             this.validacao = pqS.resultadosContemString(palavraPesquisada, this.local);
             pqS.validarPesquisa("Os resultados apresentados não contem a palavra pesquisada.", validacao);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -68,6 +70,7 @@ public class Pesquisa extends Utils{
             this.validacao = quantResultados.equals(quantResultadosObtida);
             pqS.validarPesquisa(printResultadoEsperadoObtido(quantResultados, quantResultadosObtida), validacao);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -77,6 +80,7 @@ public class Pesquisa extends Utils{
         try {
             pqS.limparPesquisa(this.local);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -98,6 +102,7 @@ public class Pesquisa extends Utils{
             this.validacao = this.quantResultadosAntes.equals(quantResultadosObtida);
             pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -119,6 +124,7 @@ public class Pesquisa extends Utils{
             boolean validacao = pqS.getValidacaoPesquisa();
             assertTrue(pqS.getMensagemPesquisaInvalida(), validacao);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -133,6 +139,7 @@ public class Pesquisa extends Utils{
             this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
             pqS.pesquisar(palavraPesquisada, local);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

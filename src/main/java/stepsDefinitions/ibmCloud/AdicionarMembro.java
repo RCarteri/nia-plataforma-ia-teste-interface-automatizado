@@ -22,6 +22,7 @@ public class AdicionarMembro extends Utils{
             assertFalse("O botão confirmar está ativo", mAMP.isBtnConfirmarAtivo());
             mAMP.adicionarMembro(funcao, chave);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

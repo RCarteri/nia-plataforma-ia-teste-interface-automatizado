@@ -21,6 +21,7 @@ public class Provedor extends Utils {
             cP.clickBtnFechar(false, "alerta");
             pP.acessarProvedor(provedor);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

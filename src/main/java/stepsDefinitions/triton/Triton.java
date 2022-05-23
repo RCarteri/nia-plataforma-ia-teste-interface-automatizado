@@ -20,6 +20,7 @@ public class Triton extends Utils {
         try {
             assertNotNull(tP.getNomeModelo());
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

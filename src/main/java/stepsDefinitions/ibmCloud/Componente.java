@@ -10,6 +10,7 @@ import pagesObjects.sections.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;
+import static support.enums.SelectorsDelays.CARR_PAG;
 import static support.enums.User.getUser;
 
 public class Componente extends Utils{
@@ -26,7 +27,9 @@ public class Componente extends Utils{
         try {
             cP.acessarComponente(componente);
             assertNotNull(cP.getTxtTituloComponente());
+            waitLoadPage(CARR_PAG);
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -46,6 +49,7 @@ public class Componente extends Utils{
             assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
                     pCS.existeOpcao(false, false, opcao));
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }
@@ -86,6 +90,7 @@ public class Componente extends Utils{
             assertTrue(printResultadoEsperadoObtido(pCS.getNomeItemSelecionado(), mCP.getNomeElemento()),
                     mCP.isNomeIgual(pCS.getNomeItemSelecionado()));
         } catch (Exception e) {
+            logError(e);
             capturaTela();
         }
     }

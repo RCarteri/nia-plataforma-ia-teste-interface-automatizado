@@ -2,7 +2,6 @@ package stepsDefinitions.ibmCloud;
 
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
-import cucumber.api.java.pt.Quando;
 import pagesObjects.sections.PaginacaoSection;
 import pagesObjects.sections.PanelContentSection;
 import pagesObjects.sections.PesquisaSection;
@@ -23,20 +22,6 @@ public class Pesquisa extends Utils{
         this.pqS = new PesquisaSection();
         this.pS = new PaginacaoSection();
         this.pCS = new PanelContentSection();
-    }
-
-    @Quando("^pesquisar um dado \"([^\"]*)\" no \"([^\"]*)\"$")
-    public void pesquisar(String dado, String local) {
-        this.local = local;
-        try {
-            pqS.limparPesquisa(this.local);
-            this.quantResultadosAntes = pS.getQuantResultados(local);
-            this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
-            pqS.pesquisar(palavraPesquisada, local);
-        } catch (Exception e) {
-            logError(e);
-            capturaTela();
-        }
     }
 
     @Então("^deverá apresentar um total de resultados diferente do anterior$")

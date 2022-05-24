@@ -15,6 +15,8 @@ public class ConfRunner {
         AllureARQ3.ConfigInicialAllureARQ3();
         // Descomentar para limpar o histórico de relatóios no Allure caso esteja travando muito
         //limparRelatoriosAllure(DESENV);
+        //limparRelatoriosAllure(HML);
+        //limparRelatoriosAllure(PROD);
     }
 
     public static void confFinish(Dominio ambiente) {

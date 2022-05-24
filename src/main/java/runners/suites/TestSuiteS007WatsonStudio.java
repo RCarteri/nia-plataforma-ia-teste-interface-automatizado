@@ -1,7 +1,6 @@
 package runners.suites;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,9 +14,7 @@ import static support.APIRest.Dominio.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
-		snippets = SnippetType.CAMELCASE,
-		tags = { "@S007" },
-		monochrome = true
+		tags = { "@S007" }
 )
 public class TestSuiteS007WatsonStudio extends ConfRunner{
 	@BeforeClass

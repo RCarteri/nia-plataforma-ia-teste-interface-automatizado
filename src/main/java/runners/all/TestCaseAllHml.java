@@ -1,7 +1,6 @@
 package runners.all;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,9 +14,7 @@ import static support.APIRest.Dominio.HML;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = {"classpath:features/gestao", "classpath:features/primeiroAcesso"},
 		glue = "classpath:stepsDefinitions",
-		snippets = SnippetType.CAMELCASE,
-		tags = { "" },
-		monochrome = true
+		tags = { "" }
 )
 public class TestCaseAllHml extends ConfRunner {
 	@BeforeClass

@@ -19,4 +19,4 @@ import support.parallel.FTABBCucumberConcurrentRunner.AppConfig;
         TestSuiteS009PrimeiroAcesso.class
 })
 @AppConfig(value = {"", "", "", "", "", "", "", ""})
-public class TestCaseParallelIBM {}
+public class TestCaseParallel {}

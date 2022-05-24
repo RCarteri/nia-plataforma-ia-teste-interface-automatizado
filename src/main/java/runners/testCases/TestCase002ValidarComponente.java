@@ -1,7 +1,6 @@
 package runners.testCases;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,9 +14,7 @@ import static support.APIRest.Dominio.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
-		snippets = SnippetType.CAMELCASE,
-		tags = { "@CT002" },
-		monochrome = true
+		tags = { "@CT002" }
 )
 public class TestCase002ValidarComponente extends ConfRunner{
 	@BeforeClass

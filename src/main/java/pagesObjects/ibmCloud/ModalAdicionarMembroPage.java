@@ -33,7 +33,7 @@ public class ModalAdicionarMembroPage {
         mensagens.add(mensagem);
     }
 
-    public void adicionarMembro2() {
+    public void adicionarMembro() {
         Utils utils = new Utils();
         try {
             for (Membro membro : membros) {
@@ -55,6 +55,7 @@ public class ModalAdicionarMembroPage {
     }
 
     private void isMensagemEsperada(Membro membro) {
+        mAMM.getForm().click();
         String mensagemEsperada = mensagens.get(membros.indexOf(membro)).getMensagem();
         assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagem()),
                 getMensagem().contains(mensagemEsperada));

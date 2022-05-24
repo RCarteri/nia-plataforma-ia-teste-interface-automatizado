@@ -31,19 +31,8 @@ public class AdicionarMembro extends Utils{
         }
     }
 
-//    @Então("^deverá apresentar a mensagem '(.*)' de erro$")
-//    public void deveraApresentarAMensagemMensagemDeErro(String mensagem) {
-//        try {
-//            assertTrue(printResultadoEsperadoObtido(mensagem, mAMP.getMensagem()),
-//                    mAMP.getMensagem().contains(mensagem));
-//            assertFalse("O botão confirmar está ativo", mAMP.isBtnConfirmarAtivo());
-//        } finally {
-//            capturaTela();
-//        }
-//    }
-
     @Quando("^adicionar membro com os dados$")
-    public void adicionarMembroComOsDadosDaFuncaoEChave(DataTable table) {
+    public void adicionarMembroComOsDados(DataTable table) {
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         for (Map<String, String> columns : rows) {
             mAMP.addMembro(new Membro(columns.get("chave"), columns.get("função")));
@@ -59,7 +48,7 @@ public class AdicionarMembro extends Utils{
         try {
             mAMP.acessarAdicionarMembro();
             assertFalse("O botão confirmar está ativo", mAMP.isBtnConfirmarAtivo());
-            mAMP.adicionarMembro2();
+            mAMP.adicionarMembro();
         } catch (Exception e) {
             logError(e);
             capturaTela();

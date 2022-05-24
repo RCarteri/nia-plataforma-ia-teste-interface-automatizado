@@ -41,13 +41,14 @@ Funcionalidade: Suite003 - Grupos de Acesso
             | modal      | Grupo | Nenhum membro encontrado.                    |
 
     @ID-003-005 @CT005
-    Esquema do Cenario: CT005 - Adicionar membro exceção
+    Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Grupo"
-        E adicionar membro com os dados  '<chave>'
-        Então deverá apresentar a mensagem '<mensagem>' de erro
-        Exemplos:
-            | chave    | mensagem                                                                                                                                 |
-            | F        | Sua chave deve possuir 8 caracteres.                                                                                                     |
-            | 22222222 | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
-
-
+        Quando adicionar membro com os dados
+            | chave    | função |
+            |          |        |
+            | F        |        |
+            | 22222222 |        |
+        Então deverá apresentar a mensagem de erro
+            | Sua chave é um item obrigatório.                                                                                                         |
+            | Sua chave deve possuir 8 caracteres.                                                                                                     |
+            | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |

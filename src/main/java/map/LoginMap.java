@@ -8,7 +8,7 @@ import static support.enums.SelectorsDelays.LOGIN;
 
 public class LoginMap {
     public WebElement getInputUsername() {
-        return waitElement("#idToken1", LOGIN);
+        return waitElement(LOGIN);
     }
 
     public WebElement getInputPassword() {

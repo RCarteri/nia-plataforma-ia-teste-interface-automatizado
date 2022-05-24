@@ -69,8 +69,11 @@ public class PanelContentSection {
 
     private boolean isGetAlertDisplayed() {
         try {
-            printLog(new ComponenteMap().getAlertInfo().isDisplayed() + "alerta esta sendo mostrado.", INFO);
-            return new ComponenteMap().getAlertInfo().isDisplayed();
+            if (new ComponenteMap().getAlertInfo().isDisplayed()) {
+                printLog("O alerta esta sendo mostrado.", INFO);
+                return true;
+            }
+            return false;
         } catch (NoSuchElementException e) {
             new ComponentePage().clickBtnFechar(true, "modal");
             return false;

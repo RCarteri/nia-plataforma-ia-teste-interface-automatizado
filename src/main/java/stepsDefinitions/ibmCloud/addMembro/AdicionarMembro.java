@@ -1,7 +1,6 @@
 package stepsDefinitions.ibmCloud.addMembro;
 
 import cucumber.api.DataTable;
-import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
@@ -12,38 +11,26 @@ import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
 
-public class AdicionarMembro extends Utils{
+public class AdicionarMembro extends Utils {
     private final ModalAdicionarMembroPage mAMP;
 
     public AdicionarMembro() {
         this.mAMP = new ModalAdicionarMembroPage();
     }
 
-    @E("^adicionar membro com os dados (.*) '(.*)'$")
-    public void adicionarMembroComAChave(String funcao, String chave) {
-        try {
-            mAMP.acessarAdicionarMembro();
-            assertFalse("O botão confirmar está ativo", mAMP.isBtnConfirmarAtivo());
-            mAMP.adicionarMembro(funcao, chave);
-        } catch (Exception e) {
-            logError(e);
-            capturaTela();
-        }
-    }
-
     @Quando("^adicionar membro com os dados$")
     public void adicionarMembroComOsDados(DataTable table) {
-        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
-        for (Map<String, String> columns : rows) {
-            mAMP.addMembro(new Membro(columns.get("chave"), columns.get("função")));
+        List<Map<String, String>> linhas = table.asMaps(String.class, String.class);
+        for (Map<String, String> colunas : linhas) {
+            mAMP.addMembro(new Membro(colunas.get("chave"), colunas.get("função")));
         }
     }
 
     @Então("^deverá apresentar a mensagem de erro$")
     public void deveraApresentarAMensagemDeErro(DataTable table) {
-        List<List<String>> rows = table.asLists(String.class);
-        for (List<String> columns : rows) {
-            mAMP.addMensagem(new Mensagem(columns.get(0)));
+        List<String> linhas = table.asList(String.class);
+        for (String linha : linhas) {
+            mAMP.addMensagem(new Mensagem(linha));
         }
         try {
             mAMP.acessarAdicionarMembro();

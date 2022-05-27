@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static support.GetElements.*;
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.SelectorsDelays.MODAL;
 
 public class ModalComponenteMap {
     public WebElement getTituloModal() {
@@ -13,7 +13,7 @@ public class ModalComponenteMap {
     }
 
     public WebElement getModal() {
-        return waitElement("div.p-dialog-header", CARR_PAG);
+        return waitElement(MODAL);
     }
 
     public List<WebElement> getListInfoNomeID() {

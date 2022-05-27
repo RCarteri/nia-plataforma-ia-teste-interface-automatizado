@@ -1,4 +1,4 @@
-package runners.testCases;
+package runners.all;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -7,16 +7,16 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
-import static support.APIRest.Dominio.DESENV;
+import static support.APIRest.Dominio.PROD;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/",
+		features = {"classpath:features/gestao", "classpath:features/primeiroAcesso"},
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CT004" }
+		tags = { "" }
 )
-public class TestCase004Pesquisar extends ConfRunner{
+public class TestCaseAllPrd extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();
@@ -24,6 +24,6 @@ public class TestCase004Pesquisar extends ConfRunner{
 
 	@AfterClass
 	public static void finish(){
-		confFinish(DESENV);
+		confFinish(PROD);
 	}
 }

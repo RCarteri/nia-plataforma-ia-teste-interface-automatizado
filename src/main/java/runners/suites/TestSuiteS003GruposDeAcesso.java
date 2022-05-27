@@ -1,21 +1,20 @@
 package runners.suites;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
+import static support.APIRest.Dominio.DESENV;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
-		snippets = SnippetType.CAMELCASE,
-		tags = { "@S003" },
-		monochrome = true
+		tags = { "@S003" }
 )
 public class TestSuiteS003GruposDeAcesso extends ConfRunner{
 	@BeforeClass
@@ -25,6 +24,6 @@ public class TestSuiteS003GruposDeAcesso extends ConfRunner{
 
 	@AfterClass
 	public static void finish(){
-		confFinish();
+		confFinish(DESENV);
 	}
 }

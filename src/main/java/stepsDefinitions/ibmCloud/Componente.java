@@ -10,70 +10,99 @@ import pagesObjects.sections.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.Utils.printResultadoEsperadoObtido;
+import static support.enums.SelectorsDelays.CARR_PAG;
 import static support.enums.User.getUser;
 
-public class Componente {
+public class Componente extends Utils{
     private final ComponentePage cP;
     private final PanelContentSection pCS;
-    private final Utils utils;
 
     public Componente() {
         this.cP = new ComponentePage();
         this.pCS = new PanelContentSection();
-        this.utils = new Utils();
     }
 
     @Quando("^selecionar o componente \"([^\"]*)\"$")
     public void selecionarOComponente(String componente) {
-        cP.acessarComponente(componente);
-        assertNotNull(cP.getTxtTituloComponente());
+        try {
+            cP.acessarComponente(componente);
+            assertNotNull(cP.getTxtTituloComponente());
+            waitLoadPage(CARR_PAG);
+        } catch (Exception e) {
+            logError(e);
+            capturaTela();
+        }
     }
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) {
-       utils.capturaTela();
-       assertEquals(titulo, cP.getTxtTituloComponente());
+        try {
+            assertEquals(titulo, cP.getTxtTituloComponente());
+        } finally {
+            capturaTela();
+        }
     }
 
     @Dado("^que não exista \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {
-        assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
-                pCS.existeOpcao(false, false, opcao));
+        try {
+            assertFalse("Todos os projetos possuem " + opcao + "+.\nNão foi possível realizar este teste.",
+                    pCS.existeOpcao(false, false, opcao));
+        } catch (Exception e) {
+            logError(e);
+            capturaTela();
+        }
     }
 
     @Dado("^que exista \"([^\"]*)\"$")
     public void existirOpcao(String opcao) {
-        assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
-                pCS.existeOpcao(true, false, opcao));
-        utils.capturaTela();
+        try {
+            assertTrue("Nenhum projeto possui " + opcao + ".\nNão foi possível realizar este teste.",
+                    pCS.existeOpcao(true, false, opcao));
+        } finally {
+            capturaTela();
+        }
     }
 
     @Dado("^que exista \"([^\"]*)\" onde o usuário logado seja o administrador$")
     public void queExistaOndeOUsuarioLogadoSejaOAdministrador(String opcao) {
-        assertTrue("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto.\nNão foi possível realizar este teste.",
-                pCS.existeOpcao(true, true, opcao));
-        utils.capturaTela();
+        try {
+            assertTrue("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto.\nNão foi possível realizar este teste.",
+                    pCS.existeOpcao(true, true, opcao));
+        } finally {
+            capturaTela();
+        }
     }
 
     @Quando("^escolher um papel diferente$")
     public void escolherUmPapelDiferente() {
-        new ModalComponentePage().editarPapel(pCS.getIndexADM());
-        utils.capturaTela();
+        try {
+            new ModalComponentePage().editarPapel(pCS.getIndexADM());
+        } catch (Exception e){
+            capturaTela();
+        }
     }
 
     @E("^deverá apresentar o mesmo nome do item selecionado$")
     public void deveraApresentarOMesmoNomeDoItemSelecionado() {
         ModalComponentePage mCP = new ModalComponentePage();
-        assertTrue(printResultadoEsperadoObtido(pCS.getNomeItemSelecionado(), mCP.getNomeElemento()),
-                mCP.isNomeIgual(pCS.getNomeItemSelecionado()));
+        try {
+            assertTrue(printResultadoEsperadoObtido(pCS.getNomeItemSelecionado(), mCP.getNomeElemento()),
+                    mCP.isNomeIgual(pCS.getNomeItemSelecionado()));
+        } catch (Exception e) {
+            logError(e);
+            capturaTela();
+        }
     }
 
     @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
-        assertEquals(printResultadoEsperadoObtido(mensagem,cP.getTxtMensagemAlerta(opcao)),
-                mensagem, cP.getTxtMensagemAlerta(opcao));
-        utils.capturaTela();
-        cP.clickBtnFechar(false,"alerta");
+        try {
+            assertEquals(printResultadoEsperadoObtido(mensagem, cP.getTxtMensagemAlerta(opcao)),
+                    mensagem, cP.getTxtMensagemAlerta(opcao));
+        } finally {
+            capturaTela();
+        }
+        cP.clickBtnFechar(false, "alerta");
     }
 }

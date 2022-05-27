@@ -8,30 +8,41 @@ import support.Utils;
 
 import static org.junit.Assert.assertTrue;
 
-public class WatsonStudio {
+public class WatsonStudio extends Utils{
     private String sigla;
     private final WatsonStudioPage wSP;
-    private final Utils utils;
 
     public WatsonStudio() {
         this.wSP = new WatsonStudioPage();
-        this.utils  = new Utils();
     }
 
     @Quando("^selecionar a sigla \"([^\"]*)\"$")
     public void selecionarASigla(String sigla) {
         this.sigla = sigla;
-        wSP.selecionarSigla(sigla);
+        try {
+            wSP.selecionarSigla(sigla);
+        } catch (Exception e) {
+            logError(e);
+            capturaTela();
+        }
     }
 
     @Então("^deverá mostrar a lista de projetos com essa sigla$")
     public void deveraMostrarAListaDeProjetosComEssaSigla() {
-        utils.capturaTela();
-        assertTrue(new PesquisaSection().resultadosContemString(this.sigla, "sigla"));
+        try {
+            assertTrue(new PesquisaSection().resultadosContemString(this.sigla, "sigla"));
+        } finally {
+            capturaTela();
+        }
     }
 
     @Quando("^atualizar a listagem de projetos$")
     public void atualizarAListagemDeProjetos() {
-        wSP.atualizarProjetos();
+        try {
+            wSP.atualizarProjetos();
+        } catch (Exception e) {
+            logError(e);
+            capturaTela();
+        }
     }
 }

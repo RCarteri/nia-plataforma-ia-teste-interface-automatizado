@@ -39,21 +39,26 @@ public class ModalAdicionarMembroPage {
     public void fillForm(MensagemErro mE) {
         Utils utils = new Utils();
         try {
+            acessarForm();
+            checkBtnInativo();
             for (MembroData membro : membros) {
                 preencherCampos(membro);
                 mE.isMensagemEsperada(membros, membro);
-                assertFalse("O botão confirmar está ativo", isBtnConfirmarAtivo());
+                checkBtnInativo();
                 utils.capturaTela();
-                mAMM.getInputChave().clear();
             }
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
         }
     }
 
+    private void checkBtnInativo() {
+        assertFalse("O botão confirmar está ativo", isBtnConfirmarAtivo());
+    }
+
     private void preencherCampos(MembroData membro) throws ElementoNaoLocalizadoException {
+        mAMM.getInputChave().clear();
         mAMM.getInputChave().sendKeys(membro.getChave());
-        mAMM.getInputChave().click();
         if (isDropDowndisplayed()) selecionarFuncao(membro.getFuncao());
         new ComponenteMap().getForm().click();
     }

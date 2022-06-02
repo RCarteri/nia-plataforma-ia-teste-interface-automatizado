@@ -58,6 +58,6 @@ public class ComponenteMap extends BasePageObjects {
     }
 
     public WebElement getForm(){
-        return getElement(".p-dialog-resizable");
+        return getElement(".p-dialog-content form");
     }
 }

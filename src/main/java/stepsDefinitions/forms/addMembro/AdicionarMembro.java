@@ -7,8 +7,6 @@ import pagesObjects.MensagemErro;
 import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
 import support.Utils;
 
-import static org.junit.Assert.assertFalse;
-
 public class AdicionarMembro extends Utils {
     private final ModalAdicionarMembroPage mAMP;
 
@@ -21,13 +19,11 @@ public class AdicionarMembro extends Utils {
         mAMP.fillMapMembro(table);
     }
 
-    @Então("^deverá apresentar a mensagem de erro$")
+    @Então("^deverá apresentar a mensagem de erro de inclusão$")
     public void deveraApresentarAMensagemDeErro(DataTable table) {
         MensagemErro mE = new MensagemErro();
         mE.fillListMensagem(table);
         try {
-            mAMP.acessarForm();
-            assertFalse("O botão confirmar está ativo", mAMP.isBtnConfirmarAtivo());
             mAMP.fillForm(mE);
         } catch (Exception e) {
             logError(e);

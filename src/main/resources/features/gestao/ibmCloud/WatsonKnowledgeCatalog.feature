@@ -44,11 +44,11 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
     Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Catálogo"
         Quando adicionar membro com os dados
-            | chave    | função        |
-            |          |               |
-            | F        | Administrador |
-            | 22222222 | Administrador |
-        Então deverá apresentar a mensagem de erro
+            | Chave    | Função |
+            |          |        |
+            | F        |        |
+            | 22222222 |        |
+        Então deverá apresentar a mensagem de erro de inclusão
             | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
             | Sua chave deve possuir 8 caracteres.                                                                                                     |
             | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |

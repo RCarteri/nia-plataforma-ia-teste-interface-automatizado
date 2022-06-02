@@ -47,11 +47,11 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Membros"
         Quando adicionar membro com os dados
-            | Chave    | Função        |
-            |          |               |
-            | F        | Administrador |
-            | 22222222 | Administrador |
-        Então deverá apresentar a mensagem de erro
+            | Chave    | Função |
+            |          |        |
+            | F        |        |
+            | 22222222 |        |
+        Então deverá apresentar a mensagem de erro de inclusão
             | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
             | Sua chave deve possuir 8 caracteres.                                                                                                     |
             | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
@@ -81,3 +81,18 @@ Funcionalidade: Suite007 - Watson Studio
         Dado que exista "Membros" onde o usuário logado seja o administrador
         Quando escolher um papel diferente
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"
+
+    @ID-007-012 @CT012
+    Cenario: CT012 - Solicitação de deploy modelo para Triton exception
+        Dado que exista "Modelos"
+        Quando solicitar deploy modelo para Triton com os dados
+            | Nome    | Instância | Notebook | Data Asset |
+            |         |           |          |            |
+            | a       |           |          |            |
+            | @@      |           |          |            |
+            | teste a |           |          |            |
+        Então deverá apresentar a mensagem de erro de solicitação
+            | Nome do modelo é necessário.Nome da instância é necessário.Necessário selecionar um notebook.Necessário selecionar ao menos um data asset. |
+            | Nome do modelo deve conter ao menos 2 caracteres.                                                                                          |
+            | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
+            | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |

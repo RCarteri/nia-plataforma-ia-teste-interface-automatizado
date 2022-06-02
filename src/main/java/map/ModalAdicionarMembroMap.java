@@ -18,7 +18,7 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-button-success")
     private WebElement btnConfirmar;
 
-    @FindBy(cssSelector = ".p-component.ng-invalid")
+    @FindBy(cssSelector = ".p-field input.p-inputtext")
     private WebElement inputChave;
 
     public List<WebElement> getListSpanFuncao() {

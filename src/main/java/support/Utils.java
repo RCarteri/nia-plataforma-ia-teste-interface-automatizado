@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
@@ -119,5 +120,9 @@ public class Utils extends FTABBUtils {
                 System.err.println("\n" + msg);
                 break;
         }
+    }
+
+    public static int getRandom(int size){
+        return ThreadLocalRandom.current().nextInt(size);
     }
 }

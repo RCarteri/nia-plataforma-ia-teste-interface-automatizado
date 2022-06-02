@@ -29,8 +29,8 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
         return getElements("small.p-invalid");
     }
 
-    public WebElement getForm(){
-        return getElement(".p-field");
+    public List<WebElement> getListSmallMsgError() {
+        return getElements("small.p-error");
     }
 
     public WebElement getBtnConfirmar() {

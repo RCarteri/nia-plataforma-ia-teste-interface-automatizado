@@ -56,4 +56,8 @@ public class ComponenteMap extends BasePageObjects {
     public WebElement getBtnFecharModal(){
         return getElement(".p-dialog-header .pi-times");
     }
+
+    public WebElement getForm(){
+        return getElement(".p-dialog-resizable");
+    }
 }

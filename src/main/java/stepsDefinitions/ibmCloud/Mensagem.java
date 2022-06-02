@@ -1,4 +1,4 @@
-package stepsDefinitions.ibmCloud.addMembro;
+package stepsDefinitions.ibmCloud;
 
 public class Mensagem {
     private final String mensagem;

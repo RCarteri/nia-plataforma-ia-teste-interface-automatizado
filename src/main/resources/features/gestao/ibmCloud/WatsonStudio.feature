@@ -47,7 +47,7 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Membros"
         Quando adicionar membro com os dados
-            | chave    | função        |
+            | Chave    | Função        |
             |          |               |
             | F        | Administrador |
             | 22222222 | Administrador |

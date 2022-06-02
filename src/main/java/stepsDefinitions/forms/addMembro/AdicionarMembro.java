@@ -1,13 +1,11 @@
-package stepsDefinitions.ibmCloud.addMembro;
+package stepsDefinitions.forms.addMembro;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import pagesObjects.MensagemErro;
 import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
 import support.Utils;
-
-import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
 
@@ -20,22 +18,17 @@ public class AdicionarMembro extends Utils {
 
     @Quando("^adicionar membro com os dados$")
     public void adicionarMembroComOsDados(DataTable table) {
-        List<Map<String, String>> linhas = table.asMaps(String.class, String.class);
-        for (Map<String, String> colunas : linhas) {
-            mAMP.addMembro(new Membro(colunas.get("chave"), colunas.get("função")));
-        }
+        mAMP.fillMapMembro(table);
     }
 
     @Então("^deverá apresentar a mensagem de erro$")
     public void deveraApresentarAMensagemDeErro(DataTable table) {
-        List<String> linhas = table.asList(String.class);
-        for (String linha : linhas) {
-            mAMP.addMensagem(new Mensagem(linha));
-        }
+        MensagemErro mE = new MensagemErro();
+        mE.fillListMensagem(table);
         try {
-            mAMP.acessarAdicionarMembro();
+            mAMP.acessarForm();
             assertFalse("O botão confirmar está ativo", mAMP.isBtnConfirmarAtivo());
-            mAMP.adicionarMembro();
+            mAMP.fillForm(mE);
         } catch (Exception e) {
             logError(e);
             capturaTela();

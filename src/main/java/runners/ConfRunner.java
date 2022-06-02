@@ -3,10 +3,10 @@ package runners;
 import ath_allure_arq3.main.AllureARQ3;
 import pagesObjects.LoginPage;
 import support.APIRest.APIRest;
-import support.APIRest.Dominio;
+import support.APIRest.Host;
 import support.Utils;
 
-import static support.APIRest.SubDiretorio.*;
+import static support.APIRest.Path.*;
 
 public class ConfRunner {
     private static final APIRest apiRest = new APIRest();
@@ -19,13 +19,13 @@ public class ConfRunner {
         //limparRelatoriosAllure(PROD);
     }
 
-    public static void confFinish(Dominio ambiente) {
+    public static void confFinish(Host ambiente) {
         new LoginPage().logoutEFecharPlataforma();
-        new AllureARQ3().enviarRelatorio(ambiente.getServidor());
+        new AllureARQ3().enviarRelatorio(ambiente.getHost());
         apiRest.atualizarAllureArq3(ambiente.getUrl(GERAR_RELATORIO));
     }
 
-    private static void limparRelatoriosAllure(Dominio ambiente){
+    private static void limparRelatoriosAllure(Host ambiente){
         new Utils().deletarAllureResults();
         apiRest.atualizarAllureArq3(ambiente.getUrl(LIMPAR_RESULTADOS));
         apiRest.atualizarAllureArq3(ambiente.getUrl(LIMPAR_HISTORICO));

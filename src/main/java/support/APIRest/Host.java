@@ -1,6 +1,6 @@
 package support.APIRest;
 
-public enum Dominio {
+public enum Host {
     //Usado para evidenciar os testes cotidianos
     DESENV("http://plat-ia-allure.nia.desenv.bb.com.br", "servidor.allure.desenv"),
 
@@ -11,18 +11,18 @@ public enum Dominio {
     PROD("http://plat-ia-allure.nia.intranet.bb.com.br", "servidor.allure.prd");
 
     private final String dominio;
-    private final String servidor;
+    private final String host;
 
-    Dominio(String dominio, String servidor) {
+    Host(String dominio, String servidor) {
         this.dominio = dominio + "/allure-docker-service";
-        this.servidor = servidor;
+        this.host = servidor;
     }
 
-    public String getUrl (SubDiretorio subDiretorio) {
-        return dominio + subDiretorio.getSubDiretorio();
+    public String getUrl (Path path) {
+        return dominio + path.getSubDiretorio();
     }
 
-    public String getServidor () {
-        return servidor;
+    public String getHost() {
+        return host;
     }
 }

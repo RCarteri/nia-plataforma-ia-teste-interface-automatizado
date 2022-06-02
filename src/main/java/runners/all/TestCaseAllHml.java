@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
-import static support.APIRest.Dominio.HML;
+import static support.APIRest.Host.HML;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(

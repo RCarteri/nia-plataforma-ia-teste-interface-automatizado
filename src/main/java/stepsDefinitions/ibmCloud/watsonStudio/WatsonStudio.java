@@ -1,4 +1,4 @@
-package stepsDefinitions.ibmCloud.WatsonStudio;
+package stepsDefinitions.ibmCloud.watsonStudio;
 
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;

@@ -99,7 +99,7 @@ public class PanelContentSection {
     private boolean clicarBotaoOpcao(String opcao) {
         for (WebElement webElement : pCM.getListaOpcoesSubmenu()) {
             if (webElement.getText().intern().equals(opcao)) {
-                if (webElement.getAttribute("class").contains("disabled")) return false;
+                if (checkBtnDisabled(webElement, "class")) return false;
                 rolarPaginaAteElemento(webElement);
                 webElement.click();
                 break;

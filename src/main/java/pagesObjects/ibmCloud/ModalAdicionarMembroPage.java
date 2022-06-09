@@ -1,6 +1,5 @@
 package pagesObjects.ibmCloud;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.DataTable;
 import map.ComponenteMap;
 import map.ModalAdicionarMembroMap;
@@ -14,8 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.User.getUser;
 
 public class ModalAdicionarMembroPage {
     private final ModalAdicionarMembroMap mAMM;
@@ -37,26 +37,16 @@ public class ModalAdicionarMembroPage {
     }
 
     public void fillForm(MensagemErro mE) {
-        Utils utils = new Utils();
-        try {
-            acessarForm();
-            checkBtnInativo();
-            for (MembroData membro : membros) {
-                preencherCampos(membro);
-                mE.isMensagemEsperada(membros, membro);
-                checkBtnInativo();
-                utils.capturaTela();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+        assertBtnDisabled(mAMM.getBtnConfirmar());
+        for (MembroData membro : membros) {
+            preencherCampos(membro);
+            mE.isMensagemEsperadaInvalid(membros.indexOf(membro));
+            assertBtnDisabled(mAMM.getBtnConfirmar());
+            new Utils().capturaTela();
         }
     }
 
-    private void checkBtnInativo() {
-        assertFalse("O botão confirmar está ativo", isBtnConfirmarAtivo());
-    }
-
-    private void preencherCampos(MembroData membro) throws ElementoNaoLocalizadoException {
+    private void preencherCampos(MembroData membro) {
         mAMM.getInputChave().clear();
         mAMM.getInputChave().sendKeys(membro.getChave());
         if (isDropDowndisplayed()) selecionarFuncao(membro.getFuncao());
@@ -89,10 +79,8 @@ public class ModalAdicionarMembroPage {
     }
 
     public void acessarForm() {
+        assertFalse("O usuário " + getUser() + " não tem permissão para adicionar membro. Não foi possível realizar este teste.",
+                checkBtnDisabled(mAMM.getBtnAdicionarMembro(), "btn"));
         mAMM.getBtnAdicionarMembro().click();
-    }
-
-    public boolean isBtnConfirmarAtivo() {
-        return mAMM.getBtnConfirmar().isEnabled();
     }
 }

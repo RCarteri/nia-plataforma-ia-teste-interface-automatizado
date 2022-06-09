@@ -2,7 +2,6 @@ package pagesObjects;
 
 import cucumber.api.DataTable;
 import map.ModalAdicionarMembroMap;
-import stepsDefinitions.forms.addMembro.MembroData;
 import stepsDefinitions.ibmCloud.Mensagem;
 import support.Utils;
 
@@ -26,10 +25,16 @@ public class MensagemErro {
         }
     }
 
-    public void isMensagemEsperada(List<MembroData> membros, MembroData membro) {
-        String mensagemEsperada = mensagens.get(membros.indexOf(membro)).getMensagem();
+    public void isMensagemEsperadaInvalid(int index) {
+        String mensagemEsperada = mensagens.get(index).getMensagem();
         assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagemInvalid()),
                 getMensagemInvalid().contains(mensagemEsperada));
+    }
+
+    public void isMensagemEsperadaErro(int index) {
+        String mensagemEsperada = mensagens.get(index).getMensagem();
+        assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagemErro()),
+                getMensagemErro().contains(mensagemEsperada));
     }
 
     private String getMensagemInvalid() {

@@ -58,7 +58,7 @@ Funcionalidade: Suite007 - Watson Studio
 
     @ID-007-006 @CT006
     Cenario: CT006 - Filtrar projetos por sigla
-        Quando selecionar a sigla "NIA"
+        Quando selecionar uma sigla
         Então deverá mostrar a lista de projetos com essa sigla
 
     @ID-007-007 @CT007

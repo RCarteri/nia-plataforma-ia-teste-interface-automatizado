@@ -16,11 +16,10 @@ public class WatsonStudio extends Utils{
         this.wSP = new WatsonStudioPage();
     }
 
-    @Quando("^selecionar a sigla \"([^\"]*)\"$")
-    public void selecionarASigla(String sigla) {
-        this.sigla = sigla;
+    @Quando("^selecionar uma sigla$")
+    public void selecionarUmaSigla() {
         try {
-            wSP.selecionarSigla(sigla);
+            this.sigla = wSP.selecionarSigla();
         } catch (Exception e) {
             logError(e);
         }

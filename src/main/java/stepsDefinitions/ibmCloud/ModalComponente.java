@@ -24,7 +24,6 @@ public class ModalComponente extends Utils {
             assertEquals(titulo, new ModalComponenteMap().getTituloModal().getText());
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -35,7 +34,6 @@ public class ModalComponente extends Utils {
             assertEquals("Informações faltando no campo: " + listaInfoNomeID.toString(), 0, listaInfoNomeID.size());
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -45,7 +43,6 @@ public class ModalComponente extends Utils {
             assertTrue(mCP.getCountLinhas() > 1);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 }

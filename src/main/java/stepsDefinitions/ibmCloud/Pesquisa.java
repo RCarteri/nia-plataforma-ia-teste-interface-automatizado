@@ -44,7 +44,6 @@ public class Pesquisa extends Utils{
             pqS.validarPesquisa("Os resultados apresentados não contem a palavra pesquisada.", validacao);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -56,7 +55,6 @@ public class Pesquisa extends Utils{
             pqS.validarPesquisa(printResultadoEsperadoObtido(quantResultados, quantResultadosObtida), validacao);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -66,7 +64,6 @@ public class Pesquisa extends Utils{
             pqS.limparPesquisa(this.local);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -88,7 +85,6 @@ public class Pesquisa extends Utils{
             pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -110,7 +106,6 @@ public class Pesquisa extends Utils{
             assertTrue(pqS.getMensagemPesquisaInvalida(), validacao);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -125,7 +120,6 @@ public class Pesquisa extends Utils{
             pqS.pesquisar(palavraPesquisada, local);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 }

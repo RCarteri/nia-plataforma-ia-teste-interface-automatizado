@@ -24,10 +24,10 @@ public class AdicionarMembro extends Utils {
         MensagemErro mE = new MensagemErro();
         mE.fillListMensagem(table);
         try {
+            mAMP.acessarForm();
             mAMP.fillForm(mE);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 }

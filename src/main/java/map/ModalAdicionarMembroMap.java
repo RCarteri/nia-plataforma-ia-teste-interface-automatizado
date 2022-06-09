@@ -12,9 +12,6 @@ import static support.Utils.printLog;
 import static support.enums.LogTypes.INFO;
 
 public class ModalAdicionarMembroMap extends BasePageObjects {
-    @FindBy(cssSelector = ".p-button-secondary.p-ml-auto")
-    private WebElement btnAdicionarMembro;
-
     @FindBy(cssSelector = ".p-button-success")
     private WebElement btnConfirmar;
 
@@ -40,9 +37,7 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
     }
 
     public WebElement getBtnAdicionarMembro() {
-        if (btnAdicionarMembro == null)
-            btnAdicionarMembro = setElement("btnAdicionarMembro");
-        return btnAdicionarMembro;
+        return getElement(".p-button-secondary.p-ml-auto");
     }
 
     public WebElement getInputChave() {

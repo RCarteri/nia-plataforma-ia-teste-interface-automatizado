@@ -40,7 +40,7 @@ public class ModalAdicionarMembroPage {
         assertBtnDisabled(mAMM.getBtnConfirmar());
         for (MembroData membro : membros) {
             preencherCampos(membro);
-            mE.isMensagemEsperadaInvalid(membros.indexOf(membro));
+            mE.isMensagemEsperada(membros.indexOf(membro));
             assertBtnDisabled(mAMM.getBtnConfirmar());
             new Utils().capturaTela();
         }

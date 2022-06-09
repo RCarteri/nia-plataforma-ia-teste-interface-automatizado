@@ -37,7 +37,7 @@ public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
         assertBtnDisabled(new SolicitarDeployModeloMap().getBtnSolicitar());
         for (SolicitacaoData solicitacao : solicitacaoData) {
             preencherCampos(solicitacao);
-            mE.isMensagemEsperadaErro(solicitacaoData.indexOf(solicitacao));
+            mE.isMensagemEsperada(solicitacaoData.indexOf(solicitacao));
             assertBtnDisabled(new SolicitarDeployModeloMap().getBtnSolicitar());
             new Utils().capturaTela();
         }

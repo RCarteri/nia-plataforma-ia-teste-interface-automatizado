@@ -25,26 +25,14 @@ public class MensagemErro {
         }
     }
 
-    public void isMensagemEsperadaInvalid(int index) {
+    public void isMensagemEsperada(int index) {
         String mensagemEsperada = mensagens.get(index).getMensagem();
-        assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagemInvalid()),
-                getMensagemInvalid().contains(mensagemEsperada));
+        assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagem()),
+                getMensagem().contains(mensagemEsperada));
     }
 
-    public void isMensagemEsperadaErro(int index) {
-        String mensagemEsperada = mensagens.get(index).getMensagem();
-        assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagemErro()),
-                getMensagemErro().contains(mensagemEsperada));
-    }
-
-    private String getMensagemInvalid() {
+    private String getMensagem() {
         return new ModalAdicionarMembroMap().getListSmallMsg().stream()
-                .map(webElement -> webElement.getText().replaceAll("\\n", ""))
-                .collect(Collectors.joining());
-    }
-
-    private String getMensagemErro() {
-        return new ModalAdicionarMembroMap().getListSmallMsgError().stream()
                 .map(webElement -> webElement.getText().replaceAll("\\n", ""))
                 .collect(Collectors.joining());
     }

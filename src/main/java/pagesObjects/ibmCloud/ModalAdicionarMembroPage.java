@@ -1,75 +1,58 @@
 package pagesObjects.ibmCloud;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
+import cucumber.api.DataTable;
+import map.ComponenteMap;
 import map.ModalAdicionarMembroMap;
 import org.openqa.selenium.WebElement;
-import stepsDefinitions.ibmCloud.addMembro.Membro;
-import stepsDefinitions.ibmCloud.addMembro.Mensagem;
+import pagesObjects.MensagemErro;
+import stepsDefinitions.forms.addMembro.MembroData;
 import support.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.User.getUser;
 
 public class ModalAdicionarMembroPage {
     private final ModalAdicionarMembroMap mAMM;
-    private final List<Membro> membros = new ArrayList<>();
-    private final List<Mensagem> mensagens = new ArrayList<>();
+    private final List<MembroData> membros = new ArrayList<>();
 
     public ModalAdicionarMembroPage() {
         this.mAMM = new ModalAdicionarMembroMap();
     }
 
-    public void addMembro(Membro membro) {
+    public void addMembro(MembroData membro) {
         membros.add(membro);
     }
 
-    public void addMensagem(Mensagem mensagem) {
-        mensagens.add(mensagem);
-    }
-
-    public void adicionarMembro() {
-        Utils utils = new Utils();
-        try {
-            for (Membro membro : membros) {
-                preencherCampos(membro);
-                isMensagemEsperada(membro);
-                assertFalse("O botão confirmar está ativo", isBtnConfirmarAtivo());
-                utils.capturaTela();
-                mAMM.getInputChave().clear();
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
+    public void fillMapMembro(DataTable table) {
+        List<Map<String, String>> linhas = table.asMaps(String.class, String.class);
+        for (Map<String, String> colunas : linhas) {
+            addMembro(new MembroData(colunas.get("Chave"), colunas.get("Função")));
         }
     }
 
-    private void preencherCampos(Membro membro) throws ElementoNaoLocalizadoException {
+    public void fillForm(MensagemErro mE) {
+        assertBtnDisabled(mAMM.getBtnConfirmar());
+        for (MembroData membro : membros) {
+            preencherCampos(membro);
+            mE.isMensagemEsperadaInvalid(membros.indexOf(membro));
+            assertBtnDisabled(mAMM.getBtnConfirmar());
+            new Utils().capturaTela();
+        }
+    }
+
+    private void preencherCampos(MembroData membro) {
+        mAMM.getInputChave().clear();
         mAMM.getInputChave().sendKeys(membro.getChave());
-        mAMM.getInputChave().click();
         if (isDropDowndisplayed()) selecionarFuncao(membro.getFuncao());
+        new ComponenteMap().getForm().click();
     }
 
-    private void isMensagemEsperada(Membro membro) {
-        mAMM.getForm().click();
-        String mensagemEsperada = mensagens.get(membros.indexOf(membro)).getMensagem();
-        assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagem()),
-                getMensagem().contains(mensagemEsperada));
-    }
-
-    public void adicionarMembro(String funcao, String chave) {
-        try {
-            mAMM.getInputChave().sendKeys(chave);
-            mAMM.getInputChave().click();
-            if (isDropDowndisplayed()) selecionarFuncao(funcao);
-        } catch (ElementoNaoLocalizadoException e) {
-            new Utils().logError(e);
-        }
-    }
 
     private boolean isDropDowndisplayed() {
         try {
@@ -80,7 +63,7 @@ public class ModalAdicionarMembroPage {
         }
     }
 
-    private void selecionarFuncao(String funcao) throws ElementoNaoLocalizadoException {
+    private void selecionarFuncao(String funcao) {
         mAMM.getDropDownFuncao().click();
         if (funcao.equals("")) {
             mAMM.getDropDownFuncao().click();
@@ -95,17 +78,9 @@ public class ModalAdicionarMembroPage {
         }
     }
 
-    public void acessarAdicionarMembro() {
+    public void acessarForm() {
+        assertFalse("O usuário " + getUser() + " não tem permissão para adicionar membro. Não foi possível realizar este teste.",
+                checkBtnDisabled(mAMM.getBtnAdicionarMembro(), "btn"));
         mAMM.getBtnAdicionarMembro().click();
-    }
-
-    public boolean isBtnConfirmarAtivo() {
-        return mAMM.getBtnConfirmar().isEnabled();
-    }
-
-    private String getMensagem() {
-        return mAMM.getListSmallMsg().stream()
-                .map(webElement -> webElement.getText().replaceAll("\\n", ""))
-                .collect(Collectors.joining());
     }
 }

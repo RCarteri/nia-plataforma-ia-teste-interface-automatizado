@@ -1,17 +1,17 @@
 package support.APIRest;
 
-public enum SubDiretorio {
+public enum Path {
     GERAR_RELATORIO("/generate-report"),
     LIMPAR_HISTORICO("/clean-history"),
     LIMPAR_RESULTADOS("/clean-results");
 
-    private final String subDiretorio;
+    private final String path;
 
-    SubDiretorio(String subDiretorio) {
-        this.subDiretorio = subDiretorio;
+    Path(String path) {
+        this.path = path;
     }
 
     public String getSubDiretorio(){
-        return subDiretorio;
+        return path;
     }
 }

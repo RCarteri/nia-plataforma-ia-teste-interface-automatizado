@@ -7,9 +7,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
+import static support.Utils.getRandom;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.INFO;
 import static support.enums.User.getUser;
@@ -103,8 +102,7 @@ public class ModalComponentePage extends ModalComponenteMap {
     }
 
     private int getIndexRandom(int indexADM) {
-        Random rnd = ThreadLocalRandom.current();
-        int indexRandom = rnd.nextInt(getListNome().size());
+        int indexRandom = getRandom(getListNome().size());
         return (indexRandom == indexADM) ? getIndexRandom(indexADM) : indexRandom;
     }
 }

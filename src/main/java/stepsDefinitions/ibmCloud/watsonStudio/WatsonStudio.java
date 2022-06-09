@@ -1,4 +1,4 @@
-package stepsDefinitions.ibmCloud.WatsonStudio;
+package stepsDefinitions.ibmCloud.watsonStudio;
 
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
@@ -16,14 +16,12 @@ public class WatsonStudio extends Utils{
         this.wSP = new WatsonStudioPage();
     }
 
-    @Quando("^selecionar a sigla \"([^\"]*)\"$")
-    public void selecionarASigla(String sigla) {
-        this.sigla = sigla;
+    @Quando("^selecionar uma sigla$")
+    public void selecionarUmaSigla() {
         try {
-            wSP.selecionarSigla(sigla);
+            this.sigla = wSP.selecionarSigla();
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -42,7 +40,6 @@ public class WatsonStudio extends Utils{
             wSP.atualizarProjetos();
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 }

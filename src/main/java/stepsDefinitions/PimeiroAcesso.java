@@ -24,7 +24,6 @@ public class PimeiroAcesso extends Utils {
                     pAP.getMensagem().contains(mensagem));
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -34,7 +33,6 @@ public class PimeiroAcesso extends Utils {
             pAP.seguirTutorial();
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -45,7 +43,6 @@ public class PimeiroAcesso extends Utils {
                     "FINALIZAR", pAP.getUtlimoBotao().getText());
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -56,7 +53,6 @@ public class PimeiroAcesso extends Utils {
                     0, pAP.getNPaginaFalha());
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 }

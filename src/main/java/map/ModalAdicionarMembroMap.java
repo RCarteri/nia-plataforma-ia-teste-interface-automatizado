@@ -12,13 +12,10 @@ import static support.Utils.printLog;
 import static support.enums.LogTypes.INFO;
 
 public class ModalAdicionarMembroMap extends BasePageObjects {
-    @FindBy(cssSelector = ".p-button-secondary.p-ml-auto")
-    private WebElement btnAdicionarMembro;
-
     @FindBy(cssSelector = ".p-button-success")
     private WebElement btnConfirmar;
 
-    @FindBy(cssSelector = ".p-component.ng-invalid")
+    @FindBy(cssSelector = ".p-field input.p-inputtext")
     private WebElement inputChave;
 
     public List<WebElement> getListSpanFuncao() {
@@ -29,8 +26,8 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
         return getElements("small.p-invalid");
     }
 
-    public WebElement getForm(){
-        return getElement(".p-field");
+    public List<WebElement> getListSmallMsgError() {
+        return getElements("small.p-error");
     }
 
     public WebElement getBtnConfirmar() {
@@ -40,9 +37,7 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
     }
 
     public WebElement getBtnAdicionarMembro() {
-        if (btnAdicionarMembro == null)
-            btnAdicionarMembro = setElement("btnAdicionarMembro");
-        return btnAdicionarMembro;
+        return getElement(".p-button-secondary.p-ml-auto");
     }
 
     public WebElement getInputChave() {

@@ -30,7 +30,6 @@ public class Componente extends Utils{
             waitLoadPage(CARR_PAG);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -50,7 +49,6 @@ public class Componente extends Utils{
                     pCS.existeOpcao(false, false, opcao));
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 
@@ -91,7 +89,6 @@ public class Componente extends Utils{
                     mCP.isNomeIgual(pCS.getNomeItemSelecionado()));
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 

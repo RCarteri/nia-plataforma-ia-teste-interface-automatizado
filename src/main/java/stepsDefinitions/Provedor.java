@@ -22,7 +22,6 @@ public class Provedor extends Utils {
             pP.acessarProvedor(provedor);
         } catch (Exception e) {
             logError(e);
-            capturaTela();
         }
     }
 }

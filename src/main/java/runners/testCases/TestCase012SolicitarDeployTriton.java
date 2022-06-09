@@ -14,9 +14,9 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CT001" }
+		tags = { "@CT012" }
 )
-public class TestCase001AcessarPlataforma extends ConfRunner{
+public class TestCase012SolicitarDeployTriton extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

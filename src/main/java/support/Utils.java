@@ -19,7 +19,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
+import static org.junit.Assert.assertTrue;
 import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
@@ -89,7 +91,7 @@ public class Utils extends FTABBUtils {
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", elemento);
     }
 
-    public void logError(Exception e) {
+    public void logError(Throwable e) {
         capturaTela();
         printLog("Um erro de " + e.getClass().getSimpleName() + " ocorreu.", ERROR);
         if ("NoSuchElementException".equals(e.getClass().getSimpleName())) {
@@ -119,5 +121,17 @@ public class Utils extends FTABBUtils {
                 System.err.println("\n" + msg);
                 break;
         }
+    }
+
+    public static int getRandom(int size){
+        return ThreadLocalRandom.current().nextInt(size);
+    }
+
+    public static boolean checkBtnDisabled(WebElement webElement, String local) {
+        return (local.equals("class")) ? webElement.getAttribute(local).contains("disabled") : !webElement.isEnabled();
+    }
+
+    public static void assertBtnDisabled(WebElement wE) {
+        assertTrue("O botão confirmar está ativo", checkBtnDisabled(wE, "btn"));
     }
 }

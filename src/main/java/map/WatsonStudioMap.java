@@ -8,7 +8,7 @@ import java.util.List;
 import static support.GetElements.getElements;
 
 public class WatsonStudioMap extends BasePageObjects {
-    @FindBy(cssSelector = ".p-dropdown-clearable .pi-chevron-down")
+    @FindBy(cssSelector = ".p-dropdown-clearable .p-dropdown-label")
     private WebElement dropDownSigla;
 
     @FindBy(cssSelector = ".pi-refresh")

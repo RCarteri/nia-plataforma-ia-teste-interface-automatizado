@@ -17,7 +17,7 @@ public class WatsonStudioPage {
         wSM.getDropDownSigla().click();
         assertTrue("O usuário " + getUser() + " não pertence a nenhuma sigla.", wSM.getListaSigla().size() > 0);
         wSM.getListaSigla().get(sortearSigla()).click();
-        return wSM.getListaSigla().get(sortearSigla()).getText();
+        return new WatsonStudioMap().getDropDownSigla().getText();
     }
 
     public void atualizarProjetos() {

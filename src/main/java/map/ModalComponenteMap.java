@@ -33,7 +33,7 @@ public class ModalComponenteMap {
     }
 
     public WebElement getPapel(int i) {
-        return getElements("nia-membros-table td:nth-child(3)").get(i);
+        return getElements("nia-membros-table td:nth-child(3) .p-inputtext").get(i);
     }
 
     public List<WebElement> getListPapel() {

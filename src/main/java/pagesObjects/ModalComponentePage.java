@@ -93,12 +93,10 @@ public class ModalComponentePage extends ModalComponenteMap {
     }
 
     private void selecionarPapelDiferente(String papelAtual) {
-        for (WebElement wEPapel : getListPapel()) {
-            if (!wEPapel.getText().equals(papelAtual)) {
-                wEPapel.click();
-                break;
-            }
-        }
+        getListPapel().stream()
+                .filter(wEPapel -> !wEPapel.getText().equals(papelAtual))
+                .findFirst()
+                .ifPresent(WebElement::click);
     }
 
     private int getIndexRandom(int indexADM) {

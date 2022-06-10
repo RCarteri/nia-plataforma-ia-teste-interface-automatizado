@@ -56,5 +56,5 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
     @ID-006-011 @CT011
     Cenario: CT011 - Editar membro
         Dado que exista "Catálogo" onde o usuário logado seja o administrador
-        Quando escolher um papel diferente
+        Quando editar o papel de um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"

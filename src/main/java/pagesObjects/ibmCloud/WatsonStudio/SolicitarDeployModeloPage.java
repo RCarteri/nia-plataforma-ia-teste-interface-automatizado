@@ -1,7 +1,6 @@
 package pagesObjects.ibmCloud.WatsonStudio;
 
 import cucumber.api.DataTable;
-import map.ComponenteMap;
 import map.SolicitarDeployModeloMap;
 import pagesObjects.MensagemErro;
 import stepsDefinitions.forms.solicitacaoDeploy.SolicitacaoData;
@@ -44,10 +43,8 @@ public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
     }
 
     private void preencherCampos(SolicitacaoData solicitacao) {
-        ComponenteMap cM = new ComponenteMap();
         getInputNome().clear();
         getInputNome().sendKeys(solicitacao.getNome());
-        cM.getForm().click();
         getDropDownInstancia().click();
         if (solicitacao.getInstancia().equals(""))
             getDropDownInstancia().click();

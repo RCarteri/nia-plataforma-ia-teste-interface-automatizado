@@ -52,9 +52,9 @@ Funcionalidade: Suite007 - Watson Studio
             | F        |        |
             | 22222222 |        |
         Então deverá apresentar a mensagem de erro de inclusão
-            | Sua chave é um item obrigatório.É obrigatório escolher um papel.                                                                         |
-            | Sua chave deve possuir 8 caracteres.                                                                                                     |
-            | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
+            | A chave é um item obrigatório.Papel é obrigatório.  |
+            | A chave deve possuir 8 caracteres.                  |
+            | A chave deve seguir o padrão: cXXXXXXX, fXXXXXXX... |
 
     @ID-007-006 @CT006
     Cenario: CT006 - Filtrar projetos por sigla
@@ -86,11 +86,11 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT012 - Solicitação de deploy modelo para Triton exception
         Dado que exista "Modelos"
         Quando solicitar deploy modelo para Triton com os dados
-            | Nome    | Instância | Notebook | Data Asset |
-            |         |           |          |            |
-            | a       |           |          |            |
-            | @@      |           |          |            |
-            | teste a |           |          |            |
+            | Nome | Instância | Notebook | Data Asset |
+            |      |           |          |            |
+            | a    |           |          |            |
+            | @@   |           |          |            |
+            | a aa |           |          |            |
         Então deverá apresentar a mensagem de erro de solicitação
             | Nome do modelo é necessário.Nome da instância é necessário.Necessário selecionar um notebook.Necessário selecionar ao menos um data asset. |
             | Nome do modelo deve conter ao menos 2 caracteres.                                                                                          |

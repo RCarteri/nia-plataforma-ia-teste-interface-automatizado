@@ -49,6 +49,6 @@ Funcionalidade: Suite003 - Grupos de Acesso
             | F        |        |
             | 22222222 |        |
         Então deverá apresentar a mensagem de erro de inclusão
-            | Sua chave é um item obrigatório.                                                                                                         |
-            | Sua chave deve possuir 8 caracteres.                                                                                                     |
-            | Sua chave deve começar pela letra "C" ou "F", e em seguida 7 números.Exemplos de chaves válidas: C1234567, F8910111, c1234567, f8910111. |
+            | A chave é um item obrigatório.                      |
+            | A chave deve possuir 8 caracteres.                  |
+            | A chave deve seguir o padrão: cXXXXXXX, fXXXXXXX... |

@@ -36,10 +36,12 @@ public class ModalComponentePage extends ModalComponenteMap {
             return new ModalComponenteMap().getModal().isDisplayed();
         } catch (NoSuchElementException | TimeoutException e) {
             waitLoadPage(CARR_PAG);
-            return new ModalComponenteMap().getComponenteTransferirS3().isDisplayed();
-        } catch (Exception e) {
-            new ComponentePage().clickBtnFechar(true, "alerta");
-            return false;
+            try {
+                return new ModalComponenteMap().getComponenteTransferirS3().isDisplayed();
+            } catch (NoSuchElementException | TimeoutException ex) {
+                new ComponentePage().clickBtnFechar(true, "alerta");
+                return false;
+            }
         }
     }
 

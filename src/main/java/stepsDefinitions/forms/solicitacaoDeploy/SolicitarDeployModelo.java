@@ -22,7 +22,7 @@ public class SolicitarDeployModelo extends Utils {
     }
 
     @Então("^deverá apresentar a mensagem de erro de solicitação")
-    public void deveraApresentarAMensagemDeErroDe(DataTable table) {
+    public void deveraApresentarAMensagemDeErroDeSolicitacao(DataTable table) {
         MensagemErro mE = new MensagemErro();
         mE.fillListMensagem(table);
         try {

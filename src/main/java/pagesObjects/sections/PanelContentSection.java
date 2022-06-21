@@ -38,6 +38,7 @@ public class PanelContentSection {
             new PaginacaoSection().avancarPagina(nPagina);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
+                getNomeItemSelecionado(prM, nItem);
                 if (checkListaOpcoes(opcao, nItem)) continue;
                 waitLoadPage(CARR_PAG);
                 ModalComponentePage mCP = new ModalComponentePage();
@@ -46,8 +47,7 @@ public class PanelContentSection {
                     return false;
                 } else if (esperado && mCP.isModalDisplayed()) {
                     printLog("Projeto com " + opcao + " encontrado.", INFO);
-                    this.nomeItemSelecionado = prM.getListNomes().get(prM.getListBtnExibir().indexOf(nItem)).getText();
-                    if (needBeADM){
+                    if (needBeADM) {
                         if (!mCP.isUserLoggedADM()) {
                             new ComponentePage().clickBtnFechar(true, "modal");
                             continue;
@@ -59,6 +59,10 @@ public class PanelContentSection {
             }
         }
         return false;
+    }
+
+    private void getNomeItemSelecionado(ProvedorMap prM, WebElement nItem) {
+        this.nomeItemSelecionado = prM.getListNomes().get(prM.getListBtnExibir().indexOf(nItem)).getText();
     }
 
     private boolean checkListaOpcoes(String opcao, WebElement nItem) {

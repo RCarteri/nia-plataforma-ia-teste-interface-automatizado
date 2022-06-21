@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static support.Utils.getRandom;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.CARR_PAG;
 import static support.enums.User.getUser;
 
 public class ModalComponentePage extends ModalComponenteMap {
@@ -35,6 +35,9 @@ public class ModalComponentePage extends ModalComponenteMap {
         try {
             return new ModalComponenteMap().getModal().isDisplayed();
         } catch (NoSuchElementException | TimeoutException e) {
+            waitLoadPage(CARR_PAG);
+            return new ModalComponenteMap().getComponenteTransferirS3().isDisplayed();
+        } catch (Exception e) {
             new ComponentePage().clickBtnFechar(true, "alerta");
             return false;
         }

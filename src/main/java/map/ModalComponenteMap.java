@@ -16,6 +16,10 @@ public class ModalComponenteMap {
         return waitElement(MODAL);
     }
 
+    public WebElement getComponenteTransferirS3(){
+        return getElement("nia-storage-transfer-page");
+    }
+
     public List<WebElement> getListInfoNomeID() {
         return getElements(".ng-trigger h4");
     }

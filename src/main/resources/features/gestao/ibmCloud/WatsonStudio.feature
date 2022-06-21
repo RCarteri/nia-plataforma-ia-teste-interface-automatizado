@@ -96,3 +96,12 @@ Funcionalidade: Suite007 - Watson Studio
             | Nome do modelo deve conter ao menos 2 caracteres.                                                                                          |
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
+
+    @ID-007-012 @CT013
+    Cenario: CT013 - Transferir arquivos do S3 para a IBM exception
+        Dado que exista "Transferir S3"
+        Quando solicitar a transferencia de arquivos S3
+            | Nome do Volume | Código de Acesso | Código de segurança |
+            |                |                  |                     |
+        Então deverá apresentar a mensagem de erro de busca
+            | Nome do volume é obrigatório.Código de acesso é obrigatório.Código de segurança é obrigatório. |

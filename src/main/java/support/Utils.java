@@ -131,7 +131,9 @@ public class Utils extends FTABBUtils {
         return (local.equals("class")) ? webElement.getAttribute(local).contains("disabled") : !webElement.isEnabled();
     }
 
-    public static void assertBtnDisabled(WebElement wE) {
-        assertTrue("O botão confirmar está ativo", checkBtnDisabled(wE, "btn"));
+    public static void assertBtnDisabled(WebElement... webElements) {
+        for (WebElement webElement : webElements) {
+            assertTrue("O botão confirmar está ativo", checkBtnDisabled(webElement, "btn"));
+        }
     }
 }

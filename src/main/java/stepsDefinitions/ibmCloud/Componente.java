@@ -72,8 +72,8 @@ public class Componente extends Utils{
         }
     }
 
-    @Quando("^escolher um papel diferente$")
-    public void escolherUmPapelDiferente() {
+    @Quando("^editar o papel de um membro$")
+    public void editarOPapelDeUmMembro() {
         try {
             new ModalComponentePage().editarPapel(pCS.getIndexADM());
         } catch (Exception e){

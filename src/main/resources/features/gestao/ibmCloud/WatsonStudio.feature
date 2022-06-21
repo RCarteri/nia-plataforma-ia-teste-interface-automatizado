@@ -79,7 +79,7 @@ Funcionalidade: Suite007 - Watson Studio
     @ID-007-011 @CT011
     Cenario: CT011 - Editar membro
         Dado que exista "Membros" onde o usuário logado seja o administrador
-        Quando escolher um papel diferente
+        Quando editar o papel de um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"
 
     @ID-007-012 @CT012

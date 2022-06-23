@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static support.Utils.getRandom;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.INFO;
 
 public class PesquisaSection {
-    private final PesquisaMap pM;
+    private PesquisaMap pM;
     private final Map<String, Boolean> validacaoPesquisa;
     private String mensagemPesquisaInvalida;
 
@@ -34,7 +35,7 @@ public class PesquisaSection {
         }
     }
 
-    public String getTxtInputFiltro(String local) {
+    public String getTxtInputPesquisa(String local) {
         switch (local) {
             case "componente":
                 return pM.getInputPesquisa().getText();
@@ -50,7 +51,7 @@ public class PesquisaSection {
                 pM.getBtnLimparPesquisa().click();
                 break;
             case "modal":
-                pM.getBtnLimparFiltroPesquisa().click();
+                pM.getBtnLimparPesquisaModal().click();
                 break;
         }
     }
@@ -85,9 +86,13 @@ public class PesquisaSection {
     private String getDadoValido(String local) {
         switch (local) {
             case "componente":
-                return pM.getListaNomesComponente().get(0).getText();
+                return pM.getListaNomesComponente().get(
+                        getRandom(pM.getListaNomesComponente().size())
+                ).getText();
             case "modal":
-                return pM.getListaNomesModal().get(0).getText();
+                return pM.getListaNomesModal().get(
+                        getRandom(pM.getListaNomesModal().size())
+                ).getText();
             default:
                 return null;
         }
@@ -96,6 +101,7 @@ public class PesquisaSection {
     public boolean resultadosContemString(String palavraPesquisada, String local) {
         boolean resultadosOk;
         List<WebElement> listTxt;
+        this.pM = new PesquisaMap();
         switch (local) {
             case "componente":
                 listTxt = pM.getListaNomesComponente();

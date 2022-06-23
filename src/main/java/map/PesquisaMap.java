@@ -11,14 +11,14 @@ public class PesquisaMap extends BasePageObjects {
     @FindBy(cssSelector = "nia-platia-table th input.p-inputtext")
     private WebElement inputPesquisa;
 
-    @FindBy(cssSelector = "nia-membros-table thead .p-inputtext")
+    @FindBy(cssSelector = "span.deleteicon.p-mb-3 input")
     private WebElement inputPesquisaModal;
 
     @FindBy(cssSelector = "nia-platia-table .deleteicon span")
     private WebElement btnLimparPesquisa;
 
-    @FindBy(cssSelector = "nia-membros-table .deleteicon span")
-    private WebElement btnLimparFiltroPesquisa;
+    @FindBy(cssSelector = "span.deleteicon.p-mb-3 span")
+    private WebElement btnLimparPesquisaModal;
 
     public WebElement getInputPesquisa() {
         if (inputPesquisa == null)
@@ -38,14 +38,14 @@ public class PesquisaMap extends BasePageObjects {
         return btnLimparPesquisa;
     }
 
-    public WebElement getBtnLimparFiltroPesquisa() {
-        if (btnLimparFiltroPesquisa == null)
-            btnLimparFiltroPesquisa = setElement("btnLimparFiltroPesquisa");
-        return btnLimparFiltroPesquisa;
+    public WebElement getBtnLimparPesquisaModal() {
+        if (btnLimparPesquisaModal == null)
+            btnLimparPesquisaModal = setElement("btnLimparPesquisaModal");
+        return btnLimparPesquisaModal;
     }
 
     public List<WebElement> getListaNomesModal() {
-        return getElements("nia-membros-table td:nth-child(2)");
+        return getElements(".p-dialog-content td:nth-child(1)");
     }
 
     public List<WebElement> getListaSigla() {

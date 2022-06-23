@@ -45,4 +45,8 @@ public class SolicitarDeployModeloMap extends BasePageObjects {
     public List<WebElement> getListDataAssets() {
         return getElements(".p-checkbox");
     }
+
+    public List<WebElement> getListDataAssetsSelecionados(){
+        return getElements("li.p-highlight");
+    }
 }

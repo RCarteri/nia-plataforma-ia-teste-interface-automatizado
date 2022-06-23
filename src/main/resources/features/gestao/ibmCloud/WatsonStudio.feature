@@ -87,11 +87,11 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT012 - Solicitação de deploy modelo para Triton exception
         Dado que exista "Modelos"
         Quando solicitar deploy modelo para Triton com os dados
-            | Nome | Instância | Notebook | Data Asset |
-            |      |           |          |            |
-            | a    |           |          |            |
-            | @@   |           |          |            |
-            | a aa |           |          |            |
+            | Nome | Instância | Notebook | Data Asset               |
+            |      |           |          |                          |
+            | a    | cpu       | any      | zzz_dataset_paj_v0.4.csv |
+            | @@   | gpu       | any      | any                      |
+            | a aa | any       | any      | any                      |
         Então deverá apresentar a mensagem de erro de solicitação
             | Nome do modelo é necessário.Nome da instância é necessário.Necessário selecionar um notebook.Necessário selecionar ao menos um data asset. |
             | Nome do modelo deve conter ao menos 2 caracteres.                                                                                          |

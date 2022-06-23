@@ -2,6 +2,7 @@ package pagesObjects.ibmCloud.WatsonStudio;
 
 import cucumber.api.DataTable;
 import map.SolicitarDeployModeloMap;
+import org.openqa.selenium.WebElement;
 import pagesObjects.MensagemErro;
 import stepsDefinitions.forms.solicitacaoDeploy.DadosDeployModelo;
 import support.Utils;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static support.Utils.*;
+import static support.enums.LogTypes.ERROR;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
@@ -45,21 +47,42 @@ public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
     private void preencherCampos(DadosDeployModelo dadoDeployModelo) {
         getInputNome().clear();
         getInputNome().sendKeys(dadoDeployModelo.getNome());
-        getDropDownInstancia().click();
-        if (dadoDeployModelo.getInstancia().equals(""))
+        if (dadoDeployModelo.getNome().equals(""))
             getDropDownInstancia().click();
-        else
+        getDropDownInstancia().click();
+        if (dadoDeployModelo.getInstancia().equals("")) {
+            if (!getListElemDropDown().isEmpty())
+                getDropDownInstancia().click();
+        } else if (dadoDeployModelo.getInstancia().equals("any"))
             getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
+        else
+            getListElemDropDown().get(getIndexDadoDropDown(dadoDeployModelo.getInstancia())).click();
         getDropDownNotebook().click();
-        if (dadoDeployModelo.getNotebook().equals(""))
+        if (dadoDeployModelo.getNotebook().equals("")) {
             getDropDownNotebook().click();
-        else
+        } else if (dadoDeployModelo.getNotebook().equals("any"))
             getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
-        getDropDownDataAsset().click();
-        if (dadoDeployModelo.getDataAsset().equals(""))
-            getDropDownDataAsset().click();
         else
-            getListDataAssets().get(getRandom(getListDataAssets().size())).click();
+            getListElemDropDown().get(getIndexDadoDropDown(dadoDeployModelo.getNotebook())).click();
         getInputNome().click();
+        getDropDownDataAsset().click();
+        getListDataAssetsSelecionados().forEach(WebElement::click);
+        if (dadoDeployModelo.getDataAsset().equals("")) {
+            getDropDownDataAsset().click();
+        } else if (dadoDeployModelo.getDataAsset().equals("any"))
+            getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
+        else {
+            getListDataAssets().get(getRandom(getListDataAssets().size())).click();
+        }
+        getInputNome().click();
+    }
+
+    private int getIndexDadoDropDown(String dado) {
+        for (WebElement wE : getListElemDropDown()) {
+            if (wE.getText().equals(dado))
+                return getListElemDropDown().indexOf(wE);
+        }
+        printLog("Item '" + dado + "' não listado no dropdown.", ERROR);
+        return -1;
     }
 }

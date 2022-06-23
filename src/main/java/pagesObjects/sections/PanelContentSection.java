@@ -17,11 +17,15 @@ import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class PanelContentSection {
     private final PanelContentMap pCM;
+    private final PaginacaoSection pS;
+    private final PaginacaoMap pM;
     private String nomeItemSelecionado;
     private int indexADM;
 
     public PanelContentSection() {
         this.pCM = new PanelContentMap();
+        this.pS = new PaginacaoSection();
+        this.pM = new PaginacaoMap();
     }
 
     public String getNomeItemSelecionado() {
@@ -33,9 +37,9 @@ public class PanelContentSection {
     }
 
     public boolean existeOpcao(boolean esperado, boolean needBeADM, String opcao) {
-        for (WebElement nPagina : new PaginacaoMap().getListBtnNPaginacao()) {
+        while (!checkBtnDisabled(pM.getBtnAvancarPagina(), "btn")) {
             ProvedorMap prM = new ProvedorMap();
-            new PaginacaoSection().avancarPagina(nPagina);
+            printLog("Testando a página " + pM.getPaginaAtual().getText() + ".", INFO);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 getNomeItemSelecionado(prM, nItem);
@@ -57,6 +61,7 @@ public class PanelContentSection {
                     return true;
                 }
             }
+            pS.avancarPagina();
         }
         return false;
     }

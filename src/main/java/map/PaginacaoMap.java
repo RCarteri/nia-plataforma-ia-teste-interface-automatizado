@@ -5,6 +5,7 @@ import support.annotations.FindBy;
 
 import java.util.List;
 
+import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 
 public class PaginacaoMap extends BasePageObjects {
@@ -28,5 +29,13 @@ public class PaginacaoMap extends BasePageObjects {
         if (txtPaginacaoModal == null)
             txtPaginacaoModal = setElement("txtPaginacaoModal");
         return txtPaginacaoModal;
+    }
+
+    public WebElement getBtnAvancarPagina(){
+        return getElement(".pi-angle-right");
+    }
+
+    public WebElement getPaginaAtual(){
+        return getElement(".p-highlight");
     }
 }

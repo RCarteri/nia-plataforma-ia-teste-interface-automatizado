@@ -15,7 +15,7 @@ import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLogged;
 import static support.enums.User.*;
 
-public class LoginPage extends LoginMap {
+public class LoginPage {
     private final Utils utils;
     int tentativa;
 
@@ -57,9 +57,10 @@ public class LoginPage extends LoginMap {
             printLog("O Usuário '" +  getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
             try {
-                getInputUsername().sendKeys(getChave());
-                getInputPassword().sendKeys(getSenha());
-                getBtnLogin().click();
+                LoginMap lM = new LoginMap();
+                lM.getInputUsername().sendKeys(getChave());
+                lM.getInputPassword().sendKeys(getSenha());
+                lM.getBtnLogin().click();
                 try {
                     waitLoadPage(LOGIN);
                 } catch (TimeoutException e) {
@@ -73,6 +74,7 @@ public class LoginPage extends LoginMap {
             } catch (Exception e) {
                 printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
                 getDriver().navigate().refresh();
+                logar();
             }
             printLog("Login realizado com o usuário '" + getUser() + "' chave: " + getChave(), INFO);
         }

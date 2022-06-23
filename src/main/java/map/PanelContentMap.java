@@ -12,7 +12,7 @@ public class PanelContentMap extends BasePageObjects {
     @FindBy(cssSelector = "nia-platia-table td:only-of-type")
     private WebElement txtNenhumResultado;
 
-    @FindBy(cssSelector = "nia-membros-table td:only-of-type")
+    @FindBy(cssSelector = ".p-dialog-content td:only-of-type")
     private WebElement txtNenhumResultadoModal;
 
     public WebElement getTxtNenhumResultadoModal() {

@@ -17,6 +17,7 @@ public class Pesquisa extends Utils{
     private String palavraPesquisada;
     private String local;
     private Boolean validacao;
+    private Boolean resultadosSoContemPalavraPesquisada = false;
 
     public Pesquisa() {
         this.pqS = new PesquisaSection();
@@ -27,9 +28,7 @@ public class Pesquisa extends Utils{
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         try {
-            String quantResultadosObtida = pS.getQuantResultados(this.local);
-            //Teste para quando desde o início retornar só um resultado na lista
-            String quantResultadosAntes = (this.quantResultadosAntes.equals("1")) ? "0" : this.quantResultadosAntes;
+            String quantResultadosObtida = (resultadosSoContemPalavraPesquisada) ? "-1" : pS.getQuantResultados(this.local);
             this.validacao = !quantResultadosAntes.equals(quantResultadosObtida);
             pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
         } finally {
@@ -70,7 +69,7 @@ public class Pesquisa extends Utils{
     @Então("^o input deve estar vazio$")
     public void oInputDeveEstarVazio() {
         try {
-            this.validacao = pqS.getTxtInputFiltro(this.local).equals("");
+            this.validacao = pqS.getTxtInputPesquisa(this.local).equals("");
             pqS.validarPesquisa("O input não está vazio.", validacao);
         } finally {
             capturaTela();
@@ -115,8 +114,9 @@ public class Pesquisa extends Utils{
             if (local.equals("modal") && !componente.equals("")) new Componente().existirOpcao(componente);
             this.local = local;
             pqS.limparPesquisa(this.local);
-            this.quantResultadosAntes = pS.getQuantResultados(local);
             this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
+            if (pqS.resultadosContemString(palavraPesquisada, this.local)) this.resultadosSoContemPalavraPesquisada = true;
+            this.quantResultadosAntes = pS.getQuantResultados(local);
             pqS.pesquisar(palavraPesquisada, local);
         } catch (Exception e) {
             logError(e);

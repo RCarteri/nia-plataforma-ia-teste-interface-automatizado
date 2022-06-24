@@ -8,8 +8,9 @@ import pagesObjects.sections.PesquisaSection;
 import support.Utils;
 
 import static org.junit.Assert.assertTrue;
+import static support.enums.LogTypes.INFO;
 
-public class Pesquisa extends Utils{
+public class Pesquisa extends Utils {
     private final PesquisaSection pqS;
     private final PaginacaoSection pS;
     private final PanelContentSection pCS;
@@ -28,7 +29,12 @@ public class Pesquisa extends Utils{
     @Então("^deverá apresentar um total de resultados diferente do anterior$")
     public void deveraApresentarUmTotalDeResultadosDiferenteDoAnterior() {
         try {
-            String quantResultadosObtida = (resultadosSoContemPalavraPesquisada) ? "-1" : pS.getQuantResultados(this.local);
+            String quantResultadosObtida;
+            if (resultadosSoContemPalavraPesquisada) {
+                printLog("Todos os resultados apresentados inicialmente continham o dado pesquisado.", INFO);
+                quantResultadosObtida = "-1";
+            } else
+                quantResultadosObtida = pS.getQuantResultados(this.local);
             this.validacao = !quantResultadosAntes.equals(quantResultadosObtida);
             pqS.validarPesquisa(printResultadoEsperadoObtido(this.quantResultadosAntes, quantResultadosObtida), validacao);
         } finally {
@@ -115,7 +121,8 @@ public class Pesquisa extends Utils{
             this.local = local;
             pqS.limparPesquisa(this.local);
             this.palavraPesquisada = pqS.getDadoPesquisa(this.local, dado);
-            if (pqS.resultadosContemString(palavraPesquisada, this.local)) this.resultadosSoContemPalavraPesquisada = true;
+            if (pqS.resultadosContemString(palavraPesquisada, this.local))
+                this.resultadosSoContemPalavraPesquisada = true;
             this.quantResultadosAntes = pS.getQuantResultados(local);
             pqS.pesquisar(palavraPesquisada, local);
         } catch (Exception e) {

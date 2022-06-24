@@ -23,7 +23,7 @@ public class GetElements {
         return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
     }
 
-    public static WebElement waitElement(SelectorsDelays locator){
+    public static WebElement waitElement(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator.getSelector())));
         return getElement(locator.getSelector());

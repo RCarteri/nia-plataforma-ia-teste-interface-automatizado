@@ -4,15 +4,16 @@ import map.PaginacaoMap;
 
 import static support.Utils.rolarPaginaAteElemento;
 
-public class PaginacaoSection extends PaginacaoMap{
+public class PaginacaoSection {
     public String getQuantResultados(String local) {
         String frase = null;
+        PaginacaoMap pM = new PaginacaoMap();
         switch (local) {
             case "componente":
-                frase = getTxtPaginacao().getText();
+                frase = pM.getTxtPaginacao().getText();
                 break;
             case "modal":
-                frase = getTxtPaginacaoModal().getText();
+                frase = pM.getTxtPaginacaoModal().getText();
                 break;
         }
         assert frase != null;
@@ -20,7 +21,8 @@ public class PaginacaoSection extends PaginacaoMap{
     }
 
     public void avancarPagina() {
-        rolarPaginaAteElemento(getBtnAvancarPagina());
-        getBtnAvancarPagina().click();
+        PaginacaoMap pM = new PaginacaoMap();
+        rolarPaginaAteElemento(pM.getBtnAvancarPagina());
+        pM.getBtnAvancarPagina().click();
     }
 }

@@ -3,7 +3,6 @@ package pagesObjects.ibmCloud;
 import cucumber.api.DataTable;
 import map.ComponenteMap;
 import map.ModalAdicionarMembroMap;
-import org.openqa.selenium.WebElement;
 import pagesObjects.MensagemErro;
 import stepsDefinitions.forms.addMembro.MembroData;
 import support.Utils;
@@ -47,10 +46,12 @@ public class ModalAdicionarMembroPage {
     }
 
     private void preencherCampos(MembroData membro) {
+        ComponenteMap cM = new ComponenteMap();
         mAMM.getInputChave().clear();
         mAMM.getInputChave().sendKeys(membro.getChave());
+        cM.getForm().click();
         if (isDropDowndisplayed()) selecionarFuncao(membro.getFuncao());
-        new ComponenteMap().getForm().click();
+        cM.getForm().click();
     }
 
 
@@ -65,16 +66,13 @@ public class ModalAdicionarMembroPage {
 
     private void selecionarFuncao(String funcao) {
         mAMM.getDropDownFuncao().click();
-        if (funcao.equals("")) {
-            mAMM.getDropDownFuncao().click();
-            mAMM.getInputChave().click();
-            return;
-        }
-        for (WebElement wE : mAMM.getListSpanFuncao()) {
-            if (wE.getText().equals(funcao)) {
-                wE.click();
+        switch (funcao){
+            case "any":
+                mAMM.getListSpanFuncao().get(
+                        getRandom(mAMM.getListSpanFuncao().size())
+                ).click();
+            case "":
                 break;
-            }
         }
     }
 

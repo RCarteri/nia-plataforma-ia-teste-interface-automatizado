@@ -46,8 +46,8 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Quando adicionar membro com os dados
             | Chave    | Função |
             |          |        |
-            | F        |        |
-            | 22222222 |        |
+            | F        | any    |
+            | 22222222 | any    |
         Então deverá apresentar a mensagem de erro de inclusão
             | A chave é um item obrigatório.Papel é obrigatório.  |
             | A chave deve possuir 8 caracteres.                  |

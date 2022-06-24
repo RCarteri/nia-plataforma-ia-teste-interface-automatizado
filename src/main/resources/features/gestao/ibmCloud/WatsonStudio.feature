@@ -39,10 +39,11 @@ Funcionalidade: Suite007 - Watson Studio
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal     | mensagem                             |
-            | componente |           | Não há nenhum projeto com este nome. |
-            | modal      | Membros   | Nenhum membro encontrado.            |
-            | modal      | Notebooks | Nenhum resultado encontrado.         |
+            | local      | modal      | mensagem                             |
+            | componente |            | Não há nenhum projeto com este nome. |
+            | modal      | Membros    | Nenhum membro encontrado.            |
+            | modal      | Notebooks  | Nenhum resultado encontrado.         |
+            | modal      | Data assets | Nenhum resultado encontrado.         |
 
     @ID-007-005 @CT005
     Cenario: CT005 - Adicionar membro exceção

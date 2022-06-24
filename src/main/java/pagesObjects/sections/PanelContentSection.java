@@ -131,7 +131,8 @@ public class PanelContentSection {
                 return pCM.getTxtNenhumResultado().getText();
             case "modal":
                 return pCM.getTxtNenhumResultadoModal().getText();
+            default:
+                throw new IllegalStateException("Local citado não existe: " + local);
         }
-        return null;
     }
 }

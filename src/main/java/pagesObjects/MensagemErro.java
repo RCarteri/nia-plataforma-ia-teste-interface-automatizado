@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class MensagemErro {
     private final List<Mensagem> mensagens = new ArrayList<>();
@@ -27,8 +27,8 @@ public class MensagemErro {
 
     public void isMensagemEsperada(int index) {
         String mensagemEsperada = mensagens.get(index).getMensagem();
-        assertTrue(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagem()),
-                getMensagem().contains(mensagemEsperada));
+        assertEquals(Utils.printResultadoEsperadoObtido(mensagemEsperada, getMensagem()),
+                getMensagem(), mensagemEsperada);
     }
 
     private String getMensagem() {

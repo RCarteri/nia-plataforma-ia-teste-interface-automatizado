@@ -16,9 +16,13 @@ public class SolicitarDeployModelo extends Utils {
 
     @Quando("^solicitar deploy modelo para Triton com os dados$")
     public void solicitarDeployModeloParaTriton(DataTable table) {
-        sDMP.acessarForm();
-        this.sDMP = new SolicitarDeployModeloPage();
-        sDMP.fillListSolicitacao(table);
+        try {
+            sDMP.acessarForm();
+            this.sDMP = new SolicitarDeployModeloPage();
+            sDMP.fillListSolicitacao(table);
+        } catch (Exception e) {
+            logError(e);
+        }
     }
 
     @Então("^deverá apresentar a mensagem de erro de solicitação")

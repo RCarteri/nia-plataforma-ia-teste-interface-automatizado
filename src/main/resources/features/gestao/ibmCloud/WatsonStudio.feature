@@ -39,10 +39,11 @@ Funcionalidade: Suite007 - Watson Studio
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal      | mensagem                             |
-            | componente |            | Não há nenhum projeto com este nome. |
-            | modal      | Membros    | Nenhum membro encontrado.            |
-            | modal      | Notebooks  | Nenhum resultado encontrado.         |
+            | local      | modal       | mensagem                             |
+            | modal      | Modelos     | Nenhum resultado encontrado.         |
+            | componente |             | Não há nenhum projeto com este nome. |
+            | modal      | Membros     | Nenhum membro encontrado.            |
+            | modal      | Notebooks   | Nenhum resultado encontrado.         |
             | modal      | Data assets | Nenhum resultado encontrado.         |
 
     @ID-007-005 @CT005
@@ -88,18 +89,18 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT012 - Solicitação de deploy modelo para Triton exception
         Dado que exista "Modelos"
         Quando solicitar deploy modelo para Triton com os dados
-            | Nome | Instância | Notebook | Data Asset               |
-            |      |           |          |                          |
-            | a    | cpu       | any      | zzz_dataset_paj_v0.4.csv |
-            | @@   | gpu       | any      | any                      |
-            | a aa | any       | any      | any                      |
+            | Nome    | Instância | Notebook | Data Asset |
+            |         |           |          |            |
+            | a       | any       | any      | any        |
+            | @@      | any       | any      | any        |
+            | a teste | any       | any      | any        |
         Então deverá apresentar a mensagem de erro de solicitação
             | Nome do modelo é necessário.Nome da instância é necessário.Necessário selecionar um notebook.Necessário selecionar ao menos um data asset. |
             | Nome do modelo deve conter ao menos 2 caracteres.                                                                                          |
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
 
-    @ID-007-012 @CT013
+    @ID-007-013 @CT013
     Cenario: CT013 - Transferir arquivos do S3 para a IBM exception
         Dado que exista "Transferir S3"
         Quando solicitar a transferencia de arquivos S3

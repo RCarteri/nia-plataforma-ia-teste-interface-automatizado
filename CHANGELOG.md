@@ -5,6 +5,42 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.5.1] - 27-06-2022
+Task: 487395, 496594, 506847, 515638, 534804, 536105, 545664
+###Adicionado
+- TestSuite e TestCase: Runners para executar suites e cenários individualmente
+- esperarQTeste(): Método para alterar o tempo de espera se for executado no qTeste
+- printLog(): Método para padronizar os logs
+- TestCaseParalelo(): Para execução dos testes em paralelo
+- SelectorsDelays: Unificação dos tempos de espera em um enum
+- Cenário: CT011 - Editar membro
+- Cenário: CT012 - Solicitção de deploy modelo para Triton
+- Cenário: CT013 - Transferir arquivos do S# para IBM Exception
+- Cenário: S007 Watson Studio - CT004 Pesquisar, exemplo Notebooks
+- Cenário: S007 Watson Studio - CT004 Pesquisar, exemplo Data assets
+- Cenário: S007 Watson Studio - CT004 Pesquisar, exemplo Modelos
+- Mensagem: Elemento não encontrado no waitLoadPage()
+- Ambientes Allure: Homologação e Produção
+- Captura de tela ao falhar cenário
+- Chave- Rafael para testes
+
+###Mudado
+- logError(): Printar tela ao chamar método
+- maxTentativas: Aumentado para 20 o número de tentativas de encontrar o elemento na tela
+- Cenário: CT005 Adicionar membro - utilizando datatable
+- SelecionarSigla() aleatóriamente
+- Cenário: CT005 - Adicionar membro Exception, escolher função aleatóriamente
+
+###Corrigido
+- ConfRunner: Removido construtor.
+- Recursividade ao logar
+- avancarPagina() - Só estava aavançando até as 5 primeiras páginas
+
+###Removido
+- Step: Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Dados do usuário logado carregados com sucesso!"
+- Anotação: @NotNull, @Nullable
+- Chave- Othavio para testes
+
 ## [3.15.1] - 23-05-2022
 Task: 469729, 478473, 480126
 ###Adicionado

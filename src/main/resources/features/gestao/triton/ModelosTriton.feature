@@ -41,4 +41,9 @@ Funcionalidade: Suite008 - Modelos Triton
     @ID-008-009 @CT009
     Cenario: CT009 - Testar modelo Triton
         Dado que exista "Testar Modelo"
-        Então deverá apresentar as informações do request
+        E apresente as informações do request
+        Quando executar um request com os dados
+            | restaurante |
+            | cafe        |
+            | torta       |
+        Então deverá apresentar um response com sucesso

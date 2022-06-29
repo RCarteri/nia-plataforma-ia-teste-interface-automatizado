@@ -1,7 +1,8 @@
 package stepsDefinitions.triton;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.pt.E;
-import cucumber.api.java.pt.Então;
+import cucumber.api.java.pt.Quando;
 import pagesObjects.triton.TritonPage;
 import support.Utils;
 
@@ -33,11 +34,20 @@ public class Triton extends Utils {
         }
     }
 
-    @Então("^deverá apresentar as informações do request$")
+    @E("^apresente as informações do request$")
     public void deveraApresentarAsInformacoesDoRequest() {
         try {
             assertTrue(tP.estaRetornandoInformacoes());
         } finally {
+            capturaTela();
+        }
+    }
+
+    @Quando("^executar um request com os dados$")
+    public void executarUmRequestValido(DataTable table) {
+        try{
+            tP.executarRequest(table);
+        }catch (Exception e){
             capturaTela();
         }
     }

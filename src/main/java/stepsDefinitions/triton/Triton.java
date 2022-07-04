@@ -38,6 +38,7 @@ public class Triton extends Utils {
     public void deveraApresentarAsInformacoesDoRequest() {
         try {
             assertTrue(tP.estaRetornandoInformacoes());
+            tP.setRequestOriginal();
         } catch (Exception e){
             capturaTela();
         }

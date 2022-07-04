@@ -21,7 +21,7 @@ public class TritonPage extends TritonMap{
     }
 
     public String getRequestOriginal() {
-        return requestOriginal;
+        return this.requestOriginal;
     }
 
     public void setRequestOriginal() {
@@ -63,7 +63,6 @@ public class TritonPage extends TritonMap{
 
     private String montarRequest() {
         StringBuilder data = new StringBuilder();
-        setRequestOriginal();
         StringBuilder request = new StringBuilder(this.requestOriginal);
         int indexSize = request.indexOf("-1,");
         int indexData = request.indexOf("\"data\": [") + 9;

@@ -20,7 +20,7 @@ public class TritonMap {
         return getElement(".p-dialog-content pre");
     }
 
-    public WebElement getRequestOriginal() {
+    public WebElement getElementRequestOriginal() {
         return getElement("#request");
     }
 
@@ -33,10 +33,8 @@ public class TritonMap {
     }
 
     public String getRequestTxt() {
-        return getRequestOriginal().getAttribute("value");
+        return getElementRequestOriginal().getAttribute("value");
     }
-
-    public String requestOriginal = getRequestTxt();
 
     protected WebElement getBtnLimpar() {
         return getElement(".pi-refresh");

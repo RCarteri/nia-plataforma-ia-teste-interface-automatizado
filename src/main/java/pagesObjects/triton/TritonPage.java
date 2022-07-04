@@ -12,7 +12,21 @@ import static support.Utils.waitLoadPage;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class TritonPage extends TritonMap{
-    private final List<Dado> dados = new ArrayList<>();
+    private String requestOriginal;
+    private final List<Dado> dados;
+
+    public TritonPage() {
+        this.requestOriginal = "";
+        this.dados = new ArrayList<>();
+    }
+
+    public String getRequestOriginal() {
+        return requestOriginal;
+    }
+
+    public void setRequestOriginal() {
+        this.requestOriginal = getRequestTxt();
+    }
 
     public String getNomeModelo() {
         return getTdNomeModelo().getText();
@@ -25,7 +39,7 @@ public class TritonPage extends TritonMap{
 
     public boolean estaRetornandoInformacoes() {
         return getInformacoes().stream()
-                .noneMatch(info -> info.getText() == null) && getRequestOriginal() != null;
+                .noneMatch(info -> info.getText() == null) && getElementRequestOriginal() != null;
     }
 
     public void addDado(Dado dado) {
@@ -34,8 +48,8 @@ public class TritonPage extends TritonMap{
 
     public void executarRequest(DataTable table) {
         fillRequest(table);
-        getRequestOriginal().clear();
-        getRequestOriginal().sendKeys(montarRequest());
+        getElementRequestOriginal().clear();
+        getElementRequestOriginal().sendKeys(montarRequest());
         getBtnExecutar().click();
         waitLoadPage(CARR_PAG);
     }
@@ -49,6 +63,7 @@ public class TritonPage extends TritonMap{
 
     private String montarRequest() {
         StringBuilder data = new StringBuilder();
+        setRequestOriginal();
         StringBuilder request = new StringBuilder(this.requestOriginal);
         int indexSize = request.indexOf("-1,");
         int indexData = request.indexOf("\"data\": [") + 9;
@@ -64,8 +79,8 @@ public class TritonPage extends TritonMap{
     }
 
     public void editarRequest() {
-        getRequestOriginal().clear();
-        getRequestOriginal().sendKeys("Texto aleatório");
+        getElementRequestOriginal().clear();
+        getElementRequestOriginal().sendKeys("Texto aleatório");
     }
 
     public void limparRequest() {

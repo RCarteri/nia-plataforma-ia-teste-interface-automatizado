@@ -47,3 +47,11 @@ Funcionalidade: Suite008 - Modelos Triton
             | cafe        |
             | torta       |
         Então deverá apresentar um response com sucesso
+
+    @ID-008-014 @CT014
+    Cenario: CT014 - Limpar request
+        Dado que exista "Testar Modelo"
+        E apresente as informações do request
+        E o request seja diferente do original
+        Quando limpar request
+        Então deverá apresentar o request original

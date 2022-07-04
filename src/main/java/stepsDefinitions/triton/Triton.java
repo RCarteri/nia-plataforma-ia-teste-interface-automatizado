@@ -2,12 +2,12 @@ package stepsDefinitions.triton;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.pt.E;
+import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.triton.TritonPage;
 import support.Utils;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class Triton extends Utils {
     private final TritonPage tP;
@@ -38,7 +38,7 @@ public class Triton extends Utils {
     public void deveraApresentarAsInformacoesDoRequest() {
         try {
             assertTrue(tP.estaRetornandoInformacoes());
-        } finally {
+        } catch (Exception e){
             capturaTela();
         }
     }
@@ -48,6 +48,34 @@ public class Triton extends Utils {
         try{
             tP.executarRequest(table);
         }catch (Exception e){
+            capturaTela();
+        }
+    }
+
+    @E("^o request seja diferente do original$")
+    public void oRequestSejaDiferenteDoOriginal() {
+        try{
+            tP.editarRequest();
+        }catch (Exception e){
+            capturaTela();
+        }
+    }
+
+    @Quando("^limpar request$")
+    public void limparRequest() {
+        try{
+            tP.limparRequest();
+        }catch (Exception e){
+            capturaTela();
+        }
+    }
+
+    @Então("^deverá apresentar o request original$")
+    public void deveraApresentarORequestOriginal() {
+        try{
+            assertEquals(printResultadoEsperadoObtido(tP.requestOriginal, tP.getRequestTxt()),
+                    tP.requestOriginal, tP.getRequestTxt());
+        }finally {
             capturaTela();
         }
     }

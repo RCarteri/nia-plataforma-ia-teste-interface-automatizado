@@ -12,36 +12,33 @@ public class TritonMap {
         return getElement(".p-dialog-content button");
     }
 
-    protected WebElement getTdNomeModelo(){
+    protected WebElement getTdNomeModelo() {
         return getElement(".p-dialog-content td:first-child");
     }
 
-    protected WebElement getBtnPreMaisDetalhes(){
+    protected WebElement getBtnPreMaisDetalhes() {
         return getElement(".p-dialog-content pre");
     }
 
-    protected WebElement getRequest(){
+    public WebElement getRequestOriginal() {
         return getElement("#request");
     }
 
-    protected List<WebElement> getInformacoes(){
+    protected List<WebElement> getInformacoes() {
         return getElements(".p-mb-2 span");
     }
 
-    protected WebElement getBtnExecutar(){
+    protected WebElement getBtnExecutar() {
         return getElement(".p-button-success");
     }
 
-    protected StringBuilder request = new StringBuilder(
-            "\"inputs\": [               \n" +
-            "  {                         \n" +
-            "    \"data\": [],           \n" +
-            "    \"datatype\": \"BYTES\",\n" +
-            "    \"name\": \"input_1\",  \n" +
-            "    \"shape\": [            \n" +
-            "      -1,                   \n" +
-            "      1                     \n" +
-            "    ]                       \n" +
-            "  }                         \n" +
-            "]");
+    public String getRequestTxt() {
+        return getRequestOriginal().getAttribute("value");
+    }
+
+    public String requestOriginal = getRequestTxt();
+
+    protected WebElement getBtnLimpar() {
+        return getElement(".pi-refresh");
+    }
 }

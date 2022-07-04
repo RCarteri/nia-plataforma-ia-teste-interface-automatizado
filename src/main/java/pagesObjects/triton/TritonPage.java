@@ -25,7 +25,7 @@ public class TritonPage extends TritonMap{
 
     public boolean estaRetornandoInformacoes() {
         return getInformacoes().stream()
-                .noneMatch(info -> info.getText() == null) && getRequest() != null;
+                .noneMatch(info -> info.getText() == null) && getRequestOriginal() != null;
     }
 
     public void addDado(Dado dado) {
@@ -34,8 +34,8 @@ public class TritonPage extends TritonMap{
 
     public void executarRequest(DataTable table) {
         fillRequest(table);
-        getRequest().clear();
-        getRequest().sendKeys(montarRequest());
+        getRequestOriginal().clear();
+        getRequestOriginal().sendKeys(montarRequest());
         getBtnExecutar().click();
         waitLoadPage(CARR_PAG);
     }
@@ -49,9 +49,10 @@ public class TritonPage extends TritonMap{
 
     private String montarRequest() {
         StringBuilder data = new StringBuilder();
-        int indexSize = this.request.indexOf("-1,");
-        int indexData = this.request.indexOf("\"data\": [") + 9;
-        this.request.replace(indexSize, indexSize + 2, String.valueOf(dados.size()));
+        StringBuilder request = new StringBuilder(this.requestOriginal);
+        int indexSize = request.indexOf("-1,");
+        int indexData = request.indexOf("\"data\": [") + 9;
+        request.replace(indexSize, indexSize + 2, String.valueOf(dados.size()));
         IntStream.range(0, dados.size()).forEachOrdered(i -> {
             data.append("\"")
                     .append(dados.get(i).getDado())
@@ -59,6 +60,15 @@ public class TritonPage extends TritonMap{
             if (i != dados.size() - 1)
                 data.append(",");
         });
-        return String.valueOf(this.request.insert(indexData, data));
+        return String.valueOf(request.insert(indexData, data));
+    }
+
+    public void editarRequest() {
+        getRequestOriginal().clear();
+        getRequestOriginal().sendKeys("Texto aleatório");
+    }
+
+    public void limparRequest() {
+        getBtnLimpar().click();
     }
 }

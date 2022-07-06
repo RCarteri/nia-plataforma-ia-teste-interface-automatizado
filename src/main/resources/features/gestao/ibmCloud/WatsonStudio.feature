@@ -114,3 +114,9 @@ Funcionalidade: Suite007 - Watson Studio
         Dado que exista "Membros" onde o usuário logado seja o administrador
         Quando excluir um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Usuário foi removido com sucesso!"
+
+    @ID-007-015 @CT015
+    Cenario: CT015 - Excluir membro
+        Dado que exista "Membros" onde o usuário logado seja o administrador
+        Quando excluir um membro
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Usuário foi removido com sucesso!"

@@ -73,8 +73,8 @@ public class Triton extends Utils {
     @Então("^deverá apresentar o request original$")
     public void deveraApresentarORequestOriginal() {
         try{
-            assertEquals(printResultadoEsperadoObtido(tP.requestOriginal, tP.getRequestTxt()),
-                    tP.requestOriginal, tP.getRequestTxt());
+            assertEquals(printResultadoEsperadoObtido(tP.getRequestOriginalTxt(), tP.getRequestTxt()),
+                    tP.getRequestOriginalTxt(), tP.getRequestTxt());
         }finally {
             capturaTela();
         }

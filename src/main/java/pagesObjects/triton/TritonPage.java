@@ -13,6 +13,15 @@ import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class TritonPage extends TritonMap{
     private final List<Dado> dados = new ArrayList<>();
+    private String requestOriginal;
+
+    public String getRequestOriginalTxt() {
+        return requestOriginal;
+    }
+
+    public void setRequestOriginalTxt() {
+        this.requestOriginal = getRequestTxt();
+    }
 
     public String getNomeModelo() {
         return getTdNomeModelo().getText();
@@ -24,8 +33,9 @@ public class TritonPage extends TritonMap{
     }
 
     public boolean estaRetornandoInformacoes() {
+        setRequestOriginalTxt();
         return getInformacoes().stream()
-                .noneMatch(info -> info.getText() == null) && getRequestOriginal() != null;
+                .noneMatch(info -> info.getText() == null) && getRequest() != null;
     }
 
     public void addDado(Dado dado) {
@@ -34,8 +44,8 @@ public class TritonPage extends TritonMap{
 
     public void executarRequest(DataTable table) {
         fillRequest(table);
-        getRequestOriginal().clear();
-        getRequestOriginal().sendKeys(montarRequest());
+        getRequest().clear();
+        getRequest().sendKeys(montarRequest());
         getBtnExecutar().click();
         waitLoadPage(CARR_PAG);
     }
@@ -64,8 +74,8 @@ public class TritonPage extends TritonMap{
     }
 
     public void editarRequest() {
-        getRequestOriginal().clear();
-        getRequestOriginal().sendKeys("Texto aleatório");
+        getRequest().clear();
+        getRequest().sendKeys("Texto aleatório");
     }
 
     public void limparRequest() {

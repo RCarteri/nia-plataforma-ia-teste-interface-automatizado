@@ -20,7 +20,7 @@ public class WatsonStudio extends Utils{
     public void selecionarUmaSigla() {
         try {
             this.sigla = wSP.selecionarSigla();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             logError(e);
         }
     }

@@ -4,6 +4,7 @@ import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
+import cucumber.api.DataTable;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,8 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.assertTrue;
@@ -85,6 +85,24 @@ public class Utils extends FTABBUtils {
         } catch (DataPoolException e) {
             logError(e);
         }
+    }
+
+    public String getChaveAddMembro(){
+        try {
+            return String.valueOf($("login_plataforma.chaveTeste.chave"));
+        } catch (DataPoolException e) {
+            logError(e);
+        }
+        return null;
+    }
+
+    public DataTable createDataTable() {
+        List<List<String>> dtList = new ArrayList<>();
+        List<String> columns = Arrays.asList("Chave", "Função");
+        List<String> dataRow1 = Arrays.asList(getChaveAddMembro(), "any");
+        dtList.add(columns);
+        dtList.add(dataRow1);
+        return DataTable.create(dtList);
     }
 
     public static void rolarPaginaAteElemento(WebElement elemento) {

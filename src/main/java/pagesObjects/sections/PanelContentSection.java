@@ -8,6 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pagesObjects.ComponentePage;
 import pagesObjects.ModalComponentePage;
+import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
 
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class PanelContentSection {
                             new ComponentePage().clickBtnFechar(true, "modal");
                             continue;
                         }
+                        isUnicoMembro(mCP);
                         this.indexADM = mCP.getIndexADM();
                     }
                     return true;
@@ -64,6 +66,14 @@ public class PanelContentSection {
             pS.avancarPagina();
         }
         return false;
+    }
+
+    private void isUnicoMembro(ModalComponentePage mCP) {
+        // Testando com um usuario que não seja o do Bruno, ele não consegue excluir o do Bruno. Por isso precisa ser > 2, o usuario do bruno e o logado.
+        if(mCP.getListElementosModal().size() <= 2) {
+            new ModalComponentePage().acessarForm();
+            new ModalAdicionarMembroPage().addMembro();
+        }
     }
 
     private void getNomeItemSelecionado(ProvedorMap prM, WebElement nItem) {

@@ -24,8 +24,8 @@ public class ModalComponenteMap {
         return getElements(".ng-trigger h4");
     }
 
-    public List<WebElement> getListaElementosModal() {
-        return getElements(".p-dialog-content td");
+    public List<WebElement> getListElementosModal() {
+        return getElements(".p-dialog-content tbody td:nth-child(2)");
     }
 
     public List<WebElement> getListCabecalhoNomeID() {
@@ -48,7 +48,19 @@ public class ModalComponenteMap {
         return getElement(".pi-save");
     }
 
+    public WebElement getBtnConfirmarExclusao() {
+        return getElement(".ng-trigger-animation:last-child .p-confirm-popup-accept");
+    }
+
     public WebElement getBtnEditar(int i) {
         return getElements(".pi-pencil").get(i);
+    }
+
+    public WebElement getBtnExcluir(int i) {
+        return getElements(".pi-trash").get(i);
+    }
+
+    public WebElement getBtnAdicionarMembro() {
+        return getElement(".p-button-secondary.p-ml-auto");
     }
 }

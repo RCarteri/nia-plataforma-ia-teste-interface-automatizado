@@ -102,4 +102,13 @@ public class Componente extends Utils{
         }
         cP.clickBtnFechar(false, "alerta");
     }
+
+    @Quando("^excluir um membro$")
+    public void excluirUmMembro() {
+        try {
+            new ModalComponentePage().excluirMembro(pCS.getIndexADM());
+        } catch (Exception e){
+            capturaTela();
+        }
+    }
 }

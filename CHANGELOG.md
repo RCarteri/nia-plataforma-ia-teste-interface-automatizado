@@ -5,6 +5,21 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.7.0] - 06-07-2022
+Task: 549521, 554598, 557037
+###Adicionado
+- Configuração: Publicar evidência no qTeste
+- Cenário: CT014 - Limpar request
+- Cenário: CT015 - Excluir membro
+- Chave: Incluida chave do Othavio para teste de exclusão de membro
+
+###Mudado
+- Cenário: CT009 - Testar Modelo Triton, executando o request
+- Passando a usar o usuário do Rafael para os teste se não mais o do bruno
+
+###Corrigido
+- selecionarSigla() não capturava tela quando não encontrava nenhuma sigla
+
 ## [5.5.1] - 27-06-2022
 Task: 487395, 496594, 506847, 515638, 534804, 536105, 545664
 ###Adicionado

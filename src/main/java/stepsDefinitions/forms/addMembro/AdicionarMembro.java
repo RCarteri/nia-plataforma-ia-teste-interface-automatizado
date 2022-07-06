@@ -4,6 +4,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.MensagemErro;
+import pagesObjects.ModalComponentePage;
 import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
 import support.Utils;
 
@@ -24,7 +25,7 @@ public class AdicionarMembro extends Utils {
         MensagemErro mE = new MensagemErro();
         mE.fillListMensagem(table);
         try {
-            mAMP.acessarForm();
+            new ModalComponentePage().acessarForm();
             mAMP.fillForm(mE);
         } catch (Exception e) {
             logError(e);

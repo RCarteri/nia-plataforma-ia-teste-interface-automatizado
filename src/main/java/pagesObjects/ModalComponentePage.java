@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
 import static support.enums.SelectorsDelays.CARR_PAG;
@@ -17,7 +18,7 @@ public class ModalComponentePage extends ModalComponenteMap {
     private int indexADM;
 
     public int getCountLinhas() {
-        return getListaElementosModal().size();
+        return getListElementosModal().size();
     }
 
     public List<String> getListaInfoNomeID() {
@@ -106,6 +107,17 @@ public class ModalComponentePage extends ModalComponenteMap {
 
     private int getIndexRandom(int indexADM) {
         int indexRandom = getRandom(getListNome().size());
-        return (indexRandom == indexADM) ? getIndexRandom(indexADM) : indexRandom;
+        return (indexRandom == indexADM || getListNome().get(indexRandom).getText().equals("Bruno")) ? getIndexRandom(indexADM) : indexRandom;
+    }
+
+    public void excluirMembro(int indexADM) {
+        getBtnExcluir(getIndexRandom(indexADM)).click();
+        new ModalComponenteMap().getBtnConfirmarExclusao().click();
+    }
+
+    public void acessarForm() {
+        assertFalse("O usuário " + getUser() + " não tem permissão para adicionar membro. Não foi possível realizar este teste.",
+                checkBtnDisabled(getBtnAdicionarMembro(), "btn"));
+        getBtnAdicionarMembro().click();
     }
 }

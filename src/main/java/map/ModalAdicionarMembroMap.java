@@ -32,10 +32,6 @@ public class ModalAdicionarMembroMap extends BasePageObjects {
         return btnConfirmar;
     }
 
-    public WebElement getBtnAdicionarMembro() {
-        return getElement(".p-button-secondary.p-ml-auto");
-    }
-
     public WebElement getInputChave() {
         if (inputChave == null)
             inputChave = setElement("inputChave");

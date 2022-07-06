@@ -5,16 +5,15 @@ import map.ComponenteMap;
 import map.ModalAdicionarMembroMap;
 import pagesObjects.MensagemErro;
 import stepsDefinitions.forms.addMembro.MembroData;
+import stepsDefinitions.ibmCloud.Componente;
 import support.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertFalse;
 import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
-import static support.enums.User.getUser;
 
 public class ModalAdicionarMembroPage {
     private final ModalAdicionarMembroMap mAMM;
@@ -51,7 +50,7 @@ public class ModalAdicionarMembroPage {
         mAMM.getInputChave().sendKeys(membro.getChave());
         cM.getForm().click();
         if (isDropDowndisplayed()) selecionarFuncao(membro.getFuncao());
-        cM.getForm().click();
+        mAMM.getBtnConfirmar().click();
     }
 
 
@@ -72,13 +71,13 @@ public class ModalAdicionarMembroPage {
                         getRandom(mAMM.getListSpanFuncao().size())
                 ).click();
             case "":
-                break;
+                new ComponenteMap().getForm().click();
         }
     }
 
-    public void acessarForm() {
-        assertFalse("O usuário " + getUser() + " não tem permissão para adicionar membro. Não foi possível realizar este teste.",
-                checkBtnDisabled(mAMM.getBtnAdicionarMembro(), "btn"));
-        mAMM.getBtnAdicionarMembro().click();
+    public void addMembro() {
+        fillMapMembro(new Utils().createDataTable());
+        preencherCampos(membros.get(0));
+        new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi incluído com sucesso!");
     }
 }

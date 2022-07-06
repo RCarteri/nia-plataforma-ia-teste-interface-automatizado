@@ -40,7 +40,7 @@ public class ModalComponente extends Utils {
     @E("^deverá mostrar a lista com elementos$")
     public void deveraMostrarAListaComElementos() {
         try {
-            assertTrue(mCP.getCountLinhas() > 1);
+            assertTrue(mCP.getCountLinhas() >= 1 );
         } catch (Exception e) {
             logError(e);
         }

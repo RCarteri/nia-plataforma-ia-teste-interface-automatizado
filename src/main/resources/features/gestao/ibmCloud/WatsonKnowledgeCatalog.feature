@@ -36,9 +36,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal    | mensagem                              |
-            | componente |          | Não há nenhum catálogo com este nome. |
-            | modal      | Catálogo | Nenhum membro encontrado.             |
+            | local      | modal    | mensagem               |
+            | componente |          | Nenhum item encontrado |
+            | modal      | Catálogo | Nenhum item encontrado |
 
     @ID-006-005 @CT005
     Cenario: CT005 - Adicionar membro exceção

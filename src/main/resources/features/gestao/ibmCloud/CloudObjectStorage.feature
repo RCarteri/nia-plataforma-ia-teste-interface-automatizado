@@ -36,8 +36,8 @@ Funcionalidade: Suite002 - Cloud Object Storage
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                             |
-            | componente |       | Não há nenhum storage com este nome. |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |
 
     @ID-002-008 @CT008
     Cenario: CT008 - Inexistência do componente

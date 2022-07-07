@@ -36,5 +36,5 @@ Funcionalidade: Suite005 - Watson Assistant
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                                |
-            | componente |       | Não há nenhuma instância com este nome. |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |

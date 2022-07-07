@@ -36,9 +36,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal    | mensagem                              |
-            | componente |          | Não há nenhum catálogo com este nome. |
-            | modal      | Catálogo | Nenhum membro encontrado.             |
+            | local      | modal    | mensagem               |
+            | componente |          | Nenhum item encontrado |
+            | modal      | Catálogo | Nenhum item encontrado |
 
     @ID-006-005 @CT005
     Cenario: CT005 - Adicionar membro exceção
@@ -58,3 +58,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Dado que exista "Catálogo" onde o usuário logado seja o administrador
         Quando editar o papel de um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"
+
+    @ID-006-015 @CT015
+    Cenario: CT015 - Excluir membro
+        Dado que exista "Catálogo" onde o usuário logado seja o administrador
+        Quando excluir um membro
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi removido com sucesso!"

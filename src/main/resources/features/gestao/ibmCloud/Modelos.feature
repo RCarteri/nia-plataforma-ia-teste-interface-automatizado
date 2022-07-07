@@ -35,5 +35,5 @@ Funcionalidade: Suite004 - Modelos
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                            |
-            | componente |       | Não há nenhum modelo com este nome. |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |

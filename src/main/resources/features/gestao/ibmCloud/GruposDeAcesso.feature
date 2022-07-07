@@ -36,9 +36,9 @@ Funcionalidade: Suite003 - Grupos de Acesso
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                                     |
-            | componente |       | Não há nenhum grupo de acesso com este nome. |
-            | modal      | Grupo | Nenhum membro encontrado.                    |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |
+            | modal      | Grupo | Nenhum item encontrado |
 
     @ID-003-005 @CT005
     Cenario: CT005 - Adicionar membro exceção

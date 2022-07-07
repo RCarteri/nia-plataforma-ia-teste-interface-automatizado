@@ -45,26 +45,13 @@ public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
     }
 
     private void preencherCampos(DadosDeployModelo dadoDeployModelo) {
-        getInputNome().clear();
-        getInputNome().sendKeys(dadoDeployModelo.getNome());
-        if (dadoDeployModelo.getNome().equals(""))
-            getDropDownInstancia().click();
-        getDropDownInstancia().click();
-        if (dadoDeployModelo.getInstancia().equals("")) {
-            if (!getListElemDropDown().isEmpty())
-                getDropDownInstancia().click();
-        } else if (dadoDeployModelo.getInstancia().equals("any"))
-            getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
-        else
-            getListElemDropDown().get(getIndexDadoDropDown(dadoDeployModelo.getInstancia())).click();
-        getDropDownNotebook().click();
-        if (dadoDeployModelo.getNotebook().equals("")) {
-            getDropDownNotebook().click();
-        } else if (dadoDeployModelo.getNotebook().equals("any"))
-            getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
-        else
-            getListElemDropDown().get(getIndexDadoDropDown(dadoDeployModelo.getNotebook())).click();
-        getInputNome().click();
+        preencherNome(dadoDeployModelo);
+        preencherInstancia(dadoDeployModelo);
+        preencherNotebook(dadoDeployModelo);
+        preencherDataAsset(dadoDeployModelo);
+    }
+
+    private void preencherDataAsset(DadosDeployModelo dadoDeployModelo) {
         getDropDownDataAsset().click();
         getListDataAssetsSelecionados().forEach(WebElement::click);
         if (dadoDeployModelo.getDataAsset().equals("")) {
@@ -75,6 +62,35 @@ public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
             getListDataAssets().get(getRandom(getListDataAssets().size())).click();
         }
         getInputNome().click();
+    }
+
+    private void preencherNotebook(DadosDeployModelo dadoDeployModelo) {
+        getDropDownNotebook().click();
+        if (dadoDeployModelo.getNotebook().equals("")) {
+            getDropDownNotebook().click();
+        } else if (dadoDeployModelo.getNotebook().equals("any"))
+            getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
+        else
+            getListElemDropDown().get(getIndexDadoDropDown(dadoDeployModelo.getNotebook())).click();
+        getInputNome().click();
+    }
+
+    private void preencherInstancia(DadosDeployModelo dadoDeployModelo) {
+        getDropDownInstancia().click();
+        if (dadoDeployModelo.getInstancia().equals("")) {
+            if (!getListElemDropDown().isEmpty())
+                getDropDownInstancia().click();
+        } else if (dadoDeployModelo.getInstancia().equals("any"))
+            getListElemDropDown().get(getRandom(getListElemDropDown().size())).click();
+        else
+            getListElemDropDown().get(getIndexDadoDropDown(dadoDeployModelo.getInstancia())).click();
+    }
+
+    private void preencherNome(DadosDeployModelo dadoDeployModelo) {
+        getInputNome().clear();
+        getInputNome().sendKeys(dadoDeployModelo.getNome());
+        if (dadoDeployModelo.getNome().equals(""))
+            getDropDownInstancia().click();
     }
 
     private int getIndexDadoDropDown(String dado) {

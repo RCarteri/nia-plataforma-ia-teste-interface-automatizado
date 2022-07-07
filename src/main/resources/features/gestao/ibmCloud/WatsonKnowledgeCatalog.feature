@@ -58,3 +58,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Dado que exista "Catálogo" onde o usuário logado seja o administrador
         Quando editar o papel de um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"
+
+    @ID-006-015 @CT015
+    Cenario: CT015 - Excluir membro
+        Dado que exista "Catálogo" onde o usuário logado seja o administrador
+        Quando excluir um membro
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi removido com sucesso!"

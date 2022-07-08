@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static br.com.bb.ath.ftabb.utilitarios.Utils.sleep;
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.INFO;
@@ -33,6 +34,7 @@ public class PesquisaSection {
                 pM.getInputPesquisaModal().sendKeys(palavra);
                 break;
         }
+        sleep(1);
     }
 
     public String getTxtInputPesquisa(String local) {

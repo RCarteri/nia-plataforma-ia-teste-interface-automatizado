@@ -87,9 +87,10 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public String getChaveAddMembro(){
+    public String getChaveAddMembro(String opcao){
+        String param = (opcao.equals("chave")) ? "login_plataforma.chaveTeste.chave" : "login_plataforma.chaveTeste.usuario";
         try {
-            return String.valueOf($("login_plataforma.chaveTeste.chave"));
+            return String.valueOf($(param));
         } catch (DataPoolException e) {
             logError(e);
         }
@@ -99,7 +100,7 @@ public class Utils extends FTABBUtils {
     public DataTable createDataTable() {
         List<List<String>> dtList = new ArrayList<>();
         List<String> columns = Arrays.asList("Chave", "Função");
-        List<String> dataRow1 = Arrays.asList(getChaveAddMembro(), "any");
+        List<String> dataRow1 = Arrays.asList(getChaveAddMembro("chave"), "any");
         dtList.add(columns);
         dtList.add(dataRow1);
         return DataTable.create(dtList);

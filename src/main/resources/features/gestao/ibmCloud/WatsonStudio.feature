@@ -120,3 +120,12 @@ Funcionalidade: Suite007 - Watson Studio
         Dado que exista "Membros" onde o usuário logado seja o administrador
         Quando excluir um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Usuário foi removido com sucesso!"
+
+    @ID-007-016 @CT016
+    Cenario: CT016 - Adicionar membro
+        Dado que exista "Membros"
+        Quando adicionar membro com os dados
+            | Chave | Função |
+            | any   | any    |
+        Mas o membro a ser adicionado não exista na lista
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi incluído com sucesso!"

@@ -1,17 +1,19 @@
 package support.enums;
 
+import static java.lang.System.getProperty;
+
 public enum User {
     USER, CHAVE, SENHA;
 
     public static String getUser() {
-        return System.getProperty(String.valueOf(USER));
+        return getProperty(String.valueOf(USER));
     }
 
     public static String getChave() {
-        return System.getProperty(String.valueOf(CHAVE));
+        return getProperty(String.valueOf(CHAVE));
     }
 
     public static String getSenha() {
-        return System.getProperty(String.valueOf(SENHA));
+        return getProperty(String.valueOf(SENHA));
     }
 }

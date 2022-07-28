@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static java.lang.System.*;
 import static org.junit.Assert.assertTrue;
 import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
@@ -77,11 +78,12 @@ public class Utils extends FTABBUtils {
            printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
-    public void setDatapool() {
+    public void setDatapool(String ambiente) {
+            String senha = (ambiente.equals("homologacao")) ? "login_plataforma.chaveF.senha_hm" : "login_plataforma.chaveF.senha_desenv";
         try {
-            System.setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
-            System.setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
-            System.setProperty(SENHA.toString(), String.valueOf($("login_plataforma.chaveF.senha")));
+            setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
+            setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
+            setProperty(SENHA.toString(), String.valueOf($(senha)));
         } catch (DataPoolException e) {
             logError(e);
         }
@@ -131,13 +133,13 @@ public class Utils extends FTABBUtils {
     public static void printLog(String msg, LogTypes type) {
         switch (type){
             case INFO:
-                System.out.println("\nINFO - " + msg);
+                out.println("\nINFO - " + msg);
                 break;
             case ERROR:
-                System.err.println("\nERRO - " + msg);
+                err.println("\nERRO - " + msg);
                 break;
             case NULL:
-                System.err.println("\n" + msg);
+                err.println("\n" + msg);
                 break;
         }
     }

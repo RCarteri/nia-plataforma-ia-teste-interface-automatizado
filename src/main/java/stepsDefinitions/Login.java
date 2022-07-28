@@ -28,10 +28,10 @@ public class Login extends Utils{
         }
     }
 
-    @E("^se não estiver logado, realiza o login no Sistema$")
-    public void realizarLogin() {
+    @E("^se não estiver logado, realiza o login em \"([^\"]*)\"$")
+    public void realizarLogin(String ambiente) {
         try {
-            lP.logar();
+            lP.logar(ambiente);
         } catch (Exception e) {
             logError(e);
         }

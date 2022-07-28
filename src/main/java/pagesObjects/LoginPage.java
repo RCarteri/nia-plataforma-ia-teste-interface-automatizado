@@ -6,9 +6,13 @@ import map.LoginMap;
 import org.openqa.selenium.TimeoutException;
 import support.Utils;
 
+import static br.com.bb.ath.ftabb.FTABB.abrirUrl;
+import static br.com.bb.ath.ftabb.gaw.Plataforma.*;
+import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
 import static support.Utils.waitLoadPage;
+import static support.enums.Ambiente.DESENV;
 import static support.enums.LogTypes.*;
 import static support.enums.SelectorsDelays.LOGIN;
 import static support.enums.SysProps.IS_LOGGED;
@@ -17,14 +21,14 @@ import static support.enums.User.*;
 
 public class LoginPage {
     private final Utils utils;
-    int tentativa;
+    private int tentativa;
 
     public LoginPage() {
         this.utils = new Utils();
     }
 
     public void abrirPlataforma() {
-        System.setProperty(IS_LOGGED.toString(), String.valueOf(Plataforma.estaLogado()));
+        setProperty(IS_LOGGED.toString(), String.valueOf(estaLogado()));
         if (isLogged()) {
             printLog("A Plataforma esta aberta.", INFO);
         } else {
@@ -34,9 +38,9 @@ public class LoginPage {
 
     public void acessarPagina(String nomePagina) {
         try {
-            String tituloPagina = Plataforma.recuperarTituloPagina();
+            String tituloPagina = recuperarTituloPagina();
             if (!(tituloPagina.intern().equals("Plataforma BB | Analytics e Inteligência Artificial"))) {
-                Plataforma.selecionarAreaDeTrabalho(nomePagina);
+                selecionarAreaDeTrabalho(nomePagina);
             }
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
@@ -45,46 +49,74 @@ public class LoginPage {
 
     public void acessarMenu(String nivel1, String nivel2) {
         try {
-            Plataforma.abrirMenu(nivel1, nivel2);
+            abrirMenu(nivel1, nivel2);
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
         }
     }
 
-    public void logar() {
-        utils.setDatapool();
+    public void logar(String ambiente) {
+        utils.setDatapool(ambiente);
         if (isLogged()) {
-            printLog("O Usuário '" +  getUser() + "' - " + getChave() + " esta logado.", INFO);
+            printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
-            try {
-                LoginMap lM = new LoginMap();
-                lM.getInputUsername().sendKeys(getChave());
-                lM.getInputPassword().sendKeys(getSenha());
-                lM.getBtnLogin().click();
-                try {
-                    waitLoadPage(LOGIN);
-                } catch (TimeoutException e) {
-                    if (++tentativa == 3) {
-                        printLog("Não foi possível realizar o login pois não saiu da tela de login. A plataforma será fechada.", ERROR);
-                        Plataforma.fecharPlataforma();
+            LoginMap lM = new LoginMap();
+            switch (ambiente) {
+                case "homologacao":
+                    try {
+                        loginPlataforma(lM);
+                        try {
+                            waitLoadPage(LOGIN);
+                        } catch (TimeoutException e) {
+                            novaTentativa(ambiente);
+                        }
+                    } catch (Exception e) {
+                        atualizarPagina(ambiente);
                     }
-                    getDriver().navigate().refresh();
-                    logar();
-                }
-            } catch (Exception e) {
-                printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
-                getDriver().navigate().refresh();
-                logar();
+                    break;
+                case "desenvolvimento":
+                    loginIntranet(ambiente, lM);
+                    break;
             }
             printLog("Login realizado com o usuário '" + getUser() + "' chave: " + getChave(), INFO);
         }
     }
 
+    private void loginIntranet(String ambiente, LoginMap lM) {
+        abrirUrl(DESENV.getUrl());
+        utils.setDatapool(ambiente);
+        lM.getInputChave().sendKeys(getChave());
+        lM.getInputSenha().sendKeys(getSenha());
+        System.out.println(getSenha());
+        lM.getBtnEntrar().click();
+    }
+
+    private void atualizarPagina(String ambiente) {
+        printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
+        getDriver().navigate().refresh();
+        logar(ambiente);
+    }
+
+    private void novaTentativa(String ambiente) {
+        if (++tentativa == 3) {
+            printLog("Não foi possível realizar o login pois não saiu da tela de login. A plataforma será fechada.", ERROR);
+            fecharPlataforma();
+        }
+        getDriver().navigate().refresh();
+        logar(ambiente);
+    }
+
+    private void loginPlataforma(LoginMap lM) {
+        lM.getInputUsername().sendKeys(getChave());
+        lM.getInputPassword().sendKeys(getSenha());
+        lM.getBtnLogin().click();
+    }
+
     public void logoutEFecharPlataforma() {
         try {
-            Plataforma.encerrarSessao();
+            encerrarSessao();
             printLog("Sessão encerrada.", NULL);
-            Plataforma.fecharPlataforma();
+            fecharPlataforma();
             printLog("Plataforma fechada.", NULL);
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);

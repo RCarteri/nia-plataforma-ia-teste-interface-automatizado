@@ -78,12 +78,11 @@ public class Utils extends FTABBUtils {
            printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
-    public void setDatapool(String ambiente) {
-            String senha = (ambiente.equals("homologacao")) ? "login_plataforma.chaveF.senha_hm" : "login_plataforma.chaveF.senha_desenv";
+    public void setDatapool() {
         try {
             setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
             setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
-            setProperty(SENHA.toString(), String.valueOf($(senha)));
+            setProperty(SENHA.toString(), String.valueOf($("login_plataforma.chaveF.senha")));
         } catch (DataPoolException e) {
             logError(e);
         }

@@ -1,7 +1,7 @@
 package support.enums;
 
 public enum Ambiente {
-    DESENV("https://plataforma.desenv.bb.com.br/gaw/v3/servlet/br.com.bb.customizacao.servlets.paginas.ServletPaginaInicialIntranet?ctx=https://plataforma.desenv.bb.com.br/gaw/v3");
+        DESENV("https://plataforma.desenv.bb.com.br/nia-plat-ia-api/v3/api/swagger.json");
 
     private final String url;
 

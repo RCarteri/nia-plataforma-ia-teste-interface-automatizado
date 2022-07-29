@@ -56,13 +56,13 @@ public class LoginPage {
     }
 
     public void logar(String ambiente) {
-        utils.setDatapool(ambiente);
+        utils.setDatapool();
         if (isLogged()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
             LoginMap lM = new LoginMap();
             switch (ambiente) {
-                case "homologacao":
+                case "homologação":
                     try {
                         loginPlataforma(lM);
                         try {
@@ -75,19 +75,17 @@ public class LoginPage {
                     }
                     break;
                 case "desenvolvimento":
-                    loginIntranet(ambiente, lM);
+                    loginIntranet(lM);
                     break;
             }
             printLog("Login realizado com o usuário '" + getUser() + "' chave: " + getChave(), INFO);
         }
     }
 
-    private void loginIntranet(String ambiente, LoginMap lM) {
+    private void loginIntranet(LoginMap lM) {
         abrirUrl(DESENV.getUrl());
-        utils.setDatapool(ambiente);
         lM.getInputChave().sendKeys(getChave());
         lM.getInputSenha().sendKeys(getSenha());
-        System.out.println(getSenha());
         lM.getBtnEntrar().click();
     }
 

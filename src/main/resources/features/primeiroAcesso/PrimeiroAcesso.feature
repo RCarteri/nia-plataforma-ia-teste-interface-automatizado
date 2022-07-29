@@ -5,7 +5,7 @@ Funcionalidade: Suite009 - Primeiro acesso
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Primeiro acesso (Cloud)"
         E a página "Primeiro acesso e convite para IBM Cloud" deverá ser carregada com sucesso

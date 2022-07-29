@@ -6,6 +6,7 @@ import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
 import io.qameta.allure.Allure;
+import org.json.JSONObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -155,5 +156,14 @@ public class Utils extends FTABBUtils {
         for (WebElement webElement : webElements) {
             assertTrue("O botão confirmar está ativo", checkBtnDisabled(webElement, "btn"));
         }
+    }
+
+    public static String gerarJson(DataTable table){
+        JSONObject json = new JSONObject();
+        List<Map<String, String>> linhas = table.asMaps(String.class, String.class);
+        for (Map<String, String> colunas : linhas) {
+            json.put(colunas.get("Chave"), colunas.get("Valor"));
+        }
+        return json.toString();
     }
 }

@@ -13,10 +13,11 @@ import static support.GetElements.getDriver;
 import static support.Utils.printLog;
 import static support.Utils.waitLoadPage;
 import static support.enums.Ambiente.DESENV;
+import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
 import static support.enums.SelectorsDelays.LOGIN;
 import static support.enums.SysProps.IS_LOGGED;
-import static support.enums.SysProps.isLogged;
+import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
 
 public class LoginPage {
@@ -28,11 +29,11 @@ public class LoginPage {
     }
 
     public void abrirPlataforma() {
-        setProperty(IS_LOGGED.toString(), String.valueOf(estaLogado()));
-        if (isLogged()) {
-            printLog("A Plataforma esta aberta.", INFO);
-        } else {
+        if (!(isLoggedIntranet() | isLoggedPlataforma())) {
+            setProperty(IS_LOGGED.toString(), String.valueOf(estaLogado()));
             Plataforma.abrirPlataforma();
+        } else {
+            printLog("A Plataforma esta aberta.", INFO);
         }
     }
 
@@ -57,7 +58,7 @@ public class LoginPage {
 
     public void logar(String ambiente) {
         utils.setDatapool();
-        if (isLogged()) {
+        if (isLoggedPlataforma() | isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
             LoginMap lM = new LoginMap();

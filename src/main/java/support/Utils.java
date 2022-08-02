@@ -1,12 +1,9 @@
 package support;
 
-import br.com.bb.ath.ftabb.FTABBContext;
 import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
-import io.qameta.allure.Allure;
-import org.json.JSONObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,11 +16,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static br.com.bb.ath.ftabb.FTABBContext.getContext;
+import static io.qameta.allure.Allure.addAttachment;
 import static java.lang.System.*;
+import static java.util.UUID.randomUUID;
 import static org.junit.Assert.assertTrue;
+import static org.openqa.selenium.OutputType.BYTES;
 import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
@@ -34,23 +38,23 @@ public class Utils extends FTABBUtils {
         sleep(esperarQTeste(tar.getDelay()));
     }
 
-    private long esperarQTeste(long segundos){
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+    private long esperarQTeste(long segundos) {
+        if (getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
             segundos /= 2L;
         }
         return segundos;
     }
 
-    public static void waitLoadPage(SelectorsDelays locator){
+    public static void waitLoadPage(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
-        }catch (TimeoutException e){
+        } catch (TimeoutException e) {
             printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
     }
 
-    public static String printResultadoEsperadoObtido(String esperado, String obtido){
+    public static String printResultadoEsperadoObtido(String esperado, String obtido) {
         return "\nResultado esperado:\n    '" +
                 esperado +
                 "'.\nResultado obtido:\n    '" +
@@ -76,7 +80,7 @@ public class Utils extends FTABBUtils {
                 e.printStackTrace();
             }
         } else
-           printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
+            printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
     public void setDatapool() {
@@ -89,7 +93,17 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public String getChaveAddMembro(String opcao){
+    public String getPayload(String tipoPayload, String endpoint) {
+        String param = "payloads." + endpoint + "." + tipoPayload;
+        try {
+            return String.valueOf($(param));
+        } catch (DataPoolException e) {
+            logError(e);
+            return null;
+        }
+    }
+
+    public String getChaveAddMembro(String opcao) {
         String param = (opcao.equals("chave")) ? "login_plataforma.chaveTeste.chave" : "login_plataforma.chaveTeste.usuario";
         try {
             return String.valueOf($(param));
@@ -123,28 +137,28 @@ public class Utils extends FTABBUtils {
     }
 
     private void allureCapturarTela() {
-        final Object driver = FTABBContext.getContext().getContextBrowserDriver().getDriver();
+        final Object driver = getContext().getContextBrowserDriver().getDriver();
         final ByteArrayInputStream byteArrInputStream = new ByteArrayInputStream(
-                ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-        final String uuid = UUID.randomUUID().toString().substring(0, 8);
-        Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
+                ((TakesScreenshot) driver).getScreenshotAs(BYTES));
+        final String uuid = randomUUID().toString().substring(0, 8);
+        addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
     public static void printLog(String msg, LogTypes type) {
-        switch (type){
+        switch (type) {
             case INFO:
-                out.println("\nINFO - " + msg);
+                out.println("\nINFO - " + msg + "\n");
                 break;
             case ERROR:
-                err.println("\nERRO - " + msg);
+                err.println("\nERRO - " + msg + "\n");
                 break;
             case NULL:
-                err.println("\n" + msg);
+                err.println("\n" + msg + "\n");
                 break;
         }
     }
 
-    public static int getRandom(int size){
+    public static int getRandom(int size) {
         return ThreadLocalRandom.current().nextInt(size);
     }
 
@@ -156,14 +170,5 @@ public class Utils extends FTABBUtils {
         for (WebElement webElement : webElements) {
             assertTrue("O botão confirmar está ativo", checkBtnDisabled(webElement, "btn"));
         }
-    }
-
-    public static String gerarJson(DataTable table){
-        JSONObject json = new JSONObject();
-        List<Map<String, String>> linhas = table.asMaps(String.class, String.class);
-        for (Map<String, String> colunas : linhas) {
-            json.put(colunas.get("Chave"), colunas.get("Valor"));
-        }
-        return json.toString();
     }
 }

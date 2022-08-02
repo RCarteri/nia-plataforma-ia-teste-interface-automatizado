@@ -18,4 +18,16 @@ public class LoginMap {
     public WebElement getBtnLogin() {
         return getElement("#loginButton_0");
     }
+
+    public WebElement getInputChave() {
+        return getElement("#chave");
+    }
+
+    public WebElement getInputSenha() {
+        return getElement("#senha");
+    }
+
+    public WebElement getBtnEntrar() {
+        return getElement("#entrar");
+    }
 }

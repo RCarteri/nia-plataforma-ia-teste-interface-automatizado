@@ -5,3 +5,6 @@
   OK: "{
     \"nomeComponente\" : null
   }"
+  Bad Request: "{
+    \"nomeComponente\" : inválido
+  }"

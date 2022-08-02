@@ -1,4 +1,4 @@
-package runners.suites;
+package runners.api.suites;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/",
+		features = "classpath:features/api",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@S005" }
+		tags = { "@APIS001" }
 )
-public class TestSuiteS005WatsonAssistant extends ConfRunner{
+public class TestSuiteApiS001ListarProjetosComDeployEmAndamento extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

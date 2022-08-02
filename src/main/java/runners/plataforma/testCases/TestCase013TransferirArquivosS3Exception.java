@@ -1,4 +1,4 @@
-package runners.testCases;
+package runners.plataforma.testCases;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -14,9 +14,9 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CT015" }
+		tags = { "@CT013" }
 )
-public class TestCase015ExcluirMembro extends ConfRunner{
+public class TestCase013TransferirArquivosS3Exception extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

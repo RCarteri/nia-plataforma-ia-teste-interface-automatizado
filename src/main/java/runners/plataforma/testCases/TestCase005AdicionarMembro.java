@@ -1,4 +1,4 @@
-package runners.suites;
+package runners.plataforma.testCases;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -14,9 +14,9 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@S004" }
+		tags = { "@CT005" }
 )
-public class TestSuiteS004Modelos extends ConfRunner{
+public class TestCase005AdicionarMembro extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

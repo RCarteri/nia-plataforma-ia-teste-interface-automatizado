@@ -97,8 +97,8 @@ public class Componente extends Utils{
         try {
             assertTrue("O alerta não foi apresentado. Não foi possível realizar este teste.",
                     cP.getMensagemAlerta(opcao).isDisplayed());
-            assertEquals(printResultadoEsperadoObtido(mensagem, cP.getTxtMensagemAlerta(opcao)),
-                    mensagem, cP.getTxtMensagemAlerta(opcao));
+            assertEquals(printResultadoEsperadoObtido(mensagem, cP.getMensagemAlerta(opcao).getText()),
+                    mensagem, cP.getMensagemAlerta(opcao).getText());
         } finally {
             capturaTela();
         }

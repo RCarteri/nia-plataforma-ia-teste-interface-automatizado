@@ -44,13 +44,13 @@ public class ComponentePage{
         }
     }
 
-    public String getTxtMensagemAlerta(String opcao) {
+    public WebElement getMensagemAlerta(String opcao) {
         ComponenteMap cM = new ComponenteMap();
         switch (opcao) {
             case "sucesso":
-                return cM.getAlertSuccess().getText();
+                return cM.getAlertSuccess();
             case "informação":
-                return cM.getAlertInfo().getText();
+                return cM.getAlertInfo();
             default:
                 return null;
         }

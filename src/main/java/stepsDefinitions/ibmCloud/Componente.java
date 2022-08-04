@@ -95,6 +95,8 @@ public class Componente extends Utils{
     @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
         try {
+            assertTrue("O alerta não foi apresentado. Não foi possível realizar este teste.",
+                    cP.getMensagemAlerta(opcao).isDisplayed());
             assertEquals(printResultadoEsperadoObtido(mensagem, cP.getTxtMensagemAlerta(opcao)),
                     mensagem, cP.getTxtMensagemAlerta(opcao));
         } finally {

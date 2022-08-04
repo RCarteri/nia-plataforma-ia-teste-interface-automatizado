@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertFalse;
 import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
 
@@ -106,18 +105,10 @@ public class ModalAdicionarMembroPage {
     }
 
     public void verificarInclusao() {
-        try {
-            assertFalse("O membro a ser inserido já está na lista.", isMembroNaLista());
-        } catch (AssertionError e) {
-            Utils utils = new Utils();
-            utils.logError(e);
-            try {
-                System.out.println("Excluíndo o usuário.");
-                new ModalComponentePage().excluirMembro(-1);
-                new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso","Usuário foi removido com sucesso!");
-            } catch (Exception ex) {
-                utils.logError(ex);
-            }
+        if (isMembroNaLista()) {
+            System.out.println("O membro já está na lista, excluíndo o membro para prosseguir o teste.");
+            new ModalComponentePage().excluirMembro(-1);
+            new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi removido com sucesso!");
         }
     }
 }

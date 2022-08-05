@@ -35,7 +35,7 @@ Funcionalidade: Suite007 - Watson Studio
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
         Quando pesquisar um dado "inválido" no "<local>" ""
-        Então deverá apresentar a mensagem "<mensagem>"
+#        Então deverá apresentar a mensagem "<mensagem>" / teste ignorado pois não foi implementado as mensagens no modal de Notebook, Data Assets e Modelos
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
@@ -100,7 +100,7 @@ Funcionalidade: Suite007 - Watson Studio
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
 
-    @ID-007-013 @CT013
+    @ID-007-013 @CT013 @ignore
     Cenario: CT013 - Transferir arquivos do S3 para a IBM exception
         Dado que exista "Transferir S3"
         Quando solicitar a transferencia de arquivos S3
@@ -113,7 +113,7 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT015 - Excluir membro
         Dado que exista "Membros" onde o usuário logado seja o administrador
         Quando excluir um membro
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Usuário foi removido com sucesso!"
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi removido com sucesso!"
 
     @ID-007-016 @CT016
     Cenario: CT016 - Adicionar membro

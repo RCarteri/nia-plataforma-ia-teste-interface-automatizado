@@ -5,6 +5,7 @@ import support.annotations.FindBy;
 
 import java.util.List;
 
+import static org.junit.Assert.fail;
 import static support.GetElements.getElements;
 
 public class PesquisaMap extends BasePageObjects {
@@ -53,6 +54,8 @@ public class PesquisaMap extends BasePageObjects {
     }
 
     public List<WebElement> getListaNomesComponente() {
+        if (getElements("nia-platia-table td:nth-child(2)").size() == 0)
+            fail("A lista não possui nenhum item.");
         return getElements("nia-platia-table td:first-child");
     }
 }

@@ -9,9 +9,11 @@ import org.openqa.selenium.WebElement;
 import pagesObjects.ComponentePage;
 import pagesObjects.ModalComponentePage;
 import pagesObjects.ibmCloud.ModalAdicionarMembroPage;
+import support.Utils;
 
 import java.util.List;
 
+import static org.junit.Assert.fail;
 import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
 import static support.enums.SelectorsDelays.CARR_PAG;
@@ -38,9 +40,9 @@ public class PanelContentSection {
     }
 
     public boolean existeOpcao(boolean esperado, boolean needBeADM, String opcao) {
-        while (!checkBtnDisabled(pM.getBtnAvancarPagina(), "btn")) {
+        do {
             ProvedorMap prM = new ProvedorMap();
-            printLog("Testando a página " + pM.getPaginaAtual().getText() + ".", INFO);
+            printLog("Procurando por '" + opcao + "'. Testando a página " + pM.getPaginaAtual().getText() + ".", INFO);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 getNomeItemSelecionado(prM, nItem);
@@ -63,14 +65,13 @@ public class PanelContentSection {
                     return true;
                 }
             }
-            pS.avancarPagina();
-        }
-        return false;
+            pS.avancarPagina(opcao);
+        } while (true);
     }
 
     private void isUnicoMembro(ModalComponentePage mCP) {
         // Testando com um usuario que não seja o do Bruno, ele não consegue excluir o do Bruno. Por isso precisa ser > 2, o usuario do bruno e o logado.
-        if(mCP.getListElementosModal().size() <= 2) {
+        if (mCP.getListElementosModal().size() <= 2) {
             new ModalComponentePage().acessarForm();
             new ModalAdicionarMembroPage().addMembro();
         }
@@ -121,10 +122,12 @@ public class PanelContentSection {
                 if (checkBtnDisabled(webElement, "class")) return false;
                 rolarPaginaAteElemento(webElement);
                 webElement.click();
-                break;
+                return true;
             }
         }
-        return true;
+        new Utils().capturaTela();
+        fail("A opção '" + opcao + "' não existe no submenu. O teste não pode prosseguir.");
+        return false;
     }
 
     private boolean isListaOpcoesDisplayed() {

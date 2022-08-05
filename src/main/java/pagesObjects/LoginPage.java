@@ -1,13 +1,13 @@
 package pagesObjects;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import br.com.bb.ath.ftabb.gaw.Plataforma;
 import map.LoginMap;
 import org.openqa.selenium.TimeoutException;
 import support.Utils;
 
 import static br.com.bb.ath.ftabb.FTABB.abrirUrl;
 import static br.com.bb.ath.ftabb.gaw.Plataforma.*;
+import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
@@ -28,10 +28,9 @@ public class LoginPage {
         this.utils = new Utils();
     }
 
-    public void abrirPlataforma() {
-        if (!(isLoggedIntranet() | isLoggedPlataforma())) {
-            setProperty(IS_LOGGED.toString(), String.valueOf(estaLogado()));
-            Plataforma.abrirPlataforma();
+    public void abraPlataforma() {
+        if (!(isLoggedIntranet() || isLoggedPlataforma())) {
+            abrirPlataforma();
         } else {
             printLog("A Plataforma esta aberta.", INFO);
         }
@@ -66,6 +65,7 @@ public class LoginPage {
                 case "homologação":
                     try {
                         loginPlataforma(lM);
+                        setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
                         try {
                             waitLoadPage(LOGIN);
                         } catch (TimeoutException e) {

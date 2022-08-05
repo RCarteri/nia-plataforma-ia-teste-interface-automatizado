@@ -67,8 +67,8 @@ public class Componente extends Utils{
         try {
             assertTrue("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto.\nNão foi possível realizar este teste.",
                     pCS.existeOpcao(true, true, opcao));
-        } finally {
-            capturaTela();
+        } catch(Exception e) {
+            logError(e);
         }
     }
 
@@ -95,8 +95,10 @@ public class Componente extends Utils{
     @Então("^deverá ser apresentado o alerta de \"([^\"]*)\" com a mensagem \"([^\"]*)\"$")
     public void deveraSerApresentadoOAlertaComAMensagem(String opcao, String mensagem) {
         try {
-            assertEquals(printResultadoEsperadoObtido(mensagem, cP.getTxtMensagemAlerta(opcao)),
-                    mensagem, cP.getTxtMensagemAlerta(opcao));
+            assertTrue("O alerta não foi apresentado. Não foi possível realizar este teste.",
+                    cP.getMensagemAlerta(opcao).isDisplayed());
+            assertEquals(printResultadoEsperadoObtido(mensagem, cP.getMensagemAlerta(opcao).getText()),
+                    mensagem, cP.getMensagemAlerta(opcao).getText());
         } finally {
             capturaTela();
         }

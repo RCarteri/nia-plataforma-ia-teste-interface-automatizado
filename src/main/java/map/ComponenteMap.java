@@ -11,9 +11,6 @@ import static support.Utils.waitLoadPage;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class ComponenteMap extends BasePageObjects {
-    @FindBy(cssSelector = "#p-panel-1-titlebar")
-    private WebElement tituloComponente;
-
     @FindBy(cssSelector = ".p-dropdown-trigger span")
     private WebElement dropComponente;
 
@@ -21,9 +18,8 @@ public class ComponenteMap extends BasePageObjects {
     private WebElement alertSuccess;
 
     public WebElement getTituloComponente() {
-        if (tituloComponente == null)
-            tituloComponente = setElement("tituloComponente");
-        return tituloComponente;
+        waitLoadPage(CARR_PAG);
+        return getElement("#p-panel-1-titlebar");
     }
 
     public WebElement getDropDownComponente() {

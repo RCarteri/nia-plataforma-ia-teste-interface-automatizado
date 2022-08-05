@@ -18,6 +18,7 @@ public class ComponenteMap extends BasePageObjects {
     private WebElement alertSuccess;
 
     public WebElement getTituloComponente() {
+        waitLoadPage(CARR_PAG);
         return getElement("#p-panel-1-titlebar");
     }
 

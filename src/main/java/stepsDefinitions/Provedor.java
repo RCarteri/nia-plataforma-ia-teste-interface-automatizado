@@ -20,6 +20,7 @@ public class Provedor extends Utils {
     public void acessarAPaginaDoProvedor(String provedor) {
         try {
             waitLoadPage(CARR_PAG);
+            cP.getMensagemAlerta("sucesso");
             cP.clickBtnFechar(false, "alerta");
             pP.acessarProvedor(provedor);
         } catch (Exception e) {

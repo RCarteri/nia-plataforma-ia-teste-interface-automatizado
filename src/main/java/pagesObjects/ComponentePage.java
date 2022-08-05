@@ -6,6 +6,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import static support.Utils.printLog;
+import static support.Utils.rolarPaginaAteElemento;
 import static support.enums.LogTypes.INFO;
 
 public class ComponentePage{
@@ -34,6 +35,7 @@ public class ComponentePage{
         try {
             ComponenteMap cM = new ComponenteMap();
             if ((local.equals("alerta"))) {
+                rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);
             } else {
                 cM.getBtnFecharModal().click();

@@ -42,7 +42,7 @@ public class PanelContentSection {
     public boolean existeOpcao(boolean esperado, boolean needBeADM, String opcao) {
         do {
             ProvedorMap prM = new ProvedorMap();
-            printLog("Testando a página " + pM.getPaginaAtual().getText() + ".", INFO);
+            printLog("Procurando por '" + opcao + "'. Testando a página " + pM.getPaginaAtual().getText() + ".", INFO);
             for (WebElement nItem : prM.getListBtnExibir()) {
                 avancarItem(nItem, prM.getListBtnExibir());
                 getNomeItemSelecionado(prM, nItem);
@@ -65,7 +65,7 @@ public class PanelContentSection {
                     return true;
                 }
             }
-            pS.avancarPagina();
+            pS.avancarPagina(opcao);
         } while (true);
     }
 

@@ -18,13 +18,14 @@ Funcionalidade: Suite007 - Watson Studio
     @ID-007-003 @CT003
     Esquema do Cenario: CT003 - Exibir componente
         Dado que exista "<opção>"
-        Então deverá apresentar o titulo "<título>" no modal
+        Então deverá apresentar o título "<título>" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista com elementos
         Exemplos:
-            | opção     | título             |
-            | Membros   | Membros do projeto |
-            | Notebooks | Notebooks          |
+            | opção       | título             |
+            | Membros     | Membros do projeto |
+            | Notebooks   | Notebooks          |
+            | Data assets | Data Assets        |
 
     @ID-007-004 @CT004
     Esquema do Cenario: CT004 - Pesquisar

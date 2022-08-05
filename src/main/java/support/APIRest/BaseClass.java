@@ -9,8 +9,10 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
+import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
+import static support.Utils.isQteste;
 import static support.Utils.printLog;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
@@ -39,12 +41,17 @@ public class BaseClass {
         if (isLoggedIntranet()) {
             printLog("Cookies já estão salvos.", INFO);
         } else {
-            setProperty(IBBID.toString(), String.valueOf(getDriver().manage().getCookieNamed("IBBID").getValue()));
+            setProperty(IBBID.toString(), valueOf(getDriver().manage().getCookieNamed("IBBID").getValue()));
         }
     }
 
+    private void setProxy() {
+        if (!isQteste())
+            proxy("170.66.49.180", 3128);
+    }
+
     private void setRequest() {
-        proxy("170.66.49.180", 3128);
+        setProxy();
         baseURI = BASE_URL;
         request = given()
                 .contentType(JSON)
@@ -68,7 +75,7 @@ public class BaseClass {
         System.out.println("---------------------------------------------------------");
         printLog("Request enviado para o endpoint: " + endpoint, INFO);
         System.out.println(payload);
-        printLog("Recebeu o seguinte retorno com o status code:" + response.getStatusLine().replace("HTTP/1.1", ""),  INFO);
+        printLog("Recebeu o seguinte retorno com o status code:" + response.getStatusLine().replace("HTTP/1.1", ""), INFO);
         response.body().prettyPrint();
     }
 }

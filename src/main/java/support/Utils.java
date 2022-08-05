@@ -1,11 +1,12 @@
 package support;
 
-import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.LogTypes;
 import support.enums.SelectorsDelays;
@@ -15,19 +16,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
+import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
 import static io.qameta.allure.Allure.addAttachment;
 import static java.lang.System.*;
+import static java.nio.file.Paths.get;
+import static java.util.Arrays.asList;
+import static java.util.Comparator.comparing;
 import static java.util.UUID.randomUUID;
+import static java.util.concurrent.ThreadLocalRandom.current;
 import static org.junit.Assert.assertTrue;
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.BYTES;
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
@@ -39,16 +43,20 @@ public class Utils extends FTABBUtils {
     }
 
     private long esperarQTeste(long segundos) {
-        if (getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+        if (isQteste()) {
             segundos /= 2L;
         }
         return segundos;
     }
 
+    public static boolean isQteste(){
+        return getContext().getOrigemExecucao().equals(QTESTE);
+    }
+
     public static void waitLoadPage(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
+            wait.until(invisibilityOfElementLocated(cssSelector(locator.getSelector())));
         } catch (TimeoutException e) {
             printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
@@ -68,12 +76,12 @@ public class Utils extends FTABBUtils {
     }
 
     public void deletarAllureResults() {
-        Path dirPath = Paths.get("./target/allure-results");
+        Path dirPath = get("./target/allure-results");
         if (dirPath.toFile().exists()) {
             try {
                 Files.walk(dirPath)
                         .map(Path::toFile)
-                        .sorted(Comparator.comparing(File::isDirectory))
+                        .sorted(comparing(File::isDirectory))
                         .forEach(File::delete);
                 printLog("Diretório " + dirPath + " deletado com sucesso.", INFO);
             } catch (IOException e) {
@@ -115,8 +123,8 @@ public class Utils extends FTABBUtils {
 
     public DataTable createDataTable() {
         List<List<String>> dtList = new ArrayList<>();
-        List<String> columns = Arrays.asList("Chave", "Função");
-        List<String> dataRow1 = Arrays.asList(getChaveAddMembro("chave"), "any");
+        List<String> columns = asList("Chave", "Função");
+        List<String> dataRow1 = asList(getChaveAddMembro("chave"), "any");
         dtList.add(columns);
         dtList.add(dataRow1);
         return DataTable.create(dtList);
@@ -159,7 +167,7 @@ public class Utils extends FTABBUtils {
     }
 
     public static int getRandom(int size) {
-        return ThreadLocalRandom.current().nextInt(size);
+        return current().nextInt(size);
     }
 
     public static boolean checkBtnDisabled(WebElement webElement, String local) {

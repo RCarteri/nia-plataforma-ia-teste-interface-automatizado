@@ -16,7 +16,7 @@ public class Hooks {
     @Before("@ignore")
     public void skip_scenario(Scenario scenario){
         System.out.println("Scenário ignorado: " + scenario.getName());
-        assumeTrue(false);
+        assumeTrue("O cenário " + scenario.getName() + " está definido para ser ignorado.", false);
     }
 
     @After

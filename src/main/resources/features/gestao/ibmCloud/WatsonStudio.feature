@@ -11,7 +11,7 @@ Funcionalidade: Suite007 - Watson Studio
         E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Watson Studio"
 
-    @ID-007-002 @CT002 @Smoke @ignore
+    @ID-007-002 @CT002 @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Projetos" na página
 

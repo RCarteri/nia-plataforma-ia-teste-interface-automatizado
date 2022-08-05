@@ -67,8 +67,8 @@ public class Componente extends Utils{
         try {
             assertTrue("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto.\nNão foi possível realizar este teste.",
                     pCS.existeOpcao(true, true, opcao));
-        } finally {
-            capturaTela();
+        } catch(Exception e) {
+            logError(e);
         }
     }
 

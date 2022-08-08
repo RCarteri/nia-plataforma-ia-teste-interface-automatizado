@@ -101,16 +101,6 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public String getPayload(String tipoPayload, String endpoint) {
-        String param = "payloads." + endpoint + "." + tipoPayload;
-        try {
-            return String.valueOf($(param));
-        } catch (DataPoolException e) {
-            logError(e);
-            return null;
-        }
-    }
-
     public String getChaveAddMembro(String opcao) {
         String param = (opcao.equals("chave")) ? "login_plataforma.chaveTeste.chave" : "login_plataforma.chaveTeste.usuario";
         try {

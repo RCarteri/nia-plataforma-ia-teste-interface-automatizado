@@ -1,12 +1,13 @@
 package support.APIRest;
 
+import br.com.bb.ath.ftabb.exceptions.DataPoolException;
+import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import support.Utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import static io.qameta.allure.Allure.descriptionHtml;
+import static io.qameta.allure.Allure.link;
 import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.valueOf;
@@ -17,24 +18,23 @@ import static support.Utils.printLog;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
 
-public class BaseClass {
+public class BaseClass extends FTABBUtils {
     protected final String BASE_URL = "https://plataforma.desenv.bb.com.br/nia-plat-ia-api/v3/api/nia";
     private RequestSpecification request;
     private String endpoint;
     private String payload;
     protected Response response;
-    protected Map<String, String> json = new HashMap<>();
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
     }
 
     public String getEndpoint() {
-        return endpoint;
+        return this.endpoint;
     }
 
     public void setPayload(String tipoPayload) {
-        this.payload = new Utils().getPayload(tipoPayload, getEndpoint());
+        this.payload = getPayload(tipoPayload, getEndpoint());
     }
 
     public void getCookies() {
@@ -59,16 +59,13 @@ public class BaseClass {
                 .relaxedHTTPSValidation();
     }
 
-    public RequestSpecification getRequest() {
-        return request;
-    }
-
     protected void enviarPayload() {
         setRequest();
         response = request.given()
                 .body(payload)
                 .when()
                 .post(endpoint);
+        setTable();
     }
 
     protected void printResult() {
@@ -77,5 +74,45 @@ public class BaseClass {
         System.out.println(payload);
         printLog("Recebeu o seguinte retorno com o status code:" + response.getStatusLine().replace("HTTP/1.1", ""), INFO);
         response.body().prettyPrint();
+    }
+
+    private String getPayload(String tipoPayload, String endpoint) {
+        String param = "payloads." + endpoint + "." + tipoPayload;
+        try {
+            return String.valueOf($(param));
+        } catch (DataPoolException e) {
+            new Utils().logError(e);
+            return null;
+        }
+    }
+
+    private String getDescricao(String endpoint) {
+        String param = "payloads." + endpoint + ".descrição";
+        try {
+            return String.valueOf($(param));
+        } catch (DataPoolException e) {
+            new Utils().logError(e);
+            return null;
+        }
+    }
+
+    public String gerarHtmlRequisicaoPost() {
+        return "<table><tr><td colspan=\"2\" style=\"padding:12px;text-align: left;background-color:#f0f2f4;font-weight:bold;\">" +
+                "POST" +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">" +
+                "Descrição</td><td>" +
+                getDescricao(getEndpoint()) +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">URL</td><td>" +
+                baseURI + this.endpoint +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Status Code</td><td>" +
+                response.getStatusLine().replace("HTTP/1.1 ", "") +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">JSON</td><td>" +
+                response.body().prettyPrint() +
+                "</td></tr></table>";
+    }
+
+    public void setTable() {
+        descriptionHtml(gerarHtmlRequisicaoPost());
+        link(endpoint, "POST", endpoint);
     }
 }

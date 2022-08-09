@@ -15,7 +15,6 @@ import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
 
 public class GetElements {
-    private final Utils utils = new Utils();
     private final List<String> iframesList = new ArrayList<>();
     private short iframesCount = 0;
     private short tentativa;

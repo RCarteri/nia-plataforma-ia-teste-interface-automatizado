@@ -24,8 +24,6 @@ public class ConfRunner {
     public static void confFinish(Host ambiente) {
         if (!isLoggedIntranet())
             new LoginPage().logoutEFecharPlataforma();
-        else
-
         new AllureARQ3().enviarRelatorio(ambiente.getHost());
         apiRest.atualizarAllureArq3(ambiente.getUrl(GERAR_RELATORIO));
     }

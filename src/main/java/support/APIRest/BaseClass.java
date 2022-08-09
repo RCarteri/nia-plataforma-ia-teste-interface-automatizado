@@ -15,6 +15,7 @@ import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
 import static support.Utils.isQteste;
 import static support.Utils.printLog;
+import static support.enums.Ambiente.API;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
 
@@ -30,11 +31,11 @@ public class BaseClass extends FTABBUtils {
     }
 
     public String getEndpoint() {
-        return this.endpoint;
+        return endpoint;
     }
 
     public void setPayload(String tipoPayload) {
-        this.payload = getPayload(tipoPayload, getEndpoint());
+        payload = getPayload(tipoPayload, getEndpoint());
     }
 
     public void getCookies() {
@@ -102,17 +103,20 @@ public class BaseClass extends FTABBUtils {
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">" +
                 "Descrição</td><td>" +
                 getDescricao(getEndpoint()) +
-                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">URL</td><td>" +
-                baseURI + this.endpoint +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Endpoint</td><td>" +
+                endpoint +
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Status Code</td><td>" +
                 response.getStatusLine().replace("HTTP/1.1 ", "") +
-                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">JSON</td><td>" +
-                response.body().prettyPrint() +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Request</td><td>" +
+                payload +
+                "</td></tr><tr><td style=\\\"min-width:100px;padding:12px;\\\">Response</td><td>\"" +
+                response.body().print() +
                 "</td></tr></table>";
     }
 
     public void setTable() {
         descriptionHtml(gerarHtmlRequisicaoPost());
-        link(endpoint, "POST", endpoint);
+        String url = API.getUrl() + endpoint.replace("-", "_");
+        link(endpoint, "POST", url);
     }
 }

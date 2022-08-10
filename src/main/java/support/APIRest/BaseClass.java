@@ -108,7 +108,7 @@ public class BaseClass extends FTABBUtils {
                 response.getStatusLine().replace("HTTP/1.1 ", "") +
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Request</td><td>" +
                 payload +
-                "</td></tr><tr><td style=\\\"min-width:100px;padding:12px;\\\">Response</td><td>\"" +
+                "</td></tr><tr><td style=\\\"min-width:100px;padding:12px;\\\">Response body</td><td>\"" +
                 response.body().print() +
                 "</td></tr></table>";
     }

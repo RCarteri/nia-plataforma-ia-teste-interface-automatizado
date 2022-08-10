@@ -1,7 +1,7 @@
 #language:pt
 #encoding: utf-8
 @APIS001
-Funcionalidade: APISuite001 - Listar Projetos Inteligencia Artificial Com Deploy Em Andamento
+Funcionalidade: APISuite001 - Listar projetos inteligência artificial com deploy em andamento
 
     Contexto: Preparar request
         Dado que a Plataforma esteja fechada, abra a Plataforma

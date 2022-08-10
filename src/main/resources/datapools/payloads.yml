@@ -1,7 +1,7 @@
 # Datapool de payloads
 
 /Op6586305-v1:
-  descrição: "Listar projetos inteligencia artificial com deploy em andamento"
+  descrição: "Listar projetos inteligência artificial com deploy em andamento"
   OK: "{
     \"nomeComponente\" : null
   }"

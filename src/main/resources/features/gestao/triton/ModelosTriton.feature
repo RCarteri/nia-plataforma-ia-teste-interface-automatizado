@@ -18,7 +18,7 @@ Funcionalidade: Suite008 - Modelos Triton
     @ID-008-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Detalhes"
-        Então deverá apresentar o titulo "Detalhes do Modelo Triton" no modal
+        Então deverá apresentar o título "Detalhes do Modelo Triton" no modal
         E deverá mostrar a lista com detalhes
         E deverá apresentar mais detalhes
 

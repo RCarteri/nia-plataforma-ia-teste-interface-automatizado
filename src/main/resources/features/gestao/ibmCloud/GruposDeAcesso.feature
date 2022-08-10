@@ -18,7 +18,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
     @ID-003-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Grupo"
-        Então deverá apresentar o titulo "Grupos de acesso" no modal
+        Então deverá apresentar o título "Grupos de acesso" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos

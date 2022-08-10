@@ -18,7 +18,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
     @ID-006-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Catálogo"
-        Então deverá apresentar o titulo "Membros do catálogo" no modal
+        Então deverá apresentar o título "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos

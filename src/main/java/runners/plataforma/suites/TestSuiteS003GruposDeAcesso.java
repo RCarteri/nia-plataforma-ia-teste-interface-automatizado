@@ -1,4 +1,4 @@
-package runners.testCases;
+package runners.plataforma.suites;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/",
+		features = "classpath:features/gestao",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CT010" }
+		tags = { "@S003" }
 )
-public class TestCase010CadastrarIBMCloud extends ConfRunner{
+public class TestSuiteS003GruposDeAcesso extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

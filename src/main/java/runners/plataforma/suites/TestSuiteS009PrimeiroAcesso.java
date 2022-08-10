@@ -1,4 +1,4 @@
-package runners.suites;
+package runners.plataforma.suites;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/",
+		features = "classpath:features/primeiroAcesso",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@S003" }
+		tags = { "@S009" }
 )
-public class TestSuiteS003GruposDeAcesso extends ConfRunner{
+public class TestSuiteS009PrimeiroAcesso extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

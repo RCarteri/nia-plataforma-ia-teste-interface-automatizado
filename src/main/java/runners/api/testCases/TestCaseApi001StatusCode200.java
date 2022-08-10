@@ -1,4 +1,4 @@
-package runners.testCases;
+package runners.api.testCases;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/",
+		features = "classpath:features/api",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CT013" }
+		tags = { "@CTAPI001" }
 )
-public class TestCase013TransferirArquivosS3Exception extends ConfRunner{
+public class TestCaseApi001StatusCode200 extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

@@ -13,7 +13,7 @@ Funcionalidade: APISuite001 - Listar projetos inteligência artificial com deplo
         Quando enviar um payload "OK"
         Então deve retornar o código 200
 
-    @ID-API001-002 @CTAPI002
-    Cenario: CTAPI002 - Bad Request - 400
+    @ID-API001-002 @APICT002
+    Cenario: APICT002 - Bad Request - 400
         Quando enviar um payload "Bad Request"
         Então deve retornar o código 400

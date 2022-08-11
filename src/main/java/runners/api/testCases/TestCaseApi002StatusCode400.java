@@ -14,7 +14,7 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/api",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CTAPI001" }
+		tags = { "@APICT001" }
 )
 public class TestCaseApi002StatusCode400 extends ConfRunner{
 	@BeforeClass

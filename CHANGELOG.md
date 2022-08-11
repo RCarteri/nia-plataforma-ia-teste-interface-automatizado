@@ -5,6 +5,24 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.1.1] - 11-08-2022
+Task: 561341, 563345, 581179, 594696, 596883, 597010, 597647  
+###Adicionado
+- Testes com API
+- Cenário: APICT001 - OK - 200, APICT002 - Bad Request - 400
+- Tabela request/respnse da API no Allure
+- Exemplo: Data Asset no ID-007-003 (Watson Studio - Exibir componente)
+- Tag - @ignore para ignorar cenário
+
+###Mudado
+- Ignorar step de verificar mensagem no ID-007-004 (Watson Studio - Pesquisar), pois não foi implementado as mensagens no modal de Notebook, Data Assets e Modelos
+
+###Corrigido
+- Rolar a página até o alerta para fechá-lo
+- Retornar erro quando não há nenhum item na lista
+- Verificar inclusão do membro
+- Parar de avançar a página quando atingir o limite
+
 ## [5.7.0] - 06-07-2022
 Task: 549521, 554598, 557037
 ###Adicionado

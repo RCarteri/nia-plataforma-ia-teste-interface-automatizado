@@ -32,7 +32,7 @@ public class PaginacaoMap extends BasePageObjects {
     }
 
     public WebElement getBtnAvancarPagina(){
-        return getElement(".pi-angle-right");
+        return getElement("button.p-paginator-next");
     }
 
     public WebElement getPaginaAtual(){

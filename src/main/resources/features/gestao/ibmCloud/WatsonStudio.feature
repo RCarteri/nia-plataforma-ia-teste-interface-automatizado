@@ -5,7 +5,7 @@ Funcionalidade: Suite007 - Watson Studio
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a página do provedor "IBM Cloud"
@@ -18,13 +18,14 @@ Funcionalidade: Suite007 - Watson Studio
     @ID-007-003 @CT003
     Esquema do Cenario: CT003 - Exibir componente
         Dado que exista "<opção>"
-        Então deverá apresentar o titulo "<título>" no modal
+        Então deverá apresentar o título "<título>" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá mostrar a lista com elementos
         Exemplos:
-            | opção     | título             |
-            | Membros   | Membros do projeto |
-            | Notebooks | Notebooks          |
+            | opção       | título             |
+            | Membros     | Membros do projeto |
+            | Notebooks   | Notebooks          |
+            | Data assets | Data Assets        |
 
     @ID-007-004 @CT004
     Esquema do Cenario: CT004 - Pesquisar
@@ -35,16 +36,16 @@ Funcionalidade: Suite007 - Watson Studio
         Então o input deve estar vazio
         E o total de resultados deverá mostrar a quantidade anterior
         Quando pesquisar um dado "inválido" no "<local>" ""
-        Então deverá apresentar a mensagem "<mensagem>"
+#        Então deverá apresentar a mensagem "<mensagem>" / teste ignorado pois não foi implementado as mensagens no modal de Notebook, Data Assets e Modelos
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal       | mensagem                             |
-            | componente |             | Não há nenhum projeto com este nome. |
-            | modal      | Membros     | Nenhum membro encontrado.            |
-            | modal      | Notebooks   | Nenhum resultado encontrado.         |
-            | modal      | Data assets | Nenhum resultado encontrado.         |
-            | modal      | Modelos     | Nenhum resultado encontrado.         |
+            | local      | modal       | mensagem                     |
+            | componente |             | Nenhum item encontrado       |
+            | modal      | Membros     | Nenhum item encontrado       |
+            | modal      | Notebooks   | Nenhum resultado encontrado. |
+            | modal      | Data assets | Nenhum resultado encontrado. |
+            | modal      | Modelos     | Nenhum resultado encontrado. |
 
     @ID-007-005 @CT005
     Cenario: CT005 - Adicionar membro exceção
@@ -100,7 +101,7 @@ Funcionalidade: Suite007 - Watson Studio
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
             | Nome do modelo não deve conter caracteres especiais e/ou espaços.                                                                          |
 
-    @ID-007-013 @CT013
+    @ID-007-013 @CT013 @ignore
     Cenario: CT013 - Transferir arquivos do S3 para a IBM exception
         Dado que exista "Transferir S3"
         Quando solicitar a transferencia de arquivos S3
@@ -113,10 +114,13 @@ Funcionalidade: Suite007 - Watson Studio
     Cenario: CT015 - Excluir membro
         Dado que exista "Membros" onde o usuário logado seja o administrador
         Quando excluir um membro
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Usuário foi removido com sucesso!"
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi removido com sucesso!"
 
-    @ID-007-015 @CT015
-    Cenario: CT015 - Excluir membro
-        Dado que exista "Membros" onde o usuário logado seja o administrador
-        Quando excluir um membro
-        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Usuário foi removido com sucesso!"
+    @ID-007-016 @CT016
+    Cenario: CT016 - Adicionar membro
+        Dado que exista "Membros"
+        Quando adicionar membro com os dados
+            | Chave | Função |
+            | any   | any    |
+        Mas o membro a ser adicionado não exista na lista
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi incluído com sucesso!"

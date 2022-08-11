@@ -18,7 +18,7 @@ public class ModalComponente extends Utils {
         this.mCP = new ModalComponentePage();
     }
 
-    @Então("^deverá apresentar o titulo \"([^\"]*)\" no modal$")
+    @Então("^deverá apresentar o título \"([^\"]*)\" no modal$")
     public void deveraApresentarOTitulo(String titulo) {
         try {
             assertEquals(titulo, new ModalComponenteMap().getTituloModal().getText());

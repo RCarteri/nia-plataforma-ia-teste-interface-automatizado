@@ -5,7 +5,7 @@ Funcionalidade: Suite004 - Modelos
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a página do provedor "IBM Cloud"
@@ -18,7 +18,7 @@ Funcionalidade: Suite004 - Modelos
     @ID-004-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Modelo"
-        Então deverá apresentar o titulo "Detalhes do Modelo" no modal
+        Então deverá apresentar o título "Detalhes do Modelo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
 
@@ -35,5 +35,5 @@ Funcionalidade: Suite004 - Modelos
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                            |
-            | componente |       | Não há nenhum modelo com este nome. |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |

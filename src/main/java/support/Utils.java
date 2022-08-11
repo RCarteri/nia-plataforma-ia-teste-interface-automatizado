@@ -1,13 +1,12 @@
 package support;
 
-import br.com.bb.ath.ftabb.FTABBContext;
-import br.com.bb.ath.ftabb.enums.OrigemExecucao;
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
-import io.qameta.allure.Allure;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.LogTypes;
 import support.enums.SelectorsDelays;
@@ -17,11 +16,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
+import java.util.List;
 
+import static br.com.bb.ath.ftabb.FTABBContext.getContext;
+import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
+import static io.qameta.allure.Allure.addAttachment;
+import static java.lang.System.*;
+import static java.nio.file.Paths.get;
+import static java.util.Arrays.asList;
+import static java.util.Comparator.comparing;
+import static java.util.UUID.randomUUID;
+import static java.util.concurrent.ThreadLocalRandom.current;
 import static org.junit.Assert.assertTrue;
+import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.OutputType.BYTES;
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
@@ -32,23 +42,27 @@ public class Utils extends FTABBUtils {
         sleep(esperarQTeste(tar.getDelay()));
     }
 
-    private long esperarQTeste(long segundos){
-        if (FTABBContext.getContext().getOrigemExecucao().equals(OrigemExecucao.QTESTE)) {
+    private long esperarQTeste(long segundos) {
+        if (isQteste()) {
             segundos /= 2L;
         }
         return segundos;
     }
 
-    public static void waitLoadPage(SelectorsDelays locator){
+    public static boolean isQteste(){
+        return getContext().getOrigemExecucao().equals(QTESTE);
+    }
+
+    public static void waitLoadPage(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(locator.getSelector())));
-        }catch (TimeoutException e){
+            wait.until(invisibilityOfElementLocated(cssSelector(locator.getSelector())));
+        } catch (TimeoutException e) {
             printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
     }
 
-    public static String printResultadoEsperadoObtido(String esperado, String obtido){
+    public static String printResultadoEsperadoObtido(String esperado, String obtido) {
         return "\nResultado esperado:\n    '" +
                 esperado +
                 "'.\nResultado obtido:\n    '" +
@@ -62,34 +76,35 @@ public class Utils extends FTABBUtils {
     }
 
     public void deletarAllureResults() {
-        Path dirPath = Paths.get("./target/allure-results");
+        Path dirPath = get("./target/allure-results");
         if (dirPath.toFile().exists()) {
             try {
                 Files.walk(dirPath)
                         .map(Path::toFile)
-                        .sorted(Comparator.comparing(File::isDirectory))
+                        .sorted(comparing(File::isDirectory))
                         .forEach(File::delete);
                 printLog("Diretório " + dirPath + " deletado com sucesso.", INFO);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else
-           printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
+            printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
     public void setDatapool() {
         try {
-            System.setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
-            System.setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
-            System.setProperty(SENHA.toString(), String.valueOf($("login_plataforma.chaveF.senha")));
+            setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
+            setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
+            setProperty(SENHA.toString(), String.valueOf($("login_plataforma.chaveF.senha")));
         } catch (DataPoolException e) {
             logError(e);
         }
     }
 
-    public String getChaveAddMembro(){
+    public String getChaveAddMembro(String opcao) {
+        String param = (opcao.equals("chave")) ? "login_plataforma.chaveTeste.chave" : "login_plataforma.chaveTeste.usuario";
         try {
-            return String.valueOf($("login_plataforma.chaveTeste.chave"));
+            return String.valueOf($(param));
         } catch (DataPoolException e) {
             logError(e);
         }
@@ -98,8 +113,8 @@ public class Utils extends FTABBUtils {
 
     public DataTable createDataTable() {
         List<List<String>> dtList = new ArrayList<>();
-        List<String> columns = Arrays.asList("Chave", "Função");
-        List<String> dataRow1 = Arrays.asList(getChaveAddMembro(), "any");
+        List<String> columns = asList("Chave", "Função");
+        List<String> dataRow1 = asList(getChaveAddMembro("chave"), "any");
         dtList.add(columns);
         dtList.add(dataRow1);
         return DataTable.create(dtList);
@@ -120,29 +135,29 @@ public class Utils extends FTABBUtils {
     }
 
     private void allureCapturarTela() {
-        final Object driver = FTABBContext.getContext().getContextBrowserDriver().getDriver();
+        final Object driver = getContext().getContextBrowserDriver().getDriver();
         final ByteArrayInputStream byteArrInputStream = new ByteArrayInputStream(
-                ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-        final String uuid = UUID.randomUUID().toString().substring(0, 8);
-        Allure.addAttachment("Print_" + uuid + ".png", byteArrInputStream);
+                ((TakesScreenshot) driver).getScreenshotAs(BYTES));
+        final String uuid = randomUUID().toString().substring(0, 8);
+        addAttachment("Print_" + uuid + ".png", byteArrInputStream);
     }
 
     public static void printLog(String msg, LogTypes type) {
-        switch (type){
+        switch (type) {
             case INFO:
-                System.out.println("\nINFO - " + msg);
+                out.println("\nINFO - " + msg + "\n");
                 break;
             case ERROR:
-                System.err.println("\nERRO - " + msg);
+                err.println("\nERRO - " + msg + "\n");
                 break;
             case NULL:
-                System.err.println("\n" + msg);
+                err.println("\n" + msg + "\n");
                 break;
         }
     }
 
-    public static int getRandom(int size){
-        return ThreadLocalRandom.current().nextInt(size);
+    public static int getRandom(int size) {
+        return current().nextInt(size);
     }
 
     public static boolean checkBtnDisabled(WebElement webElement, String local) {

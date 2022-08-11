@@ -1,7 +1,6 @@
 package stepsDefinitions;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
-import br.com.bb.ath.ftabb.gaw.Plataforma;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
@@ -9,6 +8,7 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.LoginPage;
 import support.Utils;
 
+import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
@@ -22,16 +22,16 @@ public class Login extends Utils{
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
     public void queAPlataformaEstejaFechadaAbraAPlataforma() {
         try {
-            lP.abrirPlataforma();
+            lP.abraPlataforma();
         } catch (Exception e) {
             logError(e);
         }
     }
 
-    @E("^se não estiver logado, realiza o login no Sistema$")
-    public void realizarLogin() {
+    @E("^se não estiver logado, realiza o login em \"([^\"]*)\"$")
+    public void realizarLogin(String ambiente) {
         try {
-            lP.logar();
+            lP.logar(ambiente);
         } catch (Exception e) {
             logError(e);
         }
@@ -50,7 +50,7 @@ public class Login extends Utils{
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         try {
             waitLoadPage(CARR_PAG);
-            assertEquals("A página não foi carregada.", Plataforma.recuperarTituloPagina(), titulo);
+            assertEquals("A página não foi carregada.", recuperarTituloPagina(), titulo);
         } finally {
             capturaTela();
         }

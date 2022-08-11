@@ -5,7 +5,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a página do provedor "IBM Cloud"
@@ -18,7 +18,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
     @ID-006-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Catálogo"
-        Então deverá apresentar o titulo "Membros do catálogo" no modal
+        Então deverá apresentar o título "Membros do catálogo" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
@@ -36,9 +36,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal    | mensagem                              |
-            | componente |          | Não há nenhum catálogo com este nome. |
-            | modal      | Catálogo | Nenhum membro encontrado.             |
+            | local      | modal    | mensagem               |
+            | componente |          | Nenhum item encontrado |
+            | modal      | Catálogo | Nenhum item encontrado |
 
     @ID-006-005 @CT005
     Cenario: CT005 - Adicionar membro exceção
@@ -58,3 +58,9 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         Dado que exista "Catálogo" onde o usuário logado seja o administrador
         Quando editar o papel de um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"
+
+    @ID-006-015 @CT015
+    Cenario: CT015 - Excluir membro
+        Dado que exista "Catálogo" onde o usuário logado seja o administrador
+        Quando excluir um membro
+        Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro foi removido com sucesso!"

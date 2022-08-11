@@ -5,7 +5,7 @@
     <groupId>br.com.bb.nia</groupId>
     <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
     <packaging>jar</packaging>
-    <version>5.7.0</version>
+    <version>6.1.1-SNAPSHOT</version>
     <name>nia-plataforma-ia-teste-interface-automatizado</name>
 
     <properties>
@@ -51,6 +51,12 @@
             <groupId>ath-allure-arq3</groupId>
             <artifactId>ath-allure-arq3</artifactId>
             <version>1.6.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.5.1</version>
         </dependency>
         <dependency>
             <groupId>br.com.bb.ath</groupId>
@@ -99,11 +105,6 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>4.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

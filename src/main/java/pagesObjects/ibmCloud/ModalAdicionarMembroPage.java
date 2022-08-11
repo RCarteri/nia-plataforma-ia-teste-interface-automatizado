@@ -4,6 +4,8 @@ import cucumber.api.DataTable;
 import map.ComponenteMap;
 import map.ModalAdicionarMembroMap;
 import pagesObjects.MensagemErro;
+import pagesObjects.ModalComponentePage;
+import pagesObjects.sections.PesquisaSection;
 import stepsDefinitions.forms.addMembro.MembroData;
 import stepsDefinitions.ibmCloud.Componente;
 import support.Utils;
@@ -28,19 +30,34 @@ public class ModalAdicionarMembroPage {
     }
 
     public void fillMapMembro(DataTable table) {
+        Utils utils = new Utils();
         List<Map<String, String>> linhas = table.asMaps(String.class, String.class);
+        String usuario = "";
         for (Map<String, String> colunas : linhas) {
-            addMembro(new MembroData(colunas.get("Chave"), colunas.get("Função")));
+            String chave = colunas.get("Chave");
+            if (linhas.get(0).get("Chave").equals("any")) {
+                usuario = utils.getChaveAddMembro("nome");
+                chave = utils.getChaveAddMembro("chave");
+            }
+            addMembro(new MembroData(chave, colunas.get("Função"), usuario));
         }
     }
 
-    public void fillForm(MensagemErro mE) {
+    public void fillFormError(MensagemErro mE) {
         assertBtnDisabled(mAMM.getBtnConfirmar());
         for (MembroData membro : membros) {
             preencherCampos(membro);
             mE.isMensagemEsperada(membros.indexOf(membro));
             assertBtnDisabled(mAMM.getBtnConfirmar());
             new Utils().capturaTela();
+        }
+    }
+
+    public void fillForm() {
+        assertBtnDisabled(mAMM.getBtnConfirmar());
+        for (MembroData membro : membros) {
+            preencherCampos(membro);
+            assertBtnDisabled(mAMM.getBtnConfirmar());
         }
     }
 
@@ -53,7 +70,6 @@ public class ModalAdicionarMembroPage {
         mAMM.getBtnConfirmar().click();
     }
 
-
     private boolean isDropDowndisplayed() {
         try {
             return mAMM.getDropDownFuncao().isDisplayed();
@@ -65,7 +81,7 @@ public class ModalAdicionarMembroPage {
 
     private void selecionarFuncao(String funcao) {
         mAMM.getDropDownFuncao().click();
-        switch (funcao){
+        switch (funcao) {
             case "any":
                 mAMM.getListSpanFuncao().get(
                         getRandom(mAMM.getListSpanFuncao().size())
@@ -79,5 +95,20 @@ public class ModalAdicionarMembroPage {
         fillMapMembro(new Utils().createDataTable());
         preencherCampos(membros.get(0));
         new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi incluído com sucesso!");
+    }
+
+    public boolean isMembroNaLista() {
+        PesquisaSection pS = new PesquisaSection();
+        String local = "modal";
+        pS.pesquisar(membros.get(0).getUsuario(), local);
+        return pS.resultadosContemString(membros.get(0).getUsuario(), local);
+    }
+
+    public void verificarInclusao() {
+        if (isMembroNaLista()) {
+            System.out.println("O membro já está na lista, excluíndo o membro para prosseguir o teste.");
+            new ModalComponentePage().excluirMembro(-1);
+            new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi removido com sucesso!");
+        }
     }
 }

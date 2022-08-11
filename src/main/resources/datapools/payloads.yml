@@ -1,0 +1,10 @@
+# Datapool de payloads
+
+/Op6586305-v1:
+  descrição: "Listar projetos inteligência artificial com deploy em andamento"
+  OK: "{
+    \"nomeComponente\" : null
+  }"
+  Bad Request: "{
+    \"nomeComponente\" : inválido
+  }"

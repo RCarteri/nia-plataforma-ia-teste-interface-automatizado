@@ -5,7 +5,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a página do provedor "IBM Cloud"
@@ -18,7 +18,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
     @ID-002-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Bucket"
-        Então deverá apresentar o titulo "Buckets do storage" no modal
+        Então deverá apresentar o título "Buckets do storage" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
@@ -36,8 +36,8 @@ Funcionalidade: Suite002 - Cloud Object Storage
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                             |
-            | componente |       | Não há nenhum storage com este nome. |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |
 
     @ID-002-008 @CT008
     Cenario: CT008 - Inexistência do componente

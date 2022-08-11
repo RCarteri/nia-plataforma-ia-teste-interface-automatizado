@@ -5,7 +5,7 @@ Funcionalidade: Suite008 - Modelos Triton
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a página do provedor "Triton"
@@ -18,7 +18,7 @@ Funcionalidade: Suite008 - Modelos Triton
     @ID-008-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Detalhes"
-        Então deverá apresentar o titulo "Detalhes do Modelo Triton" no modal
+        Então deverá apresentar o título "Detalhes do Modelo Triton" no modal
         E deverá mostrar a lista com detalhes
         E deverá apresentar mais detalhes
 
@@ -35,8 +35,8 @@ Funcionalidade: Suite008 - Modelos Triton
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                            |
-            | componente |       | Não há nenhum modelo com este nome. |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |
 
     @ID-008-009 @CT009
     Cenario: CT009 - Testar modelo Triton

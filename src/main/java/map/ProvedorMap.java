@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static org.junit.Assert.fail;
 import static support.GetElements.getElements;
 
 public class ProvedorMap {
@@ -12,7 +13,10 @@ public class ProvedorMap {
     }
 
     public List<WebElement> getListBtnExibir() {
-        return getElements("td button.ng-star-inserted.p-button-secondary");
+        List<WebElement> listBtnExibir = getElements("td button.ng-star-inserted.p-button-secondary");
+        if (listBtnExibir.size() == 0)
+            fail("A lista não apresenta nenhum item.");
+        return listBtnExibir;
     }
 
     public List<WebElement> getListNomes() {

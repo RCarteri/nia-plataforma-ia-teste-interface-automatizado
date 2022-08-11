@@ -1,7 +1,6 @@
 package support;
 
 import br.com.bb.ath.ftabb.FTABBContext;
-import br.com.bb.ath.ftabb.gaw.Plataforma;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,11 +9,12 @@ import support.enums.SelectorsDelays;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.fail;
 import static support.Utils.printLog;
-import static support.enums.LogTypes.*;
+import static support.enums.LogTypes.ERROR;
+import static support.enums.LogTypes.INFO;
 
 public class GetElements {
-    private final Utils utils = new Utils();
     private final List<String> iframesList = new ArrayList<>();
     private short iframesCount = 0;
     private short tentativa;
@@ -63,9 +63,7 @@ public class GetElements {
             short maxTentativas = 20;
             if (++tentativa == maxTentativas) {
                 printLog("O elemento " + by + " não foi encontrado no iframe. Tentativa: " + tentativa + "/" + maxTentativas, ERROR);
-                utils.logError(e);
-                Plataforma.fecharPlataforma();
-                printLog("Plataforma fechada.", NULL);
+                fail("O elemento " + by + " não foi encontrado no iframe. Tentativa: " + tentativa + "/" + maxTentativas);
             }
             printLog("O mapeamento não iniciou no iframe inicial. Tentativa: " + tentativa + "/" + maxTentativas, INFO);
             iframesList.clear();

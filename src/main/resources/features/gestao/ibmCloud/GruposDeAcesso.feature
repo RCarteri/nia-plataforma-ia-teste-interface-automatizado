@@ -5,7 +5,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
 
     Contexto: Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login no Sistema
+        E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Analytics | IA (hm)"
         E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud)"
         E acessar a página do provedor "IBM Cloud"
@@ -18,7 +18,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
     @ID-003-003 @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Grupo"
-        Então deverá apresentar o titulo "Grupos de acesso" no modal
+        Então deverá apresentar o título "Grupos de acesso" no modal
         E deverá apresentar as informações sobre ID e nome
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
@@ -36,9 +36,9 @@ Funcionalidade: Suite003 - Grupos de Acesso
         E a quantidade de resultados deve ser 0
         E todas as validações devem retornar sucesso
         Exemplos:
-            | local      | modal | mensagem                                     |
-            | componente |       | Não há nenhum grupo de acesso com este nome. |
-            | modal      | Grupo | Nenhum membro encontrado.                    |
+            | local      | modal | mensagem               |
+            | componente |       | Nenhum item encontrado |
+            | modal      | Grupo | Nenhum item encontrado |
 
     @ID-003-005 @CT005
     Cenario: CT005 - Adicionar membro exceção

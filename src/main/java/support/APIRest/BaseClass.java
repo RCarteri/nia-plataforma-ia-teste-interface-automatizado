@@ -106,7 +106,7 @@ public class BaseClass extends FTABBUtils {
                 BASE_URL.getUrl() + endpoint +
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Status Code</td><td>" +
                 response.getStatusLine().replace("HTTP/1.1 ", "") +
-                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Request</td><td>" +
+                "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Request payload</td><td>" +
                 payload +
                 "</td></tr><tr><td style=\\\"min-width:100px;padding:12px;\\\">Response body</td><td>\"" +
                 response.body().print() +

@@ -6,7 +6,7 @@ Funcionalidade: APISuite001 - Listar projetos inteligência artificial com deplo
     Contexto: Preparar request
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login em "desenvolvimento"
-        E que que não tenha cookies, pegue os cookies para o endpoint "/Op6586305-v1"
+        E que não tenha cookies, pegue os cookies para o endpoint "/nia/Op6586305-v1"
 
     @ID-API001-001 @APICT001
     Cenario: APICT001 - OK - 200

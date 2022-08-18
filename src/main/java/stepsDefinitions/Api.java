@@ -7,8 +7,8 @@ import support.APIRest.BaseClass;
 
 public class Api extends BaseClass {
 
-    @E("^que que não tenha cookies, pegue os cookies para o endpoint \"([^\"]*)\"$")
-    public void queQueNaoTenhaCookiesPegueOsCookiesParaOEndpoint(String endpoint) {
+    @E("^que não tenha cookies, pegue os cookies para o endpoint \"([^\"]*)\"$")
+    public void queNaoTenhaCookiesPegueOsCookiesParaOEndpoint(String endpoint) {
         setEndpoint(endpoint);
         getCookies();
     }

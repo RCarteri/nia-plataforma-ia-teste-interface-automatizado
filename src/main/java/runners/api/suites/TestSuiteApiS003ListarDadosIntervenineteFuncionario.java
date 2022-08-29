@@ -14,7 +14,7 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/api",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@APIS002" }
+		tags = { "@APIS003" }
 )
 public class TestSuiteApiS003ListarDadosIntervenineteFuncionario extends ConfRunner {
 	@BeforeClass

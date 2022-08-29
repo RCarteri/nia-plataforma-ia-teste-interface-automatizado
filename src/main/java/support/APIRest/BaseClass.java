@@ -1,10 +1,13 @@
 package support.APIRest;
 
-import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import support.Utils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
 
 import static io.qameta.allure.Allure.descriptionHtml;
 import static io.qameta.allure.Allure.link;
@@ -12,29 +15,29 @@ import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
+import static java.util.regex.Pattern.compile;
 import static support.GetElements.getDriver;
-import static support.Utils.isQteste;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.Ambiente.*;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.User.getChave;
 
 public class BaseClass extends FTABBUtils {
     private RequestSpecification request;
     private String endpoint;
     private String payload;
     protected Response response;
+    private List<Map<String, String>> yamlMap;
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
     }
 
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public void setPayload(String tipoPayload) {
-        payload = getPayload(tipoPayload, getEndpoint());
+    public void definirChave(String tipoPayload) {
+        setPayload(tipoPayload);
+        new Utils().setDatapool();
+        payload = payload.replace("CHAVE_USUARIO", getChave());
     }
 
     public void getCookies() {
@@ -52,11 +55,18 @@ public class BaseClass extends FTABBUtils {
 
     private void setRequest() {
         setProxy();
-        baseURI = BASE_URL.getUrl();
-        request = given()
-                .contentType(JSON)
-                .cookie("IBBID", getIBBID())
-                .relaxedHTTPSValidation();
+        if (endpoint.contains("/")) {
+            baseURI = BASE_URL_INTRANET.getUrl();
+            request = given()
+                    .contentType(JSON)
+                    .cookie("IBBID", getIBBID())
+                    .relaxedHTTPSValidation();
+        } else {
+            baseURI = BASE_URL.getUrl();
+            request = given()
+                    .contentType(JSON)
+                    .relaxedHTTPSValidation();
+        }
     }
 
     protected void enviarPayload() {
@@ -76,24 +86,13 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
-    private String getPayload(String tipoPayload, String endpoint) {
-        String param = "payloads." + endpoint + "." + tipoPayload;
-        try {
-            return String.valueOf($(param));
-        } catch (DataPoolException e) {
-            new Utils().logError(e);
-            return null;
-        }
+    protected void setPayload(String tipoPayload) {
+        yamlMap = getYamlMap("api", endpoint);
+        payload = getValueMapYaml(yamlMap, tipoPayload);
     }
 
-    private String getDescricao(String endpoint) {
-        String param = "payloads." + endpoint + ".descrição";
-        try {
-            return String.valueOf($(param));
-        } catch (DataPoolException e) {
-            new Utils().logError(e);
-            return null;
-        }
+    private String getDescricao() {
+        return getValueMapYaml(yamlMap, "descrição");
     }
 
     public String gerarHtmlRequisicaoPost() {
@@ -101,7 +100,7 @@ public class BaseClass extends FTABBUtils {
                 "POST" +
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">" +
                 "Descrição</td><td>" +
-                getDescricao(getEndpoint()) +
+                getDescricao() +
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">URL</td><td>" +
                 BASE_URL.getUrl() + endpoint +
                 "</td></tr><tr><td style=\"min-width:100px;padding:12px;\">Status Code</td><td>" +
@@ -113,10 +112,21 @@ public class BaseClass extends FTABBUtils {
                 "</td></tr></table>";
     }
 
-    public void setTable() {
+    private void setTable() {
         descriptionHtml(gerarHtmlRequisicaoPost());
-        String url = API.getUrl() + endpoint.replace("-", "_");
         link("Logar na intranet", DESENV.getUrl());
-        link("Acessar " + endpoint, url);
+        link("Acessar " + endpoint, getUrl());
+    }
+
+    private String getUrl() {
+        String endpoint;
+        Matcher matcher = compile("[a-z]{3}").matcher(this.endpoint);
+        if (matcher.find()) {
+            endpoint = this.endpoint.substring(0,3).toUpperCase() + this.endpoint.substring(3).replace("-","_");
+            return API.getUrl() + endpoint;
+        } else {
+            endpoint = this.endpoint.substring(0,1).toUpperCase() + this.endpoint.substring(1,9) + "_" + this.endpoint.substring(9);
+            return API.getUrl() + "NIA/" + endpoint;
+        }
     }
 }

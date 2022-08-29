@@ -2,8 +2,9 @@ package support.enums;
 
 public enum Ambiente {
     DESENV("https://plataforma.desenv.bb.com.br/nia-plat-ia-api/v3/api/swagger.json"),
-    API("https://plataforma.desenv.bb.com.br/gaw-pequi-api/v3/swagger-ui/2.2.10/dist/index.html?url=/nia-plat-ia-api/v3/api/swagger.json#!/SERVICOS32NIA"),
-    BASE_URL("https://plataforma.desenv.bb.com.br/nia-plat-ia-api/v3/api");
+    API("https://plataforma.desenv.bb.com.br/gaw-pequi-api/v3/swagger-ui/2.2.10/dist/index.html?url=/nia-plat-ia-api/v3/api/swagger.json#!/SERVICOS32"),
+    BASE_URL("http://nia-access-manager.nia.desenv.bb.com.br/"),
+    BASE_URL_INTRANET("https://plataforma.desenv.bb.com.br/nia-plat-ia-api/v3/api/");
 
     private final String url;
 

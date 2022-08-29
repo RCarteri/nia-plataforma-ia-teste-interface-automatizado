@@ -7,10 +7,9 @@ import support.APIRest.BaseClass;
 
 public class Api extends BaseClass {
 
-    @E("^que não tenha cookies, pegue os cookies para o endpoint \"([^\"]*)\"$")
-    public void queNaoTenhaCookiesPegueOsCookiesParaOEndpoint(String endpoint) {
+    @E("^que defina o endpoint \"([^\"]*)\"$")
+    public void definaOEndpoint(String endpoint) {
         setEndpoint(endpoint);
-        getCookies();
     }
 
     @Quando("^enviar um payload \"([^\"]*)\"$")
@@ -24,5 +23,16 @@ public class Api extends BaseClass {
         printResult();
         response.then().assertThat()
                 .statusCode(sc);
+    }
+
+    @Quando("^definir a chave a ser usada enviando um payload \"([^\"]*)\"$")
+    public void definirAChaveASerUsadaEnviandoUmPayload(String tipoPayload) {
+        definirChave(tipoPayload);
+        enviarPayload();
+    }
+
+    @E("^que não tenha cookies, pegue os cookies$")
+    public void queNaoTenhaCookiesPegueOsCookies() {
+        getCookies();
     }
 }

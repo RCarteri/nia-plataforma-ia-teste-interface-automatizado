@@ -1,6 +1,5 @@
 package support;
 
-import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,16 +7,16 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.yaml.snakeyaml.Yaml;
 import support.enums.LogTypes;
 import support.enums.SelectorsDelays;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
 import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
@@ -49,7 +48,7 @@ public class Utils extends FTABBUtils {
         return segundos;
     }
 
-    public static boolean isQteste(){
+    public static boolean isQteste() {
         return getContext().getOrigemExecucao().equals(QTESTE);
     }
 
@@ -72,7 +71,7 @@ public class Utils extends FTABBUtils {
     public void capturaTela() {
         capturarTela();
         allureCapturarTela();
-        printLog("Tela capturada.", INFO);
+        System.out.println("Tela capturada");
     }
 
     public void deletarAllureResults() {
@@ -92,23 +91,15 @@ public class Utils extends FTABBUtils {
     }
 
     public void setDatapool() {
-        try {
-            setProperty(USER.toString(), String.valueOf($("login_plataforma.chaveF.usuario")));
-            setProperty(CHAVE.toString(), String.valueOf($("login_plataforma.chaveF.chave")));
-            setProperty(SENHA.toString(), String.valueOf($("login_plataforma.chaveF.senha")));
-        } catch (DataPoolException e) {
-            logError(e);
-        }
+        List<Map<String, String>> yamlMap = getYamlMap("login", "chaveF");
+        setProperty(USER.toString(), getValueMapYaml(yamlMap, "usuario"));
+        setProperty(CHAVE.toString(), getValueMapYaml(yamlMap, "chave"));
+        setProperty(SENHA.toString(), getValueMapYaml(yamlMap, "senha"));
     }
 
     public String getChaveAddMembro(String opcao) {
-        String param = (opcao.equals("chave")) ? "login_plataforma.chaveTeste.chave" : "login_plataforma.chaveTeste.usuario";
-        try {
-            return String.valueOf($(param));
-        } catch (DataPoolException e) {
-            logError(e);
-        }
-        return null;
+        List<Map<String, String>> yamlMap = getYamlMap("login", "chaveTeste");
+        return getValueMapYaml(yamlMap, opcao);
     }
 
     public DataTable createDataTable() {
@@ -168,5 +159,29 @@ public class Utils extends FTABBUtils {
         for (WebElement webElement : webElements) {
             assertTrue("O botão confirmar está ativo", checkBtnDisabled(webElement, "btn"));
         }
+    }
+
+    public static List<Map<String, String>> getYamlMap(String yamlFile, String chave) {
+        String opcao = (yamlFile.equals("api")) ? "payloads.yml" : "login_plataforma.yml";
+        Reader reader = null;
+        try {
+            String rootPath = new File("").getAbsolutePath();
+            reader = new FileReader(rootPath + "/src/main/resources/datapools/" + opcao);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Map<String, Object> yamlMaps = new Yaml().load(reader);
+        return (List<Map<String, String>>) yamlMaps.get(chave);
+    }
+
+    public static String getValueMapYaml(List<Map<String, String>> lista, String chave) {
+        for (Map<String, String> map : lista) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                if (chave.equals(entry.getKey())) {
+                    return entry.getValue();
+                }
+            }
+        }
+        return null;
     }
 }

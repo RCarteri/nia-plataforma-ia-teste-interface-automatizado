@@ -1,10 +1,14 @@
 # Datapool de payloads
 
-/nia/Op6586305-v1:
-  descrição: "Listar projetos inteligência artificial com deploy em andamento"
-  OK: '{"nomeComponente" : null}'
-  Bad Request: '{"nomeComponente" : inválido}'
+op6586305v1:
+  - descrição: "Listar projetos inteligência artificial com deploy em andamento"
+  - OK: '{"nomeComponente" : null}'
+  - Internal Server Error: '{"nomeComponente" : }'
 
-/nia/Op5806077-v3:
-  descrição: "Listar modelos Watson Studio por sigla na IBM Cloud"
-  OK: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
+op5806077v3:
+  - descrição: "Listar modelos Watson Studio por sigla na IBM Cloud"
+  - OK: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
+
+dpr/Op5903588-v1:
+  - descrição: "Listar dados interveniente do funcionário"
+  - OK: '{"codigoInterveniente" : "CHAVE_USUARIO"}'

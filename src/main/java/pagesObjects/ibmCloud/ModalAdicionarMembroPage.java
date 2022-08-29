@@ -36,7 +36,7 @@ public class ModalAdicionarMembroPage {
         for (Map<String, String> colunas : linhas) {
             String chave = colunas.get("Chave");
             if (linhas.get(0).get("Chave").equals("any")) {
-                usuario = utils.getChaveAddMembro("nome");
+                usuario = utils.getChaveAddMembro("usuario");
                 chave = utils.getChaveAddMembro("chave");
             }
             addMembro(new MembroData(chave, colunas.get("Função"), usuario));

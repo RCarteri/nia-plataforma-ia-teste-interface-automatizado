@@ -12,6 +12,7 @@ op5806077v3:
 op5806077v2:
   - descrição: "Listar instâncias do Watson Assistant"
   - OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
+  - OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
 
 dpr/Op5903588-v1:
   - descrição: "Listar dados interveniente do funcionário"

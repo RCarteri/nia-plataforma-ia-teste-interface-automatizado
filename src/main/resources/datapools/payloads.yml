@@ -6,8 +6,14 @@ op6586305v1:
   - Internal Server Error: '{"nomeComponente" : }'
 
 op5806077v3:
-  - descrição: "Listar modelos Watson Studio por sigla na IBM Cloud"
-  - OK: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
+  - descrição: "Listar modelos do Watson Studio por sigla"
+  - OK-Sigla: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
+
+op5806077v2:
+  - descrição: "Listar instâncias do Watson Assistant"
+  - OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
+  - OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
+  - OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
 
 dpr/Op5903588-v1:
   - descrição: "Listar dados interveniente do funcionário"

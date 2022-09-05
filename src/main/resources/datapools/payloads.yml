@@ -13,6 +13,7 @@ op5806077v2:
   - descrição: "Listar instâncias do Watson Assistant"
   - OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
   - OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
+  - OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
 
 dpr/Op5903588-v1:
   - descrição: "Listar dados interveniente do funcionário"

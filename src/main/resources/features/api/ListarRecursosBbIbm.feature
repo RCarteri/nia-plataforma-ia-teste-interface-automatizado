@@ -17,6 +17,11 @@ Funcionalidade: APISuite002 - Listar recursos BB na IBM Cloud
         Então deve retornar o código 200
 
     @ID-API002-001 @APICT001
+    Cenario: APICT001 - OK - 200 - Listar storages do Cloud Object Storage
+        Quando enviar um payload "OK-Storage"
+        Então deve retornar o código 200
+
+    @ID-API002-001 @APICT001
     Cenario: APICT001 - OK - 200 - Listar modelos do Watson Studio por sigla
         Dado que defina o endpoint "op5806077v3"
         Quando enviar um payload "OK-Sigla"

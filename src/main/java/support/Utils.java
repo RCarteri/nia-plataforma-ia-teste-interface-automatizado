@@ -71,7 +71,7 @@ public class Utils extends FTABBUtils {
     public void capturaTela() {
         capturarTela();
         allureCapturarTela();
-        System.out.println("Tela capturada");
+        printLog("Tela capturada.", INFO);
     }
 
     public void deletarAllureResults() {

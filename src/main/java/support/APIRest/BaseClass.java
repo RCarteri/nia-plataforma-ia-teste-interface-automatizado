@@ -13,7 +13,6 @@ import static io.qameta.allure.Allure.descriptionHtml;
 import static io.qameta.allure.Allure.link;
 import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
-import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static java.util.regex.Pattern.compile;
 import static support.GetElements.getDriver;
@@ -31,30 +30,39 @@ public class BaseClass extends FTABBUtils {
     private List<Map<String, String>> yamlMap;
 
     public void setEndpoint(String endpoint) {
+        printLog("Definindo endpoint.", INFO);
         this.endpoint = endpoint;
+        printLog("Endpoint definido.", INFO);
     }
 
     public void definirChave(String tipoPayload) {
         setPayload(tipoPayload);
+        printLog("Definindo chave.", INFO);
         new Utils().setDatapool();
         payload = payload.replace("CHAVE_USUARIO", getChave());
+        printLog("Chave definida.", INFO);
     }
 
     public void getCookies() {
         if (isLoggedIntranet()) {
             printLog("Cookies já estão salvos.", INFO);
         } else {
-            setProperty(IBBID.toString(), valueOf(getDriver().manage().getCookieNamed("IBBID").getValue()));
+            printLog("Cookies: " + getDriver().manage().getCookieNamed("IBBID").getValue(), INFO);
+            setProperty(IBBID.toString(), getDriver().manage().getCookieNamed("IBBID").getValue());
         }
     }
 
     private void setProxy() {
-        if (!isQteste())
+        if (!isQteste()) {
+            printLog("Definindo proxy.", INFO);
             proxy("170.66.49.180", 3128);
+            printLog("Proxy definido.", INFO);
+        }
     }
 
     private void setRequest() {
         setProxy();
+        printLog("Definindo request de desenvolvimento.", INFO);
         if (endpoint.contains("/")) {
             baseURI = BASE_URL_INTRANET.getUrl();
             request = given()
@@ -67,14 +75,17 @@ public class BaseClass extends FTABBUtils {
                     .contentType(JSON)
                     .relaxedHTTPSValidation();
         }
+        printLog("Request definido.", INFO);
     }
 
     protected void enviarPayload() {
         setRequest();
+        printLog("Enviando request.", INFO);
         response = request.given()
                 .body(payload)
                 .when()
                 .post(endpoint);
+        printLog("Request enviado.", INFO);
         setTable();
     }
 
@@ -87,8 +98,10 @@ public class BaseClass extends FTABBUtils {
     }
 
     protected void setPayload(String tipoPayload) {
+        printLog("Definindo payload.", INFO);
         yamlMap = getYamlMap("api", endpoint);
         payload = getValueMapYaml(yamlMap, tipoPayload);
+        printLog("Payload definido.", INFO);
     }
 
     private String getDescricao() {
@@ -122,10 +135,10 @@ public class BaseClass extends FTABBUtils {
         String endpoint;
         Matcher matcher = compile("[a-z]{3}").matcher(this.endpoint);
         if (matcher.find()) {
-            endpoint = this.endpoint.substring(0,3).toUpperCase() + this.endpoint.substring(3).replace("-","_");
+            endpoint = this.endpoint.substring(0, 3).toUpperCase() + this.endpoint.substring(3).replace("-", "_");
             return API.getUrl() + endpoint;
         } else {
-            endpoint = this.endpoint.substring(0,1).toUpperCase() + this.endpoint.substring(1,9) + "_" + this.endpoint.substring(9);
+            endpoint = this.endpoint.substring(0, 1).toUpperCase() + this.endpoint.substring(1, 9) + "_" + this.endpoint.substring(9);
             return API.getUrl() + "NIA/" + endpoint;
         }
     }

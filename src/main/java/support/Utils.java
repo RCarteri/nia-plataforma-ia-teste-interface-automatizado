@@ -91,15 +91,17 @@ public class Utils extends FTABBUtils {
     }
 
     public void setDatapool() {
+        printLog("Definindo datapool de login.", INFO);
         List<Map<String, String>> yamlMap = getYamlMap("login", "chaveF");
-        setProperty(USER.toString(), getValueMapYaml(yamlMap, "usuario"));
-        setProperty(CHAVE.toString(), getValueMapYaml(yamlMap, "chave"));
-        setProperty(SENHA.toString(), getValueMapYaml(yamlMap, "senha"));
+        setProperty(USER.toString(), getValueYamlMap(yamlMap, "usuario"));
+        setProperty(CHAVE.toString(), getValueYamlMap(yamlMap, "chave"));
+        setProperty(SENHA.toString(), getValueYamlMap(yamlMap, "senha"));
+        printLog("Datapool de login definido.", INFO);
     }
 
     public String getChaveAddMembro(String opcao) {
         List<Map<String, String>> yamlMap = getYamlMap("login", "chaveTeste");
-        return getValueMapYaml(yamlMap, opcao);
+        return getValueYamlMap(yamlMap, opcao);
     }
 
     public DataTable createDataTable() {
@@ -171,17 +173,22 @@ public class Utils extends FTABBUtils {
             e.printStackTrace();
         }
         Map<String, Object> yamlMaps = new Yaml().load(reader);
+        printLog("getYamlMap map: " + yamlMaps.get(chave), INFO);
         return (List<Map<String, String>>) yamlMaps.get(chave);
     }
 
-    public static String getValueMapYaml(List<Map<String, String>> lista, String chave) {
+    public static String getValueYamlMap(List<Map<String, String>> lista, String chave) {
         for (Map<String, String> map : lista) {
+            System.out.println("testando mapYaml" + map);
             for (Map.Entry<String, String> entry : map.entrySet()) {
+                printLog("Validando se chave:" + chave + " é igual a:" + entry.getKey(), INFO);
                 if (chave.equals(entry.getKey())) {
+                    printLog("getValueMap ok, retornando valor:" + chave + "pois é igual.", INFO);
                     return entry.getValue();
                 }
             }
         }
+        printLog("getValueMap falhou, retornando null.", INFO);
         return null;
     }
 }

@@ -3,7 +3,6 @@ package support.APIRest;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import support.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,6 @@ public class BaseClass extends FTABBUtils {
     public void definirChave(String tipoPayload) {
         setPayload(tipoPayload);
         printLog("Definindo chave.", INFO);
-        new Utils().setDatapool();
         payload = payload.replace("CHAVE_USUARIO", getChave());
         printLog("Chave definida.", INFO);
     }
@@ -100,12 +98,12 @@ public class BaseClass extends FTABBUtils {
     protected void setPayload(String tipoPayload) {
         printLog("Definindo payload.", INFO);
         yamlMap = getYamlMap("api", endpoint);
-        payload = getValueMapYaml(yamlMap, tipoPayload);
+        payload = getValueYamlMap(yamlMap, tipoPayload);
         printLog("Payload definido.", INFO);
     }
 
     private String getDescricao() {
-        return getValueMapYaml(yamlMap, "descrição");
+        return getValueYamlMap(yamlMap, "descrição");
     }
 
     public String gerarHtmlRequisicaoPost() {

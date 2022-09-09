@@ -14,9 +14,11 @@ import support.enums.SelectorsDelays;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
 import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
@@ -165,9 +167,16 @@ public class Utils extends FTABBUtils {
         String opcao = (yamlFile.equals("api")) ? "payloads.yml" : "login_plataforma.yml";
         Reader reader = null;
         try {
+            printLog("get caminho absoluto.", INFO);
             String rootPath = new File("").getAbsolutePath();
+            printLog("caminho absoluto: " + rootPath, INFO);
+            List<Path> dirs = Files.walk(Paths.get(rootPath), 10)
+                    .filter(Files::isDirectory)
+                    .collect(Collectors.toList());
+            System.out.println("Diretorios");
+            System.out.println(dirs);
             reader = new FileReader(rootPath + "/src/main/resources/datapools/" + opcao);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         Map<String, Object> yamlMaps = new Yaml().load(reader);

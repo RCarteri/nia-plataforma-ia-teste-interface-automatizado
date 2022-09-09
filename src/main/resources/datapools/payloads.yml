@@ -10,10 +10,14 @@ op5806077v3:
   - OK-Sigla: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
 
 op5806077v2:
-  - descrição: "Listar instâncias do Watson Assistant"
+  - descrição: "Listar informações do componente"
   - OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
   - OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
   - OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
+
+op5839181v1:
+  - descrição: "Listar informações do componente"
+  - OK-Modelo: '{"nomeComponente":"MODELOS"}'
 
 dpr/Op5903588-v1:
   - descrição: "Listar dados interveniente do funcionário"

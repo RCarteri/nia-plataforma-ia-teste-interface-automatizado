@@ -1,6 +1,7 @@
 package support.APIRest;
 
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import support.Utils;
@@ -29,6 +30,7 @@ public class BaseClass extends FTABBUtils {
     private String payload;
     protected Response response;
     private List<Map<String, String>> yamlMap;
+    private List<Map<String, String>> listaRetorno;
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
@@ -37,7 +39,7 @@ public class BaseClass extends FTABBUtils {
     public void definirChave(String tipoPayload) {
         setPayload(tipoPayload);
         new Utils().setDatapool();
-        payload = payload.replace("CHAVE_USUARIO", getChave());
+        payload = payload.replace("chaveF", getChave());
     }
 
     public void getCookies() {
@@ -78,12 +80,42 @@ public class BaseClass extends FTABBUtils {
         setTable();
     }
 
+    protected void enviarPayload(String endpoint) {
+        setRequest();
+        response = request.given()
+                .body(payload)
+                .when()
+                .post(endpoint);
+        getListaRetorno();
+    }
+
     protected void printResult() {
         System.out.println("---------------------------------------------------------");
         printLog("Request enviado para o endpoint: " + endpoint, INFO);
         System.out.println(payload);
         printLog("Recebeu o seguinte retorno com o status code:" + response.getStatusLine().replace("HTTP/1.1", ""), INFO);
         response.body().prettyPrint();
+    }
+
+    private String getCodComponente() {
+        int indexRandom = getRandom(listaRetorno.size());
+        printLog("Nome do componente escolhido: " + listaRetorno.get(indexRandom).get("nomeComponente"), INFO);
+        return listaRetorno.get(indexRandom).get("codigoComponente");
+    }
+
+    protected void setCodComponenteNoPayload(String tipoPayload) {
+        setPayload(tipoPayload);
+        payload = payload.replace("codComponente", getCodComponente());
+    }
+    @SuppressWarnings("unchecked")
+    private void getListaRetorno() {
+        Map<String, Object> mapCompleto = response.then().extract().body().as(new TypeRef<Map<String, Object>>() {});
+        listaRetorno = (List<Map<String, String>>) mapCompleto.entrySet().iterator().next().getValue();
+    }
+
+    protected void setPayload(String endpoint, String tipoPayload) {
+        yamlMap = getYamlMap("api", endpoint);
+        payload = getValueMapYaml(yamlMap, tipoPayload);
     }
 
     protected void setPayload(String tipoPayload) {

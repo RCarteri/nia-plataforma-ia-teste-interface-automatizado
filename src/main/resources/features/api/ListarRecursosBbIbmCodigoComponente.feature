@@ -1,6 +1,6 @@
 #language:pt
 #encoding: utf-8
-@APIS002
+@APIS004
 Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do componente
 
     Contexto: Preparar request

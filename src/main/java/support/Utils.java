@@ -93,19 +93,15 @@ public class Utils extends FTABBUtils {
     }
 
     public void setDatapool() {
-        printLog("Definindo datapool de login.", INFO);
-        printLog("Definindo yamlMap.", INFO);
         List<Map<String, String>> yamlMap = getYamlMap("login", "chaveF");
-        printLog("yamlMap definido.", INFO);
-        setProperty(USER.toString(), getValueYamlMap(yamlMap, "usuario"));
-        setProperty(CHAVE.toString(), getValueYamlMap(yamlMap, "chave"));
-        setProperty(SENHA.toString(), getValueYamlMap(yamlMap, "senha"));
-        printLog("Datapool de login definido.", INFO);
+        setProperty(USER.toString(), getValueMapYaml(yamlMap, "usuario"));
+        setProperty(CHAVE.toString(), getValueMapYaml(yamlMap, "chave"));
+        setProperty(SENHA.toString(), getValueMapYaml(yamlMap, "senha"));
     }
 
     public String getChaveAddMembro(String opcao) {
         List<Map<String, String>> yamlMap = getYamlMap("login", "chaveTeste");
-        return getValueYamlMap(yamlMap, opcao);
+        return getValueMapYaml(yamlMap, opcao);
     }
 
     public DataTable createDataTable() {
@@ -170,7 +166,6 @@ public class Utils extends FTABBUtils {
     public static List<Map<String, String>> getYamlMap(String yamlFile, String chave) {
         String opcao = (yamlFile.equals("api")) ? "payloads.yml" : "login_plataforma.yml";
         Reader reader = null;
-        printLog("Reader ok", INFO);
         try {
             printLog("get caminho absoluto.", INFO);
             String rootPath = new File("").getAbsolutePath();
@@ -181,28 +176,21 @@ public class Utils extends FTABBUtils {
             System.out.println("Diretorios");
             System.out.println(dirs);
             reader = new FileReader(rootPath + "/src/main/resources/datapools/" + opcao);
-            printLog("reader: " + reader, INFO);
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        printLog("get yaml map.", INFO);
         Map<String, Object> yamlMaps = new Yaml().load(reader);
-        printLog("getYamlMap map: " + yamlMaps.get(chave), INFO);
         return (List<Map<String, String>>) yamlMaps.get(chave);
     }
 
-    public static String getValueYamlMap(List<Map<String, String>> lista, String chave) {
+    public static String getValueMapYaml(List<Map<String, String>> lista, String chave) {
         for (Map<String, String> map : lista) {
-            System.out.println("testando mapYaml" + map);
             for (Map.Entry<String, String> entry : map.entrySet()) {
-                printLog("Validando se chave:" + chave + " é igual a:" + entry.getKey(), INFO);
                 if (chave.equals(entry.getKey())) {
-                    printLog("getValueMap ok, retornando valor:" + chave + "pois é igual.", INFO);
                     return entry.getValue();
                 }
             }
         }
-        printLog("getValueMap falhou, retornando null.", INFO);
         return null;
     }
 }

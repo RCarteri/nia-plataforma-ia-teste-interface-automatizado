@@ -1,8 +1,10 @@
 package support.APIRest;
 
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import support.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import static io.qameta.allure.Allure.descriptionHtml;
 import static io.qameta.allure.Allure.link;
 import static io.restassured.RestAssured.*;
 import static io.restassured.http.ContentType.JSON;
+import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static java.util.regex.Pattern.compile;
 import static support.GetElements.getDriver;
@@ -27,40 +30,33 @@ public class BaseClass extends FTABBUtils {
     private String payload;
     protected Response response;
     private List<Map<String, String>> yamlMap;
+    private List<Map<String, String>> listaRetorno;
 
     public void setEndpoint(String endpoint) {
-        printLog("Definindo endpoint.", INFO);
         this.endpoint = endpoint;
-        printLog("Endpoint definido.", INFO);
     }
 
     public void definirChave(String tipoPayload) {
         setPayload(tipoPayload);
-        printLog("Definindo chave.", INFO);
+        new Utils().setDatapool();
         payload = payload.replace("CHAVE_USUARIO", getChave());
-        printLog("Chave definida.", INFO);
     }
 
     public void getCookies() {
         if (isLoggedIntranet()) {
             printLog("Cookies já estão salvos.", INFO);
         } else {
-            printLog("Cookies: " + getDriver().manage().getCookieNamed("IBBID").getValue(), INFO);
-            setProperty(IBBID.toString(), getDriver().manage().getCookieNamed("IBBID").getValue());
+            setProperty(IBBID.toString(), valueOf(getDriver().manage().getCookieNamed("IBBID").getValue()));
         }
     }
 
     private void setProxy() {
-        if (!isQteste()) {
-            printLog("Definindo proxy.", INFO);
+        if (!isQteste())
             proxy("170.66.49.180", 3128);
-            printLog("Proxy definido.", INFO);
-        }
     }
 
     private void setRequest() {
         setProxy();
-        printLog("Definindo request de desenvolvimento.", INFO);
         if (endpoint.contains("/")) {
             baseURI = BASE_URL_INTRANET.getUrl();
             request = given()
@@ -73,18 +69,24 @@ public class BaseClass extends FTABBUtils {
                     .contentType(JSON)
                     .relaxedHTTPSValidation();
         }
-        printLog("Request definido.", INFO);
     }
 
     protected void enviarPayload() {
         setRequest();
-        printLog("Enviando request.", INFO);
         response = request.given()
                 .body(payload)
                 .when()
                 .post(endpoint);
-        printLog("Request enviado.", INFO);
         setTable();
+    }
+
+    protected void enviarPayload(String endpoint) {
+        setRequest();
+        response = request.given()
+                .body(payload)
+                .when()
+                .post(endpoint);
+        getListaRetorno();
     }
 
     protected void printResult() {
@@ -95,15 +97,34 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
-    protected void setPayload(String tipoPayload) {
-        printLog("Definindo payload.", INFO);
+    private String getCodComponente() {
+        int indexRandom = getRandom(listaRetorno.size());
+        printLog("Nome do componente escolhido: " + listaRetorno.get(indexRandom).get("nomeComponente"), INFO);
+        return listaRetorno.get(indexRandom).get("codigoComponente");
+    }
+
+    protected void setCodComponenteNoPayload(String tipoPayload) {
+        setPayload(tipoPayload);
+        payload = payload.replace("codComponente", getCodComponente());
+    }
+    @SuppressWarnings("unchecked")
+    private void getListaRetorno() {
+        Map<String, Object> mapCompleto = response.then().extract().body().as(new TypeRef<Map<String, Object>>() {});
+        listaRetorno = (List<Map<String, String>>) mapCompleto.entrySet().iterator().next().getValue();
+    }
+
+    protected void setPayload(String endpoint, String tipoPayload) {
         yamlMap = getYamlMap("api", endpoint);
-        payload = getValueYamlMap(yamlMap, tipoPayload);
-        printLog("Payload definido.", INFO);
+        payload = getValueMapYaml(yamlMap, tipoPayload);
+    }
+
+    protected void setPayload(String tipoPayload) {
+        yamlMap = getYamlMap("api", endpoint);
+        payload = getValueMapYaml(yamlMap, tipoPayload);
     }
 
     private String getDescricao() {
-        return getValueYamlMap(yamlMap, "descrição");
+        return getValueMapYaml(yamlMap, "descrição");
     }
 
     public String gerarHtmlRequisicaoPost() {
@@ -133,10 +154,10 @@ public class BaseClass extends FTABBUtils {
         String endpoint;
         Matcher matcher = compile("[a-z]{3}").matcher(this.endpoint);
         if (matcher.find()) {
-            endpoint = this.endpoint.substring(0, 3).toUpperCase() + this.endpoint.substring(3).replace("-", "_");
+            endpoint = this.endpoint.substring(0,3).toUpperCase() + this.endpoint.substring(3).replace("-","_");
             return API.getUrl() + endpoint;
         } else {
-            endpoint = this.endpoint.substring(0, 1).toUpperCase() + this.endpoint.substring(1, 9) + "_" + this.endpoint.substring(9);
+            endpoint = this.endpoint.substring(0,1).toUpperCase() + this.endpoint.substring(1,9) + "_" + this.endpoint.substring(9);
             return API.getUrl() + "NIA/" + endpoint;
         }
     }

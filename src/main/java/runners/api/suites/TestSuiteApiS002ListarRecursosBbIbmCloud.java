@@ -1,4 +1,4 @@
-package runners.api.testCases;
+package runners.api.suites;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -14,9 +14,9 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/api",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@APICT001" }
+		tags = { "@APIS002" }
 )
-public class TestCaseApi002StatusCode400 extends ConfRunner{
+public class TestSuiteApiS002ListarRecursosBbIbmCloud extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

@@ -4,9 +4,7 @@
 Funcionalidade: APISuite001 - Listar projetos inteligência artificial com deploy em andamento
 
     Contexto: Preparar request
-        Dado que a Plataforma esteja fechada, abra a Plataforma
-        E se não estiver logado, realiza o login em "desenvolvimento"
-        E que que não tenha cookies, pegue os cookies para o endpoint "/Op6586305-v1"
+        Dado que defina o endpoint "op6586305v1"
 
     @ID-API001-001 @APICT001
     Cenario: APICT001 - OK - 200
@@ -14,6 +12,6 @@ Funcionalidade: APISuite001 - Listar projetos inteligência artificial com deplo
         Então deve retornar o código 200
 
     @ID-API001-002 @APICT002
-    Cenario: APICT002 - Bad Request - 400
-        Quando enviar um payload "Bad Request"
-        Então deve retornar o código 400
+    Cenario: APICT002 - Internal Server Error - 500
+        Quando enviar um payload "Internal Server Error"
+        Então deve retornar o código 500

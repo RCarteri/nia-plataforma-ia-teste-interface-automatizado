@@ -8,7 +8,7 @@ import support.Utils;
 
 import static ath_allure_arq3.main.AllureARQ3.ConfigInicialAllureARQ3;
 import static support.APIRest.Path.*;
-import static support.enums.Cookie.isLoggedIntranet;
+import static support.enums.SysProps.isLoggedPlataforma;
 
 public class ConfRunner {
     private static final APIRest apiRest = new APIRest();
@@ -22,7 +22,7 @@ public class ConfRunner {
     }
 
     public static void confFinish(Host ambiente) {
-        if (!isLoggedIntranet())
+        if (isLoggedPlataforma())
             new LoginPage().logoutEFecharPlataforma();
         new AllureARQ3().enviarRelatorio(ambiente.getHost());
         apiRest.atualizarAllureArq3(ambiente.getUrl(GERAR_RELATORIO));

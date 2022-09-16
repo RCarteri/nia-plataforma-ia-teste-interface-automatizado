@@ -11,3 +11,9 @@ Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do com
         Dado que tenha a lista de códigos do componente de "OK-Storage" para ver os detalhes
         Quando enviar um payload "OK-Bucket" com o código do componente
         Então deve retornar o código 200
+
+    @ID-API002-001 @APICT001
+    Cenario: APICT001 - OK - 200 - Listar membros do catálogo
+        Dado que tenha a lista de códigos do componente de "OK-Catalog" para ver os detalhes
+        Quando enviar um payload "OK-Membro" com o código do componente
+        Então deve retornar o código 200

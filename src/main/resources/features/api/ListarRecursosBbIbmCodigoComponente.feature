@@ -3,11 +3,13 @@
 @APIS004
 Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do componente
 
-    Contexto: Preparar request
+    @ID-API004-001 @APICT001
+    Esquema do Cenário: APICT001 - OK - 200
         Dado que defina o endpoint "op5839181v1"
-
-    @ID-API002-001 @APICT001
-    Cenario: APICT001 - OK - 200 - Listar buckets do Storage
-        Dado que tenha a lista de códigos do componente de "OK-Storage" para ver os detalhes
-        Quando enviar um payload "OK-Bucket" com o código do componente
+        E que tenha a lista de códigos do componente de "<componente>" para ver os detalhes
+        Quando enviar um payload "<payload>" com o código do componente
         Então deve retornar o código 200
+        Exemplos:
+            | componente | payload   |
+            | OK-Storage | OK-Bucket |
+            | OK-Catalog | OK-Membro |

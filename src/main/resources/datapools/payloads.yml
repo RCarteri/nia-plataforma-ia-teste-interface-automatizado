@@ -18,7 +18,9 @@ op5806077v2:
 op5839181v1:
   - descrição: "Listar informações do componente"
   - OK-Bucket: '{"nomeComponente":"CLOUD_OBJECT_STORAGE_BUCKETS", "codigoComponente":"codComponente"}'
+  - OK-Membro: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG", "codigoComponente":"codComponente"}'
   - OK-Modelo: '{"nomeComponente":"MODELOS"}'
+  - OK-Grupos: '{"nomeComponente":"GRUPOS_DE_ACESSO"}'
 
 dpr/Op5903588-v1:
   - descrição: "Listar dados interveniente do funcionário"

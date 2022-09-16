@@ -5,6 +5,27 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.0] - 14-09-2022
+* Versão instável no qTeste
+
+Task: 610527, 614861, 631491, 638454, 638677
+###Adicionado
+- Suite: APISuite002 - Listar recursos BB na IBM Cloud - Endpoint nia/op580677-v3
+- Suite: APISuite003 - Listar dados interveniente do funcionário - Endpoint dpr/op614861-v1
+- Suite: APISuite004 - Listar recursos BB na IBM Cloud por código do componente - Endpoint nia/op5839181-v1
+- Cenário: APICT001 - OK - 200 - Listar modelos Watson Studio por sigla - Endpoint nia/op580677-v3 Status code 200
+- Cenário: APICT002 - Internal Server Error - 500 - Endpoint Op6586305-v1
+- Cenário: APICT001 - OK - 200 - Listar instâncias do Watson Assistant - Endpoint nia/op5806077-v2 Status code 200
+- Cenário: APICT001 - OK - 200 - Listar catálogos do Watson Knowledge Catalog - Endpoint nia/op5806077-v2 Status code 200
+- Cenário: APICT001 - OK - 200 - Listar storages do Cloud Object Storage - Endpoint nia/op5806077-v2 Status code 200
+- Cenário: APICT001 - OK - 200 - Listar modelos - Endpoint nia/op5839181-v1 Status code 200
+- Método: getListaRetorno() para retornar o array listaRetorno do response
+- Printando diretórios para validar o erro que o qTeste não está encontrando os arquivos .yml
+
+###Mudado
+- Enviando requests do NIA a partir da url "https://plataforma.desenv.bb.com.br" e os outros para a url "http://nia-access-manager.nia.desenv.bb.com.br/"
+- Retornando os resultados dos arquivos .yml com os métodos getYamlMap() e getValueYamlMap() e não mais através do FTABB
+
 ## [6.1.1] - 11-08-2022
 Task: 561341, 563345, 581179, 594696, 596883, 597010, 597647  
 ###Adicionado

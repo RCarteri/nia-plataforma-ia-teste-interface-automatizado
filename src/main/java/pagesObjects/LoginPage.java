@@ -31,8 +31,9 @@ public class LoginPage {
     public void abraPlataforma() {
         if (!(isLoggedIntranet() || isLoggedPlataforma())) {
             abrirPlataforma();
+            printLog("A Plataforma foi aberta.", INFO);
         } else {
-            printLog("A Plataforma esta aberta.", INFO);
+            printLog("A Plataforma está aberta.", INFO);
         }
     }
 
@@ -84,7 +85,9 @@ public class LoginPage {
     }
 
     private void loginIntranet(LoginMap lM) {
+        printLog("Abrindo página da intranet.", INFO);
         abrirUrl(DESENV.getUrl());
+        printLog("Preenchendo formulário de login.", INFO);
         lM.getInputChave().sendKeys(getChave());
         lM.getInputSenha().sendKeys(getSenha());
         lM.getBtnEntrar().click();
@@ -106,6 +109,7 @@ public class LoginPage {
     }
 
     private void loginPlataforma(LoginMap lM) {
+        printLog("Preenchendo formulário de login.", INFO);
         lM.getInputUsername().sendKeys(getChave());
         lM.getInputPassword().sendKeys(getSenha());
         lM.getBtnLogin().click();

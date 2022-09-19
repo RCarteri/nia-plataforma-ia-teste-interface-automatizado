@@ -1,5 +1,6 @@
 package support;
 
+import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,20 +8,19 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.yaml.snakeyaml.Yaml;
 import support.enums.LogTypes;
 import support.enums.SelectorsDelays;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
+import static br.com.bb.ath.ftabb.datapool.DataPoolRepo.init;
 import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
 import static io.qameta.allure.Allure.addAttachment;
 import static java.lang.System.*;
@@ -73,7 +73,7 @@ public class Utils extends FTABBUtils {
     public void capturaTela() {
         capturarTela();
         allureCapturarTela();
-        System.out.println("Tela capturada");
+        printLog("Tela capturada.", INFO);
     }
 
     public void deletarAllureResults() {
@@ -93,15 +93,24 @@ public class Utils extends FTABBUtils {
     }
 
     public void setDatapool() {
-        List<Map<String, String>> yamlMap = getYamlMap("login", "chaveF");
-        setProperty(USER.toString(), getValueMapYaml(yamlMap, "usuario"));
-        setProperty(CHAVE.toString(), getValueMapYaml(yamlMap, "chave"));
-        setProperty(SENHA.toString(), getValueMapYaml(yamlMap, "senha"));
+        try {
+            init("datapools");
+            setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
+            setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
+            setProperty(SENHA.toString(), $("login_plataforma.chaveF.senha"));
+        } catch (DataPoolException e) {
+            logError(e);
+        }
     }
 
     public String getChaveAddMembro(String opcao) {
-        List<Map<String, String>> yamlMap = getYamlMap("login", "chaveTeste");
-        return getValueMapYaml(yamlMap, opcao);
+        String param = (opcao.equals("chave")) ? "login_plataforma.chaveTeste.chave" : "login_plataforma.chaveTeste.usuario";
+        try {
+            return $(param);
+        } catch (DataPoolException e) {
+            logError(e);
+        }
+        return null;
     }
 
     public DataTable createDataTable() {
@@ -163,34 +172,15 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public static List<Map<String, String>> getYamlMap(String yamlFile, String chave) {
-        String opcao = (yamlFile.equals("api")) ? "payloads.yml" : "login_plataforma.yml";
-        Reader reader = null;
+    public String getPayload(String endpoint, String tipoPayload) {
         try {
-            printLog("get caminho absoluto.", INFO);
-            String rootPath = new File("").getAbsolutePath();
-            printLog("caminho absoluto: " + rootPath, INFO);
-            List<Path> dirs = Files.walk(Paths.get(rootPath), 10)
-                    .filter(Files::isDirectory)
-                    .collect(Collectors.toList());
-            System.out.println("Diretorios");
-            System.out.println(dirs);
-            reader = new FileReader(rootPath + "/src/main/resources/datapools/" + opcao);
-        } catch (IOException e) {
+            String param = "payloads." + endpoint + "." + tipoPayload;
+            init("datapools");
+            return $(param);
+        } catch (DataPoolException e) {
             e.printStackTrace();
         }
-        Map<String, Object> yamlMaps = new Yaml().load(reader);
-        return (List<Map<String, String>>) yamlMaps.get(chave);
-    }
-
-    public static String getValueMapYaml(List<Map<String, String>> lista, String chave) {
-        for (Map<String, String> map : lista) {
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                if (chave.equals(entry.getKey())) {
-                    return entry.getValue();
-                }
-            }
-        }
+        printLog("Este payload não está configurado.", ERROR);
         return null;
     }
 }

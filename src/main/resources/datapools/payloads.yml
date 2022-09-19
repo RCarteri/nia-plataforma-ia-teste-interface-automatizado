@@ -1,27 +1,27 @@
 # Datapool de payloads
 
 op6586305v1:
-  - descrição: "Listar projetos inteligência artificial com deploy em andamento"
-  - OK: '{"nomeComponente" : null}'
-  - Internal Server Error: '{"nomeComponente" : }'
+  descrição: "Listar projetos inteligência artificial com deploy em andamento"
+  OK: '{"nomeComponente" : null}'
+  Internal Server Error: '{"nomeComponente" : }'
 
 op5806077v3:
-  - descrição: "Listar modelos do Watson Studio por sigla"
-  - OK-Sigla: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
+  descrição: "Listar modelos do Watson Studio por sigla"
+  OK-Sigla: '{"nomeComponente":"WATSON_STUDIO","listaSigla":"NIA"}'
 
 op5806077v2:
-  - descrição: "Listar informações do componente"
-  - OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
-  - OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
-  - OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
+  descrição: "Listar informações do componente"
+  OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
+  OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
+  OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
 
 op5839181v1:
-  - descrição: "Listar informações do componente"
-  - OK-Bucket: '{"nomeComponente":"CLOUD_OBJECT_STORAGE_BUCKETS", "codigoComponente":"codComponente"}'
-  - OK-Membro: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG", "codigoComponente":"codComponente"}'
-  - OK-Modelo: '{"nomeComponente":"MODELOS"}'
-  - OK-Grupos: '{"nomeComponente":"GRUPOS_DE_ACESSO"}'
+  descrição: "Listar informações do componente"
+  OK-Bucket: '{"nomeComponente":"CLOUD_OBJECT_STORAGE_BUCKETS", "codigoComponente":"codComponente"}'
+  OK-Membro: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG", "codigoComponente":"codComponente"}'
+  OK-Modelo: '{"nomeComponente":"MODELOS"}'
+  OK-Grupos: '{"nomeComponente":"GRUPOS_DE_ACESSO"}'
 
 dpr/Op5903588-v1:
-  - descrição: "Listar dados interveniente do funcionário"
-  - OK: '{"codigoInterveniente" : "chaveF"}'
+  descrição: "Listar dados interveniente do funcionário"
+  OK: '{"codigoInterveniente" : "CHAVE_USUARIO"}'

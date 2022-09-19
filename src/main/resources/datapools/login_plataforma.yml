@@ -4,11 +4,11 @@ chaveF:
   #  usuario: Bruno
   #  chave: F2177895
   #  senha: 14789632
-  - usuario: "Rafael"
-  - chave: "F8367126"
-  - senha: "14789632"
+  usuario: "Rafael"
+  chave: "F8367126"
+  senha: "14789632"
 
 chaveTeste:
-  - usuario: "othavio@bb.com.br"
-  - chave: "F7990759"
-  - senha: "14789632"
+  usuario: "othavio@bb.com.br"
+  chave: "F7990759"
+  senha: "14789632"

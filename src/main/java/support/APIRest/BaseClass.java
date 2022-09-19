@@ -31,6 +31,7 @@ public class BaseClass extends FTABBUtils {
     protected Response response;
     private List<Map<String, String>> yamlMap;
     private List<Map<String, String>> listaRetorno;
+    private final Utils utils = new Utils();
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
@@ -114,17 +115,15 @@ public class BaseClass extends FTABBUtils {
     }
 
     protected void setPayload(String endpoint, String tipoPayload) {
-        yamlMap = getYamlMap("api", endpoint);
-        payload = getValueMapYaml(yamlMap, tipoPayload);
+        payload = utils.getPayload(endpoint, tipoPayload);
     }
 
     protected void setPayload(String tipoPayload) {
-        yamlMap = getYamlMap("api", endpoint);
-        payload = getValueMapYaml(yamlMap, tipoPayload);
+        payload = utils.getPayload(endpoint, tipoPayload);
     }
 
     private String getDescricao() {
-        return getValueMapYaml(yamlMap, "descrição");
+        return utils.getPayload(endpoint, "descrição");
     }
 
     public String gerarHtmlRequisicaoPost() {

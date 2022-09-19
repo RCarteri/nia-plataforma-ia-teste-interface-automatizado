@@ -47,6 +47,8 @@ public class BaseClass extends FTABBUtils {
         if (isLoggedIntranet()) {
             printLog("Cookies já estão salvos.", INFO);
         } else {
+            System.out.println("cookies: " + getDriver().manage().getCookieNamed("IBBID").getValue());
+            System.out.println("todos os cookies:" + getDriver().manage().getCookies());
             setProperty(IBBID.toString(), valueOf(getDriver().manage().getCookieNamed("IBBID").getValue()));
         }
     }

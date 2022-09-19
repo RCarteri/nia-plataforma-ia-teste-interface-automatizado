@@ -44,11 +44,15 @@ public class BaseClass extends FTABBUtils {
     }
 
     public void getCookies() {
+        printLog("Está logado na intranet? " + isLoggedIntranet(), INFO);
         if (isLoggedIntranet()) {
             printLog("Cookies já estão salvos.", INFO);
         } else {
-            System.out.println("cookies: " + getDriver().manage().getCookieNamed("IBBID").getValue());
+            System.out.println("Entrou no else");
+            System.out.println("print getDriver() " + getDriver());
+            System.out.println("print menage()" + getDriver().manage());
             System.out.println("todos os cookies:" + getDriver().manage().getCookies());
+            System.out.println("cookies: " + getDriver().manage().getCookieNamed("IBBID").getValue());
             setProperty(IBBID.toString(), valueOf(getDriver().manage().getCookieNamed("IBBID").getValue()));
         }
     }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
+import static br.com.bb.ath.ftabb.datapool.DataPoolRepo.getInstance;
 import static br.com.bb.ath.ftabb.datapool.DataPoolRepo.init;
 import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
 import static io.qameta.allure.Allure.addAttachment;
@@ -93,12 +94,13 @@ public class Utils extends FTABBUtils {
     }
 
     public void setDatapool() {
+            datapoolInit();
         try {
-            init("datapools");
             setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
             setProperty(SENHA.toString(), $("login_plataforma.chaveF.senha"));
         } catch (DataPoolException e) {
+            printLog("As informações do usuário logado não foram retornadas.", ERROR);
             logError(e);
         }
     }
@@ -108,6 +110,7 @@ public class Utils extends FTABBUtils {
         try {
             return $(param);
         } catch (DataPoolException e) {
+            printLog("As informações do usuário logado não foram retornadas.", ERROR);
             logError(e);
         }
         return null;
@@ -173,14 +176,27 @@ public class Utils extends FTABBUtils {
     }
 
     public String getPayload(String endpoint, String tipoPayload) {
-        try {
             String param = "payloads." + endpoint + "." + tipoPayload;
-            init("datapools");
+            datapoolInit();
+        try {
             return $(param);
         } catch (DataPoolException e) {
             e.printStackTrace();
         }
         printLog("Este payload não está configurado.", ERROR);
         return null;
+    }
+
+    private void datapoolInit(){
+        try {
+            getInstance();
+        }catch (DataPoolException e){
+          String datapoolPath = getContext().getContextConfig().get("datapools.path");
+            try {
+                init(datapoolPath);
+            } catch (DataPoolException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }

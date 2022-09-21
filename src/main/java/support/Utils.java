@@ -191,7 +191,9 @@ public class Utils extends FTABBUtils {
         try {
             getInstance();
         }catch (DataPoolException e){
-          String datapoolPath = getContext().getContextConfig().get("datapools.path");
+//          Rever essa configuração quando souber como pegar as propriedades definidas no app.config
+//          String datapoolPath = getContext().getContextConfig().get("datapools.path");
+            String datapoolPath = "datapools";
             try {
                 init(datapoolPath);
             } catch (DataPoolException ex) {

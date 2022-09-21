@@ -5,6 +5,23 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.7.4] - 21-09-2022
+
+Task: 638399, 645038, 645768, 
+###Adicionado
+- Exemplo de cenário: APISuite002 - Listar recursos BB na IBM Cloud - APICT001 - OK - 200 - Grupos de acesso
+- Exemplo de cenário: APISuite004 - Listar recursos BB na IBM Cloud por código do componente - APICT001 - OK - 200 - Membros do catálogo
+- Método: getPayload(String endpoint, String tipoPayload), para retornar o payload a ser usado no request
+- Método: datapoolInit(), para inicializar os datapools de .yml
+
+###Corrigido
+- Problema no qTeste. O qTeste passou a usar o binários como repositório, não mais o ATF.
+
+###Mudado
+- Passando a utilizar o método $() do FTABB para ler arquivos .yml
+- Usando Esquema do cenário para o cenário: APISuite002 - Listar recursos BB na IBM Cloud APICT001 - OK - 200
+- Usando Esquema do cenário para o cenário: APISuite004 - Listar recursos BB na IBM Cloud por código do componente APICT001 - OK - 200
+
 ## [6.5.0] - 14-09-2022
 * Versão instável no qTeste
 

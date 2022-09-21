@@ -9,7 +9,7 @@ public enum Cookie {
         return !(getIBBID() == null);
     }
 
-    public static String getIBBID() {
+    public static String getIBBID(){
         return getProperty(String.valueOf(IBBID));
     }
 }

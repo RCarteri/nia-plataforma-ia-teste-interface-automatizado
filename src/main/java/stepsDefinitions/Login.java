@@ -10,6 +10,7 @@ import support.Utils;
 
 import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
+import static support.enums.LogTypes.ERROR;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class Login extends Utils{
@@ -33,6 +34,7 @@ public class Login extends Utils{
         try {
             lP.logar(ambiente);
         } catch (Exception e) {
+            printLog("Não foi possível realizar o login.", ERROR);
             logError(e);
         }
     }

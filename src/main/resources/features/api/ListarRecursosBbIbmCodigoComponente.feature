@@ -10,6 +10,7 @@ Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do com
         Quando enviar um payload "<payload>" com o código do componente
         Então deve retornar o código 200
         Exemplos:
-            | componente | payload   |
-            | OK-Storage | OK-Bucket |
-            | OK-Catalog | OK-Membro |
+            | componente   | payload   |
+            | OK-Storage   | OK-Bucket |
+            | OK-Catalog   | OK-Membro |
+            | OK-Assistant | OK-Skill  |

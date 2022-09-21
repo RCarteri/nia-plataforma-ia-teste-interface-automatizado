@@ -21,6 +21,7 @@ op5839181v1:
   OK-Membro: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG", "codigoComponente":"codComponente"}'
   OK-Modelo: '{"nomeComponente":"MODELOS"}'
   OK-Grupos: '{"nomeComponente":"GRUPOS_DE_ACESSO"}'
+  OK-Skill: '{"nomeComponente":"WATSON_ASSISTANT","codigoComponente":"codComponente"}'
 
 dpr/Op5903588-v1:
   descrição: "Listar dados interveniente do funcionário"

@@ -1,5 +1,8 @@
 # Datapool de payloads
 
+nomeCodComponente:
+  '{"nomeComponente":"nameComponente", "codigoComponente":"codComponente"}'
+
 op6586305v1:
   descrição: "Listar projetos inteligência artificial com deploy em andamento"
   OK: '{"nomeComponente" : null}'
@@ -16,14 +19,15 @@ op5806077v2:
   OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
   OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
 
+getNomeCodComponente: &nomeCodComponente '{"nomeComponente":"nameComponente", "codigoComponente":"codComponente"}'
 op5839181v1:
-  descrição: "Listar informações do componente"
+  descrição: "Listar informações do componente com o código do componente"
   OK-Bucket: '{"nomeComponente":"CLOUD_OBJECT_STORAGE_BUCKETS", "codigoComponente":"codComponente"}'
-  OK-Membro: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG", "codigoComponente":"codComponente"}'
   OK-Modelo: '{"nomeComponente":"MODELOS"}'
   OK-Grupos: '{"nomeComponente":"GRUPOS_DE_ACESSO"}'
-  OK-Skill: '{"nomeComponente":"WATSON_ASSISTANT","codigoComponente":"codComponente"}'
+  OK-Membro: *nomeCodComponente
+  OK-Skill: *nomeCodComponente
 
 dpr/Op5903588-v1:
   descrição: "Listar dados interveniente do funcionário"
-  OK: '{"codigoInterveniente" : "CHAVE_USUARIO"}'
+  OK: '{"codigoInterveniente" : "chaveUsuario"}'

@@ -1,11 +1,12 @@
 package support.APIRest;
 
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
-import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.json.JSONObject;
 import support.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -30,7 +31,7 @@ public class BaseClass extends FTABBUtils {
     private String payload;
     protected Response response;
     private List<Map<String, String>> yamlMap;
-    private List<Map<String, String>> listaRetorno;
+    private ArrayList<Map<String,String>> listaRetorno;
     private final Utils utils = new Utils();
 
     public void setEndpoint(String endpoint) {
@@ -40,7 +41,7 @@ public class BaseClass extends FTABBUtils {
     public void definirChave(String tipoPayload) {
         setPayload(tipoPayload);
         new Utils().setDatapool();
-        payload = payload.replace("CHAVE_USUARIO", getChave());
+        payload = payload.replace("chaveUsuario", getChave());
     }
 
     public void getCookies() {
@@ -87,7 +88,7 @@ public class BaseClass extends FTABBUtils {
                 .body(payload)
                 .when()
                 .post(endpoint);
-        getListaRetorno();
+        setListaRetorno();
     }
 
     protected void printResult() {
@@ -104,14 +105,19 @@ public class BaseClass extends FTABBUtils {
         return listaRetorno.get(indexRandom).get("codigoComponente");
     }
 
-    protected void setCodComponenteNoPayload(String tipoPayload) {
-        setPayload(tipoPayload);
-        payload = payload.replace("codComponente", getCodComponente());
+    private String getNameComponente(String componente) {
+        String str = utils.getPayload("op5806077v2", componente);
+        return new JSONObject(str).getString("nomeComponente");
     }
-    @SuppressWarnings("unchecked")
-    private void getListaRetorno() {
-        Map<String, Object> mapCompleto = response.then().extract().body().as(new TypeRef<Map<String, Object>>() {});
-        listaRetorno = (List<Map<String, String>>) mapCompleto.entrySet().iterator().next().getValue();
+
+    protected void setConfComponenteNoPayload(String tipoPayload, String componente) {
+        setPayload(tipoPayload);
+        payload = payload
+                .replace("codComponente", getCodComponente())
+                .replace("nameComponente", getNameComponente(componente));
+    }
+    private void setListaRetorno() {
+        listaRetorno = response.jsonPath().get("listaRetorno");
     }
 
     protected void setPayload(String endpoint, String tipoPayload) {

@@ -37,16 +37,16 @@ public class Api extends BaseClass {
         getCookies();
     }
 
-    @Dado("^que tenha a lista de códigos do componente de \"([^\"]*)\" para ver os detalhes$")
-    public void queDefinaOCodigoDeComponenteParaVerOsDetalhes(String tipoPayload){
+    @Dado("^que tenha a lista de códigos do componente \"([^\"]*)\" para ver os detalhes$")
+    public void queDefinaOCodigoDoComponenteParaVerOsDetalhes(String componente){
         String endpoint = "op5806077v2";
-        setPayload(endpoint, tipoPayload);
+        setPayload(endpoint, componente);
         enviarPayload(endpoint);
     }
 
-    @Quando("^enviar um payload \"([^\"]*)\" com o código do componente$")
-    public void enviarUmPayloadComOCodigoDoComponente(String tipoPayload) {
-        setCodComponenteNoPayload(tipoPayload);
+    @Quando("^enviar um payload \"([^\"]*)\" com o código e nome do componente \"([^\"]*)\"$")
+    public void enviarUmPayloadComOCodigoDoComponente(String tipoPayload, String componente) {
+        setConfComponenteNoPayload(tipoPayload, componente);
         enviarPayload();
     }
 }

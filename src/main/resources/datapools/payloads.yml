@@ -11,6 +11,7 @@ op5806077v3:
 
 op5806077v2:
   descrição: "Listar informações do componente"
+  OK-Studio: '{"nomeComponente":"WATSON_STUDIO"}'
   OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
   OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
   OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'

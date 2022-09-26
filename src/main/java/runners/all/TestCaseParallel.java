@@ -3,7 +3,7 @@ package runners.all;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
-import runners.plataforma.suites.*;
+import runners.plataforma.legado.suites.*;
 import support.parallel.FTABBCucumberConcurrentRunner;
 import support.parallel.FTABBCucumberConcurrentRunner.AppConfig;
 

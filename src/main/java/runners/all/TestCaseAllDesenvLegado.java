@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = {"classpath:features/gestao/novo"},
+		features = {"classpath:features/gestao/legado"},
 		glue = "classpath:stepsDefinitions",
 		tags = { "" }
 )
-public class TestCaseAllDesenv extends ConfRunner {
+public class TestCaseAllDesenvLegado extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

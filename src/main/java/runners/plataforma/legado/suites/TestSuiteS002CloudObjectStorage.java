@@ -1,4 +1,4 @@
-package runners.plataforma.suites;
+package runners.plataforma.legado.suites;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

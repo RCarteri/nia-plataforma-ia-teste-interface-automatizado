@@ -12,6 +12,6 @@ Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do com
         Exemplos:
             | componente   | payload   |
             | OK-Storage   | OK-Bucket |
-            | OK-Catalog   | OK-Membro |
-            | OK-Assistant | OK-Skill  |
-            | OK-Studio    | OK-Membro |
+#            | OK-Catalog   | OK-Membro |
+#            | OK-Assistant | OK-Skill  |
+#            | OK-Studio    | OK-Membro |

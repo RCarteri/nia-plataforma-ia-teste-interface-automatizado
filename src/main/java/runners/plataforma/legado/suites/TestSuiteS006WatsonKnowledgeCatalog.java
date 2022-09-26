@@ -1,4 +1,4 @@
-package runners.plataforma.suites;
+package runners.plataforma.legado.suites;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/primeiroAcesso",
+		features = "classpath:features/gestao",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@S009" }
+		tags = { "@S006" }
 )
-public class TestSuiteS009PrimeiroAcesso extends ConfRunner{
+public class TestSuiteS006WatsonKnowledgeCatalog extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

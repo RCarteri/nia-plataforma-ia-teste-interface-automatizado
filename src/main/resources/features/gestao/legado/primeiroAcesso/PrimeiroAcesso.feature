@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-@S009 @Smoke
+@S009L @Smoke
 Funcionalidade: Suite009 - Primeiro acesso
 
     Contexto: Acessar plataforma IA
@@ -10,7 +10,7 @@ Funcionalidade: Suite009 - Primeiro acesso
         E acessar o menu "Soluções e Serviços de IA" e "Primeiro acesso (Cloud)"
         E a página "Primeiro acesso e convite para IBM Cloud" deverá ser carregada com sucesso
 
-    @ID-009-010 @CT010
+    @ID-009-010L @CT010L
     Cenario: CT010 - Cadastrar usuário na IBM Cloud
         Dado que apresente a mensagem "Não encontramos nenhuma conta na IBM Cloud registrada para seu email:"
         Quando seguir tutorial

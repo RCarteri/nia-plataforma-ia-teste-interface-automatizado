@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-@S002
+@S002L
 Funcionalidade: Suite002 - Cloud Object Storage
 
     Contexto: Acessar plataforma IA
@@ -11,11 +11,11 @@ Funcionalidade: Suite002 - Cloud Object Storage
         E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Cloud Object Storage"
 
-    @ID-002-002 @CT002 @Smoke
+    @ID-002-002L @CT002L @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Object Storages" na página
 
-    @ID-002-003 @CT003
+    @ID-002-003L @CT003L
     Cenario: CT003 - Exibir componente
         Dado que exista "Bucket"
         Então deverá apresentar o título "Buckets do storage" no modal
@@ -23,7 +23,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
 
-    @ID-002-004 @CT004
+    @ID-002-004L @CT004L
     Esquema do Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
@@ -39,7 +39,7 @@ Funcionalidade: Suite002 - Cloud Object Storage
             | local      | modal | mensagem               |
             | componente |       | Nenhum item encontrado |
 
-    @ID-002-008 @CT008
+    @ID-002-008L @CT008L
     Cenario: CT008 - Inexistência do componente
         Dado que não exista "Bucket"
         Então deverá ser apresentado o alerta de "informação" com a mensagem "Não há nenhum bucket disponível para o projeto atualmente."

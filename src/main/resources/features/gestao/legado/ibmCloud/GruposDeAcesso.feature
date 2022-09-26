@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-@S003
+@S003L
 Funcionalidade: Suite003 - Grupos de Acesso
 
     Contexto: Acessar plataforma IA
@@ -11,11 +11,11 @@ Funcionalidade: Suite003 - Grupos de Acesso
         E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Grupos de Acesso"
 
-    @ID-003-002 @CT002 @Smoke
+    @ID-003-002L @CT002L @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Grupos de acesso" na página
 
-    @ID-003-003 @CT003
+    @ID-003-003L @CT003L
     Cenario: CT003 - Exibir componente
         Dado que exista "Grupo"
         Então deverá apresentar o título "Grupos de acesso" no modal
@@ -23,7 +23,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
 
-    @ID-003-004 @CT004
+    @ID-003-004L @CT004L
     Esquema do Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
@@ -40,7 +40,7 @@ Funcionalidade: Suite003 - Grupos de Acesso
             | componente |       | Nenhum item encontrado |
             | modal      | Grupo | Nenhum item encontrado |
 
-    @ID-003-005 @CT005
+    @ID-003-005L @CT005L
     Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Grupo"
         Quando adicionar membro com os dados

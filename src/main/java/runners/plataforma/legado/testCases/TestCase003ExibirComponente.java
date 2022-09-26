@@ -14,7 +14,7 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/gestao",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@CT003" }
+		tags = { "@CT003L"}
 )
 public class TestCase003ExibirComponente extends ConfRunner{
 	@BeforeClass

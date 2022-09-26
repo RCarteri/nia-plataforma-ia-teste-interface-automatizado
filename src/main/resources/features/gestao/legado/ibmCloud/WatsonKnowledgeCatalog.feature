@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-@S006
+@S006L
 Funcionalidade: Suite006 - Watson Knowledge Catalog
 
     Contexto: Acessar plataforma IA
@@ -11,11 +11,11 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E acessar a página do provedor "IBM Cloud"
         E selecionar o componente "Watson Knowledge Catalog"
 
-    @ID-006-002 @CT002 @Smoke
+    @ID-006-002L @CT002 @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Catálogos" na página
 
-    @ID-006-003 @CT003
+    @ID-006-003L @CT003
     Cenario: CT003 - Exibir componente
         Dado que exista "Catálogo"
         Então deverá apresentar o título "Membros do catálogo" no modal
@@ -23,7 +23,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
         E deverá apresentar o mesmo nome do item selecionado
         E deverá mostrar a lista com elementos
 
-    @ID-006-004 @CT004
+    @ID-006-004L @CT004
     Esquema do Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
@@ -40,7 +40,7 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
             | componente |          | Nenhum item encontrado |
             | modal      | Catálogo | Nenhum item encontrado |
 
-    @ID-006-005 @CT005
+    @ID-006-005L @CT005
     Cenario: CT005 - Adicionar membro exceção
         Dado que exista "Catálogo"
         Quando adicionar membro com os dados
@@ -53,13 +53,13 @@ Funcionalidade: Suite006 - Watson Knowledge Catalog
             | A chave deve possuir 8 caracteres.                  |
             | A chave deve seguir o padrão: cXXXXXXX, fXXXXXXX... |
 
-    @ID-006-011 @CT011
+    @ID-006-011L @CT011
     Cenario: CT011 - Editar membro
         Dado que exista "Catálogo" onde o usuário logado seja o administrador
         Quando editar o papel de um membro
         Então deverá ser apresentado o alerta de "sucesso" com a mensagem "Membro editado com sucesso!"
 
-    @ID-006-015 @CT015
+    @ID-006-015L @CT015
     Cenario: CT015 - Excluir membro
         Dado que exista "Catálogo" onde o usuário logado seja o administrador
         Quando excluir um membro

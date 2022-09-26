@@ -7,16 +7,16 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
-import static support.APIRest.Host.PROD;
+import static support.APIRest.Host.DESENV;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = {"classpath:features/gestao", "classpath:features/primeiroAcesso"},
+		features = {"classpath:features/gestao/legado"},
 		glue = "classpath:stepsDefinitions",
 		tags = { "" }
 )
-public class TestCaseAllPrd extends ConfRunner {
+public class TestCaseAllDesenvLegado extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();
@@ -24,6 +24,6 @@ public class TestCaseAllPrd extends ConfRunner {
 
 	@AfterClass
 	public static void finish(){
-		confFinish(PROD);
+		confFinish(DESENV);
 	}
 }

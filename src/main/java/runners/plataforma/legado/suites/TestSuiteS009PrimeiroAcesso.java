@@ -14,7 +14,7 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/primeiroAcesso",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@S009" }
+		tags = { "@S009L"}
 )
 public class TestSuiteS009PrimeiroAcesso extends ConfRunner{
 	@BeforeClass

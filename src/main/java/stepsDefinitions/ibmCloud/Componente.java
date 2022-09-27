@@ -35,9 +35,10 @@ public class Componente extends Utils{
 
     @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
     public void deveApresentarOTituloNaPagina(String titulo) {
+        String tituloObtido = cP.getTxtTituloComponente();
         try {
-            assertEquals(titulo, cP.getTxtTituloComponente());
-        } finally {
+            assertEquals(printResultadoEsperadoObtido(titulo, tituloObtido), titulo, tituloObtido);
+        } finally{
             capturaTela();
         }
     }
@@ -111,6 +112,15 @@ public class Componente extends Utils{
             new ModalComponentePage().excluirMembro(pCS.getIndexADM());
         } catch (Exception e){
             capturaTela();
+        }
+    }
+
+    @E("^deverá apresentar os cards com as informações$")
+    public void deveraApresentarOsCardsComAsInformacoes() {
+        try {
+            assertTrue(cP.getCards().size() > 0);
+        } catch (AssertionError e) {
+            fail("Os cards não foram apresentados.");
         }
     }
 }

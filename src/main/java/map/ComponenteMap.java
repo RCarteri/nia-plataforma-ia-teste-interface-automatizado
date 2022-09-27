@@ -19,7 +19,12 @@ public class ComponenteMap extends BasePageObjects {
 
     public WebElement getTituloComponente() {
         waitLoadPage(CARR_PAG);
-        return getElement("#p-panel-1-titlebar");
+        try {
+            return getElement(".main-container h1");
+        } catch (Exception e) {
+            //Legado
+            return getElement("#p-panel-1-titlebar");
+        }
     }
 
     public WebElement getDropDownComponente() {
@@ -49,11 +54,15 @@ public class ComponenteMap extends BasePageObjects {
         return getElements(".p-toast .pi-times");
     }
 
-    public WebElement getBtnFecharModal(){
+    public WebElement getBtnFecharModal() {
         return getElement(".p-dialog-header .pi-times");
     }
 
-    public WebElement getForm(){
+    public WebElement getForm() {
         return getElement(".p-dialog-content form");
+    }
+
+    public List<WebElement> getListCards() {
+        return getElements("bb-card");
     }
 }

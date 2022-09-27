@@ -11,6 +11,7 @@ import support.Utils;
 import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
 import static support.enums.LogTypes.ERROR;
+import static support.enums.LogTypes.INFO;
 import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class Login extends Utils{
@@ -62,6 +63,8 @@ public class Login extends Utils{
     public void acessarMenu(String nivel1, String nivel2) {
         try {
             lP.acessarMenu(nivel1, nivel2);
+            printLog("Menus " + nivel1 + " e " + nivel2 + " acessados com sucesso.", INFO);
+            waitLoadPage(CARR_PAG);
         } catch (Exception e) {
             logError(e);
         }

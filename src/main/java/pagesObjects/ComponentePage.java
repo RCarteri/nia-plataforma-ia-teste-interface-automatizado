@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static support.Utils.printLog;
 import static support.Utils.rolarPaginaAteElemento;
 import static support.enums.LogTypes.INFO;
@@ -26,6 +28,10 @@ public class ComponentePage{
 
     public String getTxtTituloComponente() {
         return cM.getTituloComponente().getText();
+    }
+
+    public List<WebElement> getCards() {
+        return cM.getListCards();
     }
 
     public void clickBtnFechar(boolean elemNaoExiste, String local) {

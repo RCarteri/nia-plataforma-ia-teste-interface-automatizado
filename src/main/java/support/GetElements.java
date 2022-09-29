@@ -1,15 +1,17 @@
 package support;
 
-import br.com.bb.ath.ftabb.FTABBContext;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.SelectorsDelays;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.bb.ath.ftabb.FTABBContext.getContext;
 import static org.junit.Assert.fail;
+import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.By.xpath;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
@@ -20,21 +22,21 @@ public class GetElements {
     private short tentativa;
 
     public static WebDriver getDriver() {
-        return (WebDriver) FTABBContext.getContext().getContextBrowserDriver().getDriver();
+        return (WebDriver) getContext().getContextBrowserDriver().getDriver();
     }
 
     public static WebElement waitElement(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator.getSelector())));
+        wait.until(visibilityOfElementLocated(cssSelector(locator.getSelector())));
         return getElement(locator.getSelector());
     }
 
     public static List<WebElement> getElements(String seletor) {
-        return getDriver().findElements(By.cssSelector(seletor));
+        return getDriver().findElements(cssSelector(seletor));
     }
 
     public static WebElement getElement(String seletor) {
-        return getDriver().findElement(By.cssSelector(seletor));
+        return getDriver().findElement(cssSelector(seletor));
     }
 
     public WebElement findElement(By by) {
@@ -74,7 +76,7 @@ public class GetElements {
     private void setIframesList() {
         iframesCount = 0;
         getDriver().switchTo().defaultContent();
-        getDriver().findElements(By.xpath("//iframe")).forEach(elem -> iframesList.add(elem.getAttribute("id")));
+        getDriver().findElements(xpath("//iframe")).forEach(elem -> iframesList.add(elem.getAttribute("id")));
         //getDriver().switchTo().frame(iframesList.get(1));
         if (iframesList.size() > 0)
             printLog("Voltando para o 'iframe (" + iframesList.get(0) + ")'...", INFO);

@@ -1,11 +1,11 @@
 package map;
 
 import org.openqa.selenium.WebElement;
+import pagesObjects.BasePageObjects;
+import support.GetElements;
 import support.annotations.FindBy;
 
-import java.util.List;
-
-import static support.GetElements.getElements;
+import static org.openqa.selenium.By.xpath;
 
 public class SideBarMap extends BasePageObjects {
     @FindBy(cssSelector = ".sidebar.bb-sidebar-menu")
@@ -17,23 +17,8 @@ public class SideBarMap extends BasePageObjects {
         return openSideBar;
     }
 
-    public WebElement getIbm() {
-        return getListMenus().get(1);
-    }
-
-    public WebElement getWatson() {
-        return getListItensIbm().get(0);
-    }
-
-    protected List<WebElement> getListMenus(){
-        return getElements(".sbm-items-level-1-label");
-    }
-
-    protected List<WebElement> getListItensIbm(){
-        return getElements(".sbml2-items-level-2-item");
-    }
-
-    public List<WebElement> getListItens() {
-        return getElements(".sbml2-items-level-3 .ng-star-inserted");
+    public WebElement getMenu(String menu) {
+         String seletor = "//span[contains(text(), '" + menu + "')]";
+         return new GetElements().findElement(xpath(seletor));
     }
 }

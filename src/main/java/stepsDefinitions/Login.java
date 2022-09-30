@@ -15,7 +15,7 @@ import static support.enums.LogTypes.INFO;
 import static support.enums.SelectorsDelays.BLOCKUI;
 import static support.enums.SelectorsDelays.CIRCLE;
 
-public class Login extends Utils{
+public class Login extends Utils {
     private final LoginPage lP;
 
     public Login() {
@@ -45,6 +45,7 @@ public class Login extends Utils{
     public void acessarAPagina(String nomePagina) {
         try {
             lP.acessarPagina(nomePagina);
+            printLog("Página acessada com sucesso: " + nomePagina, INFO);
         } catch (Exception e) {
             logError(e);
         }

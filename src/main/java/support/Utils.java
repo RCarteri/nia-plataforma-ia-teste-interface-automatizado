@@ -1,7 +1,6 @@
 package support;
 
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
-import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
@@ -34,11 +33,10 @@ import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.BYTES;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
-import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
 
-public class Utils extends FTABBUtils {
+public class Utils extends BaseUtils {
     public void esperar(SelectorsDelays tar) {
         printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getSelector() + "...", NULL);
         sleep(esperarQTeste(tar.getDelay()));

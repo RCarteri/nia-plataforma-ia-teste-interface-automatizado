@@ -14,14 +14,14 @@ public class SideBar extends Utils {
         this.sS = new SideBarSection();
     }
 
-    @E("^acessar o menu \"([^\"]*)\"$")
-    public void acessarOMenu(String menu) {
+    @E("^acessar os menus \"([^\"]*)\" e \"([^\"]*)\"$")
+    public void acessarOsMenus(String menu1, String menu2) {
         try {
             ComponentePage cP = new ComponentePage();
             cP.getMensagemAlerta("sucesso");
             cP.clickBtnFechar(false, "alerta");
-            sS.acessarProvedor(menu);
-            printLog("Menu " + menu + " acessado com sucesso.", INFO);
+            sS.acessarMenus(menu1, menu2);
+            printLog("Menus acessados com sucesso: " + menu1 + " " + menu2, INFO);
         } catch (Exception e) {
             logError(e);
         }
@@ -31,7 +31,7 @@ public class SideBar extends Utils {
     public void selecionarOItem(String item) {
         try {
             sS.acessarItem(item);
-            printLog("Item " + item + " acessado com sucesso.", INFO);
+            printLog("Item acessado com sucesso: " + item, INFO);
         } catch (Exception e) {
             logError(e);
         }

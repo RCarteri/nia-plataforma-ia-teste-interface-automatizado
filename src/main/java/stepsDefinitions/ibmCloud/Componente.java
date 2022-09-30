@@ -10,7 +10,8 @@ import pagesObjects.sections.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.CIRCLE;
 import static support.enums.User.getUser;
 
 public class Componente extends Utils{
@@ -27,7 +28,7 @@ public class Componente extends Utils{
         try {
             cP.acessarComponente(componente);
             assertNotNull(cP.getTxtTituloComponente());
-            waitLoadPage(CARR_PAG);
+            waitLoadPage(CIRCLE);
         } catch (Exception e) {
             logError(e);
         }
@@ -38,6 +39,7 @@ public class Componente extends Utils{
         String tituloObtido = cP.getTxtTituloComponente();
         try {
             assertEquals(printResultadoEsperadoObtido(titulo, tituloObtido), titulo, tituloObtido);
+            printLog("O título foi apresentado com sucesso: " + titulo, INFO);
         } finally{
             capturaTela();
         }
@@ -119,6 +121,7 @@ public class Componente extends Utils{
     public void deveraApresentarOsCardsComAsInformacoes() {
         try {
             assertTrue(cP.getCards().size() > 0);
+            printLog("Os cards foram apresentados com sucesso.", INFO);
         } catch (AssertionError e) {
             fail("Os cards não foram apresentados.");
         }

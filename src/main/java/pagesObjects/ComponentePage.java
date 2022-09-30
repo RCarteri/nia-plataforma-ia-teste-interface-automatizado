@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.printLog;
-import static support.Utils.rolarPaginaAteElemento;
+import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.BLOCKUI;
 
 public class ComponentePage{
     private final ComponenteMap cM;
@@ -40,6 +40,7 @@ public class ComponentePage{
         }
         try {
             ComponenteMap cM = new ComponenteMap();
+            waitLoadPage(BLOCKUI);
             if ((local.equals("alerta"))) {
                 rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);

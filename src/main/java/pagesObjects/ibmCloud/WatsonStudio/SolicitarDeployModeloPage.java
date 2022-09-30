@@ -13,14 +13,14 @@ import java.util.Map;
 
 import static support.Utils.*;
 import static support.enums.LogTypes.ERROR;
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
     private final List<DadosDeployModelo> dadosDeployModelo = new ArrayList<>();
 
     public void acessarForm() {
         getListBtnDeploy().get(getRandom(getListBtnDeploy().size())).click();
-        waitLoadPage(CARR_PAG);
+        waitLoadPage(CIRCLE);
     }
 
     public void addSolicitacao(DadosDeployModelo dadoDeployModelo) {

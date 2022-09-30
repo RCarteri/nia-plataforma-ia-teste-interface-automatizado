@@ -12,7 +12,8 @@ import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.SelectorsDelays.BLOCKUI;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Login extends Utils{
     private final LoginPage lP;
@@ -52,7 +53,7 @@ public class Login extends Utils{
     @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
         try {
-            waitLoadPage(CARR_PAG);
+            waitLoadPage(CIRCLE);
             assertEquals("A página não foi carregada.", recuperarTituloPagina(), titulo);
         } finally {
             capturaTela();
@@ -63,8 +64,9 @@ public class Login extends Utils{
     public void acessarMenu(String nivel1, String nivel2) {
         try {
             lP.acessarMenu(nivel1, nivel2);
-            printLog("Menus " + nivel1 + " e " + nivel2 + " acessados com sucesso.", INFO);
-            waitLoadPage(CARR_PAG);
+            printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
+            waitLoadPage(BLOCKUI);
+            waitLoadPage(CIRCLE);
         } catch (Exception e) {
             logError(e);
         }

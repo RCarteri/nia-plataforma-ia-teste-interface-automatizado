@@ -7,8 +7,6 @@ import java.util.List;
 
 import static support.GetElements.getElement;
 import static support.GetElements.getElements;
-import static support.Utils.waitLoadPage;
-import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-dropdown-trigger span")
@@ -17,14 +15,11 @@ public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-toast-message-success")
     private WebElement alertSuccess;
 
+    @FindBy(cssSelector = ".p-toast-message-info .p-toast-detail")
+    private WebElement alertInfo;
+
     public WebElement getTituloComponente() {
-        waitLoadPage(CARR_PAG);
-        try {
-            return getElement(".main-container h1");
-        } catch (Exception e) {
-            //Legado
-            return getElement("#p-panel-1-titlebar");
-        }
+        return getElement(".main-container h1");
     }
 
     public WebElement getDropDownComponente() {
@@ -33,17 +28,16 @@ public class ComponenteMap extends BasePageObjects {
         return dropComponente;
     }
 
-    public WebElement getAlertInfo() {
-        waitLoadPage(CARR_PAG);
-        //Se usar o FindBy trava no CT009 Inexistência do componente
-        return getElement(".p-toast-message-info .p-toast-detail");
-    }
-
     public WebElement getAlertSuccess() {
-        waitLoadPage(CARR_PAG);
         if (alertSuccess == null)
             alertSuccess = setElement("alertSuccess");
         return alertSuccess;
+    }
+
+    public WebElement getAlertInfo() {
+        if (alertInfo == null)
+            alertInfo = setElement("alertInfo");
+        return alertInfo;
     }
 
     public List<WebElement> getListComponente() {
@@ -63,6 +57,6 @@ public class ComponenteMap extends BasePageObjects {
     }
 
     public List<WebElement> getListCards() {
-        return getElements("bb-card");
+        return getElements("bb-card bb-card");
     }
 }

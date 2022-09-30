@@ -13,5 +13,5 @@ Funcionalidade: Suite002 - Watson Studio
 
     @ID-002-002 @CT002 @Smoke
     Cenario: CT002 - Exibir componente
-        Então deverá apresentar o título "Watson Studio" na página
+        Então deverá apresentar o título "Gerenciar projetos Watson Studio" na página
         E deverá apresentar os cards com as informações

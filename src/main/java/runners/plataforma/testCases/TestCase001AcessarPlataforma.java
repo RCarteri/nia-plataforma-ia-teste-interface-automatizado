@@ -1,4 +1,4 @@
-package runners.plataforma.legado.suites;
+package runners.plataforma.testCases;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -14,9 +14,9 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/gestao",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@S002L"}
+		tags = { "@CT001N" }
 )
-public class TestSuiteS002CloudObjectStorage extends ConfRunner{
+public class TestCase001AcessarPlataforma extends ConfRunner{
 	@BeforeClass
 	public static void init(){
 		confInit();

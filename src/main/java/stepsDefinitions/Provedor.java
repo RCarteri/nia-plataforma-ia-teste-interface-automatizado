@@ -5,7 +5,7 @@ import pagesObjects.ComponentePage;
 import pagesObjects.ProvedorPage;
 import support.Utils;
 
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Provedor extends Utils {
     private final ProvedorPage pP;
@@ -19,7 +19,7 @@ public class Provedor extends Utils {
     @E("^acessar a página do provedor \"([^\"]*)\"$")
     public void acessarAPaginaDoProvedor(String provedor) {
         try {
-            waitLoadPage(CARR_PAG);
+            waitLoadPage(CIRCLE);
             cP.getMensagemAlerta("sucesso");
             cP.clickBtnFechar(false, "alerta");
             pP.acessarProvedor(provedor);

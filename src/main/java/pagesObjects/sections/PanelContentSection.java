@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.Assert.fail;
 import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class PanelContentSection {
     private final PanelContentMap pCM;
@@ -47,7 +47,7 @@ public class PanelContentSection {
                 avancarItem(nItem, prM.getListBtnExibir());
                 getNomeItemSelecionado(prM, nItem);
                 if (checkListaOpcoes(opcao, nItem)) continue;
-                waitLoadPage(CARR_PAG);
+                waitLoadPage(CIRCLE);
                 ModalComponentePage mCP = new ModalComponentePage();
                 if (!esperado && isGetAlertDisplayed()) {
                     printLog("Projeto sem " + opcao + "encontrado.", INFO);

@@ -1,8 +1,5 @@
 # Datapool de payloads
 
-nomeCodComponente:
-  '{"nomeComponente":"nameComponente", "codigoComponente":"codComponente"}'
-
 op6586305v1:
   descrição: "Listar projetos inteligência artificial com deploy em andamento"
   OK: '{"nomeComponente" : null}'

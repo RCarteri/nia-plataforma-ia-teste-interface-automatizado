@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static support.Utils.waitLoadPage;
-import static support.enums.SelectorsDelays.CARR_PAG;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class TritonPage extends TritonMap{
     private final List<Dado> dados = new ArrayList<>();
@@ -47,7 +47,7 @@ public class TritonPage extends TritonMap{
         getRequest().clear();
         getRequest().sendKeys(montarRequest());
         getBtnExecutar().click();
-        waitLoadPage(CARR_PAG);
+        waitLoadPage(CIRCLE);
     }
 
     private void fillRequest(DataTable table) {

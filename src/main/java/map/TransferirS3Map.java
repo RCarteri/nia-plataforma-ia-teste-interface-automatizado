@@ -1,10 +1,11 @@
 package map;
 
 import org.openqa.selenium.WebElement;
+import pagesObjects.BasePageObjects;
 
 import static support.GetElements.getElement;
 
-public class TransferirS3Map extends BasePageObjects{
+public class TransferirS3Map extends BasePageObjects {
     public WebElement getInputCodigoSeguranca() {
         return getElement("#codigoSeguranca");
     }

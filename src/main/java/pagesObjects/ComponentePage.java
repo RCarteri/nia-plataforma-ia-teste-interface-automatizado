@@ -5,9 +5,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import static support.Utils.printLog;
-import static support.Utils.rolarPaginaAteElemento;
+import java.util.List;
+
+import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.BLOCKUI;
 
 public class ComponentePage{
     private final ComponenteMap cM;
@@ -28,12 +30,17 @@ public class ComponentePage{
         return cM.getTituloComponente().getText();
     }
 
+    public List<WebElement> getCards() {
+        return cM.getListCards();
+    }
+
     public void clickBtnFechar(boolean elemNaoExiste, String local) {
         if (elemNaoExiste) {
             printLog(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.", INFO);
         }
         try {
             ComponenteMap cM = new ComponenteMap();
+            waitLoadPage(BLOCKUI);
             if ((local.equals("alerta"))) {
                 rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);

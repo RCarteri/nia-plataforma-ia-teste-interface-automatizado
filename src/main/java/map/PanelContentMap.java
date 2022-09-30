@@ -1,6 +1,7 @@
 package map;
 
 import org.openqa.selenium.WebElement;
+import pagesObjects.BasePageObjects;
 
 import java.util.List;
 

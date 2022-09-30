@@ -15,6 +15,7 @@ public class ConfRunner {
 
     public static void confInit() {
         ConfigInicialAllureARQ3();
+        new Utils().deletarAllureResults();
         // Descomentar para limpar o histórico de relatóios no Allure caso esteja travando muito
         //limparRelatoriosAllure(DESENV);
         //limparRelatoriosAllure(HML);
@@ -29,7 +30,6 @@ public class ConfRunner {
     }
 
     private static void limparRelatoriosAllure(Host ambiente) {
-        new Utils().deletarAllureResults();
         apiRest.atualizarAllureArq3(ambiente.getUrl(LIMPAR_RESULTADOS));
         apiRest.atualizarAllureArq3(ambiente.getUrl(LIMPAR_HISTORICO));
     }

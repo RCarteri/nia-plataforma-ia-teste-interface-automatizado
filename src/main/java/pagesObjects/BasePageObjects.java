@@ -20,7 +20,7 @@ public class BasePageObjects {
         return findElementBy(locType, fieldName);
     }
 
-    protected List<WebElement> setElementList(String fieldName) {
+    protected List<WebElement> setElements(String fieldName) {
         setLocatorType(fieldName);
         return findElementListBy(locType, fieldName);
     }

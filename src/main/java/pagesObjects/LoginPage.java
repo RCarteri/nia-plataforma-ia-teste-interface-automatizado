@@ -40,17 +40,9 @@ public class LoginPage {
     public void acessarPagina(String nomePagina) {
         try {
             String tituloPagina = recuperarTituloPagina();
-            if (!(tituloPagina.intern().equals("Plataforma BB | Analytics e Inteligência Artificial")) || tituloPagina.intern().equals("Home Tecnologia")) {
+            if (!(tituloPagina.intern().equals("Home Tecnologia"))){
                 selecionarAreaDeTrabalho(nomePagina);
             }
-        } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
-        }
-    }
-
-    public void acessarMenu(String nivel1, String nivel2) {
-        try {
-            abrirMenu(nivel1, nivel2);
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
         }

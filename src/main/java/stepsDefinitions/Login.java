@@ -8,6 +8,7 @@ import cucumber.api.java.pt.Quando;
 import pagesObjects.LoginPage;
 import support.Utils;
 
+import static br.com.bb.ath.ftabb.gaw.Plataforma.abrirMenu;
 import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
 import static support.enums.LogTypes.ERROR;
@@ -64,7 +65,7 @@ public class Login extends Utils {
     @E("^acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")
     public void acessarMenu(String nivel1, String nivel2) {
         try {
-            lP.acessarMenu(nivel1, nivel2);
+            abrirMenu(nivel1, nivel2);
             printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
             waitLoadPage(BLOCKUI);
             waitLoadPage(CIRCLE);

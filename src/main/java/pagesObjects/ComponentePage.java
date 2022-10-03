@@ -7,8 +7,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static support.Utils.printLog;
 import static support.Utils.rolarPaginaAteElemento;
+import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
 
 public class ComponentePage {
@@ -45,7 +47,7 @@ public class ComponentePage {
         try {
             ComponenteMap cM = new ComponenteMap();
             if ((local.equals("alerta"))) {
-               getMensagemAlerta("sucesso");
+                getMensagemAlerta("sucesso");
                 rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);
             } else {
@@ -67,5 +69,17 @@ public class ComponentePage {
             default:
                 return null;
         }
+    }
+
+    public boolean isInfoCardsApresentadas() {
+        boolean infoCardsApresentadas = true;
+        for (WebElement card : cM.getListCards()) {
+            List<String> infoList = asList(card.getText().split("\n"));
+            if (infoList.size() < 4) {
+                printLog("Está faltando informações no card: " + infoList.get(0), ERROR);
+                infoCardsApresentadas = false;
+            }
+        }
+        return infoCardsApresentadas;
     }
 }

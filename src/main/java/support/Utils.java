@@ -53,12 +53,12 @@ public class Utils extends BaseUtils {
         return getContext().getOrigemExecucao().equals(QTESTE);
     }
 
-    public static void waitLoadPage(SelectorsDelays locator) {
+    public static void waitInvisibility(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
             wait.until(invisibilityOfElementLocated(cssSelector(locator.getSelector())));
         } catch (TimeoutException e) {
-            printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
+            printLog("O elemento " + locator.getSelector() + " não desapareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
     }
 

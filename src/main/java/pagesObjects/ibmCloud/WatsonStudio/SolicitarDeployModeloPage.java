@@ -20,7 +20,7 @@ public class SolicitarDeployModeloPage extends SolicitarDeployModeloMap {
 
     public void acessarForm() {
         getListBtnDeploy().get(getRandom(getListBtnDeploy().size())).click();
-        waitLoadPage(CIRCLE);
+        waitInvisibility(CIRCLE);
     }
 
     public void addSolicitacao(DadosDeployModelo dadoDeployModelo) {

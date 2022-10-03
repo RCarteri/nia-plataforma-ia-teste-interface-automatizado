@@ -28,7 +28,7 @@ public class Componente extends Utils{
         try {
             cP.acessarComponente(componente);
             assertNotNull(cP.getTxtTituloComponente());
-            waitLoadPage(CIRCLE);
+            waitInvisibility(CIRCLE);
         } catch (Exception e) {
             logError(e);
         }

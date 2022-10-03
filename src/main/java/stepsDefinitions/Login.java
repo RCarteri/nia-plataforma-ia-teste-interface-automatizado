@@ -1,10 +1,10 @@
 package stepsDefinitions;
 
-import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
+import pagesObjects.ComponentePage;
 import pagesObjects.LoginPage;
 import support.Utils;
 
@@ -13,14 +13,15 @@ import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
-import static support.enums.SelectorsDelays.BLOCKUI;
 import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Login extends Utils {
     private final LoginPage lP;
+    private final ComponentePage cP;
 
     public Login() {
         this.lP = new LoginPage();
+        this.cP = new ComponentePage();
     }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
@@ -53,12 +54,12 @@ public class Login extends Utils {
     }
 
     @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
-    public void aPaginaDeveraSerCarregadaComSucesso(String titulo) throws ElementoNaoLocalizadoException {
+    public void aPaginaDeveraSerCarregadaComSucesso(String titulo) {
         try {
-            waitLoadPage(CIRCLE);
             assertEquals("A página não foi carregada.", recuperarTituloPagina(), titulo);
-        } finally {
-            capturaTela();
+            cP.clickBtnFechar(false, "alerta");
+        } catch (Exception e) {
+            logError(e);
         }
     }
 
@@ -67,8 +68,7 @@ public class Login extends Utils {
         try {
             abrirMenu(nivel1, nivel2);
             printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
-            waitLoadPage(BLOCKUI);
-            waitLoadPage(CIRCLE);
+            waitInvisibility(CIRCLE);
         } catch (Exception e) {
             logError(e);
         }

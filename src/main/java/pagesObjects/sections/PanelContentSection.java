@@ -47,7 +47,7 @@ public class PanelContentSection {
                 avancarItem(nItem, prM.getListBtnExibir());
                 getNomeItemSelecionado(prM, nItem);
                 if (checkListaOpcoes(opcao, nItem)) continue;
-                waitLoadPage(CIRCLE);
+                waitInvisibility(CIRCLE);
                 ModalComponentePage mCP = new ModalComponentePage();
                 if (!esperado && isGetAlertDisplayed()) {
                     printLog("Projeto sem " + opcao + "encontrado.", INFO);

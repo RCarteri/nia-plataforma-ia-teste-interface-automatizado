@@ -1,6 +1,7 @@
 package stepsDefinitions;
 
 import cucumber.api.java.pt.E;
+import cucumber.api.java.pt.Quando;
 import pagesObjects.ComponentePage;
 import pagesObjects.sections.SideBarSection;
 import support.Utils;
@@ -16,7 +17,7 @@ public class SideBar extends Utils {
         this.cP = new ComponentePage();
     }
 
-    @E("^acessar os menus \"([^\"]*)\" e \"([^\"]*)\"$")
+    @Quando("^acessar os menus \"([^\"]*)\" e \"([^\"]*)\"$")
     public void acessarOsMenus(String menu1, String menu2) {
         try {
             cP.getMensagemAlerta("sucesso");
@@ -35,6 +36,15 @@ public class SideBar extends Utils {
             printLog("Item acessado com sucesso: " + item, INFO);
         } catch (Exception e) {
             logError(e);
+        }
+    }
+
+    @E("^deverá ser apresentados os gráficos na tela$")
+    public void deveraSerApresentadosOsGraficosNaTela() {
+        try {
+            assertTrue("Algum dos gráficos não foram apresentados na tela inicial.", new ComponentePage().getGraficos().size() >= 2);
+        } finally {
+            capturaTela();
         }
     }
 }

@@ -55,9 +55,13 @@ public class ComponenteMap extends BasePageObjects {
         return listCards;
     }
 
-    public List<WebElement> getListBtnFecharAlerta() {
 //        Não da pra usar o Findby
+    public List<WebElement> getListBtnFecharAlerta() {
         return getElements(".p-toast .pi-times");
+    }
+
+    public List<WebElement> getListGraficos() {
+        return getElements("div[class^='p-d-flex p-jc']");
     }
 
     //Legado

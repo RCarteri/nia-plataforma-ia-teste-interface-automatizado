@@ -7,15 +7,20 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.*;
+import static support.Utils.printLog;
+import static support.Utils.rolarPaginaAteElemento;
 import static support.enums.LogTypes.INFO;
 import static support.enums.SelectorsDelays.BLOCKUI;
 
-public class ComponentePage{
+public class ComponentePage {
     private final ComponenteMap cM;
 
     public ComponentePage() {
         this.cM = new ComponenteMap();
+    }
+
+    public List<WebElement> getGraficos() {
+        return new ComponenteMap().getListGraficos();
     }
 
     public void acessarComponente(String componente) {

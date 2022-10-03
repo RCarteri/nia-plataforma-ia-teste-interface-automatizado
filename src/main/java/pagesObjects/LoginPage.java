@@ -11,7 +11,7 @@ import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
-import static support.Utils.waitLoadPage;
+import static support.Utils.waitInvisibility;
 import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
@@ -60,7 +60,7 @@ public class LoginPage {
                         loginPlataforma(lM);
                         setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
                         try {
-                            waitLoadPage(LOGIN);
+                            waitInvisibility(LOGIN);
                         } catch (TimeoutException e) {
                             novaTentativa(ambiente);
                         }

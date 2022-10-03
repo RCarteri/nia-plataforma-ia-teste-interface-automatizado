@@ -36,7 +36,7 @@ public class ModalComponentePage extends ModalComponenteMap {
         try {
             return new ModalComponenteMap().getModal().isDisplayed();
         } catch (NoSuchElementException | TimeoutException e) {
-            waitLoadPage(CIRCLE);
+            waitInvisibility(CIRCLE);
             try {
                 return new ModalComponenteMap().getComponenteTransferirS3().isDisplayed();
             } catch (NoSuchElementException | TimeoutException ex) {

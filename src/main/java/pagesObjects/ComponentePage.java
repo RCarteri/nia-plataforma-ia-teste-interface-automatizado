@@ -7,15 +7,19 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static support.Utils.*;
+import static support.Utils.printLog;
+import static support.Utils.rolarPaginaAteElemento;
 import static support.enums.LogTypes.INFO;
-import static support.enums.SelectorsDelays.BLOCKUI;
 
-public class ComponentePage{
+public class ComponentePage {
     private final ComponenteMap cM;
 
     public ComponentePage() {
         this.cM = new ComponenteMap();
+    }
+
+    public List<WebElement> getGraficos() {
+        return new ComponenteMap().getListGraficos();
     }
 
     public void acessarComponente(String componente) {
@@ -40,8 +44,8 @@ public class ComponentePage{
         }
         try {
             ComponenteMap cM = new ComponenteMap();
-            waitLoadPage(BLOCKUI);
             if ((local.equals("alerta"))) {
+               getMensagemAlerta("sucesso");
                 rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);
             } else {

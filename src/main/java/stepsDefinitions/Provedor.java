@@ -19,7 +19,7 @@ public class Provedor extends Utils {
     @E("^acessar a página do provedor \"([^\"]*)\"$")
     public void acessarAPaginaDoProvedor(String provedor) {
         try {
-            waitLoadPage(CIRCLE);
+            waitInvisibility(CIRCLE);
             cP.getMensagemAlerta("sucesso");
             cP.clickBtnFechar(false, "alerta");
             pP.acessarProvedor(provedor);

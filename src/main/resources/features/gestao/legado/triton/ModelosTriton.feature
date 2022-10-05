@@ -1,6 +1,6 @@
 #language: pt
 #encoding: utf-8
-@S008
+@S008L
 Funcionalidade: Suite008 - Modelos Triton
 
     Contexto: Acessar plataforma IA
@@ -11,18 +11,18 @@ Funcionalidade: Suite008 - Modelos Triton
         E acessar a página do provedor "Triton"
         E selecionar o componente "Modelos Triton"
 
-    @ID-008-002 @CT002 @Smoke
+    @ID-008-002L @CT002L @Smoke
     Cenario: CT002 - Validar componente
         Então deverá apresentar o título "Lista de Modelos" na página
 
-    @ID-008-003 @CT003
+    @ID-008-003L @CT003L
     Cenario: CT003 - Exibir componente
         Dado que exista "Detalhes"
         Então deverá apresentar o título "Detalhes do Modelo Triton" no modal
         E deverá mostrar a lista com detalhes
         E deverá apresentar mais detalhes
 
-    @ID-008-004 @CT004
+    @ID-008-004L @CT004L
     Esquema do Cenario: CT004 - Pesquisar
         Quando pesquisar um dado "válido" no "<local>" "<modal>"
         Então deverá apresentar um total de resultados diferente do anterior
@@ -38,7 +38,7 @@ Funcionalidade: Suite008 - Modelos Triton
             | local      | modal | mensagem               |
             | componente |       | Nenhum item encontrado |
 
-    @ID-008-009 @CT009
+    @ID-008-009L @CT009L
     Cenario: CT009 - Testar modelo Triton
         Dado que exista "Testar Modelo"
         E apresente as informações do request
@@ -48,7 +48,7 @@ Funcionalidade: Suite008 - Modelos Triton
             | torta       |
         Então deverá apresentar um response com sucesso
 
-    @ID-008-014 @CT014
+    @ID-008-014L @CT014L
     Cenario: CT014 - Limpar request
         Dado que exista "Testar Modelo"
         E apresente as informações do request

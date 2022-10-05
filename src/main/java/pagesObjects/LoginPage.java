@@ -40,9 +40,8 @@ public class LoginPage {
     public void acessarPagina(String nomePagina) {
         try {
             String tituloPagina = recuperarTituloPagina();
-            if (!(tituloPagina.intern().equals("Home Tecnologia"))){
+            if (!(tituloPagina.intern().equals("Home Tecnologia")))
                 selecionarAreaDeTrabalho(nomePagina);
-            }
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
         }

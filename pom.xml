@@ -5,7 +5,7 @@
     <groupId>br.com.bb.nia</groupId>
     <artifactId>nia-plataforma-ia-teste-interface-automatizado</artifactId>
     <packaging>jar</packaging>
-    <version>7.2.0-SNAPSHOT</version>
+    <version>7.3.0-SNAPSHOT</version>
     <name>nia-plataforma-ia-teste-interface-automatizado</name>
 
     <properties>
@@ -25,8 +25,8 @@
                 <enabled>true</enabled>
             </snapshots>
             <id>central</id>
-            <name>bb-maven-repo</name>
-            <url>https://atf.intranet.bb.com.br:443/artifactory/bb-maven-repo</url>
+            <name>maven</name>
+            <url>https://binarios.intranet.bb.com.br:443/artifactory/maven</url>
         </repository>
         <repository>
             <id>maven_central</id>

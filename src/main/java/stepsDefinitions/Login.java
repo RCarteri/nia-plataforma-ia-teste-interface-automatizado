@@ -13,7 +13,6 @@ import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
-import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Login extends Utils {
     private final LoginPage lP;
@@ -68,7 +67,6 @@ public class Login extends Utils {
         try {
             abrirMenu(nivel1, nivel2);
             printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
-            waitInvisibility(CIRCLE);
         } catch (Exception e) {
             logError(e);
         }

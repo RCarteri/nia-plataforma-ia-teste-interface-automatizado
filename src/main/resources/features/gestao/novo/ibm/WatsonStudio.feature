@@ -16,3 +16,10 @@ Funcionalidade: Suite002 - Watson Studio
     Cenario: CT002 - Exibir componente
         Então deverá apresentar o título "Gerenciar projetos Watson Studio" na página
         E deverá apresentar os cards com as informações
+
+    @ID-002-003 @CT003
+    Cenario: CT003 - Pesquisar componente
+        Quando pesquisar um dado "válido"
+        Então os resultados apresentados devem conter a palavra pesquisada
+        Quando pesquisar um dado "inválido"
+        Então a quantidade de resultados deve ser 0

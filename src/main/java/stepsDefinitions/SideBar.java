@@ -8,6 +8,7 @@ import support.Utils;
 
 import static org.junit.Assert.assertTrue;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class SideBar extends Utils {
     private final SideBarSection sS;
@@ -30,6 +31,7 @@ public class SideBar extends Utils {
     public void selecionarOItem(String item) {
         try {
             sS.acessarItem(item);
+            waitInvisibility(CIRCLE);
             printLog("Item acessado com sucesso: " + item, INFO);
         } catch (Exception e) {
             logError(e);

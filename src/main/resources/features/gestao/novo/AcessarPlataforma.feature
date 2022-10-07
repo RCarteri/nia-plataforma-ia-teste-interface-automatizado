@@ -8,6 +8,5 @@ Funcionalidade: Suite001 - Acessar plataforma IA
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Tecnologia (hm)"
-        E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud) NOVO"
-        Então a página "Gestão (Cloud) NOVO" deverá ser carregada com sucesso
-        E deverá ser apresentados os gráficos na tela
+        E se não estiver na home acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud) NOVO"
+        Então deverá ser apresentados os gráficos na tela

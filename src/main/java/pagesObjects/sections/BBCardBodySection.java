@@ -25,4 +25,13 @@ public class BBCardBodySection extends BBCardBodyMap {
     public int getQuantResultados() {
         return getListNomeComponente().size();
     }
+
+    public boolean siglasOk(String tagSelecionada) {
+        return getListTag().stream()
+                .allMatch(tag -> tag.getText().equals(tagSelecionada));
+    }
+
+    public boolean siglasOk() {
+        return getQuantResultados() > getListTag().size();
+    }
 }

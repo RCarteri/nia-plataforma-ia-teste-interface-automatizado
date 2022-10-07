@@ -11,8 +11,10 @@ import support.Utils;
 import static br.com.bb.ath.ftabb.gaw.Plataforma.abrirMenu;
 import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
 import static org.junit.Assert.assertEquals;
+import static pagesObjects.LoginPage.isPagGestaoCloud;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Login extends Utils {
     private final LoginPage lP;
@@ -56,17 +58,22 @@ public class Login extends Utils {
     public void aPaginaDeveraSerCarregadaComSucesso(String titulo) {
         try {
             assertEquals("A página não foi carregada.", recuperarTituloPagina(), titulo);
+            printLog("Página " + titulo + " carregada com sucesso.", INFO);
             cP.clickBtnFechar(false, "alerta");
         } catch (Exception e) {
             logError(e);
         }
     }
 
-    @E("^acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")
+    @E("^se não estiver na home acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")
     public void acessarMenu(String nivel1, String nivel2) {
         try {
-            abrirMenu(nivel1, nivel2);
-            printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
+            if (!isPagGestaoCloud()) {
+                abrirMenu(nivel1, nivel2);
+                printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
+                waitInvisibility(CIRCLE);
+                cP.clickBtnFechar(false, "alerta");
+            }
         } catch (Exception e) {
             logError(e);
         }

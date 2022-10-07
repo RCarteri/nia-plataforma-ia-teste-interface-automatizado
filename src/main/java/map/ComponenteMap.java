@@ -22,9 +22,6 @@ public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = "bb-card-body h1")
     private WebElement tituloComponente;
 
-    @FindBy(cssSelector = "bb-card bb-card")
-    private List<WebElement> listCards;
-
     public WebElement getTituloComponente() {
         if (tituloComponente == null)
             tituloComponente = setElement("tituloComponente");
@@ -50,9 +47,7 @@ public class ComponenteMap extends BasePageObjects {
     }
 
     public List<WebElement> getListCards() {
-        if (listCards == null)
-            listCards = setElements("listCards");
-        return listCards;
+        return getElements("bb-card bb-card");
     }
 
 //        Não da pra usar o Findby

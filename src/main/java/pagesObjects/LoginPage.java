@@ -16,6 +16,7 @@ import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
 import static support.enums.SelectorsDelays.LOGIN;
+import static support.enums.SelectorsDelays.SPINNER;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
@@ -37,10 +38,19 @@ public class LoginPage {
         }
     }
 
+    public static boolean isPagGestaoCloud(){
+        try {
+            return recuperarTituloPagina().equals("Gestão (Cloud) NOVO");
+        } catch (ElementoNaoLocalizadoException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public void acessarPagina(String nomePagina) {
         try {
             String tituloPagina = recuperarTituloPagina();
-            if (!(tituloPagina.intern().equals("Home Tecnologia")))
+            if (!(tituloPagina.intern().equals("Home Tecnologia") || tituloPagina.intern().equals("Gestão (Cloud) NOVO")))
                 selecionarAreaDeTrabalho(nomePagina);
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);

@@ -49,7 +49,7 @@ public class LoginPage {
 
     public void logar(String ambiente) {
         utils.setDatapool();
-        if (isLoggedPlataforma() | isLoggedIntranet()) {
+        if (isLoggedPlataforma() || isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
             LoginMap lM = new LoginMap();
@@ -81,6 +81,7 @@ public class LoginPage {
         printLog("Preenchendo formulário de login.", INFO);
         lM.getInputChave().sendKeys(getChave());
         lM.getInputSenha().sendKeys(getSenha());
+        lM.getInputCodConf().sendKeys(getCodConf());
         lM.getBtnEntrar().click();
     }
 
@@ -95,6 +96,7 @@ public class LoginPage {
             printLog("Não foi possível realizar o login pois não saiu da tela de login. A plataforma será fechada.", ERROR);
             fecharPlataforma();
         }
+        printLog("Tentativa de login: " + tentativa + "/3", INFO);
         getDriver().navigate().refresh();
         logar(ambiente);
     }
@@ -104,6 +106,11 @@ public class LoginPage {
         lM.getInputUsername().sendKeys(getChave());
         lM.getInputPassword().sendKeys(getSenha());
         lM.getBtnLogin().click();
+        waitInvisibility(SPINNER);
+        if (!getCodConf().equals("")) {
+            lM.getInputCodConf().sendKeys(getCodConf());
+            lM.getBtnLogin().click();
+        }
     }
 
     public void logoutEFecharPlataforma() {

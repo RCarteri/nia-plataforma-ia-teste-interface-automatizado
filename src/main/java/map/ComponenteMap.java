@@ -25,9 +25,6 @@ public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = "bb-card bb-card")
     private List<WebElement> listCards;
 
-    @FindBy(cssSelector = "bb-card-body h6")
-    private List<WebElement> listNomeComponente;
-
     public WebElement getTituloComponente() {
         if (tituloComponente == null)
             tituloComponente = setElement("tituloComponente");

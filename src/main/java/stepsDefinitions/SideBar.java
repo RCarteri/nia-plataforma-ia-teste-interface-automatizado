@@ -2,11 +2,9 @@ package stepsDefinitions;
 
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Quando;
-import pagesObjects.ComponentePage;
 import pagesObjects.sections.SideBarSection;
 import support.Utils;
 
-import static org.junit.Assert.assertTrue;
 import static support.enums.LogTypes.INFO;
 import static support.enums.SelectorsDelays.CIRCLE;
 
@@ -20,8 +18,9 @@ public class SideBar extends Utils {
     @Quando("^acessar os menus \"([^\"]*)\" e \"([^\"]*)\"$")
     public void acessarOsMenus(String menu1, String menu2) {
         try {
-            sS.acessarMenus(menu1, menu2);
-            printLog("Menus acessados com sucesso: " + menu1 + " " + menu2, INFO);
+            sS.acessarMenu(menu1);
+            sS.acessarMenu(menu2);
+            printLog("Menus '" + menu1 + "' e '" + menu2 + "' acessados com sucesso." , INFO);
         } catch (Exception e) {
             logError(e);
         }
@@ -30,20 +29,11 @@ public class SideBar extends Utils {
     @E("^selecionar o item \"([^\"]*)\"$")
     public void selecionarOItem(String item) {
         try {
-            sS.acessarItem(item);
+            sS.acessarMenu(item);
             waitInvisibility(CIRCLE);
             printLog("Item acessado com sucesso: " + item, INFO);
         } catch (Exception e) {
             logError(e);
-        }
-    }
-
-    @E("^deverá ser apresentados os gráficos na tela$")
-    public void deveraSerApresentadosOsGraficosNaTela() {
-        try {
-            assertTrue("Algum dos gráficos não foram apresentados na tela inicial.", new ComponentePage().getGraficos().size() >= 2);
-        } finally {
-            capturaTela();
         }
     }
 }

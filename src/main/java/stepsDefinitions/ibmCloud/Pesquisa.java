@@ -14,6 +14,7 @@ public class Pesquisa extends Utils {
     private final BBCardBodySection cardBS;
     private final BBCardHeaderSection cardHS;
     private String palavraPesquisada;
+    private String tagSelecionada;
 
     public Pesquisa() {
         this.cardBS = new BBCardBodySection();
@@ -32,7 +33,7 @@ public class Pesquisa extends Utils {
         try {
             boolean retornoOk = cardBS.resultadosContemString(palavraPesquisada);
             assertTrue("Os resultados apresentados não contem a palavra pesquisada.", retornoOk);
-        }finally {
+        } finally {
             capturaTela();
         }
     }
@@ -44,7 +45,45 @@ public class Pesquisa extends Utils {
             assertEquals(printResultadoEsperadoObtido(quantResultados, quantResultadosObtida),
                     quantResultadosObtida, quantResultados);
         } finally {
-           capturaTela();
+            capturaTela();
+        }
+    }
+
+    @Quando("^selecionar uma sigla$")
+    public void selecionarUmaSigla() {
+        try {
+            cardHS.removerTags();
+            this.tagSelecionada = cardHS.selecionarTag();
+        } catch (Exception e) {
+            logError(e);
+        }
+    }
+
+    @Então("^deverá mostrar somente os projetos com essa sigla$")
+    public void deveraMostrarSomenteOsProjetosComEssaSigla() {
+        try {
+            assertTrue(cardBS.siglasOk(tagSelecionada));
+        } finally {
+            capturaTela();
+        }
+    }
+
+    @Quando("^não selecionar uma sigla$")
+    public void naoSelecionarUmaSigla() {
+        try {
+            cardHS.removerTags();
+            cardHS.filtrar();
+        } catch (Exception e) {
+            logError(e);
+        }
+    }
+
+    @Então("^deverá mostrar todos os projetos, incluindo os sem sigla$")
+    public void deveraMostrarTodosOsProjetosIncluindoOsSemSigla() {
+        try {
+            assertTrue("Os cards sem sigla não estão aparecendo.", cardBS.siglasOk());
+        }finally {
+            capturaTela();
         }
     }
 }

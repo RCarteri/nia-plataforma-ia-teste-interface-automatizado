@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
 import static io.qameta.allure.Allure.addAttachment;
 import static java.lang.System.*;
 import static java.nio.file.Paths.get;
+import static java.time.LocalTime.now;
 import static java.util.Arrays.asList;
 import static java.util.Comparator.comparing;
 import static java.util.UUID.randomUUID;
@@ -56,10 +59,18 @@ public class Utils extends BaseUtils {
     public static void waitInvisibility(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
+            LocalTime antes = now();
+            printLog("Agruardando o elemento '" + locator.getSelector() + " não estar mais na página.", INFO);
             wait.until(invisibilityOfElementLocated(cssSelector(locator.getSelector())));
+            printLog(locator.getSelector() + " não encontrado na página depois de " + delay(antes) + " segundos.", INFO);
         } catch (TimeoutException e) {
             printLog("O elemento " + locator.getSelector() + " não desapareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
+    }
+
+    private static String delay(LocalTime antes) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("s.SS");
+        return dtf.format(now().minusSeconds(antes.getSecond()));
     }
 
     public static String printResultadoEsperadoObtido(String esperado, String obtido) {
@@ -92,11 +103,18 @@ public class Utils extends BaseUtils {
     }
 
     public void setDatapool() {
-            datapoolInit();
+        datapoolInit();
+        String codConf = "";
         try {
             setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
             setProperty(SENHA.toString(), $("login_plataforma.chaveF.senha"));
+            try {
+                codConf = $("login_plataforma.chaveF.codConf");
+            } catch (DataPoolException e) {
+                printLog("Usuário não possui código de configuração definido.", INFO);
+            }
+            setProperty(COD_CONF.toString(), codConf);
         } catch (DataPoolException e) {
             printLog("As informações do usuário logado não foram retornadas.", ERROR);
             logError(e);
@@ -174,8 +192,8 @@ public class Utils extends BaseUtils {
     }
 
     public String getPayload(String endpoint, String tipoPayload) {
-            String param = "payloads." + endpoint + "." + tipoPayload;
-            datapoolInit();
+        String param = "payloads." + endpoint + "." + tipoPayload;
+        datapoolInit();
         try {
             return $(param);
         } catch (DataPoolException e) {
@@ -185,10 +203,10 @@ public class Utils extends BaseUtils {
         return null;
     }
 
-    private void datapoolInit(){
+    private void datapoolInit() {
         try {
             getInstance();
-        }catch (DataPoolException e){
+        } catch (DataPoolException e) {
 //          Rever essa configuração quando souber como pegar as propriedades definidas no app.config
 //          String datapoolPath = getContext().getContextConfig().get("datapools.path");
             String datapoolPath = "datapools";

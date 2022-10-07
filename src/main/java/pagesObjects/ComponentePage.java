@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static br.com.bb.ath.ftabb.utilitarios.Utils.sleep;
 import static java.util.Arrays.asList;
 import static support.Utils.printLog;
-import static support.Utils.rolarPaginaAteElemento;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
 
@@ -21,7 +21,7 @@ public class ComponentePage {
     }
 
     public List<WebElement> getGraficos() {
-        return new ComponenteMap().getListGraficos();
+        return cM.getListGraficos();
     }
 
     public void acessarComponente(String componente) {
@@ -45,10 +45,9 @@ public class ComponentePage {
             printLog(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.", INFO);
         }
         try {
-            ComponenteMap cM = new ComponenteMap();
             if ((local.equals("alerta"))) {
                 getMensagemAlerta("sucesso");
-                rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
+                sleep(1);
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);
             } else {
                 cM.getBtnFecharModal().click();
@@ -60,7 +59,6 @@ public class ComponentePage {
     }
 
     public WebElement getMensagemAlerta(String opcao) {
-        ComponenteMap cM = new ComponenteMap();
         switch (opcao) {
             case "sucesso":
                 return cM.getAlertSuccess();

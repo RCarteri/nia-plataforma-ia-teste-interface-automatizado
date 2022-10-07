@@ -6,6 +6,7 @@ import support.GetElements;
 import support.annotations.FindBy;
 
 import static org.openqa.selenium.By.xpath;
+import static support.GetElements.getElement;
 
 public class SideBarMap extends BasePageObjects {
     @FindBy(cssSelector = ".sidebar.bb-sidebar-menu")
@@ -20,5 +21,9 @@ public class SideBarMap extends BasePageObjects {
     public WebElement getMenuSideBar(String menu) {
          String seletor = "//span[contains(text(), '" + menu + "')]";
          return new GetElements().findElement(xpath(seletor));
+    }
+
+    public void getSideBarOpen() {
+        getElement(".bb-sidebar-menu-opened");
     }
 }

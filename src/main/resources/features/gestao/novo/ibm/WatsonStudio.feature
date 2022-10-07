@@ -7,8 +7,7 @@ Funcionalidade: Suite002 - Watson Studio
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Tecnologia (hm)"
-        E acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud) NOVO"
-        Então a página "Gestão (Cloud) NOVO" deverá ser carregada com sucesso
+        E se não estiver na home acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud) NOVO"
         Quando acessar os menus "IBM" e "Watson"
         E selecionar o item "Watson Studio"
 
@@ -23,3 +22,10 @@ Funcionalidade: Suite002 - Watson Studio
         Então os resultados apresentados devem conter a palavra pesquisada
         Quando pesquisar um dado "inválido"
         Então a quantidade de resultados deve ser 0
+
+    @ID-002-004 @CT004
+    Cenario: CT004 - Filtrar projetos por sigla
+        Quando não selecionar uma sigla
+        Então deverá mostrar todos os projetos, incluindo os sem sigla
+        Quando selecionar uma sigla
+        Então deverá mostrar somente os projetos com essa sigla

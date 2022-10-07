@@ -116,15 +116,4 @@ public class Componente extends Utils{
             capturaTela();
         }
     }
-
-    @E("^deverá apresentar os cards com as informações$")
-    public void deveraApresentarOsCardsComAsInformacoes() {
-        try {
-            assertTrue(cP.getCards().size() > 0);
-            assertTrue(cP.isInfoCardsApresentadas());
-            printLog("Os cards foram apresentados com sucesso.", INFO);
-        } catch (AssertionError e) {
-            fail("Os cards não foram apresentados.");
-        }
-    }
 }

@@ -3,6 +3,7 @@ package support.enums;
 public enum SelectorsDelays {
 	CIRCLE(".p-progress-spinner-circle", 20),
 	LOGIN("#idToken1", 5),
+	SPINNER(".spinner", 5),
 	MODAL("div.p-dialog-header", 1);
 
 	private final String selector;

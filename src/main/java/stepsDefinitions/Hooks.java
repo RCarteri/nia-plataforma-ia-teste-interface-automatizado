@@ -13,7 +13,7 @@ import static support.enums.SysProps.isLoggedPlataforma;
 
 public class Hooks {
     @Before("@ignore")
-    public void skip_scenario(Scenario scenario){
+    public void skip_scenario(Scenario scenario) {
         System.out.println("Scenário ignorado: " + scenario.getName());
         assumeTrue("O cenário " + scenario.getName() + " está definido para ser ignorado.", false);
     }
@@ -24,7 +24,6 @@ public class Hooks {
             if (isLoggedPlataforma()) {
                 if (!recuperarTituloPagina().intern().equals("Plataforma BB | Analytics e Inteligência Artificial"))
                     fecharPaginaAtual();
-            }
         } catch (ElementoNaoLocalizadoException e) {
             new Utils().logError(e);
         }

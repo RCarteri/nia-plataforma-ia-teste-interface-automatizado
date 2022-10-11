@@ -23,6 +23,7 @@ import static support.Utils.*;
 import static support.enums.Ambiente.*;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.Siglas.getInstance;
 import static support.enums.User.getChave;
 
 public class BaseClass extends FTABBUtils {
@@ -106,7 +107,8 @@ public class BaseClass extends FTABBUtils {
 
     private String getNameComponente(String componente) {
         String str = utils.getPayload("op5806077v2", componente);
-        return new JSONObject(str).getString("nomeComponente");
+        String nameComponente = new JSONObject(str).getString("nomeComponente");
+        return (nameComponente.equals("nameComponente")) ? nameComponente : componente;
     }
 
     protected void setConfComponenteNoPayload(String tipoPayload, String componente) {
@@ -120,12 +122,37 @@ public class BaseClass extends FTABBUtils {
         listaRetorno = response.jsonPath().get("listaRetorno");
     }
 
-    protected void setPayload(String endpoint, String tipoPayload) {
-        payload = utils.getPayload(endpoint, tipoPayload);
+    protected void setPayload(String tipoPayload) {
+        setPayload(endpoint, tipoPayload);
     }
 
-    protected void setPayload(String tipoPayload) {
+    protected void setPayload(String endpoint, String tipoPayload) {
         payload = utils.getPayload(endpoint, tipoPayload);
+        tratarPayload(tipoPayload);
+    }
+
+    private void tratarPayload(String tipoPayload) {
+        payload = payload.replace("nameComponente", tipoPayload);
+        if (tipoPayload.equals("WATSON_STUDIO"))
+            setSigla();
+    }
+
+    private void setSigla() {
+        if (getInstance().getSiglas() == null)
+            getSiglas();
+        List<String> siglas = getInstance().getSiglas();
+        String sigla = siglas.get(getRandom(siglas.size()));
+        payload = payload.replace("sigla", sigla);
+    }
+
+    private void getSiglas(){
+            BaseClass bC = new BaseClass();
+            bC.setEndpoint("dpr/Op5903588-v1");
+            bC.setChave("OK");
+            bC.enviarPayload();
+            String path = "data.listaOcorrencia.siglaSistemaSoftware";
+            List<String> siglas = bC.response.body().jsonPath().get(path);
+            getInstance().seSiglas(siglas);
     }
 
     private String getDescricao() {

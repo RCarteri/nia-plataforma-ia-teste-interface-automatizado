@@ -30,17 +30,16 @@ public class BaseClass extends FTABBUtils {
     private String endpoint;
     private String payload;
     protected Response response;
-    private List<Map<String, String>> yamlMap;
-    private ArrayList<Map<String,String>> listaRetorno;
+    private ArrayList<Map<String, String>> listaRetorno;
     private final Utils utils = new Utils();
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
     }
 
-    public void definirChave(String tipoPayload) {
+    public void setChave(String tipoPayload) {
         setPayload(tipoPayload);
-        new Utils().setDatapool();
+        new Utils().setDatapool("desenvolvimento");
         payload = payload.replace("chaveUsuario", getChave());
     }
 
@@ -116,6 +115,7 @@ public class BaseClass extends FTABBUtils {
                 .replace("codComponente", getCodComponente())
                 .replace("nameComponente", getNameComponente(componente));
     }
+
     private void setListaRetorno() {
         listaRetorno = response.jsonPath().get("listaRetorno");
     }
@@ -159,10 +159,10 @@ public class BaseClass extends FTABBUtils {
         String endpoint;
         Matcher matcher = compile("[a-z]{3}").matcher(this.endpoint);
         if (matcher.find()) {
-            endpoint = this.endpoint.substring(0,3).toUpperCase() + this.endpoint.substring(3).replace("-","_");
+            endpoint = this.endpoint.substring(0, 3).toUpperCase() + this.endpoint.substring(3).replace("-", "_");
             return API.getUrl() + endpoint;
         } else {
-            endpoint = this.endpoint.substring(0,1).toUpperCase() + this.endpoint.substring(1,9) + "_" + this.endpoint.substring(9);
+            endpoint = this.endpoint.substring(0, 1).toUpperCase() + this.endpoint.substring(1, 9) + "_" + this.endpoint.substring(9);
             return API.getUrl() + "NIA/" + endpoint;
         }
     }

@@ -58,7 +58,7 @@ public class LoginPage {
     }
 
     public void logar(String ambiente) {
-        utils.setDatapool();
+        utils.setDatapool(ambiente);
         if (isLoggedPlataforma() || isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {

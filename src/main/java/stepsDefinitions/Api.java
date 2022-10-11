@@ -30,7 +30,7 @@ public class Api extends BaseClass {
 
     @Quando("^definir a chave a ser usada enviando um payload \"([^\"]*)\"$")
     public void definirAChaveASerUsadaEnviandoUmPayload(String tipoPayload) {
-        definirChave(tipoPayload);
+        setChave(tipoPayload);
         enviarPayload();
     }
 

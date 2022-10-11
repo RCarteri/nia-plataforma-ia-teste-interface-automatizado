@@ -11,12 +11,12 @@ op5806077v3:
 
 op5806077v2:
   descrição: "Listar informações do componente"
-  OK-Studio: '{"nomeComponente":"WATSON_STUDIO"}'
   OK-Assistant: '{"nomeComponente":"WATSON_ASSISTANT"}'
   OK-Catalog: '{"nomeComponente":"WATSON_KNOWLEDGE_CATALOG"}'
   OK-Storage: '{"nomeComponente":"CLOUD_OBJECT_STORAGE"}'
 
 getNomeCodComponente: &nomeCodComponente '{"nomeComponente":"nameComponente", "codigoComponente":"codComponente"}'
+
 op5839181v1:
   descrição: "Listar informações do componente com o código do componente"
   OK-Bucket: '{"nomeComponente":"CLOUD_OBJECT_STORAGE_BUCKETS", "codigoComponente":"codComponente"}'

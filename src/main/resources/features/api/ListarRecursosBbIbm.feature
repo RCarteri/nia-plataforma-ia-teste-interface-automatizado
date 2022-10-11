@@ -10,7 +10,6 @@ Funcionalidade: APISuite002 - Listar recursos BB na IBM Cloud
         Então deve retornar o código 200
         Exemplos:
             | payload      | endpoint    |
-            | OK-Studio    | op5806077v2 |
             | OK-Assistant | op5806077v2 |
             | OK-Catalog   | op5806077v2 |
             | OK-Storage   | op5806077v2 |

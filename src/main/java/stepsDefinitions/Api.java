@@ -6,6 +6,8 @@ import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 import support.APIRest.BaseClass;
 
+import static br.com.bb.ath.ftabb.gaw.Plataforma.fecharPlataforma;
+
 public class Api extends BaseClass {
 
     @E("^que defina o endpoint \"([^\"]*)\"$")
@@ -35,6 +37,7 @@ public class Api extends BaseClass {
     @E("^que não tenha cookies, pegue os cookies$")
     public void queNaoTenhaCookiesPegueOsCookies() {
         getCookies();
+        fecharPlataforma();
     }
 
     @Dado("^que tenha a lista de códigos do componente \"([^\"]*)\" para ver os detalhes$")

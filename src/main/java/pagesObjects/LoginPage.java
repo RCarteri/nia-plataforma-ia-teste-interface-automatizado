@@ -91,7 +91,6 @@ public class LoginPage {
         printLog("Preenchendo formulário de login.", INFO);
         lM.getInputChave().sendKeys(getChave());
         lM.getInputSenha().sendKeys(getSenha());
-        lM.getInputCodConf().sendKeys(getCodConf());
         lM.getBtnEntrar().click();
     }
 

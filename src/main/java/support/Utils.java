@@ -108,7 +108,7 @@ public class Utils extends BaseUtils {
         try {
             setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
-            String senha = (ambiente.equals("homologação")) ? $("login_plataforma.chaveF.senhaHm") : $("login_plataforma.chaveF.senhades");
+            String senha = (ambiente.equals("homologação")) ? $("login_plataforma.chaveF.senhaHm") : $("login_plataforma.chaveF.senhaDes");
             setProperty(SENHA.toString(), senha);
             setProperty(COD_CONF.toString(), "111111");
         } catch (DataPoolException e) {

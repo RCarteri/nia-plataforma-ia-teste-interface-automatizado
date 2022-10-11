@@ -34,7 +34,7 @@ public class LoginPage {
             abrirPlataforma();
             printLog("A Plataforma foi aberta.", INFO);
         } else {
-            printLog("A Plataforma está aberta.", INFO);
+            printLog("A Plataforma já foi aberta.", INFO);
         }
     }
 

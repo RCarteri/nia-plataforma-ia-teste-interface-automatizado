@@ -104,7 +104,6 @@ public class Utils extends BaseUtils {
 
     public void setDatapool(String ambiente) {
         datapoolInit();
-        String codConf = "";
         try {
             setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));

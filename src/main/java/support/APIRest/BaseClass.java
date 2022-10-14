@@ -80,6 +80,7 @@ public class BaseClass extends FTABBUtils {
                 .when()
                 .post(endpoint);
         setTable();
+        printResult();
     }
 
     protected void enviarPayload(String endpoint) {
@@ -89,6 +90,7 @@ public class BaseClass extends FTABBUtils {
                 .when()
                 .post(endpoint);
         setListaRetorno();
+        printResult();
     }
 
     protected void printResult() {

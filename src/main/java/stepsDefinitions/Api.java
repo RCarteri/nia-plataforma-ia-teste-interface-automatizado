@@ -23,7 +23,6 @@ public class Api extends BaseClass {
 
     @Então("^deve retornar o código (\\d+)$")
     public void deveRetornarOCodigo(int sc) {
-        printResult();
         response.then().assertThat()
                 .statusCode(sc);
     }

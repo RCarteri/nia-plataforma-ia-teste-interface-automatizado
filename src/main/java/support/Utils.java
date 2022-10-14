@@ -1,7 +1,6 @@
 package support;
 
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
-import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import cucumber.api.DataTable;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TakesScreenshot;
@@ -16,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import static br.com.bb.ath.ftabb.enums.OrigemExecucao.QTESTE;
 import static io.qameta.allure.Allure.addAttachment;
 import static java.lang.System.*;
 import static java.nio.file.Paths.get;
+import static java.time.LocalTime.now;
 import static java.util.Arrays.asList;
 import static java.util.Comparator.comparing;
 import static java.util.UUID.randomUUID;
@@ -34,11 +36,10 @@ import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.BYTES;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
-import static support.GetElements.getDriver;
 import static support.enums.LogTypes.*;
 import static support.enums.User.*;
 
-public class Utils extends FTABBUtils {
+public class Utils extends BaseUtils {
     public void esperar(SelectorsDelays tar) {
         printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getSelector() + "...", NULL);
         sleep(esperarQTeste(tar.getDelay()));
@@ -55,13 +56,21 @@ public class Utils extends FTABBUtils {
         return getContext().getOrigemExecucao().equals(QTESTE);
     }
 
-    public static void waitLoadPage(SelectorsDelays locator) {
+    public static void waitInvisibility(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());
         try {
+            LocalTime antes = now();
+            printLog("Agruardando o elemento '" + locator.getSelector() + " não estar mais na página.", INFO);
             wait.until(invisibilityOfElementLocated(cssSelector(locator.getSelector())));
+            printLog(locator.getSelector() + " não encontrado na página depois de " + delay(antes) + " segundos.", INFO);
         } catch (TimeoutException e) {
-            printLog("O elemento " + locator.getSelector() + " não apareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
+            printLog("O elemento " + locator.getSelector() + " não desapareceu durante os " + locator.getDelay() + " segundos de espera.", ERROR);
         }
+    }
+
+    private static String delay(LocalTime antes) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("s.SS");
+        return dtf.format(now().minusSeconds(antes.getSecond()));
     }
 
     public static String printResultadoEsperadoObtido(String esperado, String obtido) {
@@ -93,12 +102,14 @@ public class Utils extends FTABBUtils {
             printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
-    public void setDatapool() {
-            datapoolInit();
+    public void setDatapool(String ambiente) {
+        datapoolInit();
         try {
             setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
-            setProperty(SENHA.toString(), $("login_plataforma.chaveF.senha"));
+            String senha = (ambiente.equals("homologação")) ? $("login_plataforma.chaveF.senhaHm") : $("login_plataforma.chaveF.senhaDes");
+            setProperty(SENHA.toString(), senha);
+            setProperty(COD_CONF.toString(), "111111");
         } catch (DataPoolException e) {
             printLog("As informações do usuário logado não foram retornadas.", ERROR);
             logError(e);
@@ -175,9 +186,9 @@ public class Utils extends FTABBUtils {
         }
     }
 
-    public String getPayload(String endpoint, String tipoPayload) {
-            String param = "payloads." + endpoint + "." + tipoPayload;
-            datapoolInit();
+    public String getPayload(String endpoint, String componente) {
+        String param = "payloads." + endpoint + "." + componente;
+        datapoolInit();
         try {
             return $(param);
         } catch (DataPoolException e) {
@@ -187,11 +198,13 @@ public class Utils extends FTABBUtils {
         return null;
     }
 
-    private void datapoolInit(){
+    private void datapoolInit() {
         try {
             getInstance();
-        }catch (DataPoolException e){
-          String datapoolPath = getContext().getContextConfig().get("datapools.path");
+        } catch (DataPoolException e) {
+//          Rever essa configuração quando souber como pegar as propriedades definidas no app.config
+//          String datapoolPath = getContext().getContextConfig().get("datapools.path");
+            String datapoolPath = "datapools";
             try {
                 init(datapoolPath);
             } catch (DataPoolException ex) {

@@ -4,8 +4,6 @@ import cucumber.api.DataTable;
 import map.ComponenteMap;
 import map.ModalAdicionarMembroMap;
 import pagesObjects.MensagemErro;
-import pagesObjects.ModalComponentePage;
-import pagesObjects.sections.PesquisaSection;
 import stepsDefinitions.forms.addMembro.MembroData;
 import stepsDefinitions.ibmCloud.Componente;
 import support.Utils;
@@ -97,18 +95,18 @@ public class ModalAdicionarMembroPage {
         new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi incluído com sucesso!");
     }
 
-    public boolean isMembroNaLista() {
-        PesquisaSection pS = new PesquisaSection();
-        String local = "modal";
-        pS.pesquisar(membros.get(0).getUsuario(), local);
-        return pS.resultadosContemString(membros.get(0).getUsuario(), local);
-    }
+//    public boolean isMembroNaLista() {
+//        PesquisaSection pS = new PesquisaSection();
+//        String local = "modal";
+//        pS.pesquisar(membros.get(0).getUsuario(), local);
+//        return pS.resultadosContemString(membros.get(0).getUsuario(), local);
+//    }
 
-    public void verificarInclusao() {
-        if (isMembroNaLista()) {
-            System.out.println("O membro já está na lista, excluíndo o membro para prosseguir o teste.");
-            new ModalComponentePage().excluirMembro(-1);
-            new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi removido com sucesso!");
-        }
-    }
+//    public void verificarInclusao() {
+//        if (isMembroNaLista()) {
+//            System.out.println("O membro já está na lista, excluíndo o membro para prosseguir o teste.");
+//            new ModalComponentePage().excluirMembro(-1);
+//            new Componente().deveraSerApresentadoOAlertaComAMensagem("sucesso", "Membro foi removido com sucesso!");
+//        }
+//    }
 }

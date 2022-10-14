@@ -2,7 +2,6 @@ package stepsDefinitions.forms.addMembro;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.pt.Então;
-import cucumber.api.java.pt.Mas;
 import cucumber.api.java.pt.Quando;
 import pagesObjects.MensagemErro;
 import pagesObjects.ModalComponentePage;
@@ -33,15 +32,14 @@ public class AdicionarMembro extends Utils {
         }
     }
 
-
-    @Mas("^o membro a ser adicionado não exista na lista$")
-    public void oMembroASerAdicionadoNaoExistaNaLista() {
-        mAMP.verificarInclusao();
-        try {
-            new ModalComponentePage().acessarForm();
-            mAMP.fillForm();
-        } catch (Exception e) {
-            logError(e);
-        }
-    }
+//    @Mas("^o membro a ser adicionado não exista na lista$")
+//    public void oMembroASerAdicionadoNaoExistaNaLista() {
+//        mAMP.verificarInclusao();
+//        try {
+//            new ModalComponentePage().acessarForm();
+//            mAMP.fillForm();
+//        } catch (Exception e) {
+//            logError(e);
+//        }
+//    }
 }

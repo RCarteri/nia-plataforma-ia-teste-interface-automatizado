@@ -5,15 +5,23 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
+import static br.com.bb.ath.ftabb.utilitarios.Utils.sleep;
+import static java.util.Arrays.asList;
 import static support.Utils.printLog;
-import static support.Utils.rolarPaginaAteElemento;
+import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
 
-public class ComponentePage{
+public class ComponentePage {
     private final ComponenteMap cM;
 
     public ComponentePage() {
         this.cM = new ComponenteMap();
+    }
+
+    public List<WebElement> getGraficos() {
+        return cM.getListGraficos();
     }
 
     public void acessarComponente(String componente) {
@@ -28,14 +36,18 @@ public class ComponentePage{
         return cM.getTituloComponente().getText();
     }
 
+    public List<WebElement> getCards() {
+        return cM.getListCards();
+    }
+
     public void clickBtnFechar(boolean elemNaoExiste, String local) {
         if (elemNaoExiste) {
             printLog(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.", INFO);
         }
         try {
-            ComponenteMap cM = new ComponenteMap();
             if ((local.equals("alerta"))) {
-                rolarPaginaAteElemento(cM.getListBtnFecharAlerta().get(0));
+                getMensagemAlerta("sucesso");
+                sleep(1);
                 cM.getListBtnFecharAlerta().forEach(WebElement::click);
             } else {
                 cM.getBtnFecharModal().click();
@@ -47,7 +59,6 @@ public class ComponentePage{
     }
 
     public WebElement getMensagemAlerta(String opcao) {
-        ComponenteMap cM = new ComponenteMap();
         switch (opcao) {
             case "sucesso":
                 return cM.getAlertSuccess();
@@ -56,5 +67,17 @@ public class ComponentePage{
             default:
                 return null;
         }
+    }
+
+    public boolean isInfoCardsApresentadas() {
+        boolean infoCardsApresentadas = true;
+        for (WebElement card : cM.getListCards()) {
+            List<String> infoList = asList(card.getText().split("\n"));
+            if (infoList.size() < 4) {
+                printLog("Está faltando informações no card: " + infoList.get(0), ERROR);
+                infoCardsApresentadas = false;
+            }
+        }
+        return infoCardsApresentadas;
     }
 }

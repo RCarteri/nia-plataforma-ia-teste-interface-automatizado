@@ -11,11 +11,12 @@ import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
-import static support.Utils.waitLoadPage;
+import static support.Utils.waitInvisibility;
 import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
 import static support.enums.SelectorsDelays.LOGIN;
+import static support.enums.SelectorsDelays.SPINNER;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
@@ -33,32 +34,32 @@ public class LoginPage {
             abrirPlataforma();
             printLog("A Plataforma foi aberta.", INFO);
         } else {
-            printLog("A Plataforma está aberta.", INFO);
+            printLog("A Plataforma já foi aberta.", INFO);
+        }
+    }
+
+    public static boolean isPagGestaoCloud(){
+        try {
+            return recuperarTituloPagina().equals("Gestão (Cloud) NOVO");
+        } catch (ElementoNaoLocalizadoException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
     public void acessarPagina(String nomePagina) {
         try {
             String tituloPagina = recuperarTituloPagina();
-            if (!(tituloPagina.intern().equals("Plataforma BB | Analytics e Inteligência Artificial"))) {
+            if (!(tituloPagina.intern().equals("Home Tecnologia") || tituloPagina.intern().equals("Gestão (Cloud) NOVO")))
                 selecionarAreaDeTrabalho(nomePagina);
-            }
-        } catch (ElementoNaoLocalizadoException e) {
-            utils.logError(e);
-        }
-    }
-
-    public void acessarMenu(String nivel1, String nivel2) {
-        try {
-            abrirMenu(nivel1, nivel2);
         } catch (ElementoNaoLocalizadoException e) {
             utils.logError(e);
         }
     }
 
     public void logar(String ambiente) {
-        utils.setDatapool();
-        if (isLoggedPlataforma() | isLoggedIntranet()) {
+        utils.setDatapool(ambiente);
+        if (isLoggedPlataforma() || isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
             LoginMap lM = new LoginMap();
@@ -68,7 +69,7 @@ public class LoginPage {
                         loginPlataforma(lM);
                         setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
                         try {
-                            waitLoadPage(LOGIN);
+                            waitInvisibility(LOGIN);
                         } catch (TimeoutException e) {
                             novaTentativa(ambiente);
                         }
@@ -104,6 +105,7 @@ public class LoginPage {
             printLog("Não foi possível realizar o login pois não saiu da tela de login. A plataforma será fechada.", ERROR);
             fecharPlataforma();
         }
+        printLog("Tentativa de login: " + tentativa + "/3", INFO);
         getDriver().navigate().refresh();
         logar(ambiente);
     }
@@ -113,6 +115,11 @@ public class LoginPage {
         lM.getInputUsername().sendKeys(getChave());
         lM.getInputPassword().sendKeys(getSenha());
         lM.getBtnLogin().click();
+        waitInvisibility(SPINNER);
+        if (!getCodConf().equals("")) {
+            lM.getInputCodConf().sendKeys(getCodConf());
+            lM.getBtnLogin().click();
+        }
     }
 
     public void logoutEFecharPlataforma() {

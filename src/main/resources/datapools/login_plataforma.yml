@@ -1,12 +1,16 @@
 # Datapool de Login
 
 chaveF:
-  #  usuario: Bruno
-  #  chave: F2177895
-  #  senha: 14789632
+#  usuario: "Ricardo"
+#  chave: "C1324634"
+#  senha: "11111111"
   usuario: "Rafael"
   chave: "F8367126"
-  senha: "14789632"
+  senhaHm: "14785236"
+  senhaDes: "11111111"
+#  usuario: "Bruno"
+#  chave: "F2177895"
+#  senhaDes: "11111111"
 
 chaveTeste:
   usuario: "othavio@bb.com.br"

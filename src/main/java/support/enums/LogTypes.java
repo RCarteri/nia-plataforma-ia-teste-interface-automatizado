@@ -1,5 +1,5 @@
 package support.enums;
 
 public enum LogTypes {
-    INFO, ERROR, NULL
+    INFO, ERROR, START, NULL, TABLE
 }

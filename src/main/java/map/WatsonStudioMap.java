@@ -1,6 +1,7 @@
 package map;
 
 import org.openqa.selenium.WebElement;
+import pagesObjects.BasePageObjects;
 import support.annotations.FindBy;
 
 import java.util.List;

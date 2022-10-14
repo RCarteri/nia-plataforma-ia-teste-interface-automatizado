@@ -1,14 +1,13 @@
 package map;
 
 import org.openqa.selenium.WebElement;
+import pagesObjects.BasePageObjects;
 import support.annotations.FindBy;
 
 import java.util.List;
 
 import static support.GetElements.getElement;
 import static support.GetElements.getElements;
-import static support.Utils.waitLoadPage;
-import static support.enums.SelectorsDelays.CARR_PAG;
 
 public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-dropdown-trigger span")
@@ -17,9 +16,16 @@ public class ComponenteMap extends BasePageObjects {
     @FindBy(cssSelector = ".p-toast-message-success")
     private WebElement alertSuccess;
 
+    @FindBy(cssSelector = ".p-toast-message-info .p-toast-detail")
+    private WebElement alertInfo;
+
+    @FindBy(cssSelector = "bb-card-body h1")
+    private WebElement tituloComponente;
+
     public WebElement getTituloComponente() {
-        waitLoadPage(CARR_PAG);
-        return getElement("#p-panel-1-titlebar");
+        if (tituloComponente == null)
+            tituloComponente = setElement("tituloComponente");
+        return tituloComponente;
     }
 
     public WebElement getDropDownComponente() {
@@ -28,32 +34,42 @@ public class ComponenteMap extends BasePageObjects {
         return dropComponente;
     }
 
-    public WebElement getAlertInfo() {
-        waitLoadPage(CARR_PAG);
-        //Se usar o FindBy trava no CT009 Inexistência do componente
-        return getElement(".p-toast-message-info .p-toast-detail");
-    }
-
     public WebElement getAlertSuccess() {
-        waitLoadPage(CARR_PAG);
         if (alertSuccess == null)
             alertSuccess = setElement("alertSuccess");
         return alertSuccess;
     }
 
-    public List<WebElement> getListComponente() {
-        return getElements(".p-dropdown-items-wrapper span");
+    public WebElement getAlertInfo() {
+        if (alertInfo == null)
+            alertInfo = setElement("alertInfo");
+        return alertInfo;
     }
 
+    public List<WebElement> getListCards() {
+        return getElements("bb-card bb-card");
+    }
+
+//        Não da pra usar o Findby
     public List<WebElement> getListBtnFecharAlerta() {
         return getElements(".p-toast .pi-times");
     }
 
-    public WebElement getBtnFecharModal(){
+    public List<WebElement> getListGraficos() {
+        return getElements("div[class^='p-d-flex p-jc']");
+    }
+
+    //Legado
+
+    public List<WebElement> getListComponente() {
+        return getElements(".p-dropdown-items-wrapper span");
+    }
+
+    public WebElement getBtnFecharModal() {
         return getElement(".p-dialog-header .pi-times");
     }
 
-    public WebElement getForm(){
+    public WebElement getForm() {
         return getElement(".p-dialog-content form");
     }
 }

@@ -12,7 +12,7 @@ import static support.APIRest.Host.HML;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = {"classpath:features/gestao", "classpath:features/primeiroAcesso"},
+		features = {"classpath:features/gestao/novo"},
 		glue = "classpath:stepsDefinitions",
 		tags = { "" }
 )

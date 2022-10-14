@@ -14,18 +14,19 @@ op5806077v3:
 
 op5806077v2:
   descrição: "Listar informações do componente"
-  WATSON_STUDIO: *watsonStudio
-  WATSON_ASSISTANT: *nomeComponente
   WATSON_KNOWLEDGE_CATALOG: *nomeComponente
   CLOUD_OBJECT_STORAGE: *nomeComponente
+  WATSON_ASSISTANT: *nomeComponente
+  WATSON_STUDIO: *watsonStudio
 
 op5839181v1:
   descrição: "Listar informações do componente com o código do componente"
   CLOUD_OBJECT_STORAGE_BUCKETS: *nomeCodComponente
-  MODELOS: *nomeComponente
+  WATSON_KNOWLEDGE_CATALOG: *nomeCodComponente
   GRUPOS_DE_ACESSO: *nomeComponente
-  MEMBERS: *nomeCodComponente
-  ASSISTANT_SKILL: *nomeCodComponente
+  WATSON_ASSISTANT: *nomeCodComponente
+  WATSON_SPACE: *nomeCodComponente
+  MODELOS: *nomeComponente
 
 dpr/Op5903588-v1:
   descrição: "Listar dados interveniente do funcionário"

@@ -4,7 +4,7 @@ import java.util.List;
 
 public final class Siglas {
     private static Siglas instance;
-    public List<String> sigla;
+    public List<String> siglas;
 
     public static Siglas getInstance() {
         if (instance == null) {
@@ -13,11 +13,11 @@ public final class Siglas {
         return instance;
     }
 
-    public void seSiglas(List<String> sigla) {
-        this.sigla = sigla;
+    public void setSiglas(List<String> sigla) {
+        this.siglas = sigla;
     }
 
     public List<String> getSiglas() {
-        return sigla;
+        return siglas;
     }
 }

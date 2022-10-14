@@ -18,6 +18,7 @@ public class Api extends BaseClass {
     @Quando("^enviar um payload \"([^\"]*)\"$")
     public void enviarUmPayloadParaOEndpoint(String tipoPayload) {
         setPayload(tipoPayload);
+        tratarPayload(tipoPayload, "");
         enviarPayload();
     }
 
@@ -29,7 +30,8 @@ public class Api extends BaseClass {
 
     @Quando("^definir a chave a ser usada enviando um payload \"([^\"]*)\"$")
     public void definirAChaveASerUsadaEnviandoUmPayload(String tipoPayload) {
-        setChave(tipoPayload);
+        setPayload("OK");
+        tratarPayload(tipoPayload, "");
         enviarPayload();
     }
 
@@ -43,12 +45,14 @@ public class Api extends BaseClass {
     public void queDefinaOCodigoDoComponenteParaVerOsDetalhes(String componente){
         String endpoint = "op5806077v2";
         setPayload(endpoint, componente);
+        tratarPayload(componente, "");
         enviarPayload(endpoint);
     }
 
     @Quando("^enviar um payload \"([^\"]*)\" com o código e nome do componente \"([^\"]*)\"$")
-    public void enviarUmPayloadComOCodigoDoComponente(String tipoPayload, String componente) {
-        setConfComponenteNoPayload(tipoPayload, componente);
+    public void enviarUmPayloadComOCodigoDoComponente(String subComponente, String componente) {
+        setPayload(subComponente);
+        tratarPayload(subComponente, componente);
         enviarPayload();
     }
 }

@@ -11,7 +11,7 @@ Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do com
         Então deve retornar o código 200
         Exemplos:
             | componente               | payload                      |
+            | WATSON_KNOWLEDGE_CATALOG | WATSON_KNOWLEDGE_CATALOG     |
             | CLOUD_OBJECT_STORAGE     | CLOUD_OBJECT_STORAGE_BUCKETS |
-            | WATSON_KNOWLEDGE_CATALOG | MEMBERS                      |
-            | WATSON_ASSISTANT         | ASSISTANT_SKILL              |
-            | WATSON_STUDIO            | MEMBERS                      |
+            | WATSON_ASSISTANT         | WATSON_ASSISTANT             |
+            | WATSON_STUDIO            | WATSON_SPACE                 |

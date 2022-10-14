@@ -186,8 +186,8 @@ public class Utils extends BaseUtils {
         }
     }
 
-    public String getPayload(String endpoint, String tipoPayload) {
-        String param = "payloads." + endpoint + "." + tipoPayload;
+    public String getPayload(String endpoint, String componente) {
+        String param = "payloads." + endpoint + "." + componente;
         datapoolInit();
         try {
             return $(param);

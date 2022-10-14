@@ -3,7 +3,8 @@ package support.APIRest;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.json.JSONObject;
+import pagesObjects.LoginPage;
+import stepsDefinitions.Api;
 import support.Utils;
 
 import java.util.ArrayList;
@@ -23,25 +24,20 @@ import static support.Utils.*;
 import static support.enums.Ambiente.*;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.Siglas.getInstance;
 import static support.enums.User.getChave;
+import static support.enums.User.getUser;
 
 public class BaseClass extends FTABBUtils {
     private RequestSpecification request;
     private String endpoint;
     private String payload;
     protected Response response;
-    private List<Map<String, String>> yamlMap;
-    private ArrayList<Map<String,String>> listaRetorno;
+    private ArrayList<Map<String, String>> listaRetorno;
     private final Utils utils = new Utils();
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
-    }
-
-    public void definirChave(String tipoPayload) {
-        setPayload(tipoPayload);
-        new Utils().setDatapool();
-        payload = payload.replace("chaveUsuario", getChave());
     }
 
     public void getCookies() {
@@ -80,6 +76,7 @@ public class BaseClass extends FTABBUtils {
                 .when()
                 .post(endpoint);
         setTable();
+        printResult();
     }
 
     protected void enviarPayload(String endpoint) {
@@ -89,6 +86,7 @@ public class BaseClass extends FTABBUtils {
                 .when()
                 .post(endpoint);
         setListaRetorno();
+        printResult();
     }
 
     protected void printResult() {
@@ -100,32 +98,63 @@ public class BaseClass extends FTABBUtils {
     }
 
     private String getCodComponente() {
+        if (listaRetorno == null) return "";
         int indexRandom = getRandom(listaRetorno.size());
         printLog("Nome do componente escolhido: " + listaRetorno.get(indexRandom).get("nomeComponente"), INFO);
         return listaRetorno.get(indexRandom).get("codigoComponente");
     }
 
-    private String getNameComponente(String componente) {
-        String str = utils.getPayload("op5806077v2", componente);
-        return new JSONObject(str).getString("nomeComponente");
-    }
-
-    protected void setConfComponenteNoPayload(String tipoPayload, String componente) {
-        setPayload(tipoPayload);
-        payload = payload
-                .replace("codComponente", getCodComponente())
-                .replace("nameComponente", getNameComponente(componente));
-    }
     private void setListaRetorno() {
         listaRetorno = response.jsonPath().get("listaRetorno");
     }
 
-    protected void setPayload(String endpoint, String tipoPayload) {
-        payload = utils.getPayload(endpoint, tipoPayload);
+    protected void setPayload(String tipoPayload) {
+        setPayload(endpoint, tipoPayload);
     }
 
-    protected void setPayload(String tipoPayload) {
-        payload = utils.getPayload(endpoint, tipoPayload);
+    protected void setPayload(String endpoint, String componente) {
+        payload = utils.getPayload(endpoint, componente);
+    }
+
+    protected void tratarPayload(String componente, String subComponente) {
+        String payload = subComponente.equals("") ? componente : subComponente;
+        if (getUser() == null)
+            new Utils().setDatapool("desenvolvimento");
+        this.payload = this.payload
+                .replaceFirst("codComponente", getCodComponente())
+                .replaceFirst("nameComponente", payload)
+                .replaceFirst("chaveUsuario", getChave());
+
+        if (componente.equals("WATSON_STUDIO"))
+            setSigla();
+    }
+
+    private void setSigla() {
+        if (getInstance().getSiglas() == null)
+            getSiglas();
+        else
+            printLog("As siglas do Usuário logado '" + getUser() + "' já estão em memória: " + getInstance().getSiglas(), INFO);
+        List<String> siglas = getInstance().getSiglas();
+        String sigla = siglas.get(getRandom(siglas.size()));
+        payload = payload.replace("sigla", sigla);
+    }
+
+    private void getSiglas() {
+        BaseClass bC = new BaseClass();
+        initDesenv();
+        bC.setEndpoint("dpr/Op5903588-v1");
+        bC.setPayload("OK");
+        bC.tratarPayload("OK", "");
+        bC.enviarPayload();
+        String path = "data.listaOcorrencia.siglaSistemaSoftware";
+        List<String> siglas = bC.response.body().jsonPath().get(path);
+        getInstance().setSiglas(siglas);
+    }
+
+    private void initDesenv() {
+        new LoginPage().abraPlataforma();
+        new LoginPage().logar("desenvolvimento");
+        new Api().queNaoTenhaCookiesPegueOsCookies();
     }
 
     private String getDescricao() {
@@ -159,10 +188,10 @@ public class BaseClass extends FTABBUtils {
         String endpoint;
         Matcher matcher = compile("[a-z]{3}").matcher(this.endpoint);
         if (matcher.find()) {
-            endpoint = this.endpoint.substring(0,3).toUpperCase() + this.endpoint.substring(3).replace("-","_");
+            endpoint = this.endpoint.substring(0, 3).toUpperCase() + this.endpoint.substring(3).replace("-", "_");
             return API.getUrl() + endpoint;
         } else {
-            endpoint = this.endpoint.substring(0,1).toUpperCase() + this.endpoint.substring(1,9) + "_" + this.endpoint.substring(9);
+            endpoint = this.endpoint.substring(0, 1).toUpperCase() + this.endpoint.substring(1, 9) + "_" + this.endpoint.substring(9);
             return API.getUrl() + "NIA/" + endpoint;
         }
     }

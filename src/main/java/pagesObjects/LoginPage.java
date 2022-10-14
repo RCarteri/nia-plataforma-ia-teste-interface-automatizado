@@ -34,7 +34,7 @@ public class LoginPage {
             abrirPlataforma();
             printLog("A Plataforma foi aberta.", INFO);
         } else {
-            printLog("A Plataforma está aberta.", INFO);
+            printLog("A Plataforma já foi aberta.", INFO);
         }
     }
 
@@ -58,7 +58,7 @@ public class LoginPage {
     }
 
     public void logar(String ambiente) {
-        utils.setDatapool();
+        utils.setDatapool(ambiente);
         if (isLoggedPlataforma() || isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
@@ -91,7 +91,6 @@ public class LoginPage {
         printLog("Preenchendo formulário de login.", INFO);
         lM.getInputChave().sendKeys(getChave());
         lM.getInputSenha().sendKeys(getSenha());
-        lM.getInputCodConf().sendKeys(getCodConf());
         lM.getBtnEntrar().click();
     }
 

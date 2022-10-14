@@ -102,19 +102,14 @@ public class Utils extends BaseUtils {
             printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
     }
 
-    public void setDatapool() {
+    public void setDatapool(String ambiente) {
         datapoolInit();
-        String codConf = "";
         try {
             setProperty(USER.toString(), $("login_plataforma.chaveF.usuario"));
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
-            setProperty(SENHA.toString(), $("login_plataforma.chaveF.senha"));
-            try {
-                codConf = $("login_plataforma.chaveF.codConf");
-            } catch (DataPoolException e) {
-                printLog("Usuário não possui código de configuração definido.", INFO);
-            }
-            setProperty(COD_CONF.toString(), codConf);
+            String senha = (ambiente.equals("homologação")) ? $("login_plataforma.chaveF.senhaHm") : $("login_plataforma.chaveF.senhaDes");
+            setProperty(SENHA.toString(), senha);
+            setProperty(COD_CONF.toString(), "111111");
         } catch (DataPoolException e) {
             printLog("As informações do usuário logado não foram retornadas.", ERROR);
             logError(e);
@@ -191,8 +186,8 @@ public class Utils extends BaseUtils {
         }
     }
 
-    public String getPayload(String endpoint, String tipoPayload) {
-        String param = "payloads." + endpoint + "." + tipoPayload;
+    public String getPayload(String endpoint, String componente) {
+        String param = "payloads." + endpoint + "." + componente;
         datapoolInit();
         try {
             return $(param);

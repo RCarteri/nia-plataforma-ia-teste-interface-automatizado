@@ -5,9 +5,41 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.4.2] - 14-10-2022
+* A partir da versão 7 todos os testes de interface serão feitos a partir do novo layou da interface da plataforma de IA, as runners e testes antigos serão removidos.
+
+Task: 651841, 652689, 652691, 657736, 665224, 666471, 671869
+###Adicionado
+- Sleep ao acessar o componente
+- Printar response de todos os requests no log
+- Classe Siglas para salvar as siglas que o usuário logado tem acesso
+- Diferenciar senha para ambientes de homologação e desenvolvimento
+- Fechar página ao pegar cookie no login da intranet
+- After voltando para a página inicial atravéz da sidebar
+- Cenario: CT004 - Filtrar projetos por sigla
+- Login com código de confirmação
+- Cenário: CT003 - Pesquisar componente na Suite002 - Watson Studio
+- Step: "Então deverá ser apresentados os gráficos na tela"
+- Find by xpath além de CSS Selector
+- Cenário: CT002 - Exibir componente
+- Cenário: CT001 - Acessar plataforma IA
+- Exemplo: APICT001 - OK - 200 - Listar membors de um projeto do Watson Studio - Endpoint Op5839181-v2
+- Exemplo: APICT001 - OK - 200 - Projetos Watson Studio - Endpoint Op5806077-v2
+- Exemplo: APICT001 - OK - 200 - Skills da instância - Endpoint Op5839181-v1
+
+###Mudado
+- Adicionado tags para testar o Legado
+
+###Corrigido
+- Iniciar datapool sem o app.config
+
+###Removido
+- Runners legado
+- Step: "Então a página "Gestão (cloud) NOVO" deverá ser carregada com sucesso"
+
 ## [6.7.4] - 21-09-2022
 
-Task: 638399, 645038, 645768, 
+Task: 638399, 645038, 645768
 ###Adicionado
 - Exemplo de cenário: APISuite002 - Listar recursos BB na IBM Cloud - APICT001 - OK - 200 - Grupos de acesso
 - Exemplo de cenário: APISuite004 - Listar recursos BB na IBM Cloud por código do componente - APICT001 - OK - 200 - Membros do catálogo

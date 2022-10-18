@@ -15,6 +15,7 @@ Funcionalidade: APISuite002 - Listar recursos BB na IBM Cloud
             | CLOUD_OBJECT_STORAGE     | op5806077v2 |
             | MODELOS                  | op5839181v1 |
             | GRUPOS_DE_ACESSO         | op5839181v1 |
+            | TRITON_MODELOS           | op5839181v1 |
 
     @ID-API002-001-1 @APICT001
     Cenário: APICT001-1 - OK - 200

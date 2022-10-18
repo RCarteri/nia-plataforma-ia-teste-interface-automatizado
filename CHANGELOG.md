@@ -5,6 +5,14 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.5.0] - 18-10-2022
+Task: 678232, 682803
+###Adicionado
+- Exemplo: APICT001 - OK - 200 - Listar modelos Triton, endpoint op5839181v1
+
+###Mudado
+- Refatoração ao retornar siglas, A partir de agora as siglas do usuário logado são armazendadas em uma classe para uso posterior, não precisando enviar um novo request
+
 ## [7.4.2] - 14-10-2022
 * A partir da versão 7 todos os testes de interface serão feitos a partir do novo layou da interface da plataforma de IA, as runners e testes antigos serão removidos.
 

@@ -23,10 +23,11 @@ op5839181v1:
   descrição: "Listar informações do componente com o código do componente"
   CLOUD_OBJECT_STORAGE_BUCKETS: *nomeCodComponente
   WATSON_KNOWLEDGE_CATALOG: *nomeCodComponente
-  GRUPOS_DE_ACESSO: *nomeComponente
   WATSON_ASSISTANT: *nomeCodComponente
-  TRITON_MODELOS: *nomeComponente
   WATSON_SPACE: *nomeCodComponente
+  GRUPOS_DE_ACESSO_MEMBROS: *nomeCodComponente
+  GRUPOS_DE_ACESSO: *nomeComponente
+  TRITON_MODELOS: *nomeComponente
   MODELOS: *nomeComponente
 
 dpr/Op5903588-v1:

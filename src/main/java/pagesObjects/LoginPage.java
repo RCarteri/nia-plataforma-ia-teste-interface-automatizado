@@ -81,7 +81,7 @@ public class LoginPage {
                     loginIntranet(lM);
                     break;
             }
-            printLog("Login realizado com o usuário '" + getUser() + "' chave: " + getChave(), INFO);
+            printLog("Login realizado com o usuário: " + getUser() + " chave: " + getChave(), INFO);
         }
     }
 

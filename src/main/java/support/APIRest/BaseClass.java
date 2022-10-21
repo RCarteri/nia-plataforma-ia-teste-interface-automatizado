@@ -3,6 +3,8 @@ package support.APIRest;
 import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import pagesObjects.LoginPage;
 import stepsDefinitions.Api;
 import support.Utils;
@@ -19,6 +21,7 @@ import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static java.util.regex.Pattern.compile;
+import static java.util.stream.Collectors.joining;
 import static support.GetElements.getDriver;
 import static support.Utils.*;
 import static support.enums.Ambiente.*;
@@ -31,6 +34,7 @@ import static support.enums.User.getUser;
 public class BaseClass extends FTABBUtils {
     private RequestSpecification request;
     private String endpoint;
+    private String endpointTratar;
     private String payload;
     protected Response response;
     private ArrayList<Map<String, String>> listaRetorno;
@@ -99,9 +103,32 @@ public class BaseClass extends FTABBUtils {
 
     private String getCodComponente() {
         if (listaRetorno == null) return "";
-        int indexRandom = getRandom(listaRetorno.size());
-        printLog("Nome do componente escolhido: " + listaRetorno.get(indexRandom).get("nomeComponente"), INFO);
-        return listaRetorno.get(indexRandom).get("codigoComponente");
+        JSONObject componente = tratarListaRetorno();
+        if (componente.get("nomeComponente").toString().equals("null")) {
+            printLog("Nome do componente escolhido: " + componente.get("nome"), INFO);
+            return (String) componente.get("id");
+        } else {
+            printLog("Nome do componente escolhido: " + componente.get("nomeComponente"), INFO);
+            return (String) componente.get("codigoComponente");
+        }
+    }
+
+    private JSONObject tratarListaRetorno() {
+        JSONArray list = null;
+        switch (endpointTratar) {
+            case "op5806077v2":
+                list = new JSONArray(listaRetorno);
+                break;
+            case "op5839181v1":
+                String newList = listaRetorno.stream()
+                        .map(item -> item.get("nomeComponente"))
+                        .collect(joining());
+                list = new JSONArray(newList);
+                break;
+        }
+        assert list != null;
+        int index = getRandom(list.length());
+        return list.getJSONObject(index);
     }
 
     private void setListaRetorno() {
@@ -113,17 +140,28 @@ public class BaseClass extends FTABBUtils {
     }
 
     protected void setPayload(String endpoint, String componente) {
+        if(endpointTratar == null) endpointTratar = endpoint;
         payload = utils.getPayload(endpoint, componente);
     }
 
-    protected void tratarPayload(String componente, String subComponente) {
-        String payload = subComponente.equals("") ? componente : subComponente;
+    protected void tratarPayload(String componente) {
         if (getUser() == null)
             new Utils().setDatapool("desenvolvimento");
-        this.payload = this.payload
-                .replaceFirst("codComponente", getCodComponente())
-                .replaceFirst("nameComponente", payload)
+        payload = payload
+                .replaceFirst("nameComponente", componente)
                 .replaceFirst("chaveUsuario", getChave());
+
+        if (componente.equals("WATSON_STUDIO"))
+            setSigla();
+    }
+
+    protected void tratarPayload(String componente, String subComponente) {
+        if (getUser() == null)
+            new Utils().setDatapool("desenvolvimento");
+        payload = payload
+                .replaceFirst("codComponente", getCodComponente())
+                .replaceFirst("nameComponente", subComponente)
+                .replaceFirst("_MEMBROS", "");
 
         if (componente.equals("WATSON_STUDIO"))
             setSigla();
@@ -144,7 +182,7 @@ public class BaseClass extends FTABBUtils {
         initDesenv();
         bC.setEndpoint("dpr/Op5903588-v1");
         bC.setPayload("OK");
-        bC.tratarPayload("OK", "");
+        bC.tratarPayload("OK");
         bC.enviarPayload();
         String path = "data.listaOcorrencia.siglaSistemaSoftware";
         List<String> siglas = bC.response.body().jsonPath().get(path);

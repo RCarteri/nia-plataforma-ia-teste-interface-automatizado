@@ -48,10 +48,10 @@ public class Api extends BaseClass {
         enviarPayload(endpoint);
     }
 
-    @Quando("^enviar um payload \"([^\"]*)\" com o código e nome do componente \"([^\"]*)\"$")
-    public void enviarUmPayloadComOCodigoENomeDoComponente(String subComponente, String componente) {
+    @Quando("^enviar um payload \"([^\"]*)\" com o código da lista de dados do componente")
+    public void enviarUmPayloadComOCodigoDaListaDeDadosDoComponente(String subComponente) {
         setPayload(subComponente);
-        tratarPayload(subComponente, componente);
+        tratarPayload(subComponente);
         enviarPayload();
     }
 }

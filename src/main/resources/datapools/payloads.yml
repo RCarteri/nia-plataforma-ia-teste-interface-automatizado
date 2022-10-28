@@ -1,7 +1,7 @@
 # Datapool de payloads
-getNomeCodComponente: &nomeCodComponente '{"nomeComponente":"nameComponente", "codigoComponente":"codComponente"}'
-getNomeComponente: &nomeComponente '{"nomeComponente":"nameComponente"}'
-getWatsonStudio: &watsonStudio '{"nomeComponente":"WATSON_STUDIO","listaSigla":"sigla"}'
+getNomeCodComponente: &nomeCodComponente '{"nomeComponente":"NOME_COMPONENTE", "codigoComponente":"COD_COMPONENTE"}'
+getNomeComponente: &nomeComponente '{"nomeComponente":"NOME_COMPONENTE"}'
+getWatsonStudio: &watsonStudio '{"nomeComponente":"WATSON_STUDIO","listaSigla":"LISTA_SIGLA"}'
 
 op6586305v1:
   descrição: "Listar projetos inteligência artificial com deploy em andamento"
@@ -24,12 +24,15 @@ op5839181v1:
   CLOUD_OBJECT_STORAGE_BUCKETS: *nomeCodComponente
   WATSON_KNOWLEDGE_CATALOG: *nomeCodComponente
   WATSON_ASSISTANT: *nomeCodComponente
-  WATSON_SPACE: *nomeCodComponente
   GRUPOS_DE_ACESSO_MEMBROS: *nomeCodComponente
   GRUPOS_DE_ACESSO: *nomeComponente
   TRITON_MODELOS: *nomeComponente
   MODELOS: *nomeComponente
 
+op6851522v1:
+  descrição: "Listar modelos na IBM Cloud"
+  MODELOS: '{"codigoEspaco" : "COD_ESPACO"}'
+
 dpr/Op5903588-v1:
   descrição: "Listar dados interveniente do funcionário"
-  OK: '{"codigoInterveniente" : "chaveUsuario"}'
+  OK: '{"codigoInterveniente" : "CHAVE_USUARIO"}'

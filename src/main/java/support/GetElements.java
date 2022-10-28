@@ -98,7 +98,6 @@ public class GetElements extends Utils{
                 else txt.append("PRINCIPAL_MAIN");
 
                 txt.append("\".");
-
                 log(txt.toString(), INFO);
 
                 return resultList;
@@ -109,12 +108,10 @@ public class GetElements extends Utils{
 
                 if (searchAttempt <= MAX_SEARCH_ATTEMPTS)
                     return findElements(by);
-
                 return null;
             }
         } catch (WebDriverException | IndexOutOfBoundsException ex) {
             treatEX(ex);
-
             return findElements(by);
         }
     }

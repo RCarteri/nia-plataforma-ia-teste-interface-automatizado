@@ -31,7 +31,6 @@ public abstract class BaseUtils extends FTABBUtils {
     }
     protected void switchToNextIframe(String[] iframesIdsList) {
         switchTo(null);
-
         for (String iframeId : iframesIdsList)
             switchTo(iframeId);
     }
@@ -69,13 +68,11 @@ public abstract class BaseUtils extends FTABBUtils {
                 logTxt.delete(0, logTxt.length());
                 logTxt.append("Buscando o elemento com o(s) parâmetro(s) acima no iframe \"");
                 logTxt.append(iframesList.get(iframesCount)).append("\"...");
-
                 log(logTxt.toString(), INFO);
             }
 
         } else {
             logTxt.append(", foi realizada ").append(searchAttempt).append(" vezes e não encontrou resultado(s) válido(s).");
-
             log(logTxt.toString(), ERROR);
         }
     }
@@ -87,7 +84,6 @@ public abstract class BaseUtils extends FTABBUtils {
             if (msg == null) {
                 if (type == START) System.out.println("\n    --- Log START ---");
                 else System.out.println("    --- Log END ---\n");
-
             } else if (type == INFO) System.out.println("\n    INFO - " + msg);
             else if (type == ERROR) System.err.println("\n    ERRO - " + msg);
             else if (type == TABLE) System.out.println("    # - " + msg);
@@ -102,10 +98,8 @@ public abstract class BaseUtils extends FTABBUtils {
                 log("O mapeamento tentou mapear um elemento inválido.", LogTypes.INFO);
             else if (ex.getClass().equals(NoSuchElementException.class))
                 log(ex.getMessage(), LogTypes.INFO);
-
         } else
             log("O limite de buscas foi atingido sem encontrar resultados.", LogTypes.ERROR);
-
         resetSearchParams(++searchAttempt);
     }
 
@@ -113,7 +107,6 @@ public abstract class BaseUtils extends FTABBUtils {
         this.searchAttempt = (short) searchAttempt;
         iframesCount = 0;
         iframesList.clear();
-
         switchTo(null);
     }
 }

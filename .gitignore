@@ -1,16 +1,14 @@
 .idea
-*.iml
+.settings
+evidencia
+logs
 target
+*.iml
 *.jar
 *.aar
 *.zip
 node_modules
 /www
-
-#Minhas configurações:
 .classpath
 .project
-.settings/
-/evidencia/
-/logs
-/target
+dependency-reduced-pom.xml

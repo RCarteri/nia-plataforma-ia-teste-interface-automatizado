@@ -4,13 +4,9 @@ import br.com.bb.ath.ftabb.utilitarios.FTABBUtils;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
-import org.json.JSONObject;
-import pagesObjects.LoginPage;
-import stepsDefinitions.Api;
 import support.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -21,23 +17,20 @@ import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static java.util.regex.Pattern.compile;
-import static java.util.stream.Collectors.joining;
 import static support.GetElements.getDriver;
-import static support.Utils.*;
+import static support.Utils.isQteste;
+import static support.Utils.printLog;
 import static support.enums.Ambiente.*;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
-import static support.enums.Siglas.getInstance;
-import static support.enums.User.getChave;
-import static support.enums.User.getUser;
 
 public class BaseClass extends FTABBUtils {
     private RequestSpecification request;
     private String endpoint;
     private String endpointTratar;
     private String payload;
-    protected Response response;
-    private ArrayList<Map<String, String>> listaRetorno;
+    public Response response;
+    private JSONArray listaRetorno;
     private final Utils utils = new Utils();
 
     public void setEndpoint(String endpoint) {
@@ -73,7 +66,7 @@ public class BaseClass extends FTABBUtils {
         }
     }
 
-    protected void enviarPayload() {
+    public void enviarPayload() {
         setRequest();
         response = request.given()
                 .body(payload)
@@ -101,98 +94,23 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
-    private String getCodComponente() {
-        if (listaRetorno == null) return "";
-        JSONObject componente = tratarListaRetorno();
-        if (componente.get("nomeComponente").toString().equals("null")) {
-            printLog("Nome do componente escolhido: " + componente.get("nome"), INFO);
-            return (String) componente.get("id");
-        } else {
-            printLog("Nome do componente escolhido: " + componente.get("nomeComponente"), INFO);
-            return (String) componente.get("codigoComponente");
-        }
-    }
-
-    private JSONObject tratarListaRetorno() {
-        JSONArray list = null;
-        switch (endpointTratar) {
-            case "op5806077v2":
-                list = new JSONArray(listaRetorno);
-                break;
-            case "op5839181v1":
-                String newList = listaRetorno.stream()
-                        .map(item -> item.get("nomeComponente"))
-                        .collect(joining());
-                list = new JSONArray(newList);
-                break;
-        }
-        assert list != null;
-        int index = getRandom(list.length());
-        return list.getJSONObject(index);
-    }
-
     private void setListaRetorno() {
-        listaRetorno = response.jsonPath().get("listaRetorno");
+        ArrayList<Map<String, String>> ArrayListListaRetorno = response.jsonPath().get("listaRetorno");
+        listaRetorno = new JSONArray(ArrayListListaRetorno);
+        listaRetorno = new TratarListaRetorno(listaRetorno, endpointTratar).tratarListaRetorno();
     }
 
-    protected void setPayload(String tipoPayload) {
+    public void setPayload(String tipoPayload) {
         setPayload(endpoint, tipoPayload);
     }
 
     protected void setPayload(String endpoint, String componente) {
-        if(endpointTratar == null) endpointTratar = endpoint;
+        if (endpointTratar == null) endpointTratar = endpoint;
         payload = utils.getPayload(endpoint, componente);
     }
 
-    protected void tratarPayload(String componente) {
-        if (getUser() == null)
-            new Utils().setDatapool("desenvolvimento");
-        payload = payload
-                .replaceFirst("nameComponente", componente)
-                .replaceFirst("chaveUsuario", getChave());
-
-        if (componente.equals("WATSON_STUDIO"))
-            setSigla();
-    }
-
-    protected void tratarPayload(String componente, String subComponente) {
-        if (getUser() == null)
-            new Utils().setDatapool("desenvolvimento");
-        payload = payload
-                .replaceFirst("codComponente", getCodComponente())
-                .replaceFirst("nameComponente", subComponente)
-                .replaceFirst("_MEMBROS", "");
-
-        if (componente.equals("WATSON_STUDIO"))
-            setSigla();
-    }
-
-    private void setSigla() {
-        if (getInstance().getSiglas() == null)
-            getSiglas();
-        else
-            printLog("As siglas do Usuário logado '" + getUser() + "' já estão em memória: " + getInstance().getSiglas(), INFO);
-        List<String> siglas = getInstance().getSiglas();
-        String sigla = siglas.get(getRandom(siglas.size()));
-        payload = payload.replace("sigla", sigla);
-    }
-
-    private void getSiglas() {
-        BaseClass bC = new BaseClass();
-        initDesenv();
-        bC.setEndpoint("dpr/Op5903588-v1");
-        bC.setPayload("OK");
-        bC.tratarPayload("OK");
-        bC.enviarPayload();
-        String path = "data.listaOcorrencia.siglaSistemaSoftware";
-        List<String> siglas = bC.response.body().jsonPath().get(path);
-        getInstance().setSiglas(siglas);
-    }
-
-    private void initDesenv() {
-        new LoginPage().abraPlataforma();
-        new LoginPage().logar("desenvolvimento");
-        new Api().queNaoTenhaCookiesPegueOsCookies();
+    public void tratarPayload(String componente){
+        payload = new TratarPayload(payload, listaRetorno).tratarPayload(componente);
     }
 
     private String getDescricao() {

@@ -3,7 +3,6 @@ package support.APIRest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import support.Utils;
-import support.enums.Siglas;
 
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
@@ -26,7 +25,7 @@ public class TratarPayload {
             int index = getRandom(list.length());
             return list.getJSONObject(index);
         }catch(IllegalArgumentException e){
-            throw new RuntimeException("A lista usada não possui dados com a sigla " + getInstance().getSigla() + " que foi selecionada.");
+            throw new RuntimeException("A lista usada não possui dados com a sigla " + getInstance().getListaSiglasTeste() + " que foi selecionada.");
         }
     }
 
@@ -42,13 +41,12 @@ public class TratarPayload {
         }
     }
 
-    protected String getSigla() {
-        Siglas siglas = new Siglas();
+    protected String getListaSiglas() {
         if (getInstance().getSiglas() == null)
-            siglas.setSiglas();
+            getInstance().setSiglas();
         else
-            printLog("As siglas do Usuário logado '" + getUser() + "' já estão em memória: " + getInstance().getSiglas(), INFO);
-        return siglas.getSigla();
+            printLog("As siglas que o usuário '" + getUser() + "' possui acesso já estão em memória: " + getInstance().getSiglas(), INFO);
+        return getInstance().getListaSiglasTeste();
     }
 
     protected String getCodEspaco() {
@@ -68,7 +66,7 @@ public class TratarPayload {
         }
 
         if (payload.contains("LISTA_SIGLA")) {
-            payload = payload.replaceFirst("LISTA_SIGLA", getSigla());
+            payload = payload.replaceFirst("LISTA_SIGLA", getListaSiglas());
         }
 
         if (payload.contains("COD_ESPACO")) {

@@ -46,6 +46,7 @@ public class TratarPayload {
             getInstance().setSiglas();
         else
             printLog("As siglas que o usuário '" + getUser() + "' possui acesso já estão em memória: " + getInstance().getSiglas(), INFO);
+        getInstance().setListaSiglaTeste();
         return getInstance().getListaSiglasTeste();
     }
 

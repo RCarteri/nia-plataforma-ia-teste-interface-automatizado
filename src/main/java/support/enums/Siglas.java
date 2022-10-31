@@ -7,9 +7,6 @@ import support.APIRest.BaseClass;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static java.util.stream.IntStream.*;
 import static org.junit.Assert.fail;
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
@@ -20,7 +17,6 @@ public final class Siglas {
     private static Siglas instance;
     public List<String> siglas;
     private String listaSiglasTeste;
-    private final int QUANT_SIGLAS_PARA_TESTAR = 2;
     private int tamanhoListaSiglaTeste;
 
     public static Siglas getInstance() {
@@ -45,13 +41,13 @@ public final class Siglas {
         new Api().queNaoTenhaCookiesPegueOsCookies();
     }
 
-    private void setListaSiglaTeste() {
+    public void setListaSiglaTeste() {
         Set<String> siglasSorteadas = new HashSet<>();
         try {
-            siglasSorteadas = range(siglasSorteadas.size(), tamanhoListaSiglaTeste)
-                    .mapToObj(i -> siglas.get(getRandom(siglas.size())))
-                    .collect(Collectors.toSet());
-            listaSiglasTeste = siglasSorteadas.toString().replaceAll("[\\[\\]]", "");
+            while(siglasSorteadas.size() < tamanhoListaSiglaTeste){
+                siglasSorteadas.add(siglas.get(getRandom(siglas.size())));
+            }
+            listaSiglasTeste = siglasSorteadas.toString().replaceAll("[\\[\\]\\s]", "");
         } catch (NullPointerException e) {
             printLog("O response anterior não possui nenhum retorno com a sigla que foi usada para o teste e retornou " + e.getClass().getSimpleName(), ERROR);
             fail();
@@ -68,10 +64,10 @@ public final class Siglas {
         String path = "data.listaOcorrencia.siglaSistemaSoftware";
         siglas = bC.response.body().jsonPath().get(path);
         setSizeListaSigla();
-        setListaSiglaTeste();
     }
 
     private void setSizeListaSigla() {
+        int QUANT_SIGLAS_PARA_TESTAR = 2;
         switch (siglas.size()) {
             case 0:
                 printLog("O tamanho da lista de siglas retornado é 0, impossível continuar o teste.", ERROR);

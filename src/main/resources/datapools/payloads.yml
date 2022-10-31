@@ -25,6 +25,7 @@ op5839181v1:
   WATSON_KNOWLEDGE_CATALOG: *nomeCodComponente
   WATSON_ASSISTANT: *nomeCodComponente
   GRUPOS_DE_ACESSO_MEMBROS: *nomeCodComponente
+  WATSON_STUDIO_MEMBROS: *nomeCodComponente
   GRUPOS_DE_ACESSO: *nomeComponente
   TRITON_MODELOS: *nomeComponente
   MODELOS: *nomeComponente

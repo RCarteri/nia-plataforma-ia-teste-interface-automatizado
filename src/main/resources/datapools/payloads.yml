@@ -27,6 +27,7 @@ op5839181v1:
   GRUPOS_DE_ACESSO_MEMBROS: *nomeCodComponente
   WATSON_STUDIO_MEMBROS: *nomeCodComponente
   NOTEBOOKS: *nomeCodComponente
+  DATA_ASSET: *nomeCodComponente
   GRUPOS_DE_ACESSO: *nomeComponente
   TRITON_MODELOS: *nomeComponente
   MODELOS: *nomeComponente

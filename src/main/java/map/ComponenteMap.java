@@ -56,7 +56,7 @@ public class ComponenteMap extends BasePageObjects {
     }
 
     public List<WebElement> getListGraficos() {
-        return getElements("div[class^='p-d-flex p-jc']");
+        return getElements("bb-card.card");
     }
 
     //Legado

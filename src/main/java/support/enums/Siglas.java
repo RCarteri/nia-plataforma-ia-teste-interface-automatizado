@@ -6,8 +6,10 @@ import support.APIRest.BaseClass;
 
 import java.util.List;
 
+import static org.junit.Assert.fail;
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
+import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
 
 public final class Siglas {
@@ -40,7 +42,12 @@ public final class Siglas {
     }
 
     private void setSigla() {
-        sigla = siglas.get(getRandom(siglas.size()));
+        try {
+            sigla = siglas.get(getRandom(siglas.size()));
+        }catch (NullPointerException e){
+            printLog("O response anterior não possui nenhum retorno com a sigla que foi usada para o teste e retornou " + e.getClass().getSimpleName(), ERROR);
+            fail();
+        }
     }
 
     public void setSiglas() {

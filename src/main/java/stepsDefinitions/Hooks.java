@@ -24,7 +24,7 @@ public class Hooks {
         try {
             if (isLoggedPlataforma())
                 if (isPagGestaoCloud())
-                    new SideBarSection().acessarMenu("Geral");
+                    new SideBarSection().acessarMenu("Inicio");
                 else
                     fecharPaginaAtual();
         } catch (ElementoNaoLocalizadoException e) {

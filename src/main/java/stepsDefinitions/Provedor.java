@@ -1,10 +1,12 @@
 package stepsDefinitions;
 
 import cucumber.api.java.pt.E;
+import cucumber.api.java.pt.Então;
 import pagesObjects.ComponentePage;
 import pagesObjects.ProvedorPage;
 import support.Utils;
 
+import static org.junit.Assert.assertTrue;
 import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Provedor extends Utils {
@@ -26,5 +28,10 @@ public class Provedor extends Utils {
         } catch (Exception e) {
             logError(e);
         }
+    }
+
+    @Então("^deverá ser apresentados os provedores de serviços de cloud$")
+    public void deveraSerApresentadosOsProvedoresDeServicosDeCloud() {
+        assertTrue(cP.getListaProvedores().size() > 0);
     }
 }

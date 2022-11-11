@@ -80,4 +80,8 @@ public class ComponentePage {
         }
         return infoCardsApresentadas;
     }
+
+    public List<WebElement> getListaProvedores() {
+        return cM.getListaProvedores();
+    }
 }

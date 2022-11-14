@@ -9,4 +9,4 @@ Funcionalidade: Suite001 - Acessar plataforma IA
         E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Tecnologia (hm)"
         E se não estiver na home acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud) NOVO"
-        Então deverá ser apresentados os gráficos na tela
+        Então deverá ser apresentados os provedores de serviços de cloud

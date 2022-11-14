@@ -59,6 +59,10 @@ public class ComponenteMap extends BasePageObjects {
         return getElements("bb-card.card");
     }
 
+    public List<WebElement> getListaProvedores() {
+        return getElements(".d-flex bb-card-body");
+    }
+
     //Legado
 
     public List<WebElement> getListComponente() {

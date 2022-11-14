@@ -1,9 +1,6 @@
 package support;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.SelectorsDelays;
 
@@ -23,6 +20,9 @@ public class GetElements extends Utils{
     private final List<String> iframesList = new ArrayList<>();
     private short iframesCount = 0;
     private short tentativa;
+    public static void clicarComJS(WebElement elemento) {
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", elemento);
+    }
 
     public static WebElement waitElement(SelectorsDelays locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), locator.getDelay());

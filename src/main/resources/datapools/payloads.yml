@@ -5,7 +5,7 @@ getWatsonStudio: &watsonStudio '{"nomeComponente":"WATSON_STUDIO","listaSigla":"
 
 op6586305v1:
   descrição: "Listar projetos inteligência artificial com deploy em andamento"
-  OK: '{"nomeComponente" : null}'
+  OK: '{"nomeComponente" : ""}'
   Internal Server Error: '{"nomeComponente" : }'
 
 op5806077v3:
@@ -35,6 +35,10 @@ op5839181v1:
 op6851522v1:
   descrição: "Listar modelos na IBM Cloud"
   MODELOS: '{"codigoEspaco" : "COD_ESPACO"}'
+
+op6583452v1:
+  descrição: "Listar projetos de Inteligência Artificial"
+  PROJETOS: '{"nomeComponente" : ""}'
 
 dpr/Op5903588-v1:
   descrição: "Listar dados interveniente do funcionário"

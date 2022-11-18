@@ -37,6 +37,7 @@ import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.OutputType.BYTES;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 import static support.enums.LogTypes.*;
+import static support.enums.SelectorsDelays.CIRCLE;
 import static support.enums.User.*;
 
 public class Utils extends BaseUtils {
@@ -81,6 +82,7 @@ public class Utils extends BaseUtils {
     }
 
     public void capturaTela() {
+        waitInvisibility(CIRCLE);
         capturarTela();
         allureCapturarTela();
         printLog("Tela capturada.", INFO);

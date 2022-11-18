@@ -29,9 +29,9 @@ public class SideBar extends Utils {
     public void selecionarOItem(String item) {
         try {
             sS.acessarMenu(item);
-           // waitInvisibility(CIRCLE);
             sleep(1);
             printLog("Item acessado com sucesso: " + item, INFO);
+            sS.fecharSideBar();
         } catch (Exception e) {
             logError(e);
         }

@@ -28,7 +28,7 @@ public class SideBarMap extends BasePageObjects {
     }
 
     public WebElement getMenuSideBar(String menu) {
-         String seletor = "//span[contains(text(), '" + menu + "')]";
+         String seletor = "//div/span[contains(text(), '" + menu + "')]";
          return new GetElements().findElement(xpath(seletor));
     }
 

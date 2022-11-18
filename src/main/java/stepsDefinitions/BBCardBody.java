@@ -16,7 +16,7 @@ public class BBCardBody extends Utils {
         this.cP = new ComponentePage();
     }
 
-    @Então("^deverá ser apresentados os gráficos na tela$")
+    @Então("^deverão ser apresentados os gráficos na tela$")
     public void deveraSerApresentadosOsGraficosNaTela() {
         try {
             assertTrue("Algum dos gráficos não foram apresentados na tela inicial.", new ComponentePage().getGraficos().size() >= 2);

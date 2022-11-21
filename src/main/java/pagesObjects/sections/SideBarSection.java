@@ -26,4 +26,8 @@ public class SideBarSection {
             return false;
         }
     }
+
+    public void fecharSideBar() {
+        sM.getBtnFecharSidebar().click();
+    }
 }

@@ -3,8 +3,8 @@
 @S003
 Funcionalidade: Suite003 - Acessar os indicadores
 
-    @ID-003-005 @CT005
-    Cenario: CT005 - Acessar os indicadores
+    @ID-003-010 @CT010
+    Cenario: CT010 - Acessar os indicadores
         Dado que a Plataforma esteja fechada, abra a Plataforma
         E se não estiver logado, realiza o login em "homologação"
         Quando acessar a página "Tecnologia (hm)"

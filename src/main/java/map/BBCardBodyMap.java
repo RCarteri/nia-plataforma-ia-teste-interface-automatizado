@@ -12,7 +12,7 @@ public class BBCardBodyMap extends BasePageObjects {
         return getElements("bb-card-body h6");
     }
 
-    public List<WebElement> getListTag() {
+    public List<WebElement> getListSigla() {
         return getElements("bb-card bb-card span");
     }
 }

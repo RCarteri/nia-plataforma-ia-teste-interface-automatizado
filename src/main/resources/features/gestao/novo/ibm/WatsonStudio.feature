@@ -29,3 +29,12 @@ Funcionalidade: Suite002 - Watson Studio
         Então deverá mostrar todos os projetos, incluindo os sem sigla
         Quando selecionar uma sigla
         Então deverá mostrar somente os projetos com essa sigla
+
+    @ID-002-006 @CT006
+    Cenario: CT006 - Limpar filtro
+        Dado que tenha pesquisado por um projeto
+        E que tenha pelo menos uma sigla no filtro de siglas
+        Quando limpar os filtros
+        Então o campo de pesquisa deve estar vazio
+        E não deve ter nenhuma sigla selecionada
+        E deverá mostrar todos os projetos

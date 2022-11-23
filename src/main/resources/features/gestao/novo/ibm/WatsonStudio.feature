@@ -37,4 +37,4 @@ Funcionalidade: Suite002 - Watson Studio
         Quando limpar os filtros
         Então o campo de pesquisa deve estar vazio
         E não deve ter nenhuma sigla selecionada
-        E deverá mostrar todos os projetos
+        E a quantidade de projetos apresentados deve ser alterada

@@ -2,7 +2,6 @@ package pagesObjects;
 
 import br.com.bb.ath.ftabb.exceptions.ElementoNaoLocalizadoException;
 import map.LoginMap;
-import org.openqa.selenium.TimeoutException;
 import support.Utils;
 
 import static br.com.bb.ath.ftabb.FTABB.abrirUrl;
@@ -11,18 +10,15 @@ import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
 import static support.Utils.printLog;
-import static support.Utils.waitInvisibility;
 import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
-import static support.enums.SelectorsDelays.LOGIN;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
 
 public class LoginPage {
     private final Utils utils;
-    private int tentativa;
 
     public LoginPage() {
         this.utils = new Utils();
@@ -67,11 +63,6 @@ public class LoginPage {
                     try {
                         loginPlataforma(lM);
                         setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
-                        try {
-                            waitInvisibility(LOGIN);
-                        } catch (TimeoutException e) {
-                            novaTentativa(ambiente);
-                        }
                     } catch (Exception e) {
                         atualizarPagina(ambiente);
                     }
@@ -95,16 +86,6 @@ public class LoginPage {
 
     private void atualizarPagina(String ambiente) {
         printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
-        getDriver().navigate().refresh();
-        logar(ambiente);
-    }
-
-    private void novaTentativa(String ambiente) {
-        if (++tentativa == 3) {
-            printLog("Não foi possível realizar o login pois não saiu da tela de login. A plataforma será fechada.", ERROR);
-            fecharPlataforma();
-        }
-        printLog("Tentativa de login: " + tentativa + "/3", INFO);
         getDriver().navigate().refresh();
         logar(ambiente);
     }

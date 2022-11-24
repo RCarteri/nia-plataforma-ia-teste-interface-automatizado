@@ -16,7 +16,6 @@ import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
 import static support.enums.SelectorsDelays.LOGIN;
-import static support.enums.SelectorsDelays.SPINNER;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
@@ -38,7 +37,7 @@ public class LoginPage {
         }
     }
 
-    public static boolean isPagGestaoCloud(){
+    public static boolean isPagGestaoCloud() {
         try {
             return recuperarTituloPagina().equals("Gestão (Cloud) NOVO");
         } catch (ElementoNaoLocalizadoException e) {
@@ -113,13 +112,11 @@ public class LoginPage {
     private void loginPlataforma(LoginMap lM) {
         printLog("Preenchendo formulário de login.", INFO);
         lM.getInputUsername().sendKeys(getChave());
-        lM.getInputPassword().sendKeys(getSenha());
         lM.getBtnLogin().click();
-        waitInvisibility(SPINNER);
-        if (!getCodConf().equals("")) {
+        lM.getInputPassword().sendKeys(getSenha());
+        if (lM.getInputCodConf().isDisplayed())
             lM.getInputCodConf().sendKeys(getCodConf());
-            lM.getBtnLogin().click();
-        }
+        lM.getBtnLogin().click();
     }
 
     public void logoutEFecharPlataforma() {

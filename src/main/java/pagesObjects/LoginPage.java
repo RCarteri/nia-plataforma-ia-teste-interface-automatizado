@@ -9,7 +9,7 @@ import static br.com.bb.ath.ftabb.gaw.Plataforma.*;
 import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static support.GetElements.getDriver;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
@@ -92,10 +92,7 @@ public class LoginPage extends LoginMap{
     private void loginPlataforma() {
         printLog("Preenchendo formulário de login.", INFO);
         getInputUsername().sendKeys(getChave());
-        getBtnLogin().click();
         getInputPassword().sendKeys(getSenha());
-        if (getInputCodConf().isDisplayed())
-            getInputCodConf().sendKeys(getCodConf());
         getBtnLogin().click();
     }
 

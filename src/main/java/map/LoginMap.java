@@ -12,11 +12,7 @@ public class LoginMap {
     }
 
     public WebElement getInputPassword() {
-        return getElement("#idToken3");
-    }
-
-    public WebElement getInputCodConf() {
-        return getElement("#idToken5");
+        return getElement("#idToken2");
     }
 
     public WebElement getBtnLogin() {

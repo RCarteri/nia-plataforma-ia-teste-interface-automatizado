@@ -17,7 +17,7 @@ import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
 
-public class LoginPage {
+public class LoginPage extends LoginMap{
     private final Utils utils;
 
     public LoginPage() {
@@ -57,31 +57,30 @@ public class LoginPage {
         if (isLoggedPlataforma() || isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
-            LoginMap lM = new LoginMap();
             switch (ambiente) {
                 case "homologação":
                     try {
-                        loginPlataforma(lM);
+                        loginPlataforma();
                         setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
                     } catch (Exception e) {
                         atualizarPagina(ambiente);
                     }
                     break;
                 case "desenvolvimento":
-                    loginIntranet(lM);
+                    loginIntranet();
                     break;
             }
             printLog("Login realizado com o usuário: " + getUser() + " chave: " + getChave(), INFO);
         }
     }
 
-    private void loginIntranet(LoginMap lM) {
+    private void loginIntranet() {
         printLog("Abrindo página da intranet.", INFO);
         abrirUrl(DESENV.getUrl());
         printLog("Preenchendo formulário de login.", INFO);
-        lM.getInputChave().sendKeys(getChave());
-        lM.getInputSenha().sendKeys(getSenha());
-        lM.getBtnEntrar().click();
+        getInputChave().sendKeys(getChave());
+        getInputSenha().sendKeys(getSenha());
+        getBtnEntrar().click();
     }
 
     private void atualizarPagina(String ambiente) {
@@ -90,14 +89,14 @@ public class LoginPage {
         logar(ambiente);
     }
 
-    private void loginPlataforma(LoginMap lM) {
+    private void loginPlataforma() {
         printLog("Preenchendo formulário de login.", INFO);
-        lM.getInputUsername().sendKeys(getChave());
-        lM.getBtnLogin().click();
-        lM.getInputPassword().sendKeys(getSenha());
-        if (lM.getInputCodConf().isDisplayed())
-            lM.getInputCodConf().sendKeys(getCodConf());
-        lM.getBtnLogin().click();
+        getInputUsername().sendKeys(getChave());
+        getBtnLogin().click();
+        getInputPassword().sendKeys(getSenha());
+        if (getInputCodConf().isDisplayed())
+            getInputCodConf().sendKeys(getCodConf());
+        getBtnLogin().click();
     }
 
     public void logoutEFecharPlataforma() {

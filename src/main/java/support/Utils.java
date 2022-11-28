@@ -2,10 +2,7 @@ package support;
 
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import cucumber.api.DataTable;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.LogTypes;
 import support.enums.SelectorsDelays;
@@ -41,18 +38,6 @@ import static support.enums.SelectorsDelays.CIRCLE;
 import static support.enums.User.*;
 
 public class Utils extends BaseUtils {
-    public void esperar(SelectorsDelays tar) {
-        printLog("Aguardando " + tar.getDelay() + " segundo(s) para " + tar.getSelector() + "...", NULL);
-        sleep(esperarQTeste(tar.getDelay()));
-    }
-
-    private long esperarQTeste(long segundos) {
-        if (isQteste()) {
-            segundos /= 2L;
-        }
-        return segundos;
-    }
-
     public static boolean isQteste() {
         return getContext().getOrigemExecucao().equals(QTESTE);
     }

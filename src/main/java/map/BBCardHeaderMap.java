@@ -9,23 +9,35 @@ import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 
 public class BBCardHeaderMap extends BasePageObjects {
-    public WebElement getInputPesquisa() {
+    protected WebElement getInputPesquisa() {
        return getElement(".bb-textfield-group input");
     }
 
-    public WebElement getInputTag() {
+    protected WebElement getInputSigla() {
        return getElement(".bb-tag-field-input");
     }
 
-    public List<WebElement> getListTag() {
+    protected List<WebElement> getListSiglaDisponiveis() {
        return getElements(".menu-item a");
     }
 
-    public List<WebElement> getListBtnRemoverTag() {
+    protected List<WebElement> getListSiglasSelecionada() {
+       return getElements("bb-tag-field .bb-label-small");
+    }
+
+    protected List<WebElement> getListBtnRemoverSigla() {
        return getElements(".tag button");
     }
 
-    public WebElement getBtnFiltrar() {
+    protected WebElement getBtnFiltrar() {
        return getElement(".secondary");
+    }
+
+    protected WebElement getTxtTotalResultados() {
+        return getElement(".status-bar label");
+    }
+
+    protected WebElement getBtnLimparTudo() {
+        return getElement("bb-filter bb-link-nav");
     }
 }

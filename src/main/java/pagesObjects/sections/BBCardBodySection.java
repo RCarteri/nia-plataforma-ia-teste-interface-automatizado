@@ -26,12 +26,12 @@ public class BBCardBodySection extends BBCardBodyMap {
         return getListNomeComponente().size();
     }
 
-    public boolean siglasOk(String tagSelecionada) {
-        return getListTag().stream()
-                .allMatch(tag -> tag.getText().equals(tagSelecionada));
+    public boolean siglasOk(String siglaSelecionada) {
+        return getListSigla().stream()
+                .allMatch(sigla -> sigla.getText().equals(siglaSelecionada));
     }
 
     public boolean siglasOk() {
-        return getQuantResultados() > getListTag().size();
+        return getQuantResultados() > getListSigla().size();
     }
 }

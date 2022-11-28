@@ -28,6 +28,7 @@ public class SideBarSection {
     }
 
     public void fecharSideBar() {
-        sM.getBtnFecharSidebar().click();
+        if (sM.getBtnFecharSidebar().isDisplayed())
+            sM.getBtnFecharSidebar().click();
     }
 }

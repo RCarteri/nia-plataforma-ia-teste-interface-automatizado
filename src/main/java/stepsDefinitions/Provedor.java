@@ -32,6 +32,7 @@ public class Provedor extends Utils {
 
     @Então("^deverá ser apresentados os provedores de serviços de cloud$")
     public void deveraSerApresentadosOsProvedoresDeServicosDeCloud() {
+        capturaTela();
         assertTrue(cP.getListaProvedores().size() > 0);
     }
 }

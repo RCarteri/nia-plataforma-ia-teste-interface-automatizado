@@ -82,7 +82,7 @@ public class PanelContentSection {
     }
 
     private boolean checkListaOpcoes(String opcao, WebElement nItem) {
-        if (isListaOpcoesDisplayed())
+        if (pCM.getListaOpcoes().isDisplayed())
             return acessarSubMenu(nItem, opcao);
         return false;
     }
@@ -128,24 +128,5 @@ public class PanelContentSection {
         new Utils().capturaTela();
         fail("A opção '" + opcao + "' não existe no submenu. O teste não pode prosseguir.");
         return false;
-    }
-
-    private boolean isListaOpcoesDisplayed() {
-        try {
-            return pCM.getListaOpcoes().isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    public String getTxtNenhumResultado(String local) {
-        switch (local) {
-            case "componente":
-                return pCM.getTxtNenhumResultado().getText();
-            case "modal":
-                return pCM.getTxtNenhumResultadoModal().getText();
-            default:
-                throw new IllegalStateException("Local citado não existe: " + local);
-        }
     }
 }

@@ -15,10 +15,6 @@ public class LoginMap {
         return getElement("#idToken2");
     }
 
-    public WebElement getInputCodConf() {
-        return getElement("#idToken3");
-    }
-
     public WebElement getBtnLogin() {
         return getElement("#loginButton_0");
     }

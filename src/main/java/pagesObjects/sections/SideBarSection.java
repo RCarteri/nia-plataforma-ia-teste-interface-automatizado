@@ -5,7 +5,9 @@ import org.openqa.selenium.NoSuchElementException;
 
 import static support.GetElements.clicarComJS;
 import static support.Utils.printLog;
+import static support.Utils.waitInvisibility;
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.SPINNER;
 
 public class SideBarSection {
     private final SideBarMap sM = new SideBarMap();
@@ -28,7 +30,9 @@ public class SideBarSection {
     }
 
     public void fecharSideBar() {
-        if (sM.getBtnFecharSidebar().isDisplayed())
+        if (sM.getBtnFecharSidebar().isDisplayed()) {
+            waitInvisibility(SPINNER);
             sM.getBtnFecharSidebar().click();
+        }
     }
 }

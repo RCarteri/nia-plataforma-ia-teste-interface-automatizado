@@ -10,4 +10,4 @@ Funcionalidade: Suite004 - Informações gerenciais
         Quando acessar a página "Tecnologia (hm)"
         E se não estiver na home acessar o menu "Soluções e Serviços de IA" e "Gestão (Cloud) NOVO"
         E selecionar o item "Informações gerenciais"
-        Então deverão ser apresentados os cards de infromações gerenciais
+        Então deverão ser apresentados os cards de infromações gerenciais com os valores

@@ -1,6 +1,7 @@
 package pagesObjects;
 
 import map.ComponenteMap;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -42,6 +43,13 @@ public class ComponentePage {
 
     public List<WebElement> getCardsInfo() {
         return cM.getListCardsInfo();
+    }
+
+    public boolean isListCardsInfoContemValores() {
+        return getCardsInfo().stream()
+                .anyMatch(webElement ->
+                        !webElement.findElement(By.cssSelector("h2"))
+                                .getText().equals("0"));
     }
 
     public void clickBtnFechar(boolean elemNaoExiste, String local) {

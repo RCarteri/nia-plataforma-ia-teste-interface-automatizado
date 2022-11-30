@@ -40,6 +40,10 @@ public class ComponentePage {
         return cM.getListCards();
     }
 
+    public List<WebElement> getCardsInfo() {
+        return cM.getListCardsInfo();
+    }
+
     public void clickBtnFechar(boolean elemNaoExiste, String local) {
         if (elemNaoExiste) {
             printLog(local.equals("alerta") ? "O modal não foi apresentado." : "O alerta não foi apresentado.", INFO);

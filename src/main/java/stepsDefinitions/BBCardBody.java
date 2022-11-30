@@ -33,8 +33,12 @@ public class BBCardBody extends Utils {
 
     @Então("^deverão ser apresentados os cards de infromações gerenciais com os valores$")
     public void deveraoSerApresentadosOsCardsDeInfo() {
-        assertTrue("Os cards não foram apresentados.", cP.getCardsInfo().size() > 0);
-        printLog("Os cards foram apresentados com sucesso.", INFO);
-        assertTrue("Nenhum card possui valor.", cP.isListCardsInfoContemValores());
+        try {
+            assertTrue("Os cards não foram apresentados.", cP.getCardsInfo().size() > 0);
+            printLog("Os cards foram apresentados com sucesso.", INFO);
+            assertTrue("Nenhum card possui valor.", cP.isListCardsInfoContemValores());
+        }finally {
+            capturaTela();
+        }
     }
 }

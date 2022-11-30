@@ -1,4 +1,4 @@
-package runners.api.suites;
+package runners.all;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/api",
+		features = {"classpath:features/api"},
 		glue = "classpath:stepsDefinitions",
-		tags = { "@APIS003" }
+		tags = { "" }
 )
-public class TestSuiteApiS003ListarDadosIntervenineteFuncionario extends ConfRunner {
+public class TestCaseAllApiDesenv_1_2_13_S extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

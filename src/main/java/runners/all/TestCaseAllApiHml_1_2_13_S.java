@@ -1,4 +1,4 @@
-package runners.api.suites;
+package runners.all;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -7,16 +7,16 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import runners.ConfRunner;
 
-import static support.APIRest.Host.DESENV;
+import static support.APIRest.Host.HML;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = "classpath:features/api",
+		features = {"classpath:features/api"},
 		glue = "classpath:stepsDefinitions",
-		tags = { "@APIS006" }
+		tags = { "" }
 )
-public class TestSuiteApiS006ListarProjetosIA extends ConfRunner {
+public class TestCaseAllApiHml_1_2_13_S extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();
@@ -24,6 +24,6 @@ public class TestSuiteApiS006ListarProjetosIA extends ConfRunner {
 
 	@AfterClass
 	public static void finish(){
-		confFinish(DESENV);
+		confFinish(HML);
 	}
 }

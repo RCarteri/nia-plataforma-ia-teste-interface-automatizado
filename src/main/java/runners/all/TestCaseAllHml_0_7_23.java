@@ -12,11 +12,11 @@ import static support.APIRest.Host.HML;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = {"classpath:features/api"},
+		features = {"classpath:features/gestao"},
 		glue = "classpath:stepsDefinitions",
 		tags = { "" }
 )
-public class TestCaseAllApiHml extends ConfRunner {
+public class TestCaseAllHml_0_7_23 extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

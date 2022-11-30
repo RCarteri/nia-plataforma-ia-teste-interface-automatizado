@@ -50,6 +50,10 @@ public class ComponenteMap extends BasePageObjects {
         return getElements("bb-card bb-card");
     }
 
+    public List<WebElement> getListCardsInfo() {
+        return getElements("nia-management-info-card");
+    }
+
 //        Não da pra usar o Findby
     public List<WebElement> getListBtnFecharAlerta() {
         return getElements(".p-toast .pi-times");

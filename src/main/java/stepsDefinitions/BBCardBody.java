@@ -35,4 +35,14 @@ public class BBCardBody extends Utils {
             fail("Os cards não foram apresentados.");
         }
     }
+
+    @Então("^deverão ser apresentados os cards de infromações gerenciais$")
+    public void deveraoSerApresentadosOsCardsDeInfo() {
+        try {
+            assertTrue(cP.getCardsInfo().size() > 0);
+            printLog("Os cards foram apresentados com sucesso.", INFO);
+        } catch (AssertionError e) {
+            fail("Os cards não foram apresentados.");
+        }
+    }
 }

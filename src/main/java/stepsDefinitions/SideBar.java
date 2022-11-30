@@ -6,6 +6,7 @@ import pagesObjects.sections.SideBarSection;
 import support.Utils;
 
 import static support.enums.LogTypes.INFO;
+import static support.enums.SelectorsDelays.CIRCLE;
 
 public class SideBar extends Utils {
     private final SideBarSection sS;
@@ -29,7 +30,7 @@ public class SideBar extends Utils {
     public void selecionarOItem(String item) {
         try {
             sS.acessarMenu(item);
-            sleep(1);
+            waitInvisibility(CIRCLE);
             printLog("Item acessado com sucesso: " + item, INFO);
             sS.fecharSideBar();
         } catch (Exception e) {

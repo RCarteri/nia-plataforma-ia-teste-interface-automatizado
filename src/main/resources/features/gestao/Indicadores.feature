@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
 @S003
-Funcionalidade: Suite003 - Acessar os indicadores
+Funcionalidade: Suite003 - Indicadores
 
     @ID-003-010 @CT010
     Cenario: CT010 - Acessar os indicadores

@@ -6,7 +6,6 @@ import pagesObjects.ComponentePage;
 import support.Utils;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static support.enums.LogTypes.INFO;
 
 public class BBCardBody extends Utils {
@@ -27,22 +26,15 @@ public class BBCardBody extends Utils {
 
     @E("^deverá apresentar os cards com as informações$")
     public void deveraApresentarOsCardsComAsInformacoes() {
-        try {
-            assertTrue(cP.getCards().size() > 0);
-            assertTrue(cP.isInfoCardsApresentadas());
-            printLog("Os cards foram apresentados com sucesso.", INFO);
-        } catch (AssertionError e) {
-            fail("Os cards não foram apresentados.");
-        }
+        assertTrue("Os cards não foram apresentados.", cP.getCards().size() > 0);
+        assertTrue("Alguma das informações não foram apresentadas no card.", cP.isInfoCardsApresentadas());
+        printLog("Os cards foram apresentados com sucesso.", INFO);
     }
 
-    @Então("^deverão ser apresentados os cards de infromações gerenciais$")
+    @Então("^deverão ser apresentados os cards de infromações gerenciais com os valores$")
     public void deveraoSerApresentadosOsCardsDeInfo() {
-        try {
-            assertTrue(cP.getCardsInfo().size() > 0);
-            printLog("Os cards foram apresentados com sucesso.", INFO);
-        } catch (AssertionError e) {
-            fail("Os cards não foram apresentados.");
-        }
+        assertTrue("Os cards não foram apresentados.", cP.getCardsInfo().size() > 0);
+        printLog("Os cards foram apresentados com sucesso.", INFO);
+        assertTrue("Nenhum card possui valor.", cP.isListCardsInfoContemValores());
     }
 }

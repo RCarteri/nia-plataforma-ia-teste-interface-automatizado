@@ -12,11 +12,11 @@ import static support.APIRest.Host.DESENV;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
-		features = {"classpath:features/gestao"},
+		features = {"classpath:features/api"},
 		glue = "classpath:stepsDefinitions",
 		tags = { "" }
 )
-public class TestCaseAllDesenv_0_7_23 extends ConfRunner {
+public class TestCaseAllApiAllureDesenv extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

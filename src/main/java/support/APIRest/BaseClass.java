@@ -88,7 +88,7 @@ public class BaseClass extends FTABBUtils {
 
     protected void printResult() {
         System.out.println("---------------------------------------------------------");
-        printLog("Request enviado para o endpoint: " + endpoint, INFO);
+        printLog("Request enviado para a URL: " + baseURI + endpoint, INFO);
         System.out.println(payload);
         printLog("Recebeu o seguinte retorno com o status code:" + response.getStatusLine().replace("HTTP/1.1", ""), INFO);
         response.body().prettyPrint();

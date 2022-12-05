@@ -26,7 +26,7 @@ public class BBCardBody extends Utils {
 
     @E("^deverá apresentar os cards com as informações$")
     public void deveraApresentarOsCardsComAsInformacoes() {
-        assertTrue("Os cards não foram apresentados. Necessário verificar se há projetos.", cP.getCards().size() > 0);
+        assertTrue("Os cards não foram apresentados. Necessário verificar se há projetos com sigla.", cP.getCards().size() > 0);
         assertTrue("Alguma das informações não foram apresentadas no card.", cP.isInfoCardsApresentadas());
         printLog("Os cards foram apresentados com sucesso.", INFO);
     }
@@ -34,7 +34,7 @@ public class BBCardBody extends Utils {
     @Então("^deverão ser apresentados os cards de infromações gerenciais com os valores$")
     public void deveraoSerApresentadosOsCardsDeInfo() {
         try {
-            assertTrue("Os cards não foram apresentados. Necessário verificar se há projetos.", cP.getCardsInfo().size() > 0);
+            assertTrue("Os cards não foram apresentados. Necessário verificar se há projetos com sigla.", cP.getCardsInfo().size() > 0);
             printLog("Os cards foram apresentados com sucesso.", INFO);
             assertTrue("Nenhum card possui valor.", cP.isListCardsInfoContemValores());
         }finally {

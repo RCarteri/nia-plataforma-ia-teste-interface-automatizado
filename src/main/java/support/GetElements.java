@@ -72,6 +72,19 @@ public class GetElements extends Utils{
         }
     }
 
+    public static WebElement getSeElementoVisivel(String elemento) {
+        return (isElementoVisivel(elemento)) ? getElement(elemento) : null;
+    }
+
+    private static boolean isElementoVisivel(String elemento) {
+        try {
+            return getElement(elemento).isDisplayed();
+        }catch (Exception e) {
+            printLog("O elemento " + elemento + " não está visivel.", INFO);
+            return false;
+        }
+    }
+
     public List<WebElement> findElements(By by) {
         try {
             if (iframesList.size() == 0)

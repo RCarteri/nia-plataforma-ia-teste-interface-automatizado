@@ -1,9 +1,9 @@
 package support.enums;
 
 public enum SelectorsDelays {
-	CIRCLE(".p-progress-spinner-circle", 20),
+	CIRCLE("bb-spinner", 20),
 	LOGIN("#idToken1", 5),
-	SPINNER(".spinner-fixed", 10),
+	SPINNER(".spinner", 10),
 	MODAL("div.p-dialog-header", 1);
 
 	private final String selector;

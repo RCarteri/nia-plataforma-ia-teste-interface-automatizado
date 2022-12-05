@@ -13,11 +13,12 @@ import static support.Utils.*;
 import static support.enums.Ambiente.DESENV;
 import static support.enums.Cookie.isLoggedIntranet;
 import static support.enums.LogTypes.*;
+import static support.enums.SelectorsDelays.SPINNER;
 import static support.enums.SysProps.IS_LOGGED;
 import static support.enums.SysProps.isLoggedPlataforma;
 import static support.enums.User.*;
 
-public class LoginPage extends LoginMap{
+public class LoginPage extends LoginMap {
     private final Utils utils;
 
     public LoginPage() {
@@ -57,19 +58,10 @@ public class LoginPage extends LoginMap{
         if (isLoggedPlataforma() || isLoggedIntranet()) {
             printLog("O Usuário '" + getUser() + "' - " + getChave() + " esta logado.", INFO);
         } else {
-            switch (ambiente) {
-                case "homologação":
-                    try {
-                        loginPlataforma();
-                        setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
-                    } catch (Exception e) {
-                        atualizarPagina(ambiente);
-                    }
-                    break;
-                case "desenvolvimento":
-                    loginIntranet();
-                    break;
-            }
+            if (ambiente.equals("homologação"))
+                loginPlataforma();
+            else
+                loginIntranet();
             printLog("Login realizado com o usuário: " + getUser() + " chave: " + getChave(), INFO);
         }
     }
@@ -83,17 +75,31 @@ public class LoginPage extends LoginMap{
         getBtnEntrar().click();
     }
 
-    private void atualizarPagina(String ambiente) {
+    private void atualizarPagina() {
         printLog("Não foi possível realizar o login. A página será atualizada.", ERROR);
         getDriver().navigate().refresh();
-        logar(ambiente);
+        loginPlataforma();
     }
 
     private void loginPlataforma() {
+        fillForm();
+        if (getAlert() != null) atualizarPagina();
+        if (getInputCodConf() != null) fillFormCodConf();
+        setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
+    }
+
+    private void fillForm() {
         printLog("Preenchendo formulário de login.", INFO);
         getInputUsername().sendKeys(getChave());
         getInputPassword().sendKeys(getSenha());
         getBtnLogin().click();
+        waitInvisibility(SPINNER);
+    }
+
+    private void fillFormCodConf() {
+        getInputCodConf().sendKeys(getCodConf());
+        getBtnLogin().click();
+        waitInvisibility(SPINNER);
     }
 
     public void logoutEFecharPlataforma() {

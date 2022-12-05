@@ -16,7 +16,7 @@ import static support.APIRest.Host.DESENV;
 		glue = "classpath:stepsDefinitions",
 		tags = { "" }
 )
-public class TestCaseAllAllureDesenv extends ConfRunner {
+public class TestCaseAllPlatAllureDesenv extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

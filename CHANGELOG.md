@@ -5,6 +5,41 @@ As mudanças feitas neste projeto serão documentadas nesse arquivo.
 O formato é baseado em [Mantenha uma Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.16.0] - 06-12-2022
+Task: 687217, 691868, 700193, 700318, 700403, 717003, 723313, 724115, 727214, 733572, 735143
+###Adicionado
+- Cenário: Listar membros do grupo de acesso
+- Cenário: Listar modelo IBM Cloud
+- Cenário: Acessar os indicadores
+- Cenário: Limpar filtro
+- Cenário: Informações gerenciais
+- Cenário API: Listar membros de um rpjeto do Watson Studio
+- Cenário API: Listar notebooks de um rpjeto do Watson Studio
+- Cenário API: Listar data asset de um rpjeto do Watson Studio
+- Cenário API: Listar projetos de inteligência artificial
+- Método: clicarComJS()
+
+###Mudado
+- Usando firefox sem citar versão
+- Criadas as classes TratarListaRetorno e TratarPayload
+- Passando a utilizar Variáveis dos payloads em maiúscula
+- Request do Watson Studio com mais de uma sigla
+- Cenario: Acessar plataforma, deverá mostrar os provedores de serviço cloud
+- Fechar sidebar se estiver aberta após a seleção do elemento
+- Mover features legado para a raiz da pasta features
+- Mover features para a raiz da pasta gestão
+- Renomear runners
+
+###Corrigido
+- Step "Quando enviar um payload "SUBCOMPONENTE" com o código da lista de dados do componente "COMPONENTE""
+- Acessar página inicial
+- Mapear menu sidebar
+- Login com código de confirmação
+
+###Removido
+- Teste API WATSON_SPACE
+
+
 ## [7.5.0] - 18-10-2022
 Task: 678232, 682803
 ###Adicionado

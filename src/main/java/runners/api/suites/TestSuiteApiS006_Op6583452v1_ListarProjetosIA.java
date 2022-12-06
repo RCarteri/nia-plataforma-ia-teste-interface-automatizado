@@ -14,9 +14,9 @@ import static support.APIRest.Host.DESENV;
 		plugin = { "pretty", "io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm" },
 		features = "classpath:features/api",
 		glue = "classpath:stepsDefinitions",
-		tags = { "@APIS001" }
+		tags = { "@APIS006" }
 )
-public class TestSuiteApiS001ListarProjetosComDeployEmAndamento extends ConfRunner {
+public class TestSuiteApiS006_Op6583452v1_ListarProjetosIA extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

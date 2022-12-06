@@ -16,7 +16,7 @@ import static support.APIRest.Host.DESENV;
 		glue = "classpath:stepsDefinitions",
 		tags = { "@APIS003" }
 )
-public class TestSuiteApiS003ListarDadosIntervenineteFuncionario extends ConfRunner {
+public class TestSuiteApiS003_Op5903588v1_ListarDadosIntervenineteFuncionario extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

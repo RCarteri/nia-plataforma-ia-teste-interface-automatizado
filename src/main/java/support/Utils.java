@@ -54,6 +54,10 @@ public class Utils extends BaseUtils {
         }
     }
 
+    public boolean isElementoNotNull(WebElement elemento){
+        return elemento != null;
+    }
+
     private static String delay(LocalTime antes) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("s.SS");
         return dtf.format(now().minusSeconds(antes.getSecond()));
@@ -181,8 +185,7 @@ public class Utils extends BaseUtils {
         } catch (DataPoolException e) {
             e.printStackTrace();
         }
-        printLog("Este payload não está configurado.", ERROR);
-        return null;
+        throw new RuntimeException("Este payload não está configurado.");
     }
 
     private void datapoolInit() {

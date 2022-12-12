@@ -59,7 +59,7 @@ public class BaseClass extends FTABBUtils {
                     .cookie("IBBID", getIBBID())
                     .relaxedHTTPSValidation();
         } else {
-            baseURI = BASE_URL.getUrl();
+            baseURI = endpoint.contains("op70") ? ALERT_LOGS_URL.getUrl() : BASE_URL.getUrl();
             request = given()
                     .contentType(JSON)
                     .relaxedHTTPSValidation();

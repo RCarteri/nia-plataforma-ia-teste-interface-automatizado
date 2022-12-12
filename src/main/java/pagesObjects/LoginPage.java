@@ -83,8 +83,19 @@ public class LoginPage extends LoginMap {
 
     private void loginPlataforma() {
         fillForm();
-        if (getAlert() != null) atualizarPagina();
-        if (getInputCodConf() != null) fillFormCodConf();
+        if (utils.isElementoNotNull(getAlert())) atualizarPagina();
+        if (utils.isElementoNotNull(getInputCodConf())) fillFormCodConf();
+        if (utils.isElementoNotNull(getReloginLink())) relogin();
+        setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
+    }
+
+    private void relogin() {
+        getReloginLink().click();
+        printLog("Preenchendo formulário de login.", INFO);
+        if (utils.isElementoNotNull(getInputCodConf()))
+            fillFormCodConf();
+        else
+            getBtnLogin().click();
         setProperty(IS_LOGGED.toString(), valueOf(estaLogado()));
     }
 

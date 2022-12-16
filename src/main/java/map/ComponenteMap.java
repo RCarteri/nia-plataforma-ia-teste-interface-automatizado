@@ -10,29 +10,11 @@ import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 
 public class ComponenteMap extends BasePageObjects {
-    @FindBy(cssSelector = ".p-dropdown-trigger span")
-    private WebElement dropComponente;
-
     @FindBy(cssSelector = ".p-toast-message-success")
     private WebElement alertSuccess;
 
     @FindBy(cssSelector = ".p-toast-message-info .p-toast-detail")
     private WebElement alertInfo;
-
-    @FindBy(cssSelector = "bb-card-body h1")
-    private WebElement tituloComponente;
-
-    public WebElement getTituloComponente() {
-        if (tituloComponente == null)
-            tituloComponente = setElement("tituloComponente");
-        return tituloComponente;
-    }
-
-    public WebElement getDropDownComponente() {
-        if (dropComponente == null)
-            dropComponente = setElement("dropComponente");
-        return dropComponente;
-    }
 
     public WebElement getAlertSuccess() {
         if (alertSuccess == null)
@@ -46,32 +28,24 @@ public class ComponenteMap extends BasePageObjects {
         return alertInfo;
     }
 
-    public List<WebElement> getListCards() {
-        return getElements("bb-card bb-card");
-    }
-
-    public List<WebElement> getListCardsInfo() {
-        return getElements("nia-management-info-card");
-    }
-
 //        Não da pra usar o Findby
     public List<WebElement> getListBtnFecharAlerta() {
         return getElements(".p-toast .pi-times");
     }
 
-    public List<WebElement> getListGraficos() {
-        return getElements("bb-card.card");
-    }
-
-    public List<WebElement> getListaProvedores() {
-        return getElements(".d-flex bb-card-body");
-    }
-
     //Legado
+//    @FindBy(cssSelector = ".p-dropdown-trigger span")
+//    private WebElement dropComponente;
 
-    public List<WebElement> getListComponente() {
-        return getElements(".p-dropdown-items-wrapper span");
-    }
+//    public WebElement getDropDownComponente() {
+//        if (dropComponente == null)
+//            dropComponente = setElement("dropComponente");
+//        return dropComponente;
+//    }
+//
+//    public List<WebElement> getListComponente() {
+//        return getElements(".p-dropdown-items-wrapper span");
+//    }
 
     public WebElement getBtnFecharModal() {
         return getElement(".p-dialog-header .pi-times");

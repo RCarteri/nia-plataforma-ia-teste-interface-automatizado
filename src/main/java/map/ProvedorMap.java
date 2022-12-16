@@ -8,10 +8,11 @@ import static org.junit.Assert.fail;
 import static support.GetElements.getElements;
 
 public class ProvedorMap {
-    public List<WebElement> getListProvedor(){
-        return getElements("div.p-card-body");
+    public List<WebElement> getListProvedor() {
+        return getElements(".d-flex bb-card-body");
     }
 
+    //Legado
     public List<WebElement> getListBtnExibir() {
         List<WebElement> listBtnExibir = getElements("td button.ng-star-inserted.p-button-secondary");
         if (listBtnExibir.size() == 0)

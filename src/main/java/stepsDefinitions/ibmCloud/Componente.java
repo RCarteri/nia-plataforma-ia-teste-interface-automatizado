@@ -10,8 +10,6 @@ import pagesObjects.sections.PanelContentSection;
 import support.Utils;
 
 import static org.junit.Assert.*;
-import static support.enums.LogTypes.INFO;
-import static support.enums.SelectorsDelays.CIRCLE;
 import static support.enums.User.getUser;
 
 public class Componente extends Utils{
@@ -23,27 +21,16 @@ public class Componente extends Utils{
         this.pCS = new PanelContentSection();
     }
 
-    @Quando("^selecionar o componente \"([^\"]*)\"$")
-    public void selecionarOComponente(String componente) {
-        try {
-            cP.acessarComponente(componente);
-            assertNotNull(cP.getTxtTituloComponente());
-            waitInvisibility(CIRCLE);
-        } catch (Exception e) {
-            logError(e);
-        }
-    }
-
-    @Então("^deverá apresentar o título \"([^\"]*)\" na página$")
-    public void deveApresentarOTituloNaPagina(String titulo) {
-        String tituloObtido = cP.getTxtTituloComponente();
-        try {
-            assertEquals(printResultadoEsperadoObtido(titulo, tituloObtido), titulo, tituloObtido);
-            printLog("O título foi apresentado com sucesso: " + titulo, INFO);
-        } finally{
-            capturaTela();
-        }
-    }
+//    @Quando("^selecionar o componente \"([^\"]*)\"$")
+//    public void selecionarOComponente(String componente) {
+//        try {
+//            cP.acessarComponente(componente);
+//            assertNotNull(cP.getTxtTituloComponente());
+//            waitInvisibility(CIRCLE);
+//        } catch (Exception e) {
+//            logError(e);
+//        }
+//    }
 
     @Dado("^que não exista \"([^\"]*)\"$")
     public void naoExistirOpcao(String opcao) {

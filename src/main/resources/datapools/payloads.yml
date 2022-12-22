@@ -28,6 +28,7 @@ op5839181v1:
   WATSON_STUDIO_MEMBROS: *nomeCodComponente
   NOTEBOOKS: *nomeCodComponente
   DATA_ASSET: *nomeCodComponente
+  TESTE_MODELO_TRITON: *nomeCodComponente
   GRUPOS_DE_ACESSO: *nomeComponente
   TRITON_MODELOS: *nomeComponente
   MODELOS: *nomeComponente

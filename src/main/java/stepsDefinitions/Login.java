@@ -2,15 +2,12 @@ package stepsDefinitions;
 
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.E;
-import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
-import pagesObjects.ComponentePage;
 import pagesObjects.LoginPage;
+import pagesObjects.ProvedorPage;
 import support.Utils;
 
 import static br.com.bb.ath.ftabb.gaw.Plataforma.abrirMenu;
-import static br.com.bb.ath.ftabb.gaw.Plataforma.recuperarTituloPagina;
-import static org.junit.Assert.assertEquals;
 import static pagesObjects.LoginPage.isPagGestaoCloud;
 import static support.enums.LogTypes.ERROR;
 import static support.enums.LogTypes.INFO;
@@ -18,11 +15,9 @@ import static support.enums.SelectorsDelays.CIRCLE;
 
 public class Login extends Utils {
     private final LoginPage lP;
-    private final ComponentePage cP;
 
     public Login() {
         this.lP = new LoginPage();
-        this.cP = new ComponentePage();
     }
 
     @Dado("^que a Plataforma esteja fechada, abra a Plataforma$")
@@ -54,17 +49,6 @@ public class Login extends Utils {
         }
     }
 
-    @Então("^a página \"([^\"]*)\" deverá ser carregada com sucesso$")
-    public void aPaginaDeveraSerCarregadaComSucesso(String titulo) {
-        try {
-            assertEquals("A página não foi carregada.", recuperarTituloPagina(), titulo);
-            printLog("Página " + titulo + " carregada com sucesso.", INFO);
-            cP.clickBtnFechar(false, "alerta");
-        } catch (Exception e) {
-            logError(e);
-        }
-    }
-
     @E("^se não estiver na home acessar o menu \"([^\"]*)\" e \"([^\"]*)\"$")
     public void acessarMenu(String nivel1, String nivel2) {
         try {
@@ -72,7 +56,7 @@ public class Login extends Utils {
                 abrirMenu(nivel1, nivel2);
                 printLog("Menus acessados com sucesso: " + nivel1 + " " + nivel2, INFO);
                 waitInvisibility(CIRCLE);
-                cP.clickBtnFechar(false, "alerta");
+                new ProvedorPage().fecharAlerta();
             }
         } catch (Exception e) {
             logError(e);

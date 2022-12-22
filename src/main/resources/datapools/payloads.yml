@@ -40,7 +40,7 @@ op6583452v1:
   descrição: "Listar projetos de Inteligência Artificial"
   PROJETOS: '{"nomeComponente" : ""}'
 
-op7045172v1:
+nia/Op7045172-v2:
   descrição: "Listar a frequência de deploy agrupado por ano-mes, modelo de IA e projeto de IA"
   OK: '{}'
 

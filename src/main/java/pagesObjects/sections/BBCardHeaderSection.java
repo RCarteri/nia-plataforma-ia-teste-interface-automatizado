@@ -12,6 +12,10 @@ public class BBCardHeaderSection extends BBCardHeaderMap {
         getInputPesquisa().clear();
     }
 
+    public String getTxtTituloComponente() {
+        return getTituloComponente().getText();
+    }
+
     public void pesquisar(String palavraPesquisada) {
         getInputPesquisa().sendKeys(palavraPesquisada);
     }

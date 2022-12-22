@@ -2,6 +2,7 @@ package map;
 
 import org.openqa.selenium.WebElement;
 import pagesObjects.BasePageObjects;
+import support.annotations.FindBy;
 
 import java.util.List;
 
@@ -9,6 +10,15 @@ import static support.GetElements.getElement;
 import static support.GetElements.getElements;
 
 public class BBCardHeaderMap extends BasePageObjects {
+    @FindBy(cssSelector = "bb-card-body h1")
+    private WebElement tituloComponente;
+
+    protected WebElement getTituloComponente() {
+        if (tituloComponente == null)
+            tituloComponente = setElement("tituloComponente");
+        return tituloComponente;
+    }
+
     protected WebElement getInputPesquisa() {
        return getElement(".bb-textfield-group input");
     }

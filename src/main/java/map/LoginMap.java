@@ -10,6 +10,10 @@ public class LoginMap extends BasePageObjects {
         return getSeElementoVisivel(".alert");
     }
 
+    public WebElement getReloginLink() {
+       return getSeElementoVisivel("#login-base a");
+    }
+
     public WebElement getInputCodConf() {
         return getSeElementoVisivel(".form-group:nth-child(5) input");
     }

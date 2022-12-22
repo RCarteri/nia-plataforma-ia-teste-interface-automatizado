@@ -31,6 +31,8 @@ public class TratarPayload {
 
     protected String getCodComponente(JSONArray listaRetorno) {
         if (listaRetorno == null) return "";
+        if (listaRetorno.get(0).getClass().getSimpleName().equals("String"))
+            return listaRetorno.get(getRandom(listaRetorno.length())).toString();
         JSONObject componente = getComponenteListaRetorno(listaRetorno);
         if (componente.get("nomeComponente").toString().equals("null")) {
             printLog("Nome do componente escolhido: " + componente.get("nome"), INFO);

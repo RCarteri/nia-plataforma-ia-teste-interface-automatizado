@@ -27,7 +27,6 @@ import static support.enums.LogTypes.INFO;
 public class BaseClass extends FTABBUtils {
     private RequestSpecification request;
     private String endpoint;
-    private String endpointTratar;
     private String payload;
     public Response response;
     private JSONArray listaRetorno;
@@ -97,7 +96,7 @@ public class BaseClass extends FTABBUtils {
     private void setListaRetorno() {
         ArrayList<Map<String, String>> ArrayListListaRetorno = response.jsonPath().get("listaRetorno");
         listaRetorno = new JSONArray(ArrayListListaRetorno);
-        listaRetorno = new TratarListaRetorno(listaRetorno, endpointTratar).tratarListaRetorno();
+        listaRetorno = new TratarListaRetorno(listaRetorno, endpoint).tratarListaRetorno();
     }
 
     public void setPayload(String tipoPayload) {
@@ -105,8 +104,8 @@ public class BaseClass extends FTABBUtils {
     }
 
     protected void setPayload(String endpoint, String componente) {
-        if (endpointTratar == null) endpointTratar = endpoint;
-        payload = utils.getPayload(endpoint, componente);
+        this.endpoint = endpoint;
+        payload = utils.getPayload(this.endpoint, componente);
     }
 
     public void tratarPayload(String componente) {

@@ -7,15 +7,15 @@ import java.util.stream.IntStream;
 
 public class TratarListaRetorno {
     private final JSONArray listaRetorno;
-    private final String endpointTratar;
+    private final String endpoint;
 
-    public TratarListaRetorno(JSONArray listaRetorno, String endpointTratar) {
+    public TratarListaRetorno(JSONArray listaRetorno, String endpoint) {
         this.listaRetorno = listaRetorno;
-        this.endpointTratar = endpointTratar;
+        this.endpoint = endpoint;
     }
 
     public JSONArray tratarListaRetorno() {
-        switch (endpointTratar) {
+        switch (endpoint) {
             case "op5806077v2":
                 return new JSONArray(listaRetorno);
             case "op5806077v3":
@@ -23,7 +23,7 @@ public class TratarListaRetorno {
             case "op5839181v1":
                 return getListaRefatorada();
             default:
-                throw new NullPointerException("O endpoint " + endpointTratar + " não está configurado para ter a listaRertono tratada.");
+                throw new NullPointerException("O endpoint " + endpoint + " não está configurado para ter a listaRertono tratada.");
         }
     }
 

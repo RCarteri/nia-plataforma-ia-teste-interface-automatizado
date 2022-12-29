@@ -28,10 +28,12 @@ public class TratarListaRetorno {
     }
 
     private JSONArray getListaRefatorada() {
-         return new JSONArray(IntStream
-                .range(0, listaRetorno.length())
+        String s = IntStream.range(0, listaRetorno.length())
                 .mapToObj(i -> String.valueOf(listaRetorno.getJSONObject(i).get("nomeComponente")))
-                .collect(Collectors.joining()));
+                .collect(Collectors.joining());
+        if (!s.contains("["))
+            s = "[" + s + ']';
+        return new JSONArray(s);
     }
 
     private JSONArray getListaQueContenhaSigla() {

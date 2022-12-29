@@ -93,7 +93,7 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
-    private void setListaRetorno() {
+    public void setListaRetorno() {
         ArrayList<Map<String, String>> ArrayListListaRetorno = response.jsonPath().get("listaRetorno");
         listaRetorno = new JSONArray(ArrayListListaRetorno);
         listaRetorno = new TratarListaRetorno(listaRetorno, endpoint).tratarListaRetorno();

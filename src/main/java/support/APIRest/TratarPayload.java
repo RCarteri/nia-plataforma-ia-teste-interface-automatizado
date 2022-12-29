@@ -1,6 +1,7 @@
 package support.APIRest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import support.Utils;
 
@@ -14,33 +15,47 @@ import static support.enums.User.getUser;
 public class TratarPayload {
     private String payload;
     private final JSONArray listaRetorno;
+    private JSONObject componenteListaRetorno;
 
     public TratarPayload(String payload, JSONArray listaRetorno) {
         this.payload = payload;
         this.listaRetorno = listaRetorno;
     }
 
-    protected JSONObject getComponenteListaRetorno(JSONArray list) {
-        try{
-            int index = getRandom(list.length());
-            return list.getJSONObject(index);
-        }catch(IllegalArgumentException e){
+    public JSONObject getComponente() {
+        return componenteListaRetorno;
+    }
+
+    protected void setComponenteListaRetorno() {
+        try {
+            int index = getRandom(listaRetorno.length());
+            componenteListaRetorno = listaRetorno.getJSONObject(index);
+        } catch (IllegalArgumentException e) {
             throw new RuntimeException("A lista usada não possui dados com a sigla " + getInstance().getListaSiglasTeste() + " que foi selecionada.");
         }
     }
 
-    protected String getCodComponente(JSONArray listaRetorno) {
+    protected String getCodComponente() {
+        String nomeComponente;
+        String codComponente;
         if (listaRetorno == null) return "";
         if (listaRetorno.get(0).getClass().getSimpleName().equals("String"))
             return listaRetorno.get(getRandom(listaRetorno.length())).toString();
-        JSONObject componente = getComponenteListaRetorno(listaRetorno);
-        if (componente.get("nomeComponente").toString().equals("null")) {
-            printLog("Nome do componente escolhido: " + componente.get("nome"), INFO);
-            return (String) componente.get("id");
-        } else {
-            printLog("Nome do componente escolhido: " + componente.get("nomeComponente"), INFO);
-            return (String) componente.get("codigoComponente");
+        setComponenteListaRetorno();
+        try {
+            if (componenteListaRetorno.get("nomeComponente").toString().equals("null")) {
+                nomeComponente = (String) componenteListaRetorno.get("nome");
+                codComponente = (String) componenteListaRetorno.get("id");
+            } else {
+                nomeComponente = (String) componenteListaRetorno.get("nomeComponente");
+                codComponente = (String) componenteListaRetorno.get("codigoComponente");
+            }
+        } catch (JSONException e) {
+            nomeComponente = (String) componenteListaRetorno.get("userName");
+            codComponente = (String) componenteListaRetorno.get("id");
         }
+        printLog("Nome do componente escolhido: " + nomeComponente, INFO);
+        return codComponente;
     }
 
     protected String getListaSiglas() {
@@ -53,12 +68,13 @@ public class TratarPayload {
     }
 
     protected String getCodEspaco() {
-        return (String) getComponenteListaRetorno(listaRetorno).get("codigoEspaco");
+        setComponenteListaRetorno();
+        return (String) componenteListaRetorno.get("codigoEspaco");
     }
 
     public String tratarPayload(String componente) {
         payload = payload
-                .replaceFirst("COD_COMPONENTE", getCodComponente(listaRetorno))
+                .replaceFirst("COD_COMPONENTE", getCodComponente())
                 .replaceFirst("NOME_COMPONENTE", componente)
                 .replaceFirst("_MEMBROS", "");
 

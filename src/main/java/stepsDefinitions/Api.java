@@ -54,4 +54,9 @@ public class Api extends BaseClass {
         tratarPayload(subComponente);
         enviarPayload();
     }
+
+    @Então("^salvar os resultados do response$")
+    public void salvarOsResultadosDoResponse() {
+        setListaRetorno();
+    }
 }

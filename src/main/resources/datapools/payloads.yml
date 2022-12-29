@@ -32,6 +32,7 @@ op5839181v1:
   GRUPOS_DE_ACESSO: *nomeComponente
   TRITON_MODELOS: *nomeComponente
   MODELOS: *nomeComponente
+  USER_INFO: *nomeCodComponente
 
 op6851522v1:
   descrição: "Listar modelos na IBM Cloud"

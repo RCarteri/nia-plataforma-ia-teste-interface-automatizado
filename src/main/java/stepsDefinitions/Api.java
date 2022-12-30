@@ -41,15 +41,15 @@ public class Api extends BaseClass {
         fecharPlataforma();
     }
 
-    @Dado("^que tenha a lista de dados do componente \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
-    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String componente, String endpoint){
+    @Dado("^que tenha a lista de \"([^\"]*)\" \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
+    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String local, String componente, String endpoint){
         setPayload(endpoint, componente);
         tratarPayload(componente);
         enviarPayload(endpoint);
     }
 
-    @Quando("^enviar um payload \"([^\"]*)\" com o código da lista de dados do componente")
-    public void enviarUmPayloadComOCodigoDaListaDeDadosDoComponente(String subComponente) {
+    @Quando("^enviar um payload \"([^\"]*)\" com o código do \"([^\"]*)\" selecionado aleatóriamente$")
+    public void enviarUmPayloadComOCodigoDaListaDeDadosDoComponente(String subComponente, String codComponente) {
         setPayload(subComponente);
         tratarPayload(subComponente);
         enviarPayload();

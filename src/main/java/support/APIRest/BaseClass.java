@@ -109,7 +109,7 @@ public class BaseClass extends FTABBUtils {
     }
 
     public void tratarPayload(String componente) {
-        payload = new TratarPayload(payload, listaRetorno).tratarPayload(componente);
+        payload = new TratarPayload(payload, listaRetorno).tratarPayload(componente, endpoint);
     }
 
     private String getDescricao() {

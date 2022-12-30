@@ -24,8 +24,8 @@ op5839181v1:
   CLOUD_OBJECT_STORAGE_BUCKETS: *nomeCodComponente
   WATSON_KNOWLEDGE_CATALOG: *nomeCodComponente
   WATSON_ASSISTANT: *nomeCodComponente
-  GRUPOS_DE_ACESSO_MEMBROS: *nomeCodComponente
-  WATSON_STUDIO_MEMBROS: *nomeCodComponente
+  GRUPOS_DE_ACESSO-MEMBROS: *nomeCodComponente
+  WATSON_STUDIO-MEMBROS: *nomeCodComponente
   NOTEBOOKS: *nomeCodComponente
   DATA_ASSET: *nomeCodComponente
   TESTE_MODELO_TRITON: *nomeCodComponente
@@ -49,3 +49,16 @@ nia/Op7045172-v2:
 dpr/Op5903588-v1:
   descrição: "Listar dados interveniente do funcionário"
   OK: '{"codigoInterveniente" : "CHAVE_USUARIO"}'
+
+op5949338v1:
+  descrição: "Editar acesso aos reursos BB da IBM Cloud"
+  WATSON_STUDIO-EDITAR_MEMBRO: '{
+    "mensagemRequisicao": {
+      "nomeComponente": "NOME_COMPONENTE",
+      "codigoComponente": "COD_COMPONENTE",
+      "codigoInstrucao": "EDITAR",
+      "codigoEmail": "COD_EMAIL",
+      "codigoIdentificador": "COD_ID",
+      "codigoPermissao": "COD_PERMISSAO"
+    }
+  }'

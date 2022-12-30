@@ -5,7 +5,7 @@ Funcionalidade: APISuite005 - Listar modelos na IBM Cloud
 
     @ID-API005-001 @APICT001
     Cenario: APICT001 - OK - 200
-        Dado que tenha a lista de dados do componente "WATSON_STUDIO" no endpoint "op5806077v3"
+        Dado que tenha a lista de "projetos" "WATSON_STUDIO" no endpoint "op5806077v3"
         E que defina o endpoint "op6851522v1"
-        Quando enviar um payload "MODELOS" com o código da lista de dados do componente "WATSON_STUDIO"
+        Quando enviar um payload "MODELOS" com o código do "projeto" selecionado aleatóriamente
         Então deve retornar o código 200

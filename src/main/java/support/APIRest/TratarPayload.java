@@ -4,9 +4,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import support.Utils;
+import support.enums.DadosSelecionadosApi;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static java.lang.System.setProperty;
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
+import static support.enums.DadosSelecionadosApi.*;
 import static support.enums.LogTypes.INFO;
 import static support.enums.Siglas.getInstance;
 import static support.enums.User.getChave;
@@ -36,8 +42,7 @@ public class TratarPayload {
     }
 
     protected String getCodComponente() {
-        String nomeComponente;
-        String codComponente;
+        String nomeComponente, codComponente;
         if (listaRetorno == null) return "";
         if (listaRetorno.get(0).getClass().getSimpleName().equals("String"))
             return listaRetorno.get(getRandom(listaRetorno.length())).toString();
@@ -49,10 +54,13 @@ public class TratarPayload {
             } else {
                 nomeComponente = (String) componenteListaRetorno.get("nomeComponente");
                 codComponente = (String) componenteListaRetorno.get("codigoComponente");
+                setProperty(COD_COMPONENTE.toString(), codComponente);
             }
         } catch (JSONException e) {
+            //Usado para request que editam os papeis dos membros
             nomeComponente = (String) componenteListaRetorno.get("userName");
             codComponente = (String) componenteListaRetorno.get("id");
+            setProperty(PAPEL.toString(), (String) componenteListaRetorno.get("role"));
         }
         printLog("Nome do componente escolhido: " + nomeComponente, INFO);
         return codComponente;
@@ -67,30 +75,55 @@ public class TratarPayload {
         return getInstance().getListaSiglasTeste();
     }
 
-    protected String getCodEspaco() {
+    private String getCodEspaco() {
         setComponenteListaRetorno();
         return (String) componenteListaRetorno.get("codigoEspaco");
     }
 
-    public String tratarPayload(String componente) {
-        payload = payload
-                .replaceFirst("COD_COMPONENTE", getCodComponente())
-                .replaceFirst("NOME_COMPONENTE", componente)
-                .replaceFirst("_MEMBROS", "");
+    private String getCodEmail() {
+        JSONObject o = (JSONObject) listaRetorno.get(0);
+        return (String) o.get("email");
+    }
 
-        if (payload.contains("CHAVE_USUARIO")) {
-            if (getUser() == null)
-                new Utils().setDatapool("desenvolvimento");
-            payload = payload.replaceFirst("CHAVE_USUARIO", getChave());
+    public String tratarPayload(String componente, String endpoint) {
+        switch (endpoint) {
+            case "dpr/Op5903588-v1":
+                if (getUser() == null)
+                    new Utils().setDatapool("desenvolvimento");
+                payload = payload.replaceFirst("CHAVE_USUARIO", getChave());
+                break;
+            case "op5806077v3":
+            case "op5806077v2":
+                payload = payload.replaceFirst("LISTA_SIGLA", getListaSiglas());
+                break;
+            case "op6851522v1":
+                payload = payload.replaceFirst("COD_ESPACO", getCodEspaco());
+                break;
+            case "op5949338v1":
+                payload = payload.replaceFirst("COD_COMPONENTE", DadosSelecionadosApi.getCodComponente())
+                        .replaceFirst("COD_EMAIL", getCodEmail())
+                        .replaceFirst("COD_ID", getCodId())
+                        .replaceFirst("COD_PERMISSAO", getPapel());
+                System.out.println();
+                break;
+            case "op5839181v1":
+                payload = payload.replaceFirst("COD_COMPONENTE", getCodComponente());
+                break;
         }
-
-        if (payload.contains("LISTA_SIGLA")) {
-            payload = payload.replaceFirst("LISTA_SIGLA", getListaSiglas());
-        }
-
-        if (payload.contains("COD_ESPACO")) {
-            payload = payload.replaceFirst("COD_ESPACO", getCodEspaco());
-        }
+        payload = payload.replaceFirst("NOME_COMPONENTE", componente);
+        System.out.println(payload);
+        payload = payload.replaceFirst("-[A-Z_]+", "");
         return payload;
+    }
+
+    private String getPapel() {
+        List<String> papeis = Arrays.asList("admin", "viewer", "editor");
+        String papel = papeis.get(getRandom(papeis.size()));
+        return (papel.equals(getPapelOriginal())) ? getPapel() : papel;
+    }
+
+    private String getCodId() {
+        JSONObject o = (JSONObject) listaRetorno.get(0);
+        return (String) o.get("iamId");
     }
 }

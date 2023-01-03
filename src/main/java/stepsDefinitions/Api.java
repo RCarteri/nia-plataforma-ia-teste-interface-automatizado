@@ -1,9 +1,6 @@
 package stepsDefinitions;
 
-import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.E;
-import cucumber.api.java.pt.Então;
-import cucumber.api.java.pt.Quando;
+import cucumber.api.java.pt.*;
 import support.APIRest.BaseClass;
 
 import static br.com.bb.ath.ftabb.gaw.Plataforma.fecharPlataforma;
@@ -46,6 +43,7 @@ public class Api extends BaseClass {
         setPayload(endpoint, componente);
         tratarPayload(componente);
         enviarPayload(endpoint);
+        salvarListaDados();
     }
 
     @Quando("^enviar um payload \"([^\"]*)\" com o código do \"([^\"]*)\" selecionado aleatóriamente$")
@@ -55,8 +53,9 @@ public class Api extends BaseClass {
         enviarPayload();
     }
 
-    @Então("^salvar os resultados do response$")
-    public void salvarOsResultadosDoResponse() {
+    @Então("^o papel do usuário logado precisa ser \"([^\"]*)\"$")
+    public void queOPapelDoUsuarioLogadoPrecisaSer(String papel) {
         setListaRetorno();
+        isUsuarioLogado(papel);
     }
 }

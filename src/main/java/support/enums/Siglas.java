@@ -19,7 +19,7 @@ public final class Siglas {
     private String listaSiglasTeste;
     private int tamanhoListaSiglaTeste;
 
-    public static Siglas getInstance() {
+    public static Siglas getInstanceSigla() {
         if (instance == null) {
             instance = new Siglas();
         }

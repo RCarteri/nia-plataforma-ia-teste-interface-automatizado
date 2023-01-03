@@ -2,8 +2,10 @@
 
 chaveF:
   senhaDes: "11111111"
+  codConfirmacao: "111111"
 
   usuario: "Bruno"
+  userName: "bruno_miranda@bb.com.br"
   chave: "F2177895"
   senhaHm: "14785236"
 

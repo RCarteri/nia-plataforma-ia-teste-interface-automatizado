@@ -7,8 +7,11 @@ import org.json.JSONArray;
 import support.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 import static io.qameta.allure.Allure.descriptionHtml;
 import static io.qameta.allure.Allure.link;
@@ -17,6 +20,7 @@ import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static java.util.regex.Pattern.compile;
+import static support.APIRest.DadosSelecionadosApi.getInstanceDSApi;
 import static support.GetElements.getDriver;
 import static support.Utils.isQteste;
 import static support.Utils.printLog;
@@ -93,6 +97,10 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
+    public void salvarListaDados(){
+        getInstanceDSApi().setListaDadosResponseComponente(listaRetorno);
+    }
+
     public void setListaRetorno() {
         ArrayList<Map<String, String>> ArrayListListaRetorno = response.jsonPath().get("listaRetorno");
         listaRetorno = new JSONArray(ArrayListListaRetorno);
@@ -101,6 +109,19 @@ public class BaseClass extends FTABBUtils {
 
     public void setPayload(String tipoPayload) {
         setPayload(endpoint, tipoPayload);
+    }
+
+    private List<HashMap<String, Object>> jsonArraytoListHashMap(JSONArray jsonArray){
+        return jsonArray.toList().stream()
+                .map(m -> ((HashMap<String, Object>) m))
+                .collect(Collectors.toList());
+    }
+
+    public boolean isUsuarioLogado(String papel){
+        List<HashMap<String, Object>> listaRetorno = jsonArraytoListHashMap(this.listaRetorno);
+
+
+        return true;
     }
 
     protected void setPayload(String endpoint, String componente) {

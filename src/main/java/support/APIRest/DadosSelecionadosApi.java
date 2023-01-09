@@ -2,11 +2,18 @@ package support.APIRest;
 
 import org.json.JSONArray;
 
+import java.util.HashMap;
+import java.util.List;
+
+import static support.Utils.jsonArraytoListHashMap;
+
 public class DadosSelecionadosApi {
-    private JSONArray listaDadosResponseComponente;
     private String papelOriginal;
-    private String codComponente;
     private static DadosSelecionadosApi instance;
+    private List<HashMap<String, String>> membros;
+    private HashMap<String, String> membro;
+    private List<HashMap<String, String>> projetos;
+    private HashMap<String, String> projeto;
 
     public static DadosSelecionadosApi getInstanceDSApi() {
         if (instance == null) {
@@ -15,12 +22,36 @@ public class DadosSelecionadosApi {
         return instance;
     }
 
-    public void setListaDadosResponseComponente(JSONArray listaDadosResponseComponente) {
-        this.listaDadosResponseComponente = listaDadosResponseComponente;
+    public List<HashMap<String, String>> getMembros() {
+        return membros;
     }
 
-    public JSONArray getListaDadosResponseComponente() {
-        return listaDadosResponseComponente;
+    public List<HashMap<String, String>> getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(JSONArray projetos) {
+        this.projetos = jsonArraytoListHashMap(projetos);
+    }
+
+    public HashMap<String, String> getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(int indexProjetoSelecionado) {
+        this.projeto = projetos.get(indexProjetoSelecionado);
+    }
+
+    public HashMap<String, String> getMembro() {
+        return membro;
+    }
+
+    public void setMembro(HashMap<String, String> membro) {
+        this.membro = membro;
+    }
+
+    public void setMembros(JSONArray membros) {
+        this.membros = jsonArraytoListHashMap(membros);
     }
 
     public String getPapelOriginal() {
@@ -32,10 +63,6 @@ public class DadosSelecionadosApi {
     }
 
     public String getCodComponente() {
-        return codComponente;
-    }
-
-    public void setCodComponente(String codComponente) {
-        this.codComponente = codComponente;
+        return getProjeto().get("codigoComponente");
     }
 }

@@ -32,8 +32,7 @@ public class TratarPayload {
 
     protected void setComponenteListaRetorno() {
         try {
-            int index = getRandom(listaRetorno.length());
-            componenteListaRetorno = listaRetorno.getJSONObject(index);
+            componenteListaRetorno = listaRetorno.getJSONObject(0);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("A lista usada não possui dados com a sigla " + getInstanceSigla().getListaSiglasTeste() + " que foi selecionada.");
         }
@@ -43,7 +42,7 @@ public class TratarPayload {
         String nomeComponente, codComponente;
         if (listaRetorno == null) return "";
         if (listaRetorno.get(0).getClass().getSimpleName().equals("String"))
-            return listaRetorno.get(getRandom(listaRetorno.length())).toString();
+            return listaRetorno.get(0).toString();
         setComponenteListaRetorno();
         try {
             if (componenteListaRetorno.get("nomeComponente").toString().equals("null")) {
@@ -52,13 +51,12 @@ public class TratarPayload {
             } else {
                 nomeComponente = (String) componenteListaRetorno.get("nomeComponente");
                 codComponente = (String) componenteListaRetorno.get("codigoComponente");
-                getInstanceDSApi().setCodComponente(codComponente);
             }
         } catch (JSONException e) {
             //Usado para request que editam os papeis dos membros
-            nomeComponente = (String) componenteListaRetorno.get("userName");
-            codComponente = (String) componenteListaRetorno.get("id");
-            getInstanceDSApi().setPapelOriginal((String) componenteListaRetorno.get("role"));
+            nomeComponente = getInstanceDSApi().getMembro().get("userName");
+            codComponente = getInstanceDSApi().getMembro().get("id");
+            getInstanceDSApi().setPapelOriginal(getInstanceDSApi().getMembro().get("role"));
         }
         printLog("Nome do componente escolhido: " + nomeComponente, INFO);
         return codComponente;
@@ -70,6 +68,7 @@ public class TratarPayload {
         else
             printLog("As siglas que o usuário '" + getUser() + "' possui acesso já estão em memória: " + getInstanceSigla().getSiglas(), INFO);
         getInstanceSigla().setListaSiglaTeste();
+        printLog("Sigla usada para o teste: " + getInstanceSigla().getListaSiglasTeste(), INFO);
         return getInstanceSigla().getListaSiglasTeste();
     }
 
@@ -102,14 +101,12 @@ public class TratarPayload {
                         .replaceFirst("COD_EMAIL", getCodEmail())
                         .replaceFirst("COD_ID", getCodId())
                         .replaceFirst("COD_PERMISSAO", getPapel());
-                System.out.println();
                 break;
             case "op5839181v1":
                 payload = payload.replaceFirst("COD_COMPONENTE", getCodComponente());
                 break;
         }
         payload = payload.replaceFirst("NOME_COMPONENTE", componente);
-        System.out.println(payload);
         payload = payload.replaceFirst("-[A-Z_]+", "");
         return payload;
     }

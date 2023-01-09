@@ -4,6 +4,7 @@ import cucumber.api.java.pt.*;
 import support.APIRest.BaseClass;
 
 import static br.com.bb.ath.ftabb.gaw.Plataforma.fecharPlataforma;
+import static org.junit.Assert.assertTrue;
 
 public class Api extends BaseClass {
 
@@ -39,11 +40,11 @@ public class Api extends BaseClass {
     }
 
     @Dado("^que tenha a lista de \"([^\"]*)\" \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
-    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String local, String componente, String endpoint){
+    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String dados, String componente, String endpoint){
         setPayload(endpoint, componente);
         tratarPayload(componente);
         enviarPayload(endpoint);
-        salvarListaDados();
+        salvarListaDados(dados);
     }
 
     @Quando("^enviar um payload \"([^\"]*)\" com o código do \"([^\"]*)\" selecionado aleatóriamente$")
@@ -53,9 +54,14 @@ public class Api extends BaseClass {
         enviarPayload();
     }
 
-    @Então("^o papel do usuário logado precisa ser \"([^\"]*)\"$")
+    @Mas("^o papel do usuário logado precisa ser \"([^\"]*)\" no projeto selecionado$")
     public void queOPapelDoUsuarioLogadoPrecisaSer(String papel) {
         setListaRetorno();
-        isUsuarioLogado(papel);
+        assertTrue(verificarMembrosProjeto(papel));
+    }
+
+    @E("^que selecione um membro da lista que não seja o usuário logado$")
+    public void queSelecioneUmMembroDaListaQueNaoSejaOUsuarioLogado() {
+        setMembro();
     }
 }

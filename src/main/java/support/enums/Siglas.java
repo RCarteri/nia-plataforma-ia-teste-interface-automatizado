@@ -11,7 +11,6 @@ import static org.junit.Assert.fail;
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.ERROR;
-import static support.enums.LogTypes.INFO;
 
 public final class Siglas {
     private static Siglas instance;
@@ -27,7 +26,6 @@ public final class Siglas {
     }
 
     public String getListaSiglasTeste() {
-        printLog("Sigla usada para o teste: " + listaSiglasTeste, INFO);
         return listaSiglasTeste;
     }
 

@@ -15,7 +15,7 @@ import static support.enums.LogTypes.ERROR;
 public final class Siglas {
     private static Siglas instance;
     public List<String> siglas;
-    private String listaSiglasTeste;
+    private String listaSiglasTeste = "COC,DSC,NIA,NXR";
     private int tamanhoListaSiglaTeste;
 
     public static Siglas getInstanceSigla() {

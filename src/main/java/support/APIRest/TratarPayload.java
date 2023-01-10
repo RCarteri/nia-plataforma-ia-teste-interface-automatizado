@@ -34,7 +34,7 @@ public class TratarPayload {
         try {
             componenteListaRetorno = listaRetorno.getJSONObject(0);
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("A lista usada não possui dados com a sigla " + getInstanceSigla().getListaSiglasTeste() + " que foi selecionada.");
+            throw new RuntimeException("A lista usada não possui dados com as siglas " + getInstanceSigla().getListaSiglasTeste() + " que foram selecionadas.");
         }
     }
 
@@ -78,20 +78,19 @@ public class TratarPayload {
     }
 
     private String getCodEmail() {
-        JSONObject o = (JSONObject) listaRetorno.get(0);
-        return (String) o.get("email");
+        return getInstanceDSApi().getUserInfo().get("email");
     }
 
     public String tratarPayload(String componente, String endpoint) {
         switch (endpoint) {
             case "dpr/Op5903588-v1":
+            case "op5806077v2":
+            case "op5806077v3":
+//                usado para selecionar a sigla de acordo com o response
+//                payload = payload.replaceFirst("LISTA_SIGLA", getListaSiglas());
                 if (getUser() == null)
                     new Utils().setDatapool("desenvolvimento");
                 payload = payload.replaceFirst("CHAVE_USUARIO", getChave());
-                break;
-            case "op5806077v3":
-            case "op5806077v2":
-                payload = payload.replaceFirst("LISTA_SIGLA", getListaSiglas());
                 break;
             case "op6851522v1":
                 payload = payload.replaceFirst("COD_ESPACO", getCodEspaco());
@@ -118,7 +117,6 @@ public class TratarPayload {
     }
 
     private String getCodId() {
-        JSONObject o = (JSONObject) listaRetorno.get(0);
-        return (String) o.get("iamId");
+        return getInstanceDSApi().getUserInfo().get("iamId");
     }
 }

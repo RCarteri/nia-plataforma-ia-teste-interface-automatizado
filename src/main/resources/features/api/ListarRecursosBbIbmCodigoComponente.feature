@@ -5,7 +5,7 @@ Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do com
 
     @ID-API004-001 @APICT001
     Esquema do Cenário: APICT001 - OK - 200
-        Dado que tenha a lista de "dado" "<componente>" no endpoint "<endpoint>"
+        Dado que tenha a lista de retorno do "<componente>" no endpoint "<endpoint>"
         E que defina o endpoint "op5839181v1"
         Quando enviar um payload "<payload>" com o código do "componente" selecionado aleatóriamente
         Então deve retornar o código 200

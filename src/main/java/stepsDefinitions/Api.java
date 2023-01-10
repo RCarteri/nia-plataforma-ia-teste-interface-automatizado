@@ -39,12 +39,12 @@ public class Api extends BaseClass {
         fecharPlataforma();
     }
 
-    @Dado("^que tenha a lista de \"([^\"]*)\" \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
-    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String dados, String componente, String endpoint){
+    @Dado("^que tenha a lista de retorno do \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
+    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String componente, String endpoint){
         setPayload(endpoint, componente);
         tratarPayload(componente);
         enviarPayload(endpoint);
-        salvarListaDados(dados);
+        salvarListaDados(componente);
     }
 
     @Quando("^enviar um payload \"([^\"]*)\" com o código do \"([^\"]*)\" selecionado aleatóriamente$")

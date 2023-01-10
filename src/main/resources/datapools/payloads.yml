@@ -1,7 +1,7 @@
 # Datapool de payloads
 getNomeCodComponente: &nomeCodComponente '{"nomeComponente":"NOME_COMPONENTE", "codigoComponente":"COD_COMPONENTE"}'
 getNomeComponente: &nomeComponente '{"nomeComponente":"NOME_COMPONENTE"}'
-getWatsonStudio: &watsonStudio '{"nomeComponente":"WATSON_STUDIO","listaSigla":"LISTA_SIGLA"}'
+getWatsonStudio: &watsonStudio '{"nomeComponente":"WATSON_STUDIO","listaSigla":"COC,DSC,NIA,NXR"}'
 
 op6586305v1:
   descrição: "Listar projetos inteligência artificial com deploy em andamento"

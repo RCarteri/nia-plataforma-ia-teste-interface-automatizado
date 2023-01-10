@@ -98,12 +98,12 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
-    public void salvarListaDados(String dados) {
-        switch (dados) {
-            case "projetos":
+    public void salvarListaDados(String componente) {
+        switch (componente) {
+            case "WATSON_STUDIO":
                 getInstanceDSApi().setProjetos(listaRetorno);
-            case "membros":
-                System.out.println("");
+            case "USER_INFO":
+                getInstanceDSApi().setUserInfo(listaRetorno);
         }
     }
 

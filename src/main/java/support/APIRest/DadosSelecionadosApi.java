@@ -12,6 +12,7 @@ public class DadosSelecionadosApi {
     private static DadosSelecionadosApi instance;
     private List<HashMap<String, String>> membros;
     private HashMap<String, String> membro;
+    private HashMap<String, String> userInfo;
     private List<HashMap<String, String>> projetos;
     private HashMap<String, String> projeto;
 
@@ -20,6 +21,14 @@ public class DadosSelecionadosApi {
             instance = new DadosSelecionadosApi();
         }
         return instance;
+    }
+
+    public HashMap<String, String> getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(JSONArray userInfo) {
+        this.userInfo = jsonArraytoListHashMap(userInfo).get(0);
     }
 
     public List<HashMap<String, String>> getMembros() {

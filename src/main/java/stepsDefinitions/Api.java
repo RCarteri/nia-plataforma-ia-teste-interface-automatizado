@@ -1,12 +1,10 @@
 package stepsDefinitions;
 
-import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.E;
-import cucumber.api.java.pt.Então;
-import cucumber.api.java.pt.Quando;
+import cucumber.api.java.pt.*;
 import support.APIRest.BaseClass;
 
 import static br.com.bb.ath.ftabb.gaw.Plataforma.fecharPlataforma;
+import static org.junit.Assert.assertTrue;
 
 public class Api extends BaseClass {
 
@@ -41,17 +39,29 @@ public class Api extends BaseClass {
         fecharPlataforma();
     }
 
-    @Dado("^que tenha a lista de dados do componente \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
+    @Dado("^que tenha a lista de retorno do \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
     public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String componente, String endpoint){
         setPayload(endpoint, componente);
         tratarPayload(componente);
         enviarPayload(endpoint);
+        salvarListaDados(componente);
     }
 
-    @Quando("^enviar um payload \"([^\"]*)\" com o código da lista de dados do componente")
-    public void enviarUmPayloadComOCodigoDaListaDeDadosDoComponente(String subComponente) {
+    @Quando("^enviar um payload \"([^\"]*)\" com o código do componente selecionado$")
+    public void enviarUmPayloadComOCodigoDoComponenteSelecionado(String subComponente) {
         setPayload(subComponente);
         tratarPayload(subComponente);
         enviarPayload();
+    }
+
+    @Mas("^o papel do usuário logado precisa ser \"([^\"]*)\" no projeto selecionado$")
+    public void queOPapelDoUsuarioLogadoPrecisaSer(String papel) {
+        setListaRetorno();
+        assertTrue(verificarMembrosProjeto(papel));
+    }
+
+    @E("^que selecione um membro da lista que não seja o usuário logado$")
+    public void queSelecioneUmMembroDaListaQueNaoSejaOUsuarioLogado() {
+        setMembro();
     }
 }

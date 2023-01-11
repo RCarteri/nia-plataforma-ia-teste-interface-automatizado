@@ -11,15 +11,14 @@ import static org.junit.Assert.fail;
 import static support.Utils.getRandom;
 import static support.Utils.printLog;
 import static support.enums.LogTypes.ERROR;
-import static support.enums.LogTypes.INFO;
 
 public final class Siglas {
     private static Siglas instance;
     public List<String> siglas;
-    private String listaSiglasTeste;
+    private String listaSiglasTeste = "COC,DSC,NIA,NXR";
     private int tamanhoListaSiglaTeste;
 
-    public static Siglas getInstance() {
+    public static Siglas getInstanceSigla() {
         if (instance == null) {
             instance = new Siglas();
         }
@@ -27,7 +26,6 @@ public final class Siglas {
     }
 
     public String getListaSiglasTeste() {
-        printLog("Sigla usada para o teste: " + listaSiglasTeste, INFO);
         return listaSiglasTeste;
     }
 

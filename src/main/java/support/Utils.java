@@ -2,6 +2,7 @@ package support;
 
 import br.com.bb.ath.ftabb.exceptions.DataPoolException;
 import cucumber.api.DataTable;
+import org.json.JSONArray;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.enums.LogTypes;
@@ -15,7 +16,9 @@ import java.nio.file.Path;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
 import static br.com.bb.ath.ftabb.datapool.DataPoolRepo.getInstance;
@@ -100,7 +103,8 @@ public class Utils extends BaseUtils {
             setProperty(CHAVE.toString(), $("login_plataforma.chaveF.chave"));
             String senha = (ambiente.equals("homologação")) ? $("login_plataforma.chaveF.senhaHm") : $("login_plataforma.chaveF.senhaDes");
             setProperty(SENHA.toString(), senha);
-            setProperty(COD_CONF.toString(), "111111");
+            setProperty(COD_CONF.toString(),  $("login_plataforma.chaveF.codConfirmacao"));
+            setProperty(USER_NAME.toString(),  $("login_plataforma.chaveF.userName"));
         } catch (DataPoolException e) {
             printLog("As informações do usuário logado não foram retornadas.", ERROR);
             logError(e);
@@ -125,6 +129,12 @@ public class Utils extends BaseUtils {
         dtList.add(columns);
         dtList.add(dataRow1);
         return DataTable.create(dtList);
+    }
+
+    public static List<HashMap<String, String>> jsonArraytoListHashMap(JSONArray jsonArray){
+        return jsonArray.toList().stream()
+                .map(m -> ((HashMap<String, String>) m))
+                .collect(Collectors.toList());
     }
 
     public static void rolarPaginaAteElemento(WebElement elemento) {

@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import support.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -17,17 +18,20 @@ import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.valueOf;
 import static java.lang.System.setProperty;
 import static java.util.regex.Pattern.compile;
+import static org.junit.Assert.fail;
+import static support.APIRest.DadosSelecionadosApi.getInstanceDSApi;
 import static support.GetElements.getDriver;
-import static support.Utils.isQteste;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.Ambiente.*;
 import static support.enums.Cookie.*;
 import static support.enums.LogTypes.INFO;
+import static support.enums.Siglas.getInstanceSigla;
+import static support.enums.User.getUser;
+import static support.enums.User.getUserName;
 
 public class BaseClass extends FTABBUtils {
     private RequestSpecification request;
     private String endpoint;
-    private String endpointTratar;
     private String payload;
     public Response response;
     private JSONArray listaRetorno;
@@ -94,23 +98,82 @@ public class BaseClass extends FTABBUtils {
         response.body().prettyPrint();
     }
 
-    private void setListaRetorno() {
+    public void salvarListaDados(String componente) {
+        switch (componente) {
+            case "WATSON_STUDIO":
+                getInstanceDSApi().setProjetos(listaRetorno);
+            case "USER_INFO":
+                getInstanceDSApi().setUserInfo(listaRetorno);
+        }
+    }
+
+    public void setListaRetorno() {
         ArrayList<Map<String, String>> ArrayListListaRetorno = response.jsonPath().get("listaRetorno");
         listaRetorno = new JSONArray(ArrayListListaRetorno);
-        listaRetorno = new TratarListaRetorno(listaRetorno, endpointTratar).tratarListaRetorno();
+        listaRetorno = new TratarListaRetorno(listaRetorno, endpoint).tratarListaRetorno();
     }
 
     public void setPayload(String tipoPayload) {
         setPayload(endpoint, tipoPayload);
     }
 
+    public void mudarProjeto(int i) {
+        if (i == getInstanceDSApi().getProjetos().size())
+            fail("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto das siglas selecionadas '" + getInstanceSigla().getListaSiglasTeste() + "', necessário fazer um novo teste com outra sigla.");
+        String codComponente = getInstanceDSApi().getProjetos().get(i).get("codigoComponente");
+        payload = payload.replaceFirst("\"[a-z-\\d]+\"", "\"" + codComponente + "\"");
+        enviarPayload(endpoint);
+    }
+
+    public void setMembro() {
+        HashMap<String, String> membro = getInstanceDSApi()
+                .getMembros().get(getRandom(getInstanceDSApi().getMembros().size()));
+        if ((membro.get("id").contains("IBMid") && !membro.get("userName").equals(getUserName())))
+            getInstanceDSApi().setMembro(membro);
+        else
+            setMembro();
+    }
+
+    public boolean verificarMembrosProjeto(String papel) {
+        int i = -1;
+        do {
+            getInstanceDSApi().setProjeto(i);
+            getInstanceDSApi().setMembros(listaRetorno);
+            if (getInstanceDSApi().getMembros().size() <= 2) {
+                if (!isUnicoMembro() && isUsuarioLogadoPapel(papel)) return true;
+            } else if (isUsuarioLogadoPapel(papel)) return true;
+            mudarProjeto(++i);
+        }
+        while (i < getInstanceDSApi().getProjetos().size());
+        return false;
+    }
+
+    private static boolean isUnicoMembro() {
+        for (HashMap<String, String> membro_ : getInstanceDSApi().getMembros())
+            if (!membro_.get("id").contains("IBMid")) {
+                System.out.println("O projeto '" + getInstanceDSApi().getProjeto().get("nomeComponente") + "' só possui um membro, não será possível editar o seu papel.");
+                return true;
+            }
+        return false;
+    }
+
+    private static boolean isUsuarioLogadoPapel(String papel) {
+        for (HashMap<String, String> membro : getInstanceDSApi().getMembros())
+            if (membro.get("userName").equals(getUserName()) && membro.get("role").equals(papel)) {
+                System.out.println("O usuário logado '" + getUser() + "' é " + papel + " do projeto: " + getInstanceDSApi().getProjeto().get("nomeComponente") + ". Seguindo com o teste.");
+                return true;
+            }
+        System.out.println("O usuário logado '" + getUser() + "' não é " + papel + " do projeto '" + getInstanceDSApi().getProjeto().get("nomeComponente") + "'. Selecionando outro projeto...");
+        return false;
+    }
+
     protected void setPayload(String endpoint, String componente) {
-        if (endpointTratar == null) endpointTratar = endpoint;
-        payload = utils.getPayload(endpoint, componente);
+        this.endpoint = endpoint;
+        payload = utils.getPayload(this.endpoint, componente);
     }
 
     public void tratarPayload(String componente) {
-        payload = new TratarPayload(payload, listaRetorno).tratarPayload(componente);
+        payload = new TratarPayload(payload, listaRetorno).tratarPayload(componente, endpoint);
     }
 
     private String getDescricao() {

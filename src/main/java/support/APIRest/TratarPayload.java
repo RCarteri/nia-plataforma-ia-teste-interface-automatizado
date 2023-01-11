@@ -1,15 +1,12 @@
 package support.APIRest;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import support.Utils;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static support.Utils.getRandom;
-import static support.Utils.printLog;
+import static support.Utils.*;
 import static support.enums.LogTypes.INFO;
 import static support.enums.Siglas.getInstanceSigla;
 import static support.APIRest.DadosSelecionadosApi.getInstanceDSApi;
@@ -19,23 +16,10 @@ import static support.enums.User.getUser;
 public class TratarPayload {
     private String payload;
     private final JSONArray listaRetorno;
-    private JSONObject componenteListaRetorno;
 
     public TratarPayload(String payload, JSONArray listaRetorno) {
         this.payload = payload;
         this.listaRetorno = listaRetorno;
-    }
-
-    public JSONObject getComponente() {
-        return componenteListaRetorno;
-    }
-
-    protected void setComponenteListaRetorno() {
-        try {
-            componenteListaRetorno = listaRetorno.getJSONObject(0);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("A lista usada não possui dados com as siglas " + getInstanceSigla().getListaSiglasTeste() + " que foram selecionadas.");
-        }
     }
 
     protected String getCodComponente() {
@@ -43,17 +27,16 @@ public class TratarPayload {
         if (listaRetorno == null) return "";
         if (listaRetorno.get(0).getClass().getSimpleName().equals("String"))
             return listaRetorno.get(0).toString();
-        setComponenteListaRetorno();
-        try {
-            if (componenteListaRetorno.get("nomeComponente").toString().equals("null")) {
-                nomeComponente = (String) componenteListaRetorno.get("nome");
-                codComponente = (String) componenteListaRetorno.get("id");
-            } else {
-                nomeComponente = (String) componenteListaRetorno.get("nomeComponente");
-                codComponente = (String) componenteListaRetorno.get("codigoComponente");
-            }
-        } catch (JSONException e) {
-            //Usado para request que editam os papeis dos membros
+        getInstanceDSApi().setComponenteEscolhido(listaRetorno);
+//            usado para retornar as instâncias do Watson Assistant
+        if (getInstanceDSApi().getComponenteEscolhido().get("nome") != null) {
+            nomeComponente = getInstanceDSApi().getComponenteEscolhido().get("nome");
+            codComponente = getInstanceDSApi().getComponenteEscolhido().get("id");
+        } else if (getInstanceDSApi().getComponenteEscolhido().get("nomeComponente") != null){
+            nomeComponente = getInstanceDSApi().getComponenteEscolhido().get("nomeComponente");
+            codComponente = getInstanceDSApi().getComponenteEscolhido().get("codigoComponente");
+        } else { //(getInstanceDSApi().getComponenteEscolhido().get("role") != null)
+//            Usado para request que editam os papeis dos membros
             nomeComponente = getInstanceDSApi().getMembro().get("userName");
             codComponente = getInstanceDSApi().getMembro().get("id");
             getInstanceDSApi().setPapelOriginal(getInstanceDSApi().getMembro().get("role"));
@@ -73,8 +56,8 @@ public class TratarPayload {
     }
 
     private String getCodEspaco() {
-        setComponenteListaRetorno();
-        return (String) componenteListaRetorno.get("codigoEspaco");
+        getInstanceDSApi().setComponenteEscolhido(listaRetorno);
+        return getInstanceDSApi().getComponenteEscolhido().get("codigoEspaco");
     }
 
     private String getCodEmail() {

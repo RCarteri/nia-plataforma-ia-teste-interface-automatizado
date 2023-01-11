@@ -135,7 +135,7 @@ public class BaseClass extends FTABBUtils {
     }
 
     public boolean verificarMembrosProjeto(String papel) {
-        int i = 0;
+        int i = -1;
         do {
             getInstanceDSApi().setProjeto(i);
             getInstanceDSApi().setMembros(listaRetorno);
@@ -158,7 +158,6 @@ public class BaseClass extends FTABBUtils {
     }
 
     private static boolean isUsuarioLogadoPapel(String papel) {
-        System.out.println();
         for (HashMap<String, String> membro : getInstanceDSApi().getMembros())
             if (membro.get("userName").equals(getUserName()) && membro.get("role").equals(papel)) {
                 System.out.println("O usuário logado '" + getUser() + "' é " + papel + " do projeto: " + getInstanceDSApi().getProjeto().get("nomeComponente") + ". Seguindo com o teste.");

@@ -47,8 +47,8 @@ public class Api extends BaseClass {
         salvarListaDados(componente);
     }
 
-    @Quando("^enviar um payload \"([^\"]*)\" com o código do \"([^\"]*)\" selecionado aleatóriamente$")
-    public void enviarUmPayloadComOCodigoDaListaDeDadosDoComponente(String subComponente, String codComponente) {
+    @Quando("^enviar um payload \"([^\"]*)\" com o código do componente selecionado$")
+    public void enviarUmPayloadComOCodigoDoComponenteSelecionado(String subComponente) {
         setPayload(subComponente);
         tratarPayload(subComponente);
         enviarPayload();

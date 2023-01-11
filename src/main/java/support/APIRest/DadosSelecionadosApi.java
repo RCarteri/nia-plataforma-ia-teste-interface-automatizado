@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import java.util.HashMap;
 import java.util.List;
 
+import static support.Utils.getRandom;
 import static support.Utils.jsonArraytoListHashMap;
 
 public class DadosSelecionadosApi {
@@ -15,6 +16,7 @@ public class DadosSelecionadosApi {
     private HashMap<String, String> userInfo;
     private List<HashMap<String, String>> projetos;
     private HashMap<String, String> projeto;
+    private HashMap<String, String> componenteEscolhido;
 
     public static DadosSelecionadosApi getInstanceDSApi() {
         if (instance == null) {
@@ -25,6 +27,14 @@ public class DadosSelecionadosApi {
 
     public HashMap<String, String> getUserInfo() {
         return userInfo;
+    }
+
+    public HashMap<String, String> getComponenteEscolhido() {
+        return componenteEscolhido;
+    }
+
+    public void setComponenteEscolhido(JSONArray listaRetorno) {
+        this.componenteEscolhido = jsonArraytoListHashMap(listaRetorno).get(getRandom(listaRetorno.length()));
     }
 
     public void setUserInfo(JSONArray userInfo) {
@@ -48,7 +58,8 @@ public class DadosSelecionadosApi {
     }
 
     public void setProjeto(int indexProjetoSelecionado) {
-        this.projeto = projetos.get(indexProjetoSelecionado);
+        this.projeto = (indexProjetoSelecionado == -1) ?
+                this.componenteEscolhido : projetos.get(indexProjetoSelecionado);
     }
 
     public HashMap<String, String> getMembro() {

@@ -16,7 +16,7 @@ import static support.APIRest.Host.DESENV;
 		glue = "classpath:stepsDefinitions",
 		tags = { "@APIS008" }
 )
-public class TestSuiteApiS008_Op5949338v1_EditarAcessoMembro extends ConfRunner {
+public class TestSuiteApiS008_Op5949338v1_ManipularMembro extends ConfRunner {
 	@BeforeClass
 	public static void init(){
 		confInit();

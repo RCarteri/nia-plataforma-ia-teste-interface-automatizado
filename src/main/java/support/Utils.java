@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static br.com.bb.ath.ftabb.FTABBContext.getContext;
@@ -94,6 +96,15 @@ public class Utils extends BaseUtils {
             }
         } else
             printLog("Diretório " + dirPath + " não existe, não precisa ser deletado.", INFO);
+    }
+
+    public static String getStringByRegex(String regex, String string) {
+        Pattern patt = Pattern.compile(regex);
+        Matcher matcher = patt.matcher(string);
+        if (matcher.find())
+            return matcher.group();
+        else
+            return matcher.group();
     }
 
     public void setDatapool(String ambiente) {

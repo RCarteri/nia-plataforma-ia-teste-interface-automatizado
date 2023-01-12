@@ -79,10 +79,13 @@ public class TratarPayload {
                 payload = payload.replaceFirst("COD_ESPACO", getCodEspaco());
                 break;
             case "op5949338v1":
+                String acao = getStringByRegex("(?<=-)[A-Z]+", componente);
+                boolean diferente = acao.equals("EDITAR");
                 payload = payload.replaceFirst("COD_COMPONENTE", getInstanceDSApi().getCodComponente())
                         .replaceFirst("COD_EMAIL", getCodEmail())
                         .replaceFirst("COD_ID", getCodId())
-                        .replaceFirst("COD_PERMISSAO", getPapel());
+                        .replaceFirst("ACAO", acao)
+                        .replaceFirst("COD_PERMISSAO", getPapel(diferente));
                 break;
             case "op5839181v1":
                 payload = payload.replaceFirst("COD_COMPONENTE", getCodComponente());
@@ -93,10 +96,13 @@ public class TratarPayload {
         return payload;
     }
 
-    private String getPapel() {
-        List<String> papeis = Arrays.asList("admin", "viewer", "editor");
-        String papel = papeis.get(getRandom(papeis.size()));
-        return (papel.equals(getInstanceDSApi().getPapelOriginal())) ? getPapel() : papel;
+    private String getPapel(boolean diferente) {
+        if (diferente) {
+            List<String> papeis = Arrays.asList("admin", "viewer", "editor");
+            String papel = papeis.get(getRandom(papeis.size()));
+            return (papel.equals(getInstanceDSApi().getPapelOriginal())) ? getPapel(diferente) : papel;
+        }else
+            return getInstanceDSApi().getMembro().get("role");
     }
 
     private String getCodId() {

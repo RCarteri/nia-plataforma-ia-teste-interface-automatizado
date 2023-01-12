@@ -117,6 +117,11 @@ public class BaseClass extends FTABBUtils {
         setPayload(endpoint, tipoPayload);
     }
 
+    public void printSiglasExistentes(){
+        String siglas = response.body().jsonPath().get("data.listaOcorrencia.siglaSistemaSoftware").toString();
+        System.out.println("Siglas existentes para teste: " + siglas);
+    }
+
     public void mudarProjeto(int i) {
         if (i == getInstanceDSApi().getProjetos().size())
             fail("O usuário logado '" + getUser() + "' não é administrador de nenhum projeto das siglas selecionadas '" + getInstanceSigla().getListaSiglasTeste() + "', necessário fazer um novo teste com outra sigla.");

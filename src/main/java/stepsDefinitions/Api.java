@@ -31,6 +31,7 @@ public class Api extends BaseClass {
         setPayload(tipoPayload);
         tratarPayload(tipoPayload);
         enviarPayload();
+        printSiglasExistentes();
     }
 
     @E("^que não tenha cookies, pegue os cookies$")

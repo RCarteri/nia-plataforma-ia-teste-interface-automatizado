@@ -3,6 +3,8 @@ package stepsDefinitions;
 import cucumber.api.java.pt.*;
 import support.APIRest.BaseClass;
 
+import java.util.List;
+
 import static br.com.bb.ath.ftabb.gaw.Plataforma.fecharPlataforma;
 import static org.junit.Assert.assertTrue;
 
@@ -41,7 +43,7 @@ public class Api extends BaseClass {
     }
 
     @Dado("^que tenha a lista de retorno do \"([^\"]*)\" no endpoint \"([^\"]*)\"$")
-    public void queTenhaAListaDeDadosDoComponenteNoEndpoint(String componente, String endpoint){
+    public void queTenhaAListaDeRetornoDoComponenteNoEndpoint(String componente, String endpoint){
         setPayload(endpoint, componente);
         tratarPayload(componente);
         enviarPayload(endpoint);
@@ -64,5 +66,10 @@ public class Api extends BaseClass {
     @E("^que selecione um membro da lista que não seja o usuário logado$")
     public void queSelecioneUmMembroDaListaQueNaoSejaOUsuarioLogado() {
         setMembro();
+    }
+
+    @E("^que um dos membros não esteja cadastrado$")
+    public void queUmDosMembrosNaoEstejaCadastrado(List<List<String>> membros) {
+        setMembroParaIncluir(membros);
     }
 }

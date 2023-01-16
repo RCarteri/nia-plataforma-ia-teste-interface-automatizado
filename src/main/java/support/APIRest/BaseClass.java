@@ -8,6 +8,7 @@ import support.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -117,7 +118,7 @@ public class BaseClass extends FTABBUtils {
         setPayload(endpoint, tipoPayload);
     }
 
-    public void printSiglasExistentes(){
+    public void printSiglasExistentes() {
         String siglas = response.body().jsonPath().get("data.listaOcorrencia.siglaSistemaSoftware").toString();
         System.out.println("Siglas existentes para teste: " + siglas);
     }
@@ -133,7 +134,7 @@ public class BaseClass extends FTABBUtils {
     public void setMembro() {
         HashMap<String, String> membro = getInstanceDSApi()
                 .getMembros().get(getRandom(getInstanceDSApi().getMembros().size()));
-        if ((membro.get("id").contains("IBMid") && !membro.get("userName").equals(getUserName())))
+        if (membro.get("state").equals("ACTIVE") && membro.get("type").contains("user") && !membro.get("userName").equals(getUserName()))
             getInstanceDSApi().setMembro(membro);
         else
             setMembro();
@@ -144,9 +145,7 @@ public class BaseClass extends FTABBUtils {
         do {
             getInstanceDSApi().setProjeto(i);
             getInstanceDSApi().setMembros(listaRetorno);
-            if (getInstanceDSApi().getMembros().size() <= 2) {
-                if (!isUnicoMembro() && isUsuarioLogadoPapel(papel)) return true;
-            } else if (isUsuarioLogadoPapel(papel)) return true;
+            if (isUsuarioLogadoPapel(papel) && !isUnicoMembro()) return true;
             mudarProjeto(++i);
         }
         while (i < getInstanceDSApi().getProjetos().size());
@@ -155,11 +154,12 @@ public class BaseClass extends FTABBUtils {
 
     private static boolean isUnicoMembro() {
         for (HashMap<String, String> membro_ : getInstanceDSApi().getMembros())
-            if (!membro_.get("id").contains("IBMid")) {
-                System.out.println("O projeto '" + getInstanceDSApi().getProjeto().get("nomeComponente") + "' só possui um membro, não será possível editar o seu papel.");
-                return true;
-            }
-        return false;
+            if ((membro_.get("state").equals("ACTIVE") &&
+                    membro_.get("type").equals("user") &&
+                    !membro_.get("userName").equals(getUserName())))
+                return false;
+        System.out.println("O projeto '" + getInstanceDSApi().getProjeto().get("nomeComponente") + "' só possui um membro, não será possível editar o seu papel.");
+        return true;
     }
 
     private static boolean isUsuarioLogadoPapel(String papel) {
@@ -179,6 +179,23 @@ public class BaseClass extends FTABBUtils {
 
     public void tratarPayload(String componente) {
         payload = new TratarPayload(payload, listaRetorno).tratarPayload(componente, endpoint);
+    }
+
+    public void setMembroParaIncluir(List<List<String>> membros) {
+        for (List<String> membroParaIncluir : membros) {
+            boolean membroJaExiste = false;
+            String email = membroParaIncluir.get(1);
+            for (HashMap<String, String> membro : getInstanceDSApi().getMembros()) {
+                if (membro.get("userName").equals(email)) {
+                    membroJaExiste = true;
+                    break;
+                }
+            }
+            if (!membroJaExiste) {
+                getInstanceDSApi().setMembroParaIncluir(membroParaIncluir);
+                return;
+            }
+        }
     }
 
     private String getDescricao() {

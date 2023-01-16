@@ -9,7 +9,7 @@ import static support.Utils.getRandom;
 import static support.Utils.jsonArraytoListHashMap;
 
 public class DadosSelecionadosApi {
-    private String papelOriginal;
+    private String papelOriginal = "viewer";
     private static DadosSelecionadosApi instance;
     private List<HashMap<String, String>> membros;
     private HashMap<String, String> membro;
@@ -17,6 +17,7 @@ public class DadosSelecionadosApi {
     private List<HashMap<String, String>> projetos;
     private HashMap<String, String> projeto;
     private HashMap<String, String> componenteEscolhido;
+    private List<String> membroParaIncluir;
 
     public static DadosSelecionadosApi getInstanceDSApi() {
         if (instance == null) {
@@ -43,6 +44,14 @@ public class DadosSelecionadosApi {
 
     public List<HashMap<String, String>> getMembros() {
         return membros;
+    }
+
+    public void setMembroParaIncluir(List<String> membro){
+        this.membroParaIncluir = membro;
+    }
+
+    public List<String> getMembroParaIncluir(){
+        return this.membroParaIncluir;
     }
 
     public List<HashMap<String, String>> getProjetos() {

@@ -22,6 +22,7 @@ op5949338v1:
   descrição: "Manipular acesso aos reursos BB da IBM Cloud"
   WATSON_STUDIO-EDITAR_MEMBRO: *manipularMembro
   WATSON_STUDIO-REMOVER_MEMBRO: *manipularMembro
+  WATSON_STUDIO-INCLUIR_MEMBRO: *manipularMembro
 
 op5806077v3:
   descrição: "Listar modelos do Watson Studio por sigla"

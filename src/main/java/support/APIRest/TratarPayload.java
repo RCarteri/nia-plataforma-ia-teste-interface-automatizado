@@ -16,6 +16,7 @@ import static support.enums.User.getUser;
 public class TratarPayload {
     private String payload;
     private final JSONArray listaRetorno;
+    private String acao;
 
     public TratarPayload(String payload, JSONArray listaRetorno) {
         this.payload = payload;
@@ -61,7 +62,9 @@ public class TratarPayload {
     }
 
     private String getCodEmail() {
-        return getInstanceDSApi().getUserInfo().get("email");
+        return (acao.equals("INCLUIR")) ?
+                getInstanceDSApi().getMembroParaIncluir().get(1) :
+                getInstanceDSApi().getUserInfo().get("email");
     }
 
     public String tratarPayload(String componente, String endpoint) {
@@ -79,13 +82,14 @@ public class TratarPayload {
                 payload = payload.replaceFirst("COD_ESPACO", getCodEspaco());
                 break;
             case "op5949338v1":
-                String acao = getStringByRegex("(?<=-)[A-Z]+", componente);
-                boolean diferente = acao.equals("EDITAR");
+                acao = getStringByRegex("(?<=-)[A-Z]+", componente);
+                boolean diferente = !acao.equals("REMOVER");
                 payload = payload.replaceFirst("COD_COMPONENTE", getInstanceDSApi().getCodComponente())
                         .replaceFirst("COD_EMAIL", getCodEmail())
                         .replaceFirst("COD_ID", getCodId())
                         .replaceFirst("ACAO", acao)
                         .replaceFirst("COD_PERMISSAO", getPapel(diferente));
+                System.out.println("Membro a ser manipulado: " + getCodEmail());
                 break;
             case "op5839181v1":
                 payload = payload.replaceFirst("COD_COMPONENTE", getCodComponente());
@@ -106,6 +110,8 @@ public class TratarPayload {
     }
 
     private String getCodId() {
-        return getInstanceDSApi().getUserInfo().get("iamId");
+       return (acao.equals("INCLUIR")) ?
+               getInstanceDSApi().getMembroParaIncluir().get(0) :
+               getInstanceDSApi().getUserInfo().get("iamId");
     }
 }

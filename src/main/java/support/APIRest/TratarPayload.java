@@ -89,7 +89,7 @@ public class TratarPayload {
                         .replaceFirst("COD_ID", getCodId())
                         .replaceFirst("ACAO", acao)
                         .replaceFirst("COD_PERMISSAO", getPapel(diferente));
-                System.out.println("Membro a ser manipulado: " + getCodEmail());
+                System.out.println("Memebro a ser manipulado: " + getCodEmail());
                 break;
             case "op5839181v1":
                 payload = payload.replaceFirst("COD_COMPONENTE", getCodComponente());

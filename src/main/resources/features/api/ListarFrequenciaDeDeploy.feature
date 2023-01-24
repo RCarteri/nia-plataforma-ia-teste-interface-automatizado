@@ -9,6 +9,7 @@ Funcionalidade: APISuite007 - Listar a frequência de deploy agrupado por ano-me
         E que não tenha cookies, pegue os cookies
         E que defina o endpoint "nia/Op7045172-v2"
 
-    Cenário: APICT001 - OK - 200
+    @ID-API007-200 @APICT200
+    Cenário: APICT200 - OK 200
         Quando enviar um payload "OK"
         Então deve retornar o código 200

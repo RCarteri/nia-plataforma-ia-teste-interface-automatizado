@@ -8,8 +8,8 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
         E que defina o endpoint "op5839181v1"
         Quando enviar um payload "WATSON_STUDIO-MEMBROS" com o código do componente selecionado
 
-    @ID-API008-001 @APICT001
-    Esquema do Cenario: Cenário: APICT001 - OK - 200
+    @ID-API008-200 @APICT200
+    Esquema do Cenario: Cenário: APICT200 - OK 200
         Mas o papel do usuário logado precisa ser "admin" no projeto selecionado
         E que selecione um membro da lista que não seja o usuário logado
         Dado que tenha a lista de retorno do "USER_INFO" no endpoint "op5839181v1"
@@ -21,8 +21,8 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
             | WATSON_STUDIO-EDITAR_MEMBRO  |
             | WATSON_STUDIO-REMOVER_MEMBRO |
 
-    @ID-API008-001 @APICT001
-    Cenario: Cenário: APICT001 - OK - 200
+    @ID-API008-200 @APICT200
+    Cenario: Cenário: APICT200 - OK 200
         Mas o papel do usuário logado precisa ser "admin" no projeto selecionado
         Dado que defina o endpoint "op5949338v1"
         E que um dos membros não esteja cadastrado
@@ -40,7 +40,7 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
         Então deve retornar o código 200
 
     @ID-API008-002 @APICT422
-    Esquema do Cenario: Cenário: APICT422 - Unprocessable Entity - SC 422
+    Esquema do Cenario: Cenário: APICT422 - Unprocessable Entity 422
         Mas o papel do usuário logado precisa ser "diferente de admin" no projeto selecionado
         E que selecione um membro da lista que não seja o usuário logado
         Dado que tenha a lista de retorno do "USER_INFO" no endpoint "op5839181v1"

@@ -142,10 +142,15 @@ public class BaseClass extends FTABBUtils {
 
     public boolean verificarMembrosProjeto(String papel) {
         int i = -1;
+        String papelEditor = "";
+        if (!papel.equals("admin")) {
+            papelEditor = "editor";
+            papel = "viewer";
+        }
         do {
             getInstanceDSApi().setProjeto(i);
             getInstanceDSApi().setMembros(listaRetorno);
-            if (isUsuarioLogadoPapel(papel) && !isUnicoMembro()) return true;
+            if (isUsuarioLogadoPapel(papel) || isUsuarioLogadoPapel(papelEditor) && !isUnicoMembro()) return true;
             mudarProjeto(++i);
         }
         while (i < getInstanceDSApi().getProjetos().size());

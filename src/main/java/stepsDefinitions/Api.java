@@ -6,6 +6,7 @@ import support.APIRest.BaseClass;
 import java.util.List;
 
 import static br.com.bb.ath.ftabb.gaw.Plataforma.fecharPlataforma;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertTrue;
 
 public class Api extends BaseClass {
@@ -71,5 +72,11 @@ public class Api extends BaseClass {
     @E("^que um dos membros não esteja cadastrado$")
     public void queUmDosMembrosNaoEstejaCadastrado(List<List<String>> membros) {
         setMembroParaIncluir(membros);
+    }
+
+    @E("^a mensagem de erro deve conter \"([^\"]*)\"$")
+    public void aMensagemDeErroDeveConter(String mensagem) {
+        response.then().assertThat()
+                .body(containsString(mensagem));
     }
 }

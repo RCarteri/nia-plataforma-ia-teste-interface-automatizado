@@ -3,8 +3,8 @@
 @APIS002
 Funcionalidade: APISuite002 - Listar recursos BB na IBM Cloud
 
-    @ID-API002-001 @APICT001
-    Esquema do Cenário: APICT001 - OK - 200
+    @ID-API002-200 @APICT200
+    Esquema do Cenário: APICT200 - OK 200
         Dado que defina o endpoint "<endpoint>"
         Quando enviar um payload "<payload>"
         Então deve retornar o código 200

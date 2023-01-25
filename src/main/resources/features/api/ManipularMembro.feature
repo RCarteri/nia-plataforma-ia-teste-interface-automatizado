@@ -47,7 +47,8 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
         E que defina o endpoint "op5949338v1"
         Quando enviar um payload "<payload>" com o código do componente selecionado
         Então deve retornar o código 422
-        E a mensagem de erro deve conter "Permission Denied: Authenticated user is not authorized to update the project"
+        E a mensagem de erro deve conter "<mensagem>"
         Exemplos:
-            | payload                      |
-            | WATSON_STUDIO-EDITAR_MEMBRO  |
+            | payload                      | mensagem                                                                      |
+            | WATSON_STUDIO-EDITAR_MEMBRO  | Permission Denied: Authenticated user is not authorized to update the project |
+            | WATSON_STUDIO-REMOVER_MEMBRO | Você não está autorizado para executar essa operação.                         |

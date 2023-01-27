@@ -173,7 +173,7 @@ public class BaseClass extends FTABBUtils {
                 System.out.println("O usuário logado '" + getUser() + "' é " + papel + " do projeto: " + getInstanceDSApi().getProjeto().get("nomeComponente") + ". Seguindo com o teste.");
                 return true;
             }
-        System.out.println("O usuário logado '" + getUser() + "' não é " + papel + " do projeto '" + getInstanceDSApi().getProjeto().get("nomeComponente") + "'. Selecionando outro projeto...");
+        System.out.println("O usuário logado '" + getUser() + "' não é " + papel + " do projeto '" + getInstanceDSApi().getProjeto().get("nomeComponente"));
         return false;
     }
 

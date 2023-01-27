@@ -52,3 +52,13 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
             | payload                      | mensagem                                                                      |
             | WATSON_STUDIO-EDITAR_MEMBRO  | Permission Denied: Authenticated user is not authorized to update the project |
             | WATSON_STUDIO-REMOVER_MEMBRO | Você não está autorizado para executar essa operação.                         |
+
+    @ID-API008-422 @APICT422
+    Cenario: Cenário: APICT422 - Unprocessable Entity 422
+        Mas o papel do usuário logado precisa ser "diferente de admin" no projeto selecionado
+        Dado que defina o endpoint "op5949338v1"
+        E que um dos membros não esteja cadastrado
+            | IBMid-6650026X3F | amelia.oliveira@bb.com.br |
+        Quando enviar um payload "WATSON_STUDIO-INCLUIR_MEMBRO" com o código do componente selecionado
+        Então deve retornar o código 422
+        E a mensagem de erro deve conter "Permission Denied: Authenticated user is not authorized to add members to the project"

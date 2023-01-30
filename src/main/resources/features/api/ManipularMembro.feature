@@ -1,7 +1,7 @@
 #language:pt
 #encoding: utf-8
 @APIS008
-Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
+Funcionalidade: APISuite008 - CRUD nos reursos BB da IBM Cloud
 
     Contexto: Retornar membros
         Dado que tenha a lista de retorno do "WATSON_STUDIO" no endpoint "op5806077v3"
@@ -9,7 +9,7 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
         Quando enviar um payload "WATSON_STUDIO-MEMBROS" com o código do componente selecionado
 
     @ID-API008-200 @APICT200
-    Esquema do Cenario: Cenário: APICT200 - OK 200
+    Esquema do Cenario: Cenário: APICT200 - Editar e remover membro - OK 200
         Mas o papel do usuário logado precisa ser "admin" no projeto selecionado
         E que selecione um membro da lista que não seja o usuário logado
         Dado que tenha a lista de retorno do "USER_INFO" no endpoint "op5839181v1"
@@ -22,7 +22,7 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
             | WATSON_STUDIO-REMOVER_MEMBRO |
 
     @ID-API008-200 @APICT200
-    Cenario: Cenário: APICT200 - OK 200
+    Cenario: Cenário: APICT200 - Inserir membro - OK 200
         Mas o papel do usuário logado precisa ser "admin" no projeto selecionado
         Dado que defina o endpoint "op5949338v1"
         E que um dos membros não esteja cadastrado
@@ -40,7 +40,7 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
         Então deve retornar o código 200
 
     @ID-API008-422 @APICT422
-    Esquema do Cenario: Cenário: APICT422 - Unprocessable Entity 422
+    Esquema do Cenario: Cenário: APICT422 - Erro de administrador ao editar e remover membro - Unprocessable Entity 422
         Mas o papel do usuário logado precisa ser "diferente de admin" no projeto selecionado
         E que selecione um membro da lista que não seja o usuário logado
         Dado que tenha a lista de retorno do "USER_INFO" no endpoint "op5839181v1"
@@ -54,7 +54,7 @@ Funcionalidade: APISuite008 - Manipular acesso aos reursos BB da IBM Cloud
             | WATSON_STUDIO-REMOVER_MEMBRO | Você não está autorizado para executar essa operação.                         |
 
     @ID-API008-422 @APICT422
-    Cenario: Cenário: APICT422 - Unprocessable Entity 422
+    Cenario: Cenário: APICT422 - Erro de administrador ao inserir membro - Unprocessable Entity 422
         Mas o papel do usuário logado precisa ser "diferente de admin" no projeto selecionado
         Dado que defina o endpoint "op5949338v1"
         E que um dos membros não esteja cadastrado

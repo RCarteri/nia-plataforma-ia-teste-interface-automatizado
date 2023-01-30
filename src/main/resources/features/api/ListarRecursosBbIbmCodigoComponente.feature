@@ -4,7 +4,7 @@
 Funcionalidade: APISuite004 - Listar recursos BB na IBM Cloud por código do componente
 
     @ID-API004-200 @APICT200
-    Esquema do Cenário: APICT200 - OK 200
+    Esquema do Cenário: APICT200 - Listar projetos dos serviços da IBM Cloud por código do componente - OK 200
         Dado que tenha a lista de retorno do "<componente>" no endpoint "<endpoint>"
         E que defina o endpoint "op5839181v1"
         Quando enviar um payload "<payload>" com o código do componente selecionado

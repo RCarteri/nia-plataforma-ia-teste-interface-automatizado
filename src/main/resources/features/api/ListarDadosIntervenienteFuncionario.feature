@@ -10,6 +10,6 @@ Funcionalidade: APISuite003 - Listar dados interveniente do funcionário
         E que defina o endpoint "dpr/Op5903588-v1"
 
     @ID-API003-200 @APICT200
-    Cenario: APICT200 - OK 200
+    Cenario: APICT200 - Listar siglas acessíveis pelo usuário - OK 200
         Quando definir a chave a ser usada enviando um payload "OK"
         Então deve retornar o código 200

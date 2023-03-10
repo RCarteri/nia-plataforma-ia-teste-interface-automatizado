@@ -1,28 +1,15 @@
 # Projeto de automação da interface da Plataforma de IA
 
-## Projeto de automação utilizando o FTABB para a [Plataforma BB](https://plataforma.hm.bb.com.br/gaw/v3/)
-
-### Links úteis:
- - [Documentação FTABB](https://ftabb.intranet.bb.com.br/#/)
-
 **Para mais detalhes sobre o versionamento, consultar o [CHANGELOG](https://fontes.intranet.bb.com.br/nia/nia-plataforma-ia-teste-interface-automatizado/nia-plataforma-ia-teste-interface-automatizado/-/blob/master/CHANGELOG.md).**
 
 ___
 ___
-## Rodando o teste [localmente](https://fontes.intranet.bb.com.br/nia/nia-plataforma-ia-teste-interface-automatizado/nia-plataforma-ia-teste-interface-automatizado):
+## Rodando o teste localmente:
 
 ### Rodar este teste localmente:
 1.  ### Configuração de ambiente:
 Obs.:
 - Caso seu ambiente já esteja configurado, proceder para o passo **2. Executando o Teste**
-- Caso prefira acomapnhar a *play list* com vídes de auto-instrução para a configuração até a execução de um teste localmente em sua máquina, basta seguir a seguinte sequência de vídeos **(21:40s)**, feita pelo [Alex Steeve de Oliveira Ghattas](https://humanograma.intranet.bb.com.br/F0430119):
-
-1. [Apresentação](https://vhs.labbs.com.br/video/d0q-01-do-zero-ao-qteste-introducao-mov), **55s**;
-2. [Instalando o JDK](https://vhs.labbs.com.br/video/d0q-02-instalando-jdk-mp4), **4:40s**;
-3. [Instalando o MAVEN](https://vhs.labbs.com.br/video/d0q-03-instalando-maven-mp4), **5:17s**;
-4. [Instalando o Eclipse - Parte 1](https://vhs.labbs.com.br/video/d0q-05-instalando-eclipse-parte-1-mp4), **3:37s**;
-5. [Instalando o Eclipse - Parte 2](https://vhs.labbs.com.br/video/d0q-07-instalando-eclipse-parte-2-mp4); **5:23s**; e
-6. [Executando um teste com Cucumber](https://vhs.labbs.com.br/video/d0q-08-executando-o-teste-mp4), **1:48s**.
 
 #### JAVA:
 Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o [site da Oracle](https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html) (requer [criação de conta na Oracle](https://profile.oracle.com/myprofile/account/create-account.jspx) para a realizaçao do donwload); É importante configurar as variáveis de ambiente (**JAVA_HOME** e **CLASSPATH**) para o Java;]
@@ -104,19 +91,9 @@ Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o 
         - Em JUnit na parte de macros digitar: -ea -Dhttp.proxyHost=170.66.49.180 -Dhttp.proxyPort=3128
         - Então clicar em **OK**
 
-#### settings.xml:
-- Para trabalhar com [Artfactory](http://atf.intranet.bb.com.br/), que é um repositório onde o Banco do Brasil mantém as libs do **Maven**, é necessário alterar o arquivo *settings.xml* do Maven, conforme os passos abaixo:
-	- acessar o link [ATF - Home](http://atf.intranet.bb.com.br/artifactory/webapp/#/home) e fazer login;
-		- Vá até o modulo **Set Me Up**, filtre por  *bb-maven-repo* e clique no módulo;
-		- Digite dua senha e clique no link *Generate Maven Settings*;
-		- Clique no botão **Generate Settings**; e
-		- Faça o downlod do *Snippet* e salve como *settings.xml* no diretório **.\conf** onde o Maven foi instalado.
-	- Com a **IDE IntelliJ** aberta, acesse o menu **Help => Find Action** pesquise por "maven" **=> Maven Settings** e no campo **Maven Home Path** selecione a pasta do Maven que você baixou: `C:\Users\<seu usuario>\ftabb\apache-maven-3.8.4`
-        - Clique em *'Apply and Close'*.
-
 2. ### Executando o teste:
     1. #### Clone:
-         - Clone o projeto através do [fontes BB](https://fontes.intranet.bb.com.br/nia/nia-plataforma-ia-teste-interface-automatizado/nia-plataforma-ia-teste-interface-automatizado);
+         - Clone o projeto
     2. #### Abrindo o projeto MAVEN no IntelliJ:
          - Com a IDE aberta, acesse o menu **File => Import => Maven => Existing Maven Project =>** localize a pasta onde foi feito o **clone** do passo anterior;
           - Marque o arquvio */pom.xml* dentro da janela de Projetos;
@@ -131,20 +108,7 @@ Possuir o Java JDK 8 instalado. Seguir orientações de instalação conforme o 
         - Na estrutura do projeto, navegue até a pasta **src/main/resources/features/**; e
         - Execute a classe **"*.feature"** referente ao cenário de testes que deseja.
 
-3. ### Rodar este teste via [qTeste](https://qteste.intranet.bb.com.br):
-
-- Acessar os [Testes Selenium](https://qteste.intranet.bb.com.br/selenium/testes);
-- Clique em **Selecione Componente da Aplicação**;
-- Clique em **Outros Componentes**;
-- Digite **nia-plat-ia-teste-interface** no campo de pesquisa e clique em **SELECIONAR**;
-- Clique em **Selecione o Projeto de Teste** e **nia-plat-ia-teste-interface** ;
-- Selecione a versão mais recente do Script de Teste;
-- Selecione a versão do browser que preferir;
-- Na aba **Runners**, escolha o cenário de Teste que deseja executar;
-- Clique em **EXECUTAR**;
-- Aguarde o resultado.
-
-4. ### Relatórios Allure na ARQ3
+3. ### Relatórios Allure na ARQ3
     Este projeto está integrado com a ferramenta Allure implementada na infraestrutura de nuvem da Arq3. Ele é responsável por gerar relatórios dinamicamente a cada teste que for realizado pela classe "**Runner.java**".
 
     Após rodar o teste pela **Runner.java** escolhida ou qTeste é só acessar o link do [Allure][allure] para ver os resultados do teste.
